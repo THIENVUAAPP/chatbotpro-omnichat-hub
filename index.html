@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ChatbotPro - Digital Luxury AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-fixed-dim": "#cfbcff",
+                        "tertiary-container": "#c9a74d",
+                        "surface-container-lowest": "#0f0d13",
+                        "surface-container-low": "#1d1b20",
+                        "outline-variant": "#494551",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "secondary-fixed": "#e9ddff",
+                        "surface-tint": "#cfbcff",
+                        "on-background": "#e6e0e9",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "secondary": "#cdc0e9",
+                        "error-container": "#93000a",
+                        "outline": "#948e9c",
+                        "primary-container": "#6750a4",
+                        "surface-container": "#211f24",
+                        "surface-dim": "#141218",
+                        "on-primary-fixed": "#22005d",
+                        "secondary-container": "#4d4465",
+                        "on-error-container": "#ffdad6",
+                        "inverse-primary": "#6750a4",
+                        "on-tertiary-container": "#503d00",
+                        "on-surface-variant": "#cbc4d2",
+                        "primary": "#cfbcff",
+                        "inverse-surface": "#e6e0e9",
+                        "surface-variant": "#36343a",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "primary-fixed": "#e9ddff",
+                        "on-primary-container": "#e0d2ff",
+                        "surface": "#141218",
+                        "surface-container-high": "#2b292f",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#1f1635",
+                        "inverse-on-surface": "#322f35",
+                        "tertiary-fixed": "#ffdf93",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "on-secondary": "#342b4b",
+                        "surface-bright": "#3b383e",
+                        "tertiary": "#e7c365",
+                        "on-tertiary": "#3e2e00",
+                        "background": "#141218",
+                        "on-secondary-container": "#bfb2da",
+                        "on-surface": "#e6e0e9",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "surface-container-highest": "#36343a",
+                        "on-primary": "#381e72"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        "stack-lg": "48px",
+                        "unit": "8px",
+                        "stack-sm": "12px",
+                        "gutter": "24px",
+                        "stack-md": "24px",
+                        "container-margin": "40px"
+                    },
+                    fontFamily: {
+                        "label-caps": ["Sora"],
+                        "mono-data": ["JetBrains Mono"],
+                        "display-lg": ["Sora"],
+                        "body-lg": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "display-lg-mobile": ["Sora"],
+                        "body-sm": ["Sora"]
+                    },
+                    fontSize: {
+                        "label-caps": ["12px", { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "600" }],
+                        "mono-data": ["13px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "display-lg": ["48px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
+                        "display-lg-mobile": ["32px", { lineHeight: "1.2", fontWeight: "700" }],
+                        "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(5, 5, 5, 0.6);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(207, 188, 255, 0.1);
+        }
+        .luxury-gradient {
+            background: linear-gradient(135deg, #cfbcff 0%, #e7c365 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .neon-border {
+            position: relative;
+        }
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, #cfbcff, #6750a4, #e7c365, #c9a74d);
+            z-index: -1;
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .neon-border:hover::before, .neon-border.active::before {
+            opacity: 1;
+        }
+        .floating-icon {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        .pulse-glow {
+            animation: pulseGlow 2s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 10px rgba(207, 188, 255, 0.2); }
+            to { box-shadow: 0 0 30px rgba(207, 188, 255, 0.6); }
+        }
+        body {
+            background-color: #050505;
+            color: #e6e0e9;
+            overflow-x: hidden;
+        }
+        /* Grid Background Pattern */
+        .cyber-grid {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(207, 188, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(207, 188, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
+            pointer-events: none;
+        }
+        .void-gradient {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(103, 80, 164, 0.15) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        /* Range Slider Styling for ROI Calculator */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #cfbcff;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 0 10px rgba(207, 188, 255, 0.5);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: rgba(207, 188, 255, 0.2);
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="font-body-lg antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+<div class="cyber-grid"></div>
+<div class="void-gradient"></div>
+<!-- TopNavBar -->
+<nav class="bg-surface-container/60 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-outline-variant/30 shadow-[0_0_15px_rgba(207,188,255,0.1)] flex justify-between items-center px-container-margin h-20 w-full md:px-container-margin px-4">
+<div class="font-display-lg text-display-lg bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent text-2xl md:text-3xl whitespace-nowrap">
+            ChatbotPro
+        </div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg active:scale-95 transition-transform" href="features.html">Features</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg active:scale-95 transition-transform" href="#pricing">Pricing</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg active:scale-95 transition-transform" href="#roi">ROI</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-primary hover:bg-white/5 transition-all duration-300 p-2 rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">language</span>
+</button>
+<button class="hidden md:block text-primary hover:bg-white/5 transition-all duration-300 p-2 rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="bg-gradient-to-r from-primary-container to-secondary-container hover:brightness-125 text-on-primary-container font-label-caps text-label-caps px-6 py-2 rounded-full border border-primary/30 shadow-[0_0_15px_rgba(207,188,255,0.2)] transition-all duration-300 active:scale-95">
+                ENTERPRISE LOGIN
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 px-4 md:px-container-margin pb-stack-lg max-w-[1600px] mx-auto w-full flex flex-col gap-stack-lg">
+<!-- Hero Section -->
+<section class="min-h-[819px] flex flex-col items-center justify-center text-center relative py-stack-lg">
+<div class="absolute inset-0 -z-10 opacity-30 flex items-center justify-center overflow-hidden pointer-events-none">
+<!-- Decorative abstract tech elements -->
+<div class="w-96 h-96 rounded-full border border-primary/20 absolute floating-icon" style="animation-delay: 0s;"></div>
+<div class="w-[600px] h-[600px] rounded-full border border-tertiary/10 absolute floating-icon" style="animation-delay: -2s; animation-duration: 8s;"></div>
+</div>
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary-container/10 backdrop-blur-sm mb-stack-md">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-mono-data text-mono-data text-primary">v4.0 Enterprise Core Online</span>
+</div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg max-w-4xl mb-stack-md leading-tight">
+                Command The Void. <br/>
+<span class="luxury-gradient">Digital Luxury AI.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-stack-lg">
+                The apex of conversational intelligence. Engineered for financial analysts, tech executives, and elite power users who demand more than a utility—they demand an instrument of power.
+            </p>
+<div class="flex flex-col sm:flex-row gap-gutter items-center">
+<button onclick="window.location.href='checkout.html?tier=pro'" class="bg-gradient-to-r from-primary to-secondary text-surface-container-lowest font-label-caps text-label-caps px-10 py-4 rounded-xl pulse-glow hover:brightness-110 active:scale-95 transition-all duration-300 flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                    ACQUIRE LICENSE NOW
+                </button>
+<button class="border border-tertiary text-tertiary font-label-caps text-label-caps px-10 py-4 rounded-xl hover:bg-tertiary/10 active:scale-95 transition-all duration-300 flex items-center gap-2 trigger-lead-capture">
+<span class="material-symbols-outlined">play_circle</span>
+                    VIEW ARCHITECTURE
+                </button>
+</div>
+</section>
+<!-- Global Trust Section -->
+<section class="py-stack-md border-t border-b border-outline-variant/10 text-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-6 tracking-widest opacity-70">TRUSTED BY APEX ORGANIZATIONS</p>
+<div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+<span class="font-display-lg text-2xl text-on-surface">FinTech Global</span>
+<span class="font-display-lg text-2xl text-on-surface">Nexus Systems</span>
+<span class="font-display-lg text-2xl text-on-surface">Aura Capital</span>
+<span class="font-display-lg text-2xl text-on-surface">QuantCore</span>
+<span class="font-display-lg text-2xl text-on-surface">Vanguard Tech</span>
+</div>
+</section>
+<!-- How It Works (3 Steps) -->
+<section class="py-stack-lg relative">
+<div class="text-center mb-stack-lg">
+<h2 class="font-headline-md text-headline-md mb-2">Architectural Flow</h2>
+<p class="font-mono-data text-mono-data text-on-surface-variant">Three phases to total command.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-unit relative">
+<!-- Connecting lines for desktop -->
+<div class="hidden md:block absolute top-1/2 left-[16%] right-[16%] h-px bg-gradient-to-r from-primary/10 via-tertiary/30 to-primary/10 -translate-y-1/2 z-0"></div>
+<div class="glass-panel rounded-xl p-stack-md flex flex-col items-center text-center relative z-10 bg-surface-container/40 hover:border-primary/50 transition-colors">
+<div class="w-16 h-16 rounded-full bg-primary-container/20 flex items-center justify-center text-primary mb-6 shadow-[0_0_20px_rgba(207,188,255,0.1)]">
+<span class="material-symbols-outlined text-3xl">cable</span>
+</div>
+<h3 class="font-label-caps text-label-caps mb-3">1. Connect</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Integrate our neural API into your existing data lakes and enterprise systems in minutes.</p>
+</div>
+<div class="glass-panel rounded-xl p-stack-md flex flex-col items-center text-center relative z-10 bg-surface-container/40 hover:border-tertiary/50 transition-colors">
+<div class="w-16 h-16 rounded-full bg-tertiary/20 flex items-center justify-center text-tertiary mb-6 shadow-[0_0_20px_rgba(231,195,101,0.1)]">
+<span class="material-symbols-outlined text-3xl">model_training</span>
+</div>
+<h3 class="font-label-caps text-label-caps mb-3">2. Train</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">The AI ingests your proprietary knowledge base, adapting its lexicon to your specific domain.</p>
+</div>
+<div class="glass-panel rounded-xl p-stack-md flex flex-col items-center text-center relative z-10 bg-surface-container/40 hover:border-secondary/50 transition-colors">
+<div class="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center text-secondary mb-6 shadow-[0_0_20px_rgba(205,192,233,0.1)]">
+<span class="material-symbols-outlined text-3xl">rocket_launch</span>
+</div>
+<h3 class="font-label-caps text-label-caps mb-3">3. Deploy</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Unleash omnipresent intelligence across your organization with military-grade security.</p>
+</div>
+</div>
+</section>
+<!-- Connectivity & Languages (Addictive Visuals) -->
+<section class="py-stack-lg relative" id="features">
+<div class="text-center mb-stack-lg">
+<h2 class="font-headline-md text-headline-md mb-2">Omnipresent Connectivity</h2>
+<p class="font-mono-data text-mono-data text-on-surface-variant">20+ Languages. Infinite Integrations.</p>
+</div>
+<!-- Bento Grid for Connectivity -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-unit">
+<div class="glass-panel rounded-xl p-stack-md col-span-1 md:col-span-2 relative overflow-hidden group hover:border-primary/50 transition-colors duration-500">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-4 text-primary">
+<span class="material-symbols-outlined">hub</span>
+<h3 class="font-label-caps text-label-caps">API Neural Net</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">Seamlessly dock into your existing architecture. Millisecond latency across global endpoints.</p>
+</div>
+<div class="mt-8 flex flex-wrap gap-4 relative h-32">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-32 h-32 bg-primary/20 rounded-full blur-2xl"></div>
+<!-- Simulated floating nodes -->
+<div class="w-12 h-12 rounded-lg bg-surface-container border border-outline-variant/30 flex items-center justify-center floating-icon shadow-lg" style="animation-delay: 0s;">
+<span class="material-symbols-outlined text-primary">data_object</span>
+</div>
+<div class="w-12 h-12 rounded-lg bg-surface-container border border-outline-variant/30 flex items-center justify-center floating-icon shadow-lg" style="animation-delay: -1.5s;">
+<span class="material-symbols-outlined text-tertiary">lock</span>
+</div>
+<div class="w-12 h-12 rounded-lg bg-surface-container border border-outline-variant/30 flex items-center justify-center floating-icon shadow-lg" style="animation-delay: -3s;">
+<span class="material-symbols-outlined text-secondary">cloud</span>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-stack-md relative overflow-hidden group hover:border-tertiary/50 transition-colors duration-500 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-4 text-tertiary">
+<span class="material-symbols-outlined">translate</span>
+<h3 class="font-label-caps text-label-caps">Global Lexicon</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Fluent in power. Operating across 20 primary global business languages.</p>
+</div>
+<div class="mt-8 grid grid-cols-2 gap-2 font-mono-data text-mono-data text-xs text-on-surface-variant">
+<div class="glass-panel p-2 rounded border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer text-center">ENG</div>
+<div class="glass-panel p-2 rounded border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer text-center">JPN</div>
+<div class="glass-panel p-2 rounded border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer text-center">ZHO</div>
+<div class="glass-panel p-2 rounded border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer text-center">FRA</div>
+<div class="glass-panel p-2 rounded border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer text-center">DEU</div>
+<div class="glass-panel p-2 rounded border border-outline-variant/20 hover:border-primary/50 transition-colors cursor-pointer text-center">+15</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Specialized Channels Gallery -->
+<section class="py-stack-lg border-t border-outline-variant/10" id="channels">
+<div class="flex flex-col md:flex-row justify-between items-end mb-stack-lg gap-4">
+<div>
+<h2 class="font-headline-md text-headline-md mb-2">30 Specialized Channels</h2>
+<p class="font-mono-data text-mono-data text-on-surface-variant">Bespoke environments for every elite discipline.</p>
+</div>
+<button class="text-primary font-label-caps text-label-caps flex items-center gap-1 hover:text-primary-fixed transition-colors">
+                    EXPLORE ALL <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-unit">
+<!-- Channel Cards -->
+<div class="glass-panel rounded-xl p-stack-sm aspect-square flex flex-col justify-between group hover:bg-surface-container-high/50 transition-all duration-300 cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps mb-1">Financial Quant</h4>
+<p class="font-mono-data text-mono-data text-[10px] text-on-surface-variant">Real-time market analysis</p>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-stack-sm aspect-square flex flex-col justify-between group hover:bg-surface-container-high/50 transition-all duration-300 cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-tertiary/20 flex items-center justify-center text-tertiary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">gavel</span>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps mb-1">Legal Counsel</h4>
+<p class="font-mono-data text-mono-data text-[10px] text-on-surface-variant">Contract &amp; compliance parsing</p>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-stack-sm aspect-square flex flex-col justify-between group hover:bg-surface-container-high/50 transition-all duration-300 cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps mb-1">DevOps Architect</h4>
+<p class="font-mono-data text-mono-data text-[10px] text-on-surface-variant">Infrastructure as code</p>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-stack-sm aspect-square flex flex-col justify-between group hover:bg-surface-container-high/50 transition-all duration-300 cursor-pointer border-dashed border-outline-variant/30 hover:border-primary/50">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">add</span>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps mb-1 text-on-surface-variant">View 27 More</h4>
+<p class="font-mono-data text-mono-data text-[10px] text-on-surface-variant">Specialized domains</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ROI Calculator Widget -->
+<section class="py-stack-lg border-t border-outline-variant/10" id="roi">
+<div class="max-w-4xl mx-auto">
+<div class="text-center mb-stack-lg">
+<h2 class="font-headline-md text-headline-md mb-2">Real-Time ROI Projection</h2>
+<p class="font-mono-data text-mono-data text-on-surface-variant">Calculate the financial impact of total command.</p>
+</div>
+<div class="glass-panel rounded-2xl p-stack-lg border border-tertiary/20 shadow-[0_0_40px_rgba(231,195,101,0.05)] relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-tertiary/10 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg items-center">
+<!-- Inputs -->
+<div class="flex flex-col gap-6">
+<div>
+<div class="flex justify-between mb-2">
+<label class="font-label-caps text-label-caps text-on-surface">Monthly Support Tickets</label>
+<span class="font-mono-data text-primary" id="val-tickets">5,000</span>
+</div>
+<input class="w-full" id="slider-tickets" max="50000" min="1000" type="range" value="5000"/>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<label class="font-label-caps text-label-caps text-on-surface">Avg. Cost Per Resolution</label>
+<span class="font-mono-data text-primary" id="val-cost">$15.00</span>
+</div>
+<input class="w-full" id="slider-cost" max="100" min="5" type="range" value="15"/>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<label class="font-label-caps text-label-caps text-on-surface">ChatbotPro Deflection Rate</label>
+<span class="font-mono-data text-primary" id="val-deflection">65%</span>
+</div>
+<input class="w-full" id="slider-deflection" max="90" min="10" type="range" value="65"/>
+</div>
+</div>
+<!-- Output -->
+<div class="bg-surface-container-lowest/80 rounded-xl p-stack-md border border-outline-variant/20 flex flex-col justify-center items-center text-center h-full">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-4">PROJECTED MONTHLY SAVINGS</p>
+<div class="font-display-lg text-display-lg luxury-gradient mb-2" id="roi-savings">$48,750</div>
+<p class="font-mono-data text-mono-data text-tertiary flex items-center gap-2" id="roi-annual">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                        585% Annual ROI
+                    </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing Section -->
+<section class="py-stack-lg" id="pricing">
+<div class="text-center mb-stack-lg">
+<h2 class="font-headline-md text-headline-md mb-2">Acquisition Tiers</h2>
+<p class="font-mono-data text-mono-data text-on-surface-variant">Select your level of command.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter items-center">
+<!-- Starter -->
+<div class="glass-panel rounded-xl p-stack-md flex flex-col h-full border-outline-variant/20 hover:border-outline-variant/50 transition-all">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-4">STARTER</h3>
+<div class="font-display-lg text-display-lg mb-2">$49<span class="text-lg text-on-surface-variant font-body-sm">/mo</span></div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-8 pb-4 border-b border-outline-variant/10">Essential tools for individual professionals.</p>
+<ul class="flex flex-col gap-3 flex-grow mb-8 font-mono-data text-mono-data text-sm">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary">check</span> 5 Specialized Channels</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary">check</span> Standard API Access</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary">check</span> 5 Languages</li>
+</ul>
+<button onclick="window.location.href='checkout.html?tier=starter'" class="w-full py-3 rounded-lg border border-outline-variant/50 text-on-surface font-label-caps text-label-caps hover:bg-surface-container-high transition-colors">INITIATE STARTER</button>
+</div>
+<!-- Pro (Neon Glowing) -->
+<div class="glass-panel rounded-xl p-stack-md flex flex-col h-[105%] neon-border active relative transform md:-translate-y-4 shadow-[0_0_30px_rgba(207,188,255,0.15)] z-10 bg-surface-container/80 backdrop-blur-3xl">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-primary to-tertiary text-surface-container-lowest font-label-caps text-[10px] px-3 py-1 rounded-full whitespace-nowrap">MOST SELECTED</div>
+<h3 class="font-label-caps text-label-caps text-primary mb-4">PRO</h3>
+<div class="font-display-lg text-display-lg mb-2 text-white">$149<span class="text-lg text-on-surface-variant font-body-sm">/mo</span></div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-8 pb-4 border-b border-outline-variant/10">Full capability for elite power users.</p>
+<ul class="flex flex-col gap-3 flex-grow mb-8 font-mono-data text-mono-data text-sm">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span> All 30 Specialized Channels</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span> High-throughput API</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span> 20+ Languages</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span> Advanced Analytics Dashboard</li>
+</ul>
+<button onclick="window.location.href='checkout.html?tier=pro'" class="w-full py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-surface-container-lowest font-label-caps text-label-caps hover:brightness-110 active:scale-95 transition-all pulse-glow">ACQUIRE PRO LICENSE</button>
+</div>
+<!-- Elite -->
+<div class="glass-panel rounded-xl p-stack-md flex flex-col h-full border-tertiary/20 hover:border-tertiary/50 transition-all">
+<h3 class="font-label-caps text-label-caps text-tertiary mb-4">ELITE ENTERPRISE</h3>
+<div class="font-headline-md text-headline-md mb-2 text-tertiary">Custom</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-8 pb-4 border-b border-outline-variant/10">Bespoke deployment for large organizations.</p>
+<ul class="flex flex-col gap-3 flex-grow mb-8 font-mono-data text-mono-data text-sm text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary">diamond</span> Dedicated Infrastructure</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary">diamond</span> Custom Channel Training</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary">diamond</span> 24/7 White-glove Support</li>
+</ul>
+<button class="w-full py-3 rounded-lg border border-tertiary/50 text-tertiary font-label-caps text-label-caps hover:bg-tertiary/10 transition-colors trigger-lead-capture">CONTACT SALES</button>
+</div>
+</div>
+</section>
+<!-- Frequently Asked Questions -->
+<section class="py-stack-lg border-t border-outline-variant/10">
+<div class="max-w-3xl mx-auto">
+<div class="text-center mb-stack-lg">
+<h2 class="font-headline-md text-headline-md mb-2">Enterprise Inquiries</h2>
+<p class="font-mono-data text-mono-data text-on-surface-variant">Clarity before command.</p>
+</div>
+<div class="flex flex-col gap-4">
+<div class="glass-panel rounded-xl p-6 border border-outline-variant/20 hover:border-primary/30 transition-colors">
+<h4 class="font-label-caps text-label-caps mb-2 text-primary">Is my proprietary data secure?</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Absolute isolation. We utilize military-grade encryption (AES-256) at rest and in transit. Enterprise tiers include zero-retention policies—your data trains your models locally and is never shared.</p>
+</div>
+<div class="glass-panel rounded-xl p-6 border border-outline-variant/20 hover:border-primary/30 transition-colors">
+<h4 class="font-label-caps text-label-caps mb-2 text-primary">How fast is deployment?</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Standard API integration takes under 4 hours for skilled engineering teams. Bespoke Enterprise deployments are typically live within 14 business days, including custom channel training.</p>
+</div>
+<div class="glass-panel rounded-xl p-6 border border-outline-variant/20 hover:border-primary/30 transition-colors">
+<h4 class="font-label-caps text-label-caps mb-2 text-primary">Can it handle custom workflows?</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Yes. Our Neural Net API allows for infinite integrations. Hook into your existing CRM, ERP, or custom internal tooling with comprehensive webhooks and REST endpoints.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Instant Sale CTA (Urgency) -->
+<section class="py-stack-lg border-t border-outline-variant/10">
+<div class="glass-panel rounded-2xl p-stack-lg text-center relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent pointer-events-none"></div>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-error-container/20 border border-error-container/50 text-error font-mono-data text-xs mb-stack-md">
+<span class="material-symbols-outlined text-xs">timer</span>
+                    LIMITED AVAILABILITY: BATCH 004 CLOSING
+                </div>
+<h2 class="font-headline-md text-headline-md mb-4">Secure Your Node Now</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto mb-stack-lg">
+                    Enterprise allocation for the current architecture iteration is nearing capacity. Do not miss the window to integrate unparalleled digital luxury.
+                </p>
+<button onclick="window.location.href='checkout.html?tier=pro'" class="bg-primary text-surface-container-lowest font-label-caps text-label-caps px-12 py-5 rounded-xl hover:bg-primary-fixed active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(207,188,255,0.3)] pulse-glow">
+                    ACQUIRE LICENSE NOW
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center px-container-margin py-stack-sm w-full mt-auto gap-4">
+<div class="font-label-caps text-label-caps text-on-surface">
+            © 2024 ChatbotPro. Digital Luxury AI.
+        </div>
+<div class="flex gap-6">
+<a class="font-mono-data text-mono-data text-on-surface-variant hover:text-tertiary-fixed transition-colors opacity-80 hover:opacity-100" href="#">System Status</a>
+<a class="font-mono-data text-mono-data text-on-surface-variant hover:text-tertiary-fixed transition-colors opacity-80 hover:opacity-100" href="#">API Health</a>
+<a class="font-mono-data text-mono-data text-on-surface-variant hover:text-tertiary-fixed transition-colors opacity-80 hover:opacity-100" href="#">Support</a>
+</div>
+</footer>
+<script src="js/main.js"></script>
+<script src="js/roi.js"></script>
+</body></html>

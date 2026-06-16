@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Guides - ChatbotPro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#cfbcff",
+                        "tertiary-container": "#c9a74d",
+                        "surface-container-lowest": "#0f0d13",
+                        "surface-container-low": "#1d1b20",
+                        "outline-variant": "#494551",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "secondary-fixed": "#e9ddff",
+                        "surface-tint": "#cfbcff",
+                        "on-background": "#e6e0e9",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "secondary": "#cdc0e9",
+                        "error-container": "#93000a",
+                        "outline": "#948e9c",
+                        "primary-container": "#6750a4",
+                        "surface-container": "#211f24",
+                        "surface-dim": "#141218",
+                        "on-primary-fixed": "#22005d",
+                        "secondary-container": "#4d4465",
+                        "on-error-container": "#ffdad6",
+                        "inverse-primary": "#6750a4",
+                        "on-tertiary-container": "#503d00",
+                        "on-surface-variant": "#cbc4d2",
+                        "primary": "#cfbcff",
+                        "inverse-surface": "#e6e0e9",
+                        "surface-variant": "#36343a",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "primary-fixed": "#e9ddff",
+                        "on-primary-container": "#e0d2ff",
+                        "surface": "#141218",
+                        "surface-container-high": "#2b292f",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#1f1635",
+                        "inverse-on-surface": "#322f35",
+                        "tertiary-fixed": "#ffdf93",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "on-secondary": "#342b4b",
+                        "surface-bright": "#3b383e",
+                        "tertiary": "#e7c365",
+                        "on-tertiary": "#3e2e00",
+                        "background": "#141218",
+                        "on-secondary-container": "#bfb2da",
+                        "on-surface": "#e6e0e9",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "surface-container-highest": "#36343a",
+                        "on-primary": "#381e72"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "48px",
+                        "unit": "8px",
+                        "stack-sm": "12px",
+                        "gutter": "24px",
+                        "stack-md": "24px",
+                        "container-margin": "40px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Sora"],
+                        "mono-data": ["JetBrains Mono"],
+                        "display-lg": ["Sora"],
+                        "body-lg": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "display-lg-mobile": ["Sora"],
+                        "body-sm": ["Sora"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "mono-data": ["13px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #050505;
+            color: theme('colors.on-background');
+        }
+        .glass-panel {
+            background: rgba(20, 18, 24, 0.6);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(203, 196, 210, 0.1);
+        }
+        .glass-panel-hover {
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .glass-panel-hover:hover {
+            background: rgba(20, 18, 24, 0.8);
+            transform: scale(1.02);
+            box-shadow: inset 0 0 0 2px rgba(207, 188, 255, 0.3), 0 0 20px rgba(207, 188, 255, 0.15);
+        }
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, theme('colors.primary'), theme('colors.tertiary'));
+        }
+        .btn-primary {
+            background: linear-gradient(to right, theme('colors.primary'), theme('colors.tertiary'));
+            color: theme('colors.on-primary');
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 15px rgba(207, 188, 255, 0.4);
+        }
+        .glass-play-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .glass-play-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col py-stack-md px-4 bg-surface-dim/80 backdrop-blur-2xl fixed left-0 top-0 h-screen w-64 border-r border-outline-variant/20 shadow-xl z-40">
+<div class="mb-stack-lg px-2">
+<span class="font-display-lg text-display-lg text-primary text-[28px]">ChatbotPro</span>
+<div class="mt-4 flex items-center space-x-3">
+<img alt="System Operator" class="w-10 h-10 rounded-full border border-primary/30" data-alt="A macro shot of a sleek, futuristic avatar interface glowing with subtle cyan and purple accents against an obsidian background. The portrait exudes digital luxury and high-tech elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3GjKf6SRfwMNDLC8QuIQ46qcE85qBfD4d09_OOk6_1i7Rz3fZkxc6lwX8CjADTaBAsCxR4DYtN_6DhFNupqI64j4CZ_ep2K50XjiwJ9kxFdr7WSdwOzFp94bx08cc84lpPrjBFfnIR6wm6n-TlCeivh9b3kQOfqfUbo8XA_pnRHjmygl8fLTYZW_VBFQjOaFGeFsNM1F-bSgcHInz--QQyabIw1Qogdpj4NSuHekUEGcoIILw3ZS4qQ9HfCK7Tt0KFjWKdUA3CED-"/>
+<div>
+<div class="font-label-caps text-label-caps text-on-surface">Admin Terminal</div>
+<div class="font-mono-data text-mono-data text-tertiary text-[10px]">Elite Access</div>
+</div>
+</div>
+</div>
+<ul class="space-y-unit flex-1">
+<li>
+<a class="flex items-center space-x-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-white/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps" href="dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center space-x-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-white/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps" href="features.html">
+<span class="material-symbols-outlined">smart_toy</span>
+<span>Chatbot Library</span>
+</a>
+</li>
+<li>
+<a class="flex items-center space-x-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-white/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps" href="dashboard.html">
+<span class="material-symbols-outlined">hub</span>
+<span>CRM Intelligence</span>
+</a>
+</li>
+<li>
+<a class="flex items-center space-x-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-white/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps" href="env-vars.html">
+<span class="material-symbols-outlined">database</span>
+<span>Environment Variables</span>
+</a>
+</li>
+<li>
+<a class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-primary-container/20 text-primary border-r-2 border-primary hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps" href="guides.html">
+<span class="material-symbols-outlined">menu_book</span>
+<span>User Guides</span>
+</a>
+</li>
+<li>
+<a class="flex items-center space-x-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-white/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps" href="env-vars.html">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 relative min-h-screen flex flex-col">
+<!-- TopNavBar for Mobile / Minimal Search Header for Desktop -->
+<header class="flex justify-between items-center px-container-margin py-stack-md w-full sticky top-0 z-30 bg-surface-container/60 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_0_15px_rgba(207,188,255,0.1)]">
+<div class="md:hidden font-display-lg-mobile text-display-lg-mobile text-gradient">
+                ChatbotPro
+            </div>
+<div class="hidden md:flex flex-1 max-w-2xl mx-auto relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
+<input id="search-guides" class="w-full bg-surface-container-high border border-outline-variant/30 rounded-full py-3 pl-12 pr-4 font-mono-data text-mono-data text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all duration-300 placeholder:text-on-surface-variant/50" placeholder="Search documentation, API refs, or tutorials..." type="text"/>
+<div class="absolute right-2 top-1/2 -translate-y-1/2 hidden md:flex items-center space-x-1">
+<kbd class="px-2 py-1 bg-surface-variant rounded text-[10px] font-mono-data text-on-surface-variant border border-outline-variant/30">⌘</kbd>
+<kbd class="px-2 py-1 bg-surface-variant rounded text-[10px] font-mono-data text-on-surface-variant border border-outline-variant/30">K</kbd>
+</div>
+</div>
+<div class="flex items-center space-x-4 md:ml-auto">
+<button class="text-on-surface-variant hover:text-primary transition-colors active:scale-95">
+<span class="material-symbols-outlined">language</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors active:scale-95 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-tertiary rounded-full animate-pulse"></span>
+</button>
+</div>
+</header>
+<div class="flex-1 px-4 md:px-container-margin py-stack-lg max-w-7xl mx-auto w-full">
+<!-- Hero Section -->
+<div class="mb-stack-lg text-center md:text-left">
+<h1 class="font-display-lg text-display-lg mb-4">
+                    Master Your <span class="text-gradient">Intelligence</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">
+                    Explore comprehensive guides, API references, and advanced tutorials designed for power users operating the ChatbotPro framework.
+                </p>
+</div>
+<!-- Mobile Search (Visible only on mobile) -->
+<div class="md:hidden mb-stack-lg relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input id="search-guides-mobile" class="w-full bg-surface-container-high border border-outline-variant/30 rounded-full py-3 pl-12 pr-4 font-mono-data text-mono-data text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all duration-300" placeholder="Search documentation..." type="text"/>
+</div>
+<!-- Interactive Tiles (Bento Grid) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-stack-lg">
+<!-- Tile 1 -->
+<a class="glass-panel glass-panel-hover rounded-xl p-6 flex flex-col h-full group relative overflow-hidden" href="#">
+<div class="absolute -right-10 -top-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-all duration-500"></div>
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center mb-6 border border-outline-variant/30 group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-primary text-2xl" data-weight="fill">rocket_launch</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Getting Started</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex-1">
+                        Core concepts, initial setup, and deployment strategies for your first autonomous agent.
+                    </p>
+<div class="mt-4 flex items-center text-primary font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+<span>Read Guide</span>
+<span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+</div>
+</a>
+<!-- Tile 2 -->
+<a class="glass-panel glass-panel-hover rounded-xl p-6 flex flex-col h-full group relative overflow-hidden" href="#">
+<div class="absolute -right-10 -top-10 w-32 h-32 bg-tertiary/10 rounded-full blur-2xl group-hover:bg-tertiary/20 transition-all duration-500"></div>
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center mb-6 border border-outline-variant/30 group-hover:border-tertiary/50 transition-colors">
+<span class="material-symbols-outlined text-tertiary text-2xl" data-weight="fill">api</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">API Integration</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex-1">
+                        RESTful endpoints, webhooks, and secure authentication protocols for custom telemetry.
+                    </p>
+<div class="mt-4 flex items-center text-tertiary font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+<span>View Docs</span>
+<span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+</div>
+</a>
+<!-- Tile 3 -->
+<a class="glass-panel glass-panel-hover rounded-xl p-6 flex flex-col h-full group relative overflow-hidden" href="#">
+<div class="absolute -right-10 -top-10 w-32 h-32 bg-error/10 rounded-full blur-2xl group-hover:bg-error/20 transition-all duration-500"></div>
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center mb-6 border border-outline-variant/30 group-hover:border-error/50 transition-colors">
+<span class="material-symbols-outlined text-error text-2xl" data-weight="fill">psychology</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Advanced AI Skills</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex-1">
+                        Prompt engineering, context window management, and custom LLM routing mechanics.
+                    </p>
+<div class="mt-4 flex items-center text-error font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+<span>Master Skills</span>
+<span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+</div>
+</a>
+</div>
+<!-- Video Tutorials Section -->
+<div class="mb-stack-lg">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface">Featured Transmissions</h3>
+<a class="font-label-caps text-label-caps text-primary hover:text-primary-fixed transition-colors" href="#">View All Archive</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Video 1 -->
+<div class="group relative rounded-xl overflow-hidden border border-outline-variant/20 aspect-video bg-surface-container cursor-pointer">
+<img alt="Cybersecurity Interface" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500" data-alt="A dark, cinematic visualization of a high-tech cybersecurity interface. Glowing cyan and magenta code lines cascade across deep black monitors in a server room context. The mood is intense, secure, and technologically elite." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDc9fxGO0-UXogo5puGNiPtGpBASqnwg2Cic04M8GHP3TNuFdagH6PtjGf7XZC2bQbaSDoUEp9U0G1Xr2gfFIEthCyDNNsGeCvY7MmW7gSsYGyKXAHK933ZbZv1_3Ee-UmddLRl2oTudWOkzt83MUMtQ7MHb-QgGNtx8Ngy6HEr5_HXrYxCWyMsknDrB0QhaoRRRVJT-uZ6uhCZvQgDMb7W-qnrep_6d-bxTGJ2y3ltF5Y4qfSkN83e04rDr0wPgpgxKiQb4H_6gM2i"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-16 h-16 rounded-full glass-play-btn flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl ml-1" data-weight="fill">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 p-4 w-full">
+<div class="flex justify-between items-end">
+<div>
+<span class="inline-block px-2 py-1 bg-surface/80 backdrop-blur-md rounded text-[10px] font-mono-data text-tertiary mb-2 border border-tertiary/30">TUTORIAL</span>
+<h4 class="font-body-lg text-body-lg text-white font-semibold">Configuring Neural Pathways</h4>
+</div>
+<span class="font-mono-data text-mono-data text-on-surface-variant bg-surface/80 px-2 py-1 rounded">12:45</span>
+</div>
+</div>
+</div>
+<!-- Video 2 -->
+<div class="group relative rounded-xl overflow-hidden border border-outline-variant/20 aspect-video bg-surface-container cursor-pointer">
+<img alt="Data Flow Abstract" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500" data-alt="An abstract digital representation of AI data flow. Streams of luminous gold and purple light weave through an abyss of pure obsidian space. The aesthetic is ultra-modern, conveying speed, fluidity, and advanced machine learning processing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8ITb_mapn3__fR_gTwFaMFJCxjrXfSvnePwyMSVtqm3uasT_Sb1NSnPRx5bv96JJP_faJp5j4FH-NeDEhpH3h4py-pqVzxdvzm-ewyRlKhu9eDaEbi2htM9YnWxG2AErgsF0jn036fOPdoqluG30z5PeHhr7DmXGX-Y1IX0f0379MSi1TxRYM8UnjN3aZRViiEL2j9d5vb-ahUjv7BuHqJDAth-8iumD1m8m1qhf74FCAEh1pOpoXENpKuaXkP3hJZCwk9Y1qS3dt"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-16 h-16 rounded-full glass-play-btn flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl ml-1" data-weight="fill">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 p-4 w-full">
+<div class="flex justify-between items-end">
+<div>
+<span class="inline-block px-2 py-1 bg-surface/80 backdrop-blur-md rounded text-[10px] font-mono-data text-primary mb-2 border border-primary/30">DEEP DIVE</span>
+<h4 class="font-body-lg text-body-lg text-white font-semibold">Mastering Context Windows</h4>
+</div>
+<span class="font-mono-data text-mono-data text-on-surface-variant bg-surface/80 px-2 py-1 rounded">24:10</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="mt-auto w-full bg-surface-container-lowest border-t border-outline-variant/10 flex justify-between items-center px-container-margin py-stack-sm">
+<div class="font-label-caps text-label-caps text-on-surface">© 2024 ChatbotPro. Digital Luxury AI.</div>
+<div class="flex space-x-6">
+<a class="font-mono-data text-mono-data text-on-surface-variant hover:text-tertiary-fixed transition-colors opacity-80 hover:opacity-100" href="#">System Status</a>
+<a class="font-mono-data text-mono-data text-on-surface-variant hover:text-tertiary-fixed transition-colors opacity-80 hover:opacity-100" href="#">API Health</a>
+<a class="font-mono-data text-mono-data text-on-surface-variant hover:text-tertiary-fixed transition-colors opacity-80 hover:opacity-100" href="#">Support</a>
+</div>
+</footer>
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Search guides filtering
+    const searchGuides = document.getElementById('search-guides');
+    const searchGuidesMobile = document.getElementById('search-guides-mobile');
+    const guideTiles = document.querySelectorAll('main .grid:first-of-type > a');
+    
+    function filterGuides(query) {
+        const term = query.toLowerCase().trim();
+        guideTiles.forEach(tile => {
+            const title = tile.querySelector('h2').textContent.toLowerCase();
+            const desc = tile.querySelector('p').textContent.toLowerCase();
+            
+            if (title.includes(term) || desc.includes(term)) {
+                tile.style.display = 'flex';
+            } else {
+                tile.style.display = 'none';
+            }
+        });
+    }
+
+    if (searchGuides) {
+        searchGuides.addEventListener('input', () => filterGuides(searchGuides.value));
+    }
+    if (searchGuidesMobile) {
+        searchGuidesMobile.addEventListener('input', () => filterGuides(searchGuidesMobile.value));
+    }
+
+    // 2. Click tile actions
+    guideTiles.forEach(tile => {
+        tile.addEventListener('click', (e) => {
+            e.preventDefault();
+            const title = tile.querySelector('h2').textContent;
+            window.showToast(`Loading manual section: ${title}...`, 'info');
+        });
+    });
+
+    // 3. Click video transmitters
+    document.querySelectorAll('main .aspect-video').forEach(video => {
+        video.addEventListener('click', () => {
+            const title = video.querySelector('h4').textContent;
+            window.showToast(`Buffering video transmission: "${title}"`, 'success');
+        });
+    });
+
+    // 4. Archive link
+    const archiveLink = Array.from(document.querySelectorAll('a')).find(el => el.textContent.trim().includes('View All Archive'));
+    if (archiveLink) {
+        archiveLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.showToast('Transmission archive is locked to active licenses.', 'info');
+        });
+    }
+
+    // Ambient hover effect logic
+    document.querySelectorAll('.glass-panel-hover').forEach(panel => {
+        panel.addEventListener('mousemove', (e) => {
+            const rect = panel.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / panel.clientWidth) * 100;
+            const y = ((e.clientY - rect.top) / panel.clientHeight) * 100;
+            panel.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(207,188,255,0.05) 0%, rgba(20,18,24,0.6) 50%)`;
+        });
+        panel.addEventListener('mouseleave', () => {
+            panel.style.background = 'rgba(20, 18, 24, 0.6)';
+        });
+    });
+});
+</script>
+</body></html>
