@@ -6,7 +6,7 @@
     <title>CHỐT NGHÌN ĐƠN</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script>
         tailwind.config = {
@@ -25,45 +25,80 @@
     <script>
         const content = `
         <div x-data="{ 
-            activeTab: 'media',
-            uploading: false,
-            images: ['https://placehold.co/400x400/121214/475569?text=Banner+Tet', 'https://placehold.co/400x400/121214/475569?text=Sale+Thang+8'],
-            simulateUpload() {
-                this.uploading = true;
-                setTimeout(() => {
-                    this.uploading = false;
-                    this.images.unshift('https://placehold.co/400x400/10B981/0A0A0A?text=Anh+San+Pham+Moi');
-                }, 1500);
-            }
+            previewImage: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=600&auto=format&fit=crop',
+            isUploadingImage: false,
+            
+            triggerImageUpload() {
+                this.$refs.imageInput.click();
+            },
+            
+            handleImageSelect(event) {
+                const file = event.target.files[0];
+                if(!file) return;
+                
+                this.isUploadingImage = true;
+                
+                // Read file to data URL for preview
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    setTimeout(() => {
+                        this.previewImage = e.target.result;
+                        this.isUploadingImage = false;
+                        window.dispatchEvent(new CustomEvent('show-toast', { detail: { msg: 'Đã tải lên và cập nhật Ảnh Banner thành công!', type: 'success' } }));
+                    }, 1000); // Simulate network delay
+                };
+                reader.readAsDataURL(file);
+            },
+            simulateAction(msg) { window.dispatchEvent(new CustomEvent('show-toast', { detail: { msg: msg, type: 'success' } })); }
         }">
-            <h2 class="text-xl font-bold mb-6">Quản Lý Nội Dung & Media</h2>
-            <div class="mb-6 flex gap-4 border-b border-white/5">
-                <button class="pb-2 font-bold text-sm px-4 text-[#00F0FF] border-b-2 border-[#00F0FF]">Thư Viện Media Đa Phương Tiện</button>
-            </div>
-
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="font-bold">Kho Ảnh / Video Của Doanh Nghiệp</h3>
-                <button @click="simulateUpload()" class="px-6 py-2 bg-[#00F0FF] text-black font-bold rounded-xl text-sm flex items-center gap-2 hover:bg-cyan-400">
-                    <span x-show="!uploading" class="material-symbols-outlined text-[18px]">upload</span> 
-                    <span x-show="!uploading">Tải Lên Media</span>
-                    <span x-show="uploading" class="material-symbols-outlined animate-spin text-[18px]">sync</span>
-                    <span x-show="uploading">Đang xử lý...</span>
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold font-display">Quản Lý Nội Dung & Banner</h2>
+                <button @click="triggerImageUpload" class="px-6 py-2.5 bg-[#00F0FF] text-black font-bold rounded-xl text-sm flex items-center gap-2 hover:bg-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.3)]">
+                    <span class="material-symbols-outlined text-[18px]" x-show="!isUploadingImage">add_photo_alternate</span>
+                    <span class="material-symbols-outlined text-[18px] animate-spin" x-show="isUploadingImage" style="display:none;">refresh</span>
+                    <span x-text="isUploadingImage ? 'Đang xử lý...' : 'Tải Banner Lên'"></span>
                 </button>
+                <input type="file" x-ref="imageInput" @change="handleImageSelect" accept="image/*" class="hidden">
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <template x-for="img in images" :key="img">
-                    <div class="aspect-square rounded-2xl overflow-hidden border border-white/10 relative group">
-                        <img :src="img" class="w-full h-full object-cover transition-transform group-hover:scale-105">
-                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                            <button class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/40"><span class="material-symbols-outlined text-white">visibility</span></button>
-                            <button class="w-10 h-10 bg-red-500/80 rounded-full flex items-center justify-center hover:bg-red-500"><span class="material-symbols-outlined text-white">delete</span></button>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Image Preview Section -->
+                <div class="bg-[#121214] border border-white/5 p-4 rounded-2xl relative group">
+                    <div class="absolute top-2 left-2 bg-black/80 px-3 py-1 rounded text-xs text-[#10B981] font-bold z-10 border border-[#10B981]/30">Banner Đang Chạy (Live)</div>
+                    <div class="aspect-video bg-[#0A0A0A] rounded-xl overflow-hidden relative">
+                        <!-- Simulated Loading Overlay -->
+                        <div x-show="isUploadingImage" style="display:none;" class="absolute inset-0 bg-black/60 z-20 flex flex-col items-center justify-center backdrop-blur-sm">
+                            <span class="material-symbols-outlined text-white text-4xl animate-spin mb-2">hourglass_empty</span>
+                            <span class="text-sm font-bold text-white">Đang tải ảnh lên máy chủ...</span>
+                        </div>
+                        <img :src="previewImage" alt="Banner Preview" class="w-full h-full object-cover transition-transform group-hover:scale-105 duration-500">
+                    </div>
+                    <div class="mt-4 flex justify-between items-center px-2">
+                        <div>
+                            <div class="font-bold">Campaign Siêu Sale Mùa Hè</div>
+                            <div class="text-xs text-slate-400">Kích thước: 1920x1080 - Định dạng: JPG</div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button @click="triggerImageUpload" class="w-8 h-8 rounded bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-300"><span class="material-symbols-outlined text-[16px]">edit</span></button>
                         </div>
                     </div>
-                </template>
+                </div>
+
+                <!-- Content text templates -->
+                <div class="space-y-4">
+                    <h3 class="font-bold text-lg">Mẫu Content Gắn Kèm</h3>
+                    <div class="bg-[#121214] border border-white/5 p-4 rounded-xl">
+                        <textarea class="w-full bg-[#0A0A0A] border border-white/10 p-3 text-sm rounded-xl text-white h-24 mb-2 focus:outline-none focus:border-[#00F0FF]">🔥 SIÊU SALE CHÀO HÈ - GIẢM NGAY 50%
+Săn ngay deal hot số lượng có hạn tại Shop! Nhập mã SUMMER50 để nhận ưu đãi.</textarea>
+                        <div class="flex justify-end gap-2">
+                            <button @click="simulateAction('Đã Copy Content vào bộ nhớ tạm!')" class="px-4 py-1.5 bg-white/5 hover:bg-white/10 rounded-lg text-xs font-bold text-slate-300 border border-white/5">Copy</button>
+                            <button @click="simulateAction('Đã Lưu Mẫu Content!')" class="px-4 py-1.5 bg-[#10B981] text-black hover:bg-emerald-400 rounded-lg text-xs font-bold shadow-[0_0_10px_rgba(16,185,129,0.3)]">Lưu Mẫu</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    `;
+`;
         document.addEventListener('DOMContentLoaded', () => {
             renderLayout('content', content);
         });
