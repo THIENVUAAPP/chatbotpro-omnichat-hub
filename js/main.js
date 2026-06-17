@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initToastSystem();
     initGlobalLinkHandlers();
     
+    // Core Role Permissions Init
+    initRoleSwitcher();
+    applyRolePermissions();
+    checkRoleAccess();
+    
     // Run translation on load
     translatePage();
 });
@@ -23,11 +28,21 @@ const translations = {
         "nav-support": "Hỗ Trợ",
         "nav-home": "Trang Chủ",
         "nav-crm": "CRM Khách Hàng",
-        "nav-api": "Cấu Hình API",
-        "nav-guides": "Hướng Dẫn",
+        "nav-api": "Cấu Hình API & Kênh",
+        "nav-guides": "Hướng Dẫn Sử Dụng",
         "nav-settings": "Cài Đặt",
         "nav-admin-terminal": "Admin Terminal",
         "copyright": "© 2026 ChatbotPro. Trợ lý Trí Tuệ Nhân Tạo Doanh Nghiệp.",
+        "nav-team": "Phân Quyền Team",
+        "nav-logout": "Quay Lại Web",
+
+        // Role Switcher & Access Control
+        "role-label": "VAI TRÒ:",
+        "role-owner": "Chủ Doanh Nghiệp",
+        "role-staff": "Nhân Viên Trực",
+        "role-access-denied-title": "TRUY CẬP BỊ TỪ CHỐI",
+        "role-access-denied-desc": "Bạn đang ở vai trò Nhân Viên. Bạn không có quyền truy cập vào trang cấu hình API hoặc phân quyền team. Vui lòng liên hệ Chủ Doanh Nghiệp để cấu hình hệ thống.",
+        "role-access-denied-btn": "Quay lại Bảng CRM",
 
         // Landing Page: Hero Section
         "hero-badge": "v4.0 Core Nhân Viên Số Hoạt Động",
@@ -116,7 +131,7 @@ const translations = {
         // Checkout Page
         "checkout-title": "Phương Thức Thanh Toán",
         "checkout-desc": "Mọi giao dịch đều được mã hóa bảo mật 256-bit SSL.",
-        "checkout-method-card": "THẺ QUỐC TẾ",
+        "checkout-method-card": "THÈ QUỐC TẾ",
         "checkout-method-wallet": "VÍ ĐIỆN TỬ",
         "checkout-method-apple": "MOMO / ZALOPAY",
         "checkout-label-number": "SỐ THẺ",
@@ -143,7 +158,7 @@ const translations = {
         "dash-roster-sub": "Tự động đồng bộ từ Messenger, Zalo OA và Zalo cá nhân.",
         "dash-search-placeholder": "Tìm kiếm khách hàng, kênh kết nối...",
         "dash-col-name": "KHÁCH HÀNG",
-        "dash-col-channel": "KÊNH",
+        "dash-col-channel": "KÊNH KẾT NỐI",
         "dash-col-status": "TRẠNG THÁI",
         "dash-col-date": "NGÀY TƯ VẤN",
         "dash-col-action": "THAO TÁC",
@@ -151,8 +166,8 @@ const translations = {
         "dash-status-manual": "Cần nhân sự trực",
 
         // Environment Variables (Cấu hình API)
-        "env-title": "Quản Lý Biến Môi Trường API",
-        "dash-env-sub": "Cấu hình API Keys kết nối LLM, Zalo OA, Messenger và các webhook.",
+        "env-title": "Cấu Hình API & Hệ Thống",
+        "dash-env-sub": "Cấu hình API Keys kết nối LLM, cơ sở dữ liệu và các thông số mô hình.",
         "env-btn-add": "Thêm Biến Môi Trường",
         "env-col-key": "TÊN BIẾN (KEY)",
         "env-col-value": "GIÁ TRỊ (VALUE)",
@@ -178,6 +193,63 @@ const translations = {
         "env-placeholder-key": "TÊN_BIẾN_MỚI",
         "env-placeholder-value": "Giá trị...",
         
+        // Social Connections (Integrations Grid)
+        "channels-tab-title": "Cấu Hình Kênh Kết Nối",
+        "channels-tab-sub": "Đồng bộ Access Token, Webhook và tài khoản mạng xã hội / sàn thương mại điện tử để tự động hóa chốt đơn.",
+        "chan-status-connected": "Đang hoạt động",
+        "chan-status-disconnected": "Chưa kết nối",
+        "chan-btn-connect": "KẾT NỐI KÊNH",
+        "chan-btn-disconnect": "NGẤT KẾT NỐI",
+        "chan-modal-title": "Cấu Hình Kết Nối API Kênh",
+        "chan-modal-webhook-label": "Webhook URL (Nhận sự kiện tin nhắn)",
+        "chan-modal-token-label": "Access Token / API Key kết nối",
+        "chan-modal-id-label": "Page ID / Shop ID / Group ID",
+        "chan-btn-copy": "Sao Chép",
+        "chan-btn-save": "LƯU KẾT NỐI",
+
+        // Inbox & Chat Console
+        "chat-tab-all": "Tất cả",
+        "chat-tab-zalo": "Zalo OA",
+        "chat-tab-facebook": "Facebook Page/Msg",
+        "chat-tab-tiktok": "TikTok Shop",
+        "chat-tab-shopee": "Shopee / Lazada",
+        "chat-tab-website": "Website Widget",
+        "chat-autopilot-active": "AI tự động trực",
+        "chat-autopilot-inactive": "Nhân viên trực chat",
+        "chat-autopilot-toggle": "Chế độ tự động (AI Autopilot)",
+        "chat-input-placeholder": "Nhập nội dung tin nhắn tư vấn... (Gõ nội dung sẽ tự tắt AI để bạn tiếp quản)",
+        "chat-ai-suggestions": "AI GỢI Ý PHẢN HỒI",
+        "chat-crm-details": "THÔNG TIN KHÁCH HÀNG CRM",
+        "chat-crm-phone": "Số điện thoại",
+        "chat-crm-address": "Địa chỉ đơn hàng",
+        "chat-crm-notes": "Ghi chú đơn hàng",
+        "chat-btn-takeover": "👤 Can thiệp thủ công",
+        "chat-btn-enable-ai": "🤖 Kích hoạt lại AI",
+        "chat-ai-suggest-badge": "AI gợi ý chốt đơn",
+        "chat-active-threads": "Hội thoại đang hoạt động",
+
+        // Team Management Page
+        "team-title": "Phân Quyền & Đội Ngũ Nhân Sự",
+        "team-sub": "Thiết lập tài khoản, vai trò và phân quyền truy cập chức năng cho nhân viên.",
+        "team-col-name": "NHÂN SỰ",
+        "team-col-role": "VAI TRÒ HỆ THỐNG",
+        "team-col-status": "TRẠNG THÁI",
+        "team-col-permissions": "PHÂN QUYỀN TRUY CẬP TRANG",
+        "team-col-action": "THAO TÁC",
+        "team-btn-add": "Thêm Thành Viên",
+        "team-status-active": "Hoạt động",
+        "team-status-inactive": "Tạm khóa",
+        "team-modal-add-title": "Thêm Nhân Sự Đội Ngũ",
+        "team-modal-label-name": "Tên Nhân Viên",
+        "team-modal-label-email": "Địa Chỉ Email",
+        "team-modal-label-role": "Vai Trò Nhân Sự",
+        "team-modal-label-permissions": "Phân Quyền Chi Tiết",
+        "team-btn-save": "LƯU NHÂN SỰ",
+        "team-perm-crm": "Quản lý CRM & Chat",
+        "team-perm-api": "Cấu hình API & Kênh",
+        "team-perm-guides": "Xem tài liệu Hướng dẫn",
+        "team-perm-team": "Quản lý Đội ngũ",
+
         // Guides Page
         "guides-title": "Trung Tâm Hướng Dẫn Sử Dụng",
         "dash-guides-sub": "Tài liệu hướng dẫn cấu hình AI, Zalo OA và tối ưu tri thức.",
@@ -199,7 +271,7 @@ const translations = {
         "guides-btn-master": "Làm Chủ Kỹ Năng",
         "guides-video-title": "Video Hướng Dẫn Nổi Bật",
         "guides-video-archive": "Xem Toàn Bộ Kho Lưu Trữ",
-        "guides-v1-title": "Cấu Hình Đường Truyền Neural",
+        "guides-v1-title": "Cấu HÌnh Đường Truyền Neural",
         "guides-v2-title": "Tối Ưu Ngữ Cảnh AI (Context Windows)",
         "guides-search-placeholder": "Tìm kiếm tài liệu...",
         "guides-video-tag-tutorial": "HƯỚNG DẪN",
@@ -232,11 +304,21 @@ const translations = {
         "nav-support": "Support",
         "nav-home": "Home",
         "nav-crm": "CRM Intelligence",
-        "nav-api": "API Configuration",
+        "nav-api": "API & Channels",
         "nav-guides": "User Guides",
         "nav-settings": "Settings",
         "nav-admin-terminal": "Admin Terminal",
         "copyright": "© 2026 ChatbotPro. Digital Luxury AI Assistant Platform.",
+        "nav-team": "Team Permissions",
+        "nav-logout": "Back to Web",
+
+        // Role Switcher & Access Control
+        "role-label": "ROLE:",
+        "role-owner": "Owner / Admin",
+        "role-staff": "Chat Staff / Agent",
+        "role-access-denied-title": "ACCESS DENIED",
+        "role-access-denied-desc": "You are currently logged in with the Staff role. You do not have permissions to access API configurations or Team Permissions. Please contact the Owner.",
+        "role-access-denied-btn": "Return to CRM",
 
         // Landing Page: Hero Section
         "hero-badge": "v4.0 Enterprise Core Online",
@@ -307,7 +389,7 @@ const translations = {
         "price-elite-btn": "CONTACT SALES",
 
         // Landing Page: FAQs
-        "faq-title": "Enterprise Inquiries",
+        "faq-title": "FAQ",
         "faq-sub": "Clarity before command.",
         "faq-q1": "Is my proprietary data secure?",
         "faq-a1": "Absolute isolation. We utilize military-grade encryption (AES-256) at rest and in transit. Your data is never shared.",
@@ -326,7 +408,7 @@ const translations = {
         "checkout-title": "Payment Method",
         "checkout-desc": "All transactions are secure and encrypted.",
         "checkout-method-card": "CREDIT CARD",
-        "checkout-method-wallet": "PAYPAL",
+        "checkout-method-wallet": "PAYPAL / MOMO",
         "checkout-method-apple": "APPLE PAY",
         "checkout-label-number": "CARD NUMBER",
         "checkout-label-expiry": "EXPIRY DATE",
@@ -360,8 +442,8 @@ const translations = {
         "dash-status-manual": "Staff required",
 
         // Environment Variables
-        "env-title": "API Keys Control Manager",
-        "dash-env-sub": "Configure keys for LLM providers, Zalo API, and webhooks.",
+        "env-title": "API Keys & Integrations",
+        "dash-env-sub": "Configure keys for LLM providers, databases, and connection credentials.",
         "env-btn-add": "Add Variable",
         "env-col-key": "VARIABLE KEY",
         "env-col-value": "VALUE",
@@ -385,37 +467,64 @@ const translations = {
         "env-detail-updated": "Last Updated:",
         "env-detail-hash": "Version Hash:",
         "env-placeholder-key": "NEW_VARIABLE_KEY",
-        "env-placeholder-value": "Value...",       "checkout-secure": "256-bit SSL Secure Checkout",
+        "env-placeholder-value": "Value...",
+        
+        // Social Connections (Integrations Grid)
+        "channels-tab-title": "Social Channels Connection",
+        "channels-tab-sub": "Link Zalo OA, Facebook Messenger, TikTok Shop, Shopee, and other endpoints via credentials or API tokens.",
+        "chan-status-connected": "Active",
+        "chan-status-disconnected": "Not connected",
+        "chan-btn-connect": "CONNECT CHANNEL",
+        "chan-btn-disconnect": "DISCONNECT",
+        "chan-modal-title": "Configure Channel API Connection",
+        "chan-modal-webhook-label": "Webhook URL (Incoming events)",
+        "chan-modal-token-label": "Access Token / API connection Key",
+        "chan-modal-id-label": "Page ID / Shop ID / Group ID",
+        "chan-btn-copy": "Copy",
+        "chan-btn-save": "CONFIRM CONNECTION",
 
-        // Dashboard & CRM
-        "dash-title": "CRM Dashboard",
-        "dash-sub": "Monitor automated AI agent operations and client details.",
-        "dash-card-revenue": "AI Revenue",
-        "dash-card-chats": "Completed Chats",
-        "dash-card-deflection": "Deflection Rate",
-        "dash-card-satisfaction": "Satisfaction Rate",
-        "dash-roster-title": "Client Roster",
-        "dash-roster-sub": "Synced in real-time from Zalo, Messenger, and Website.",
-        "dash-search-placeholder": "Search clients, channels...",
-        "dash-col-name": "CLIENT NAME",
-        "dash-col-channel": "CHANNEL",
-        "dash-col-status": "STATUS",
-        "dash-col-date": "DATE CONVERSATION",
-        "dash-col-action": "ACTION",
-        "dash-status-auto": "Automated",
-        "dash-status-manual": "Staff required",
+        // Inbox & Chat Console
+        "chat-tab-all": "All",
+        "chat-tab-zalo": "Zalo OA",
+        "chat-tab-facebook": "Facebook Page/Msg",
+        "chat-tab-tiktok": "TikTok Shop",
+        "chat-tab-shopee": "Shopee / Lazada",
+        "chat-tab-website": "Website Widget",
+        "chat-autopilot-active": "AI active",
+        "chat-autopilot-inactive": "Staff direct active",
+        "chat-autopilot-toggle": "AI Autopilot Mode",
+        "chat-input-placeholder": "Type response message... (Typing switches AI autopilot off automatically)",
+        "chat-ai-suggestions": "AI SUGGESTED REPLIES",
+        "chat-crm-details": "CRM CUSTOMER DOSSIER",
+        "chat-crm-phone": "Phone number",
+        "chat-crm-address": "Shipping address",
+        "chat-crm-notes": "Order logs & notes",
+        "chat-btn-takeover": "👤 Manual Takeover",
+        "chat-btn-enable-ai": "🤖 Re-enable AI Autopilot",
+        "chat-ai-suggest-badge": "AI suggest",
+        "chat-active-threads": "Active conversations",
 
-        // Environment Variables
-        "env-title": "API Keys Control Manager",
-        "dash-env-sub": "Configure keys for LLM providers, Zalo API, and webhooks.",
-        "env-btn-add": "Add Variable",
-        "env-col-key": "VARIABLE KEY",
-        "env-col-value": "VALUE",
-        "env-col-desc": "DESCRIPTION",
-        "env-col-action": "ACTION",
-        "env-btn-reveal": "Show",
-        "env-btn-hide": "Hide",
-        "env-btn-delete": "Delete",
+        // Team Management Page
+        "team-title": "Team & Member Permissions",
+        "team-sub": "Manage employee credentials, access roles, and custom page permissions.",
+        "team-col-name": "TEAM MEMBER",
+        "team-col-role": "SYSTEM ROLE",
+        "team-col-status": "STATUS",
+        "team-col-permissions": "PAGE PERMISSIONS",
+        "team-col-action": "ACTIONS",
+        "team-btn-add": "Add Team Member",
+        "team-status-active": "Active",
+        "team-status-inactive": "Locked",
+        "team-modal-add-title": "Add New Team Member",
+        "team-modal-label-name": "Staff Name",
+        "team-modal-label-email": "Email Address",
+        "team-modal-label-role": "System Role",
+        "team-modal-label-permissions": "Detailed Permissions",
+        "team-btn-save": "SAVE MEMBER",
+        "team-perm-crm": "Manage CRM & Chat Console",
+        "team-perm-api": "Modify API & Channel Settings",
+        "team-perm-guides": "View Help Manuals & Guides",
+        "team-perm-team": "Manage Team Members",
 
         // Guides Page
         "guides-title": "User Mastery Support Center",
@@ -508,6 +617,24 @@ function initCommonStyles() {
             width: 100%;
             transition: width linear;
         }
+        
+        /* Access Denied Overlay style */
+        .access-denied-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(248, 250, 252, 0.9);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .access-denied-visible {
+            opacity: 1 !important;
+        }
     `;
 
     const styleEl = document.createElement('style');
@@ -591,7 +718,9 @@ function initLanguageSelector() {
 
     // Bind event listeners to open the selector
     document.body.addEventListener('click', (e) => {
-        const langBtn = e.target.closest('[aria-label="language"]') || e.target.closest('.material-symbols-outlined')?.parentElement?.classList.contains('language') || (e.target.innerText === 'language' && e.target.classList.contains('material-symbols-outlined'));
+        const langBtn = e.target.closest('[aria-label="language"]') || 
+                        e.target.closest('.material-symbols-outlined')?.parentElement?.classList.contains('language') || 
+                        (e.target.innerText === 'language' && e.target.classList.contains('material-symbols-outlined'));
         if (langBtn) {
             e.preventDefault();
             overlay.classList.add('modal-visible');
@@ -624,7 +753,6 @@ function initLanguageSelector() {
 
             setTimeout(() => {
                 overlay.classList.remove('modal-visible');
-                const selectedLangObj = languages.find(l => l.code === selectedLang);
                 
                 // Translate the elements
                 translatePage();
@@ -651,7 +779,7 @@ function initLanguageSelector() {
     });
 }
 
-// 3. Lead Capture Modal Injection and Binding - Bright Theme
+// 3. Lead Capture Modal Injection and Binding
 function initLeadCaptureModal() {
     if (document.getElementById('lead-capture-modal')) return;
 
@@ -695,7 +823,7 @@ function initLeadCaptureModal() {
                         </div>
                     </div>
                     
-                    // Form Area
+                    <!-- Form Area -->
                     <div class="md:w-7/12 p-8 md:p-10 relative bg-white">
                         <div class="mb-6">
                             <h2 class="font-display-lg-mobile text-xl font-bold bg-gradient-to-r from-primary via-secondary to-tertiary bg-clip-text text-transparent mb-2" data-translate="modal-title">Mở Khóa Trợ Lý AI</h2>
@@ -806,9 +934,8 @@ function initLeadCaptureModal() {
     });
 }
 
-// 4. Premium Toast Notification System - Light Mode Colors
+// 4. Premium Toast Notification System
 function initToastSystem() {
-    // Create toast container if not exists
     let toastContainer = document.getElementById('toast-container');
     if (!toastContainer) {
         toastContainer = document.createElement('div');
@@ -817,22 +944,20 @@ function initToastSystem() {
         document.body.appendChild(toastContainer);
     }
 
-    // Expose showToast globally
     window.showToast = function(message, type = 'success', duration = 4000) {
         const toast = document.createElement('div');
         toast.className = 'luxury-toast rounded-xl overflow-hidden flex flex-col w-full';
         
-        // Set accent colors based on type
         let borderClass = 'border-l-4 border-l-primary';
         let icon = 'check_circle';
         let iconColor = 'text-primary';
         
         if (type === 'success') {
-            borderClass = 'border-l-4 border-l-[#10b981]'; // Emerald Success
+            borderClass = 'border-l-4 border-l-[#10b981]';
             icon = 'verified';
             iconColor = 'text-[#10b981]';
         } else if (type === 'error') {
-            borderClass = 'border-l-4 border-l-[#ef4444]'; // Red Error
+            borderClass = 'border-l-4 border-l-[#ef4444]';
             icon = 'error';
             iconColor = 'text-[#ef4444]';
         } else if (type === 'info') {
@@ -856,23 +981,19 @@ function initToastSystem() {
 
         toastContainer.appendChild(toast);
         
-        // Trigger reflow for slide/fade in animation
         toast.offsetHeight;
         toast.classList.add('toast-show');
 
-        // Close button action
         toast.querySelector('.toast-close-btn').addEventListener('click', () => {
             toast.classList.remove('toast-show');
             setTimeout(() => toast.remove(), 400);
         });
 
-        // Trigger progress bar countdown
         const progressBar = toast.querySelector('.toast-progress-bar');
         setTimeout(() => {
             if (progressBar) progressBar.style.width = '0%';
         }, 50);
 
-        // Auto remove
         setTimeout(() => {
             if (toast.parentElement) {
                 toast.classList.remove('toast-show');
@@ -882,42 +1003,194 @@ function initToastSystem() {
     };
 }
 
-// 5. Global Link Handlers
+// 5. Global Link Handlers & Nav Active Synchronization
 function initGlobalLinkHandlers() {
-    // Detect page context to bind specific events
     const currentPath = window.location.pathname;
     
     // Sidebar Active State Auto-matching
-    const sidebarLinks = document.querySelectorAll('aside nav a, nav.desktop-nav a, nav.desktop-nav + nav a, .desktop-nav nav a');
+    const sidebarLinks = document.querySelectorAll('aside nav a, nav.desktop-nav a, nav.desktop-nav + nav a, .desktop-nav nav a, nav ul a');
     if (sidebarLinks.length > 0) {
         sidebarLinks.forEach(link => {
             const href = link.getAttribute('href');
             if (!href || href === '#' || href.startsWith('#')) return;
             
-            // Normalize path matching
             const isMatch = currentPath.includes(href) || 
                             (currentPath.endsWith('/') && href === 'index.html');
             
             if (isMatch) {
-                // Remove active classes from siblings
                 sidebarLinks.forEach(l => {
                     l.classList.remove('bg-primary/10', 'text-primary', 'border-r-2', 'border-primary', 'active');
                     l.classList.add('text-on-surface-variant');
                 });
                 
-                // Add active classes to matched link
                 link.classList.add('bg-primary/10', 'text-primary', 'border-r-2', 'border-primary', 'active');
                 link.classList.remove('text-on-surface-variant');
             }
         });
     }
 
-    // Bind custom login redirection
+    // Bind login buttons on public site
     document.body.addEventListener('click', (e) => {
         const loginBtn = e.target.closest('button');
-        if (loginBtn && loginBtn.textContent.trim().includes('LOGIN') || loginBtn && loginBtn.textContent.trim().includes('ĐĂNG NHẬP')) {
+        if (loginBtn && (loginBtn.textContent.trim().includes('LOGIN') || loginBtn.textContent.trim().includes('ĐĂNG NHẬP') || loginBtn.getAttribute('data-translate') === 'nav-login')) {
             e.preventDefault();
             window.location.href = 'dashboard.html';
         }
     });
+}
+
+// 6. Role Switcher & Dynamic SideNavBar Permissions
+function initRoleSwitcher() {
+    // Check if selector is needed on current page
+    const isAdminPage = ['dashboard.html', 'env-vars.html', 'team.html', 'guides.html'].some(p => window.location.pathname.includes(p));
+    if (!isAdminPage) return;
+
+    // Find insertion target in the navbar
+    const headerContainer = document.querySelector('header .flex.items-center.gap-stack-md');
+    if (!headerContainer) return;
+
+    // Remove existing role switcher if any
+    const existing = document.getElementById('role-switcher-container');
+    if (existing) existing.remove();
+
+    const roleContainer = document.createElement('div');
+    roleContainer.id = 'role-switcher-container';
+    roleContainer.className = 'relative ml-2';
+
+    const currentRole = localStorage.getItem('chatbotpro_role') || 'owner';
+    const roleTextKey = currentRole === 'owner' ? 'role-owner' : 'role-staff';
+
+    roleContainer.innerHTML = `
+        <button id="role-switcher-btn" class="flex items-center gap-2 px-4 py-2 bg-slate-50 border border-outline-variant/50 rounded-full hover:border-primary/50 hover:bg-white transition-all text-xs font-semibold text-on-surface-variant active:scale-95">
+            <span class="material-symbols-outlined text-[18px]">admin_panel_settings</span>
+            <span id="active-role-text" data-translate="${roleTextKey}">${currentRole === 'owner' ? 'Chủ Doanh Nghiệp' : 'Nhân Viên Trực'}</span>
+            <span class="material-symbols-outlined text-[16px] transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="role-switcher-dropdown" class="absolute right-0 mt-2 w-56 bg-white border border-outline-variant/30 rounded-xl shadow-lg opacity-0 pointer-events-none transition-all duration-200 z-50">
+            <div class="p-2 flex flex-col gap-1">
+                <button data-role="owner" class="role-opt-btn w-full text-left px-3 py-2.5 rounded-lg text-xs font-semibold hover:bg-primary/5 hover:text-primary transition-all flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[16px]">military_tech</span>
+                    <span data-translate="role-owner">Chủ Doanh Nghiệp</span>
+                </button>
+                <button data-role="staff" class="role-opt-btn w-full text-left px-3 py-2.5 rounded-lg text-xs font-semibold hover:bg-primary/5 hover:text-primary transition-all flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[16px]">support_agent</span>
+                    <span data-translate="role-staff">Nhân Viên Trực</span>
+                </button>
+            </div>
+        </div>
+    `;
+
+    // Insert before profile picture (which is the last element inside gap-stack-md container)
+    headerContainer.insertBefore(roleContainer, headerContainer.lastElementChild);
+
+    const btn = document.getElementById('role-switcher-btn');
+    const dropdown = document.getElementById('role-switcher-dropdown');
+
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isClosed = dropdown.classList.contains('pointer-events-none');
+        if (isClosed) {
+            dropdown.classList.remove('opacity-0', 'pointer-events-none');
+            btn.querySelector('.material-symbols-outlined:last-child').style.transform = 'rotate(180deg)';
+        } else {
+            dropdown.classList.add('opacity-0', 'pointer-events-none');
+            btn.querySelector('.material-symbols-outlined:last-child').style.transform = 'rotate(0deg)';
+        }
+    });
+
+    document.addEventListener('click', () => {
+        dropdown.classList.add('opacity-0', 'pointer-events-none');
+        btn.querySelector('.material-symbols-outlined:last-child').style.transform = 'rotate(0deg)';
+    });
+
+    dropdown.querySelectorAll('.role-opt-btn').forEach(opt => {
+        opt.addEventListener('click', () => {
+            const role = opt.getAttribute('data-role');
+            localStorage.setItem('chatbotpro_role', role);
+            dropdown.classList.add('opacity-0', 'pointer-events-none');
+            btn.querySelector('.material-symbols-outlined:last-child').style.transform = 'rotate(0deg)';
+
+            // Toast feedback
+            const lang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+            const msg = role === 'owner' 
+                ? (lang === 'VIE' ? 'Đã chuyển sang vai trò: Chủ Doanh Nghiệp' : 'Switched to Owner role') 
+                : (lang === 'VIE' ? 'Đã chuyển sang vai trò: Nhân Viên Trực Chat' : 'Switched to Staff role');
+            window.showToast(msg, 'info');
+
+            // Apply modifications
+            applyRolePermissions();
+            checkRoleAccess();
+            translatePage();
+        });
+    });
+}
+
+function applyRolePermissions() {
+    const currentRole = localStorage.getItem('chatbotpro_role') || 'owner';
+    const textSpan = document.getElementById('active-role-text');
+    if (textSpan) {
+        textSpan.setAttribute('data-translate', currentRole === 'owner' ? 'role-owner' : 'role-staff');
+    }
+
+    // Hide or show Owner specific items in the sidebar
+    document.querySelectorAll('[data-role-required="owner"]').forEach(el => {
+        if (currentRole === 'owner') {
+            el.style.display = '';
+        } else {
+            el.style.display = 'none';
+        }
+    });
+}
+
+function checkRoleAccess() {
+    const currentRole = localStorage.getItem('chatbotpro_role') || 'owner';
+    const currentPath = window.location.pathname;
+
+    const isRestrictedPage = ['env-vars.html', 'team.html'].some(p => currentPath.includes(p));
+    
+    if (isRestrictedPage && currentRole === 'staff') {
+        // Render Access Denied overlay immediately
+        if (document.getElementById('access-denied-blocker')) return;
+
+        const overlay = document.createElement('div');
+        overlay.id = 'access-denied-blocker';
+        overlay.className = 'access-denied-overlay';
+
+        overlay.innerHTML = `
+            <div class="glass-panel p-10 rounded-2xl max-w-lg w-full text-center border-l-4 border-l-[#ef4444] bg-white shadow-2xl relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 w-24 h-24 bg-[#ef4444]/5 rounded-full blur-xl"></div>
+                <span class="material-symbols-outlined text-[#ef4444] text-[64px] mb-4">gavel</span>
+                <h2 class="font-display-lg text-2xl font-bold text-on-surface mb-4" data-translate="role-access-denied-title">TRUY CẬP BỊ TỪ CHỐI</h2>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mb-8 leading-relaxed" data-translate="role-access-denied-desc">Bạn đang ở vai trò Nhân Viên. Bạn không có quyền truy cập vào trang cấu hình API hoặc phân quyền team. Vui lòng liên hệ Chủ Doanh Nghiệp để cấu hình hệ thống.</p>
+                <button onclick="window.location.href='dashboard.html'" class="btn-gradient w-full py-3 rounded-lg text-white font-label-caps text-label-caps font-bold transition-all shadow-[0_4px_15px_rgba(103,80,164,0.1)] active:scale-95 flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-sm">hub</span>
+                    <span data-translate="role-access-denied-btn">Quay lại Bảng CRM</span>
+                </button>
+            </div>
+        `;
+
+        document.body.appendChild(overlay);
+        translatePage();
+        
+        // Trigger reflow & show
+        overlay.offsetHeight;
+        overlay.classList.add('access-denied-visible');
+
+        // Block scrolling on body
+        document.body.style.overflow = 'hidden';
+
+        // Auto redirect after 3 seconds
+        setTimeout(() => {
+            window.location.href = 'dashboard.html';
+        }, 3200);
+    } else {
+        const blocker = document.getElementById('access-denied-blocker');
+        if (blocker) {
+            blocker.classList.remove('access-denied-visible');
+            setTimeout(() => {
+                blocker.remove();
+                document.body.style.overflow = '';
+            }, 300);
+        }
+    }
 }

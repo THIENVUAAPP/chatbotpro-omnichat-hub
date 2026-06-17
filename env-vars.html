@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>ChatbotPro - Cấu Hình API</title>
+    <title>ChatbotPro - Cấu Hình API & Kênh</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -165,15 +165,23 @@
             filter: blur(0);
         }
 
-        .material-symbols-outlined[data-weight="fill"] {
-            font-variation-settings: 'FILL' 1;
-        }
-
         .bg-grid {
             background-size: 40px 40px;
             background-image: 
                 linear-gradient(to right, rgba(103, 80, 164, 0.02) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(103, 80, 164, 0.02) 1px, transparent 1px);
+        }
+
+        .modal-active {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+        .modal-card {
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+        }
+        .modal-active .modal-card {
+            transform: scale(1) !important;
         }
     </style>
 </head>
@@ -221,40 +229,34 @@
         </div>
         <ul class="flex flex-col gap-2 flex-1">
             <li>
-                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="index.html">
-                    <span class="material-symbols-outlined">dashboard</span>
-                    <span data-translate="nav-home">Trang Chủ</span>
-                </a>
-            </li>
-            <li>
-                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="features.html">
-                    <span class="material-symbols-outlined">smart_toy</span>
-                    <span data-translate="nav-features">Tính Năng</span>
-                </a>
-            </li>
-            <li>
                 <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="dashboard.html">
                     <span class="material-symbols-outlined">hub</span>
                     <span data-translate="nav-crm">CRM Khách Hàng</span>
                 </a>
             </li>
-            <li>
+            <li data-role-required="owner">
                 <a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary border-r-2 border-primary font-label-caps text-label-caps font-bold active" href="env-vars.html">
                     <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">database</span>
-                    <span data-translate="nav-api">Cấu Hình API</span>
+                    <span data-translate="nav-api">Cấu Hình API & Kênh</span>
+                </a>
+            </li>
+            <li data-role-required="owner">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="team.html">
+                    <span class="material-symbols-outlined">groups</span>
+                    <span data-translate="nav-team">Phân Quyền Team</span>
                 </a>
             </li>
             <li>
                 <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="guides.html">
                     <span class="material-symbols-outlined">menu_book</span>
-                    <span data-translate="nav-guides">Hướng Dẫn</span>
+                    <span data-translate="nav-guides">Hướng Dẫn Sử Dụng</span>
                 </a>
             </li>
         </ul>
         <div class="mt-auto">
-            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="env-vars.html">
-                <span class="material-symbols-outlined">settings</span>
-                <span data-translate="nav-settings">Cài Đặt</span>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="index.html">
+                <span class="material-symbols-outlined">logout</span>
+                <span data-translate="nav-logout">Quay Lại Web</span>
             </a>
         </div>
     </nav>
@@ -264,207 +266,512 @@
         <!-- Page Header -->
         <header class="mb-stack-lg flex flex-col md:flex-row md:justify-between md:items-end gap-stack-md border-b border-outline-variant/30 pb-stack-md">
             <div>
-                <h1 class="font-display-lg text-headline-md text-on-surface mb-unit font-bold" data-translate="env-title">Quản Lý Biến Môi Trường API</h1>
-                <p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl" data-translate="dash-env-sub">Cấu hình API Keys kết nối LLM, Zalo OA, Messenger và các webhook.</p>
+                <h1 class="font-display-lg text-headline-md text-on-surface mb-unit font-bold" data-translate="env-title">Cấu Hình API & Kênh</h1>
+                <p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl" data-translate="dash-env-sub">Cấu hình API Keys kết nối LLM, cơ sở dữ liệu và các thông số mô hình.</p>
             </div>
             <div class="flex gap-stack-sm mt-4 md:mt-0">
                 <button class="btn-luxury px-6 py-2.5 rounded-full font-label-caps text-label-caps flex items-center gap-2 font-bold" data-translate="env-btn-audit">
                     <span class="material-symbols-outlined text-[18px]">history</span>
                     Xem Nhật Ký
                 </button>
-                <button class="btn-primary px-6 py-2.5 rounded-full font-label-caps text-label-caps font-bold flex items-center gap-2" data-translate="env-btn-deploy">
+                <button class="btn-primary px-6 py-2.5 rounded-full font-label-caps text-label-caps font-bold flex items-center gap-2" id="btn-deploy">
                     <span class="material-symbols-outlined text-[18px]">save</span>
-                    Áp Dụng Thay Đổi
+                    <span data-translate="env-btn-deploy">Áp Dụng Thay Đổi</span>
                 </button>
             </div>
         </header>
-<!-- Bento Grid Layout -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-<!-- Left Column: Variable Management (8 cols) -->
-<section class="lg:col-span-8 flex flex-col gap-gutter">
-        <!-- Core Variables Card -->
-        <div class="glass-panel rounded-xl p-stack-md glass-panel-hover transition-all duration-300 bg-white">
-            <div class="flex justify-between items-center mb-stack-md border-b border-outline-variant/30 pb-unit">
-                <div class="flex items-center gap-stack-sm">
-                    <span class="material-symbols-outlined text-primary">key</span>
-                    <h3 class="font-headline-md text-headline-md text-on-surface font-bold" data-translate="env-card-infra">Khóa Hạ Tầng Core</h3>
-                </div>
-                <button id="btn-add-var" class="text-primary hover:text-tertiary transition-colors flex items-center gap-1 font-label-caps text-label-caps font-bold">
-                    <span class="material-symbols-outlined text-[16px]">add</span> 
-                    <span data-translate="env-btn-add">Thêm Biến Môi Trường</span>
-                </button>
-            </div>
-            <div id="vars-list" class="flex flex-col gap-unit">
-                <!-- Key/Value Row 1 -->
-                <div class="grid grid-cols-12 gap-unit items-center bg-slate-50/50 p-2 rounded-lg border border-outline-variant/20 group">
-                    <div class="col-span-4 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-[#10b981] text-[16px]" title="Encrypted &amp; Safe">lock</span>
-                        <input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs text-outline" readonly="" type="text" value="OPENAI_API_KEY"/>
-                    </div>
-                    <div class="col-span-7 relative">
-                        <input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs obscured-value" readonly="" type="text" value="sk-proj-7x89qwe7r89qwe7r89qwe7r89qwe"/>
-                    </div>
-                    <div class="col-span-1 flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button class="p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
-                        <button class="p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+
+        <!-- Dynamic Content Grid -->
+        <div class="flex flex-col gap-gutter">
+            
+            <!-- SECTION 1: Social & E-commerce Connection Grid (NEW REQUIREMENT) -->
+            <section class="glass-panel rounded-xl p-stack-md bg-white">
+                <div class="mb-6 border-b border-outline-variant/30 pb-unit flex items-center gap-stack-sm">
+                    <span class="material-symbols-outlined text-primary text-[28px]">hub</span>
+                    <div>
+                        <h3 class="font-headline-md text-lg text-on-surface font-bold" data-translate="channels-tab-title">Cấu Hình Kênh Kết Nối</h3>
+                        <p class="text-xs text-on-surface-variant" data-translate="channels-tab-sub">Đồng bộ Access Token, Webhook và tài khoản mạng xã hội để tự động hóa chốt đơn.</p>
                     </div>
                 </div>
-                <!-- Key/Value Row 2 -->
-                <div class="grid grid-cols-12 gap-unit items-center bg-slate-50/50 p-2 rounded-lg border border-outline-variant/20 group">
-                    <div class="col-span-4 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-[#10b981] text-[16px]">lock</span>
-                        <input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs text-outline" readonly="" type="text" value="DB_CONNECTION_STRING"/>
-                    </div>
-                    <div class="col-span-7">
-                        <input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs obscured-value" readonly="" type="text" value="postgresql://user:pass@cluster.aws.com/db"/>
-                    </div>
-                    <div class="col-span-1 flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button class="p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
-                        <button class="p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
-                    </div>
-                </div>
-                <!-- Add New Row Input -->
-                <div class="grid grid-cols-12 gap-unit items-center mt-stack-sm">
-                    <div class="col-span-4">
-                        <input id="new-var-key" class="input-glass w-full rounded py-2 px-3 font-mono-data text-mono-data text-xs" data-translate-placeholder="env-placeholder-key" placeholder="TÊN_BIẾN_MỚI" type="text"/>
-                    </div>
-                    <div class="col-span-7">
-                        <input id="new-var-val" class="input-glass w-full rounded py-2 px-3 font-mono-data text-mono-data text-xs" data-translate-placeholder="env-placeholder-value" placeholder="Giá trị..." type="text"/>
-                    </div>
-                    <div class="col-span-1 flex justify-end">
-                        <button id="btn-save-new-var" class="p-2 bg-primary/10 hover:bg-primary/20 rounded text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">check</span></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- System Config Card -->
-        <div class="glass-panel rounded-xl p-stack-md glass-panel-hover transition-all duration-300 bg-white">
-            <div class="flex justify-between items-center mb-stack-md border-b border-outline-variant/30 pb-unit">
-                <div class="flex items-center gap-stack-sm">
-                    <span class="material-symbols-outlined text-tertiary">tune</span>
-                    <h3 class="font-headline-md text-headline-md text-on-surface font-bold" data-translate="env-card-params">Tham Số Hệ Thống</h3>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
-                <!-- Param 1 -->
-                <div>
-                    <label class="block font-label-caps text-label-caps text-on-surface-variant mb-2 font-bold" data-translate="env-label-model">Mô Hình Mặc Định</label>
-                    <select class="input-glass w-full rounded-lg py-2.5 px-4 font-mono-data text-mono-data text-sm appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%236750a4%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[position:right_1rem_center]">
-                        <option value="gpt-4">GPT-4 Turbo</option>
-                        <option value="claude-3">Claude 3 Opus</option>
-                        <option value="llama-3">Llama 3 70B</option>
-                    </select>
-                </div>
-                <!-- Param 2 -->
-                <div>
-                    <label class="block font-label-caps text-label-caps text-on-surface-variant mb-2 font-bold" data-translate="env-label-tokens">Số Token Tối Đa</label>
-                    <input class="input-glass w-full rounded-lg py-2.5 px-4 font-mono-data text-mono-data text-sm" type="number" value="4096"/>
-                </div>
-                <!-- Param 3 -->
-                <div>
-                    <label class="block font-label-caps text-label-caps text-on-surface-variant mb-2 font-bold" data-translate="env-label-temp">Độ Sáng Tạo (Temperature)</label>
-                    <div class="flex items-center gap-4">
-                        <input class="w-full accent-primary" max="2" min="0" step="0.1" type="range" value="0.7"/>
-                        <span class="font-mono-data text-mono-data text-primary w-8 text-right">0.7</span>
-                    </div>
-                </div>
-                <!-- Param 4 -->
-                <div class="flex items-center justify-between mt-auto">
-                    <label class="block font-label-caps text-label-caps text-on-surface-variant font-bold" data-translate="env-label-cache">Bật Bộ Nhớ Đệm Vector</label>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input checked="" class="sr-only peer" type="checkbox"/>
-                        <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-                    </label>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Right Column: Integrations & Status (4 cols) -->
-    <section class="lg:col-span-4 flex flex-col gap-gutter">
-        <!-- Integration Status -->
-        <div class="glass-panel rounded-xl p-stack-md relative overflow-hidden group bg-white">
-            <div class="absolute -right-10 -top-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-500"></div>
-            <h3 class="font-headline-md text-headline-md text-on-surface mb-stack-md relative z-10 font-bold" data-translate="env-card-connections">Kết Nối Hoạt Động</h3>
-            <!-- Gmail Connection -->
-            <div class="bg-slate-50/50 border border-outline-variant/30 rounded-lg p-4 flex flex-col gap-4 relative z-10">
-                <div class="flex justify-between items-start">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-white rounded flex items-center justify-center shadow-lg border border-slate-100">
-                            <svg class="w-6 h-6" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V8L12 13L20 8V18ZM12 11L4 6H20L12 11Z" fill="#EA4335"></path>
-                            </svg>
-                        </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="channels-grid">
+                    <!-- Zalo OA -->
+                    <div class="border border-outline-variant/40 rounded-xl p-5 bg-slate-50/50 flex flex-col justify-between hover:border-primary/40 transition-colors">
                         <div>
-                            <h4 class="font-body-sm text-body-sm font-bold text-on-surface">Gmail SMTP</h4>
-                            <p class="font-label-caps text-label-caps text-outline text-[10px] mt-1">system@chatbotpro.com</p>
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-slate-100 shadow-md">
+                                    <span class="font-bold text-primary font-display-lg text-sm">Zalo</span>
+                                </div>
+                                <span class="badge-status px-2 py-0.5 bg-[#10b981]/15 text-[#10b981] rounded text-[10px] font-bold border border-[#10b981]/25 flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span>
+                                    <span data-translate="chan-status-connected">Đang hoạt động</span>
+                                </span>
+                            </div>
+                            <h4 class="font-semibold text-sm text-on-surface">Zalo OA (Official Account)</h4>
+                            <p class="text-[11px] text-on-surface-variant mt-2 leading-relaxed">Đồng bộ tin nhắn Zalo OA, tự động trả lời tư vấn và chăm sóc khách hàng quan tâm.</p>
                         </div>
+                        <button data-channel="zalo" class="btn-configure mt-6 w-full py-2 bg-white hover:bg-slate-100 border border-outline-variant/50 text-on-surface text-xs font-semibold rounded-lg transition-colors flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-sm">settings</span>
+                            <span>CẤU HÌNH API</span>
+                        </button>
                     </div>
-                    <span class="px-2 py-1 bg-[#10b981]/20 text-[#10b981] rounded text-xs font-label-caps flex items-center gap-1 font-bold">
-                        <span class="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span> Connected
-                    </span>
-                </div>
-                <button class="w-full py-2 border border-outline-variant/50 rounded-lg text-on-surface-variant font-label-caps text-label-caps hover:bg-slate-100 transition-colors text-xs font-bold bg-white">
-                    Manage Connection
-                </button>
-            </div>
-            <!-- Slack Connection -->
-            <div class="bg-slate-50/50 border border-outline-variant/30 rounded-lg p-4 flex flex-col gap-4 relative z-10 mt-unit">
-                <div class="flex justify-between items-start">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-white rounded flex items-center justify-center shadow-lg border border-slate-100">
-                            <svg class="w-6 h-6" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.528 2.528 0 0 1 2.521-2.523 2.528 2.528 0 0 1 2.521 2.523v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 8.835a2.528 2.528 0 0 1 2.521-2.522 2.528 2.528 0 0 1 2.521 2.522 2.527 2.527 0 0 1-2.52 2.52H8.833v-2.52zM8.834 7.563A2.528 2.528 0 0 1 11.355 5.04a2.528 2.528 0 0 1 2.521 2.521V1.25A2.528 2.528 0 0 1 11.355-1.27a2.528 2.528 0 0 1-2.521 2.521v6.313zM18.956 8.835a2.528 2.528 0 0 1 2.522-2.522 2.528 2.528 0 0 1 2.522 2.522 2.527 2.527 0 0 1-2.522 2.52H18.956v-2.52zM17.685 8.835a2.528 2.528 0 0 1-2.522 2.522 2.528 2.528 0 0 1-2.522-2.522V2.522A2.528 2.528 0 0 1 15.163 0a2.528 2.528 0 0 1 2.522 2.522v6.313zM15.163 15.165a2.528 2.528 0 0 1-2.522 2.523 2.528 2.528 0 0 1-2.522-2.523 2.527 2.527 0 0 1 2.522-2.52H15.163v-2.52zM15.163 16.437a2.528 2.528 0 0 1-2.522 2.522 2.528 2.528 0 0 1-2.522-2.522v6.313a2.528 2.528 0 0 1 2.522 2.522 2.528 2.528 0 0 1 2.522-2.522v-6.313z" fill="#E01E5A"></path>
-                            </svg>
-                        </div>
+
+                    <!-- Facebook Page / Messenger -->
+                    <div class="border border-outline-variant/40 rounded-xl p-5 bg-slate-50/50 flex flex-col justify-between hover:border-primary/40 transition-colors">
                         <div>
-                            <h4 class="font-body-sm text-body-sm font-bold text-on-surface">Slack Webhooks</h4>
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 bg-[#1877f2]/10 rounded-lg flex items-center justify-center border border-slate-100 shadow-md">
+                                    <span class="font-bold text-[#1877f2] font-display-lg text-lg">f</span>
+                                </div>
+                                <span class="badge-status px-2 py-0.5 bg-[#10b981]/15 text-[#10b981] rounded text-[10px] font-bold border border-[#10b981]/25 flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span>
+                                    <span data-translate="chan-status-connected">Đang hoạt động</span>
+                                </span>
+                            </div>
+                            <h4 class="font-semibold text-sm text-on-surface">Facebook Messenger &amp; Comments</h4>
+                            <p class="text-[11px] text-on-surface-variant mt-2 leading-relaxed">Tự động trả lời tin nhắn Fanpage và tự động phản hồi bình luận bài viết quảng cáo.</p>
+                        </div>
+                        <button data-channel="facebook" class="btn-configure mt-6 w-full py-2 bg-white hover:bg-slate-100 border border-outline-variant/50 text-on-surface text-xs font-semibold rounded-lg transition-colors flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-sm">settings</span>
+                            <span>CẤU HÌNH API</span>
+                        </button>
+                    </div>
+
+                    <!-- Facebook Group -->
+                    <div class="border border-outline-variant/40 rounded-xl p-5 bg-slate-50/50 flex flex-col justify-between hover:border-primary/40 transition-colors">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center border border-slate-100 shadow-md">
+                                    <span class="material-symbols-outlined text-emerald-600 text-lg">groups</span>
+                                </div>
+                                <span class="badge-status px-2 py-0.5 bg-slate-100 text-outline rounded text-[10px] font-bold border border-outline-variant/30 flex items-center gap-1">
+                                    <span data-translate="chan-status-disconnected">Chưa kết nối</span>
+                                </span>
+                            </div>
+                            <h4 class="font-semibold text-sm text-on-surface">Facebook Group Integration</h4>
+                            <p class="text-[11px] text-on-surface-variant mt-2 leading-relaxed">Quét và tự động phản hồi các thắc mắc của thành viên trong hội nhóm của bạn.</p>
+                        </div>
+                        <button data-channel="facebook-group" class="btn-configure mt-6 w-full py-2 bg-primary/10 hover:bg-primary/20 text-primary text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-sm">link</span>
+                            <span data-translate="chan-btn-connect">KẾT NỐI KÊNH</span>
+                        </button>
+                    </div>
+
+                    <!-- TikTok Shop -->
+                    <div class="border border-outline-variant/40 rounded-xl p-5 bg-slate-50/50 flex flex-col justify-between hover:border-primary/40 transition-colors">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 bg-black rounded-lg flex items-center justify-center border border-slate-100 shadow-md">
+                                    <span class="font-bold text-white font-mono-data text-xs">TikTok</span>
+                                </div>
+                                <span class="badge-status px-2 py-0.5 bg-slate-100 text-outline rounded text-[10px] font-bold border border-outline-variant/30 flex items-center gap-1">
+                                    <span data-translate="chan-status-disconnected">Chưa kết nối</span>
+                                </span>
+                            </div>
+                            <h4 class="font-semibold text-sm text-on-surface">TikTok Shop API</h4>
+                            <p class="text-[11px] text-on-surface-variant mt-2 leading-relaxed">Đồng bộ tin nhắn chat trực tiếp của khách hàng mua sắm trên các phiên Live TikTok.</p>
+                        </div>
+                        <button data-channel="tiktok" class="btn-configure mt-6 w-full py-2 bg-primary/10 hover:bg-primary/20 text-primary text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-sm">link</span>
+                            <span data-translate="chan-btn-connect">KẾT NỐI KÊNH</span>
+                        </button>
+                    </div>
+
+                    <!-- Shopee -->
+                    <div class="border border-outline-variant/40 rounded-xl p-5 bg-slate-50/50 flex flex-col justify-between hover:border-primary/40 transition-colors">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 bg-[#ee4d2d]/10 rounded-lg flex items-center justify-center border border-slate-100 shadow-md">
+                                    <span class="font-bold text-[#ee4d2d] font-display-lg text-sm">S</span>
+                                </div>
+                                <span class="badge-status px-2 py-0.5 bg-slate-100 text-outline rounded text-[10px] font-bold border border-outline-variant/30 flex items-center gap-1">
+                                    <span data-translate="chan-status-disconnected">Chưa kết nối</span>
+                                </span>
+                            </div>
+                            <h4 class="font-semibold text-sm text-on-surface">Shopee Merchant API</h4>
+                            <p class="text-[11px] text-on-surface-variant mt-2 leading-relaxed">Đồng bộ hội thoại shopee chat, quản lý đơn hàng và phản hồi khiếu nại của khách mua.</p>
+                        </div>
+                        <button data-channel="shopee" class="btn-configure mt-6 w-full py-2 bg-primary/10 hover:bg-primary/20 text-primary text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-sm">link</span>
+                            <span data-translate="chan-btn-connect">KẾT NỐI KÊNH</span>
+                        </button>
+                    </div>
+
+                    <!-- Lazada -->
+                    <div class="border border-outline-variant/40 rounded-xl p-5 bg-slate-50/50 flex flex-col justify-between hover:border-primary/40 transition-colors">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 bg-[#0f143c]/10 rounded-lg flex items-center justify-center border border-slate-100 shadow-md">
+                                    <span class="font-bold text-[#0f143c] font-display-lg text-sm">Laz</span>
+                                </div>
+                                <span class="badge-status px-2 py-0.5 bg-slate-100 text-outline rounded text-[10px] font-bold border border-outline-variant/30 flex items-center gap-1">
+                                    <span data-translate="chan-status-disconnected">Chưa kết nối</span>
+                                </span>
+                            </div>
+                            <h4 class="font-semibold text-sm text-on-surface">Lazada Seller API</h4>
+                            <p class="text-[11px] text-on-surface-variant mt-2 leading-relaxed">Tự động trả lời nhanh các câu hỏi mua hàng và đồng bộ sản phẩm từ Lazada Seller Center.</p>
+                        </div>
+                        <button data-channel="lazada" class="btn-configure mt-6 w-full py-2 bg-primary/10 hover:bg-primary/20 text-primary text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-sm">link</span>
+                            <span data-translate="chan-btn-connect">KẾT NỐI KÊNH</span>
+                        </button>
+                    </div>
+
+                    <!-- YouTube -->
+                    <div class="border border-outline-variant/40 rounded-xl p-5 bg-slate-50/50 flex flex-col justify-between hover:border-primary/40 transition-colors">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 bg-red-600/10 rounded-lg flex items-center justify-center border border-slate-100 shadow-md">
+                                    <span class="material-symbols-outlined text-red-600 text-lg">play_circle</span>
+                                </div>
+                                <span class="badge-status px-2 py-0.5 bg-slate-100 text-outline rounded text-[10px] font-bold border border-outline-variant/30 flex items-center gap-1">
+                                    <span data-translate="chan-status-disconnected">Chưa kết nối</span>
+                                </span>
+                            </div>
+                            <h4 class="font-semibold text-sm text-on-surface">YouTube Live &amp; Comments</h4>
+                            <p class="text-[11px] text-on-surface-variant mt-2 leading-relaxed">Tự động chốt đơn qua bình luận livestream YouTube và trả lời comment video tự động.</p>
+                        </div>
+                        <button data-channel="youtube" class="btn-configure mt-6 w-full py-2 bg-primary/10 hover:bg-primary/20 text-primary text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-sm">link</span>
+                            <span data-translate="chan-btn-connect">KẾT NỐI KÊNH</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: Variables Management (Traditional Keys) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+                <!-- Left: Keys list (8 cols) -->
+                <div class="lg:col-span-8 flex flex-col gap-gutter">
+                    <div class="glass-panel rounded-xl p-stack-md bg-white">
+                        <div class="flex justify-between items-center mb-stack-md border-b border-outline-variant/30 pb-unit">
+                            <div class="flex items-center gap-stack-sm">
+                                <span class="material-symbols-outlined text-primary">key</span>
+                                <h3 class="font-headline-md text-headline-md text-on-surface font-bold" data-translate="env-card-infra">Khóa Hạ Tầng Core</h3>
+                            </div>
+                            <button id="btn-add-var" class="text-primary hover:text-tertiary transition-colors flex items-center gap-1 font-label-caps text-label-caps font-bold">
+                                <span class="material-symbols-outlined text-[16px]">add</span> 
+                                <span data-translate="env-btn-add">Thêm Biến Môi Trường</span>
+                            </button>
+                        </div>
+                        <div id="vars-list" class="flex flex-col gap-unit">
+                            <!-- OpenAI -->
+                            <div class="grid grid-cols-12 gap-unit items-center bg-slate-50/50 p-2 rounded-lg border border-outline-variant/20 group">
+                                <div class="col-span-4 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-[#10b981] text-[16px]">lock</span>
+                                    <input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs text-outline" readonly type="text" value="OPENAI_API_KEY"/>
+                                </div>
+                                <div class="col-span-7 relative">
+                                    <input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs obscured-value" readonly type="text" value="sk-proj-7x89qwe7r89qwe7r89qwe7r89qwe"/>
+                                </div>
+                                <div class="col-span-1 flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button class="p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+                                    <button class="p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+                                </div>
+                            </div>
+                            <!-- DB Conn -->
+                            <div class="grid grid-cols-12 gap-unit items-center bg-slate-50/50 p-2 rounded-lg border border-outline-variant/20 group">
+                                <div class="col-span-4 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-[#10b981] text-[16px]">lock</span>
+                                    <input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs text-outline" readonly type="text" value="DB_CONNECTION_STRING"/>
+                                </div>
+                                <div class="col-span-7">
+                                    <input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs obscured-value" readonly type="text" value="postgresql://user:pass@cluster.aws.com/db"/>
+                                </div>
+                                <div class="col-span-1 flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button class="p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+                                    <button class="p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+                                </div>
+                            </div>
+                            <!-- Add Row Input -->
+                            <div class="grid grid-cols-12 gap-unit items-center mt-stack-sm">
+                                <div class="col-span-4">
+                                    <input id="new-var-key" class="input-glass w-full rounded py-2 px-3 font-mono-data text-mono-data text-xs" data-translate-placeholder="env-placeholder-key" placeholder="TÊN_BIẾN_MỚI" type="text"/>
+                                </div>
+                                <div class="col-span-7">
+                                    <input id="new-var-val" class="input-glass w-full rounded py-2 px-3 font-mono-data text-mono-data text-xs" data-translate-placeholder="env-placeholder-value" placeholder="Giá trị..." type="text"/>
+                                </div>
+                                <div class="col-span-1 flex justify-end">
+                                    <button id="btn-save-new-var" class="p-2 bg-primary/10 hover:bg-primary/20 rounded text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">check</span></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <span class="px-2 py-1 bg-slate-100 text-outline rounded text-xs font-label-caps border border-outline-variant/30 font-bold">
-                        Disconnected
-                    </span>
+
+                    <!-- Config params -->
+                    <div class="glass-panel rounded-xl p-stack-md bg-white">
+                        <div class="flex justify-between items-center mb-stack-md border-b border-outline-variant/30 pb-unit">
+                            <div class="flex items-center gap-stack-sm">
+                                <span class="material-symbols-outlined text-tertiary">tune</span>
+                                <h3 class="font-headline-md text-headline-md text-on-surface font-bold" data-translate="env-card-params">Tham Số Hệ Thống</h3>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+                            <div>
+                                <label class="block font-label-caps text-label-caps text-on-surface-variant mb-2 font-bold" data-translate="env-label-model">Mô Hình Mặc Định</label>
+                                <select class="input-glass w-full rounded-lg py-2.5 px-4 font-mono-data text-mono-data text-sm appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%236750a4%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[position:right_1rem_center]">
+                                    <option value="gpt-4">GPT-4 Turbo</option>
+                                    <option value="claude-3">Claude 3 Opus</option>
+                                    <option value="llama-3">Llama 3 70B</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block font-label-caps text-label-caps text-on-surface-variant mb-2 font-bold" data-translate="env-label-tokens">Số Token Tối Đa</label>
+                                <input class="input-glass w-full rounded-lg py-2.5 px-4 font-mono-data text-mono-data text-sm" type="number" value="4096"/>
+                            </div>
+                            <div>
+                                <label class="block font-label-caps text-label-caps text-on-surface-variant mb-2 font-bold" data-translate="env-label-temp">Độ Sáng Tạo (Temperature)</label>
+                                <div class="flex items-center gap-4">
+                                    <input class="w-full accent-primary" id="temp-range" max="2" min="0" step="0.1" type="range" value="0.7"/>
+                                    <span class="font-mono-data text-mono-data text-primary w-8 text-right" id="temp-val">0.7</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mt-auto">
+                                <label class="block font-label-caps text-label-caps text-on-surface-variant font-bold" data-translate="env-label-cache">Bật Bộ Nhớ Đệm Vector</label>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input checked class="sr-only peer" type="checkbox"/>
+                                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button class="w-full py-2 bg-primary/10 text-primary rounded-lg font-label-caps text-label-caps hover:bg-primary/20 transition-colors text-xs flex items-center justify-center gap-1 font-bold">
-                    <span class="material-symbols-outlined text-[16px]">add_link</span> Connect Slack
-                </button>
+
+                <!-- Right info: Status Details (4 cols) -->
+                <div class="lg:col-span-4 flex flex-col gap-gutter">
+                    <div class="glass-panel rounded-xl p-stack-md bg-white">
+                        <h3 class="font-headline-md text-headline-md text-on-surface mb-stack-sm text-sm border-b border-outline-variant/30 pb-2 font-bold" data-translate="env-card-details">Environment Details</h3>
+                        <ul class="flex flex-col gap-2 font-mono-data text-mono-data text-xs text-on-surface-variant">
+                            <li class="flex justify-between"><span class="text-outline" data-translate="env-detail-env">Current Env:</span> <span class="text-tertiary font-bold">Production</span></li>
+                            <li class="flex justify-between"><span class="text-outline" data-translate="env-detail-region">Region:</span> <span class="text-on-surface font-bold">us-east-1</span></li>
+                            <li class="flex justify-between"><span class="text-outline" data-translate="env-detail-updated">Last Updated:</span> <span class="text-on-surface font-bold">2 hours ago</span></li>
+                            <li class="flex justify-between"><span class="text-outline" data-translate="env-detail-hash">Version Hash:</span> <span class="text-primary truncate ml-4 font-bold">#a9f3b2c</span></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
+
         </div>
-        <!-- Environment Meta -->
-        <div class="glass-panel rounded-xl p-stack-md bg-white">
-            <h3 class="font-headline-md text-headline-md text-on-surface mb-stack-sm text-sm border-b border-outline-variant/30 pb-2 font-bold" data-translate="env-card-details">Environment Details</h3>
-            <ul class="flex flex-col gap-2 font-mono-data text-mono-data text-xs text-on-surface-variant">
-                <li class="flex justify-between"><span class="text-outline" data-translate="env-detail-env">Current Env:</span> <span class="text-tertiary font-bold">Production</span></li>
-                <li class="flex justify-between"><span class="text-outline" data-translate="env-detail-region">Region:</span> <span class="text-on-surface font-bold">us-east-1</span></li>
-                <li class="flex justify-between"><span class="text-outline" data-translate="env-detail-updated">Last Updated:</span> <span class="text-on-surface font-bold">2 hours ago</span></li>
-                <li class="flex justify-between"><span class="text-outline" data-translate="env-detail-hash">Version Hash:</span> <span class="text-primary truncate ml-4 font-bold">#a9f3b2c</span></li>
-            </ul>
-        </div>
-    </section>
+    </main>
 </div>
-</main>
-<!-- Footer -->
-<footer class="bg-white/80 backdrop-blur-md border-t border-outline-variant/30 flex justify-between items-center px-container-margin py-stack-sm w-full mt-auto z-40 relative md:ml-64 w-[calc(100%-16rem)] max-md:w-full max-md:ml-0">
-    <div class="font-label-caps text-label-caps text-on-surface font-bold" data-translate="copyright">© 2026 ChatbotPro. Trợ lý Trí Tuệ Nhân Tạo Doanh Nghiệp.</div>
-    <div class="flex gap-stack-md">
-        <a class="font-mono-data text-mono-data text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100 text-xs" href="#" data-translate="nav-status">System Status</a>
-        <a class="font-mono-data text-mono-data text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100 text-xs" href="#" data-translate="nav-health">API Health</a>
-        <a class="font-mono-data text-mono-data text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100 text-xs" href="#" data-translate="nav-support">Support</a>
+
+<!-- Channel Connection Modal -->
+<div id="channel-modal" class="fixed inset-0 z-[110] flex items-center justify-center bg-[#050505]/30 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+    <div class="relative w-full max-w-lg px-4 md:px-0 mx-auto modal-card">
+        <div class="bg-white/95 backdrop-blur-[40px] rounded-[24px] border border-outline-variant/30 shadow-[0_15px_50px_rgba(103,80,164,0.15)] overflow-hidden text-on-surface p-8">
+            <!-- Close Button -->
+            <button id="close-channel-modal" aria-label="Close dialog" class="absolute top-6 right-6 text-on-surface-variant hover:text-primary transition-colors group">
+                <span class="material-symbols-outlined text-[24px] group-hover:rotate-90 transition-transform duration-300">close</span>
+            </button>
+            
+            <div class="mb-6 flex items-center gap-3">
+                <div id="modal-channel-logo" class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center font-bold text-primary shadow-inner">
+                    logo
+                </div>
+                <div>
+                    <h2 class="font-display-lg text-lg font-bold text-on-surface" id="modal-title-text" data-translate="chan-modal-title">Cấu Hình Kết Nối API Kênh</h2>
+                    <p class="text-xs text-on-surface-variant" id="modal-subtitle-text">Tích hợp tài khoản bán hàng của bạn.</p>
+                </div>
+            </div>
+            
+            <form id="channel-connection-form" class="space-y-4">
+                <!-- Webhook URL (Read only with copy button) -->
+                <div class="space-y-2">
+                    <label class="font-label-caps text-label-caps text-on-surface block text-xs" data-translate="chan-modal-webhook-label">Webhook URL (Nhận sự kiện tin nhắn)</label>
+                    <div class="flex gap-2">
+                        <input id="modal-webhook-url" class="input-glass flex-grow rounded-lg py-2 px-3 font-mono-data text-mono-data text-xs bg-slate-50 border-outline-variant/30" readonly type="text" value="https://api.chatbotpro.com/webhook/v1/sync/zalo"/>
+                        <button id="btn-copy-webhook" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 border border-outline-variant/50 rounded-lg font-label-caps text-label-caps text-xs font-semibold flex items-center gap-1 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-[14px]">content_copy</span>
+                            <span data-translate="chan-btn-copy">Sao Chép</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Page ID / Shop ID / Group ID -->
+                <div class="space-y-2">
+                    <label class="font-label-caps text-label-caps text-on-surface block text-xs" id="lbl-channel-id" data-translate="chan-modal-id-label">Page ID / Shop ID / Group ID</label>
+                    <input class="w-full bg-slate-50 border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg px-4 py-2.5 focus:ring-0 focus:border-primary focus:outline-none placeholder:text-outline/50" id="channel-shop-id" required placeholder="Ex: 928301823" type="text"/>
+                </div>
+
+                <!-- Access Token / App Secret Key -->
+                <div class="space-y-2">
+                    <label class="font-label-caps text-label-caps text-on-surface block text-xs" data-translate="chan-modal-token-label">Access Token / API Key kết nối</label>
+                    <input class="w-full bg-slate-50 border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg px-4 py-2.5 focus:ring-0 focus:border-primary focus:outline-none placeholder:text-outline/50" id="channel-token" required placeholder="Ex: vcp_..." type="password"/>
+                </div>
+
+                <!-- Action Button -->
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary hover:brightness-105 text-white font-label-caps text-label-caps py-3 px-6 rounded-lg transition-all shadow-[0_0_20px_rgba(103,80,164,0.1)] hover:shadow-[0_0_25px_rgba(103,80,164,0.2)] flex items-center justify-center space-x-2 font-bold" id="modal-btn-submit">
+                        <span data-translate="chan-btn-save">LƯU KẾT NỐI</span>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</footer>
+</div>
+
 <script src="js/main.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+    // Range slider value display
+    const tempRange = document.getElementById('temp-range');
+    const tempVal = document.getElementById('temp-val');
+    if (tempRange && tempVal) {
+        tempRange.addEventListener('input', () => {
+            tempVal.textContent = tempRange.value;
+        });
+    }
+
+    // Modal elements
+    const channelModal = document.getElementById('channel-modal');
+    const closeChannelBtn = document.getElementById('close-channel-modal');
+    const channelForm = document.getElementById('channel-connection-form');
+    
+    // Form fields
+    const modalLogo = document.getElementById('modal-channel-logo');
+    const modalTitle = document.getElementById('modal-title-text');
+    const modalSubtitle = document.getElementById('modal-subtitle-text');
+    const webhookInput = document.getElementById('modal-webhook-url');
+    const idInput = document.getElementById('channel-shop-id');
+    const tokenInput = document.getElementById('channel-token');
+    const idLabel = document.getElementById('lbl-channel-id');
+
+    let activeChannelSlug = '';
+    let triggeringCard = null;
+
+    // Connect config events
+    document.querySelectorAll('.btn-configure').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const card = btn.closest('.border');
+            triggeringCard = card;
+            const channelSlug = btn.getAttribute('data-channel');
+            activeChannelSlug = channelSlug;
+
+            const lang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+            
+            // Set details based on channel
+            let channelName = '';
+            let subtitle = '';
+            let idPlaceholder = 'Ex: 928301823';
+            let idLabelText = lang === 'VIE' ? 'ID Tài Khoản / Page / Shop' : 'Account / Page / Shop ID';
+
+            if (channelSlug === 'zalo') {
+                channelName = 'Zalo OA (Official Account)';
+                subtitle = 'Tự động đồng bộ tin nhắn qua API Zalo OA';
+                modalLogo.innerHTML = '<span class="text-primary font-bold">Zalo</span>';
+                idLabelText = lang === 'VIE' ? 'Zalo OA ID' : 'Zalo OA ID';
+                idPlaceholder = 'Ex: 40293810293';
+            } else if (channelSlug === 'facebook') {
+                channelName = 'Facebook Page & Comments';
+                subtitle = 'Tự động trả lời Messenger và Bình luận';
+                modalLogo.innerHTML = '<span class="text-[#1877f2] font-bold text-lg">f</span>';
+                idLabelText = lang === 'VIE' ? 'Facebook Page ID' : 'Facebook Page ID';
+                idPlaceholder = 'Ex: 10023812938';
+            } else if (channelSlug === 'facebook-group') {
+                channelName = 'Facebook Group Integration';
+                subtitle = 'Quét thảo luận và trả lời tự động trong Group';
+                modalLogo.innerHTML = '<span class="material-symbols-outlined text-emerald-600">groups</span>';
+                idLabelText = lang === 'VIE' ? 'Facebook Group ID' : 'Facebook Group ID';
+                idPlaceholder = 'Ex: 382910398';
+            } else if (channelSlug === 'tiktok') {
+                channelName = 'TikTok Shop API';
+                subtitle = 'Đồng bộ tin nhắn chốt đơn trên livestream';
+                modalLogo.innerHTML = '<span class="text-black text-xs font-mono">TikTok</span>';
+                idLabelText = lang === 'VIE' ? 'TikTok Seller ID' : 'TikTok Seller ID';
+                idPlaceholder = 'Ex: 50493812';
+            } else if (channelSlug === 'shopee') {
+                channelName = 'Shopee Merchant API';
+                subtitle = 'Tích hợp tin nhắn chat sàn Shopee';
+                modalLogo.innerHTML = '<span class="text-[#ee4d2d] font-bold">S</span>';
+                idLabelText = lang === 'VIE' ? 'Shopee Shop ID' : 'Shopee Shop ID';
+                idPlaceholder = 'Ex: 12049382';
+            } else if (channelSlug === 'lazada') {
+                channelName = 'Lazada Seller API';
+                subtitle = 'Tích hợp tin nhắn chat sàn Lazada';
+                modalLogo.innerHTML = '<span class="text-[#0f143c] font-bold text-xs">Laz</span>';
+                idLabelText = lang === 'VIE' ? 'Lazada Seller ID' : 'Lazada Seller ID';
+                idPlaceholder = 'Ex: lzd-89328';
+            } else if (channelSlug === 'youtube') {
+                channelName = 'YouTube Live & Comments';
+                subtitle = 'Quét livestream và chốt đơn tự động';
+                modalLogo.innerHTML = '<span class="material-symbols-outlined text-red-600">play_circle</span>';
+                idLabelText = lang === 'VIE' ? 'YouTube Channel ID' : 'YouTube Channel ID';
+                idPlaceholder = 'Ex: UC-8923hask29';
+            }
+
+            modalTitle.textContent = channelName;
+            modalSubtitle.textContent = subtitle;
+            idLabel.textContent = idLabelText;
+            idInput.placeholder = idPlaceholder;
+            webhookInput.value = `https://api.chatbotpro.com/webhook/v1/sync/${channelSlug}?shop_id=983-A12`;
+
+            // If already connected, prepopulate mock data
+            const isConnected = card.querySelector('.badge-status').textContent.trim().toLowerCase().includes('connected') || card.querySelector('.badge-status').textContent.trim().toLowerCase().includes('hoạt động');
+            if (isConnected) {
+                idInput.value = '98320492';
+                tokenInput.value = '••••••••••••••••••••••••';
+            } else {
+                idInput.value = '';
+                tokenInput.value = '';
+            }
+
+            channelModal.classList.add('modal-active');
+        });
+    });
+
+    closeChannelBtn.addEventListener('click', () => {
+        channelModal.classList.remove('modal-active');
+    });
+
+    channelModal.addEventListener('click', (e) => {
+        if (e.target === channelModal) channelModal.classList.remove('modal-active');
+    });
+
+    // Copy Webhook URL
+    const btnCopyWebhook = document.getElementById('btn-copy-webhook');
+    btnCopyWebhook.addEventListener('click', (e) => {
+        e.preventDefault();
+        webhookInput.select();
+        document.execCommand('copy');
+        
+        const lang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+        window.showToast(lang === 'VIE' ? 'Đã sao chép Webhook URL vào bộ nhớ đệm!' : 'Webhook URL copied to clipboard!', 'success');
+    });
+
+    // Save Channel Connection
+    channelForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        channelModal.classList.remove('modal-active');
+
+        const lang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+
+        // Update card status dynamically
+        if (triggeringCard) {
+            const badge = triggeringCard.querySelector('.badge-status');
+            const btn = triggeringCard.querySelector('.btn-configure');
+
+            badge.className = 'badge-status px-2 py-0.5 bg-[#10b981]/15 text-[#10b981] rounded text-[10px] font-bold border border-[#10b981]/25 flex items-center gap-1';
+            badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span> ${lang === 'VIE' ? 'Đang hoạt động' : 'Active'}`;
+            
+            btn.className = 'btn-configure mt-6 w-full py-2 bg-white hover:bg-slate-100 border border-outline-variant/50 text-on-surface text-xs font-semibold rounded-lg transition-colors flex items-center justify-center gap-2';
+            btn.innerHTML = `<span class="material-symbols-outlined text-sm">settings</span> <span>${lang === 'VIE' ? 'CẤU HÌNH API' : 'CONFIGURE API'}</span>`;
+        }
+
+        const msg = lang === 'VIE' 
+            ? `Đã liên kết kênh thành công!` 
+            : `Channel connected successfully!`;
+        window.showToast(msg, 'success');
+    });
+
+    // Environment variables CRUD
     const varsList = document.getElementById('vars-list');
     const newVarKey = document.getElementById('new-var-key');
     const newVarVal = document.getElementById('new-var-val');
     const btnSaveNewVar = document.getElementById('btn-save-new-var');
     const btnAddVar = document.getElementById('btn-add-var');
 
-    // 1. Hover-to-reveal setup function
     function setupObscuredValues() {
-        const obscuredInputs = document.querySelectorAll('.obscured-value');
-        obscuredInputs.forEach(input => {
-            // Remove previous listeners to avoid duplicates
+        document.querySelectorAll('.obscured-value').forEach(input => {
             input.removeEventListener('click', toggleReveal);
             input.addEventListener('click', toggleReveal);
         });
@@ -476,39 +783,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setupObscuredValues();
 
-    // 2. Add variable logic
     btnSaveNewVar.addEventListener('click', (e) => {
         e.preventDefault();
         const key = newVarKey.value.trim().toUpperCase();
         const val = newVarVal.value.trim();
-        const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+        const lang = localStorage.getItem('chatbotpro_lang') || 'VIE';
 
         if (!key || !val) {
-            const msg = currentLang === 'VIE' 
-                ? 'Vui lòng cung cấp cả tên biến và giá trị.' 
-                : 'Please provide both a key and a value.';
-            window.showToast(msg, 'error');
+            window.showToast(lang === 'VIE' ? 'Vui lòng cung cấp cả tên biến và giá trị.' : 'Key and Value are required.', 'error');
             return;
         }
 
-        // Check if variable key already exists
-        const existingKeys = Array.from(varsList.querySelectorAll('input[type="text"]:first-child'))
-            .map(input => input.value);
-            
-        if (existingKeys.includes(key)) {
-            const msg = currentLang === 'VIE'
-                ? `Biến ${key} đã tồn tại.`
-                : `Variable ${key} already exists.`;
-            window.showToast(msg, 'error');
-            return;
-        }
-
-        // Create new variable row HTML element
         const row = document.createElement('div');
         row.className = 'grid grid-cols-12 gap-unit items-center bg-slate-50/50 p-2 rounded-lg border border-outline-variant/20 group';
         row.innerHTML = `
             <div class="col-span-4 flex items-center gap-2">
-                <span class="material-symbols-outlined text-[#10b981] text-[16px]" title="Encrypted & Safe">lock</span>
+                <span class="material-symbols-outlined text-[#10b981] text-[16px]">lock</span>
                 <input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs text-outline" readonly type="text" value="${key}"/>
             </div>
             <div class="col-span-7 relative">
@@ -520,145 +810,83 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
-        // Insert row at top of list (just below grid header/first elements)
         varsList.insertBefore(row, varsList.firstChild);
-
-        // Reset inputs
         newVarKey.value = '';
         newVarVal.value = '';
 
-        // Bind interactive elements for the new row
         bindRowEvents(row);
         setupObscuredValues();
 
-        const msg = currentLang === 'VIE'
-            ? `Đã thêm thành công biến ${key}.`
-            : `Variable ${key} added successfully.`;
-        window.showToast(msg, 'success');
+        window.showToast(lang === 'VIE' ? `Đã thêm thành công biến ${key}` : `Variable ${key} added successfully.`, 'success');
     });
 
-    // 3. Bind events for rows
     function bindRowEvents(row) {
         const btnDelete = row.querySelector('.btn-delete-row');
         const btnEdit = row.querySelector('.btn-edit-row');
         const keyInput = row.querySelector('input:first-of-type');
         const valInput = row.querySelector('.obscured-value');
 
-        // Delete row
-        btnDelete.addEventListener('click', () => {
-            const key = keyInput.value;
-            const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
-            row.remove();
-            
-            const msg = currentLang === 'VIE'
-                ? `Đã xóa biến ${key}.`
-                : `Variable ${key} deleted.`;
-            window.showToast(msg, 'info');
-        });
+        if (btnDelete) {
+            btnDelete.addEventListener('click', () => {
+                row.remove();
+                const lang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+                window.showToast(lang === 'VIE' ? `Đã xóa biến ${keyInput.value}` : `Variable ${keyInput.value} deleted.`, 'info');
+            });
+        }
 
-        // Edit row (toggle readonly and focused style)
-        btnEdit.addEventListener('click', () => {
-            const isEditing = valInput.getAttribute('readonly') === null;
-            const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+        if (btnEdit) {
+            btnEdit.addEventListener('click', () => {
+                const isEditing = valInput.getAttribute('readonly') === null;
+                const lang = localStorage.getItem('chatbotpro_lang') || 'VIE';
 
-            if (isEditing) {
-                // Save state
-                valInput.setAttribute('readonly', '');
-                valInput.classList.add('obscured-value');
-                valInput.classList.remove('revealed');
-                btnEdit.innerHTML = '<span class="material-symbols-outlined text-[18px]">edit</span>';
-                
-                const msg = currentLang === 'VIE'
-                    ? `Đã cập nhật biến ${keyInput.value}.`
-                    : `Variable ${keyInput.value} updated.`;
-                window.showToast(msg, 'success');
-            } else {
-                // Edit state
-                valInput.removeAttribute('readonly');
-                valInput.classList.remove('obscured-value');
-                valInput.focus();
-                btnEdit.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span>';
-            }
-        });
+                if (isEditing) {
+                    valInput.setAttribute('readonly', '');
+                    valInput.classList.add('obscured-value');
+                    valInput.classList.remove('revealed');
+                    btnEdit.innerHTML = '<span class="material-symbols-outlined text-[18px]">edit</span>';
+                    window.showToast(lang === 'VIE' ? `Đã cập nhật biến ${keyInput.value}` : `Variable ${keyInput.value} updated.`, 'success');
+                } else {
+                    valInput.removeAttribute('readonly');
+                    valInput.classList.remove('obscured-value');
+                    valInput.focus();
+                    btnEdit.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span>';
+                }
+            });
+        }
     }
 
-    // Bind initial list rows
     varsList.querySelectorAll('.group').forEach(row => {
-        // Skip add row inputs container
-        if (!row.querySelector('.btn-delete-row')) {
-            // Bind edit/delete for the two hardcoded rows as well
-            const btnEdit = row.querySelector('button:first-of-type');
-            const btnDelete = row.querySelector('button:last-of-type');
-            
-            if (btnEdit && btnDelete) {
-                btnEdit.classList.add('btn-edit-row');
-                btnDelete.classList.add('btn-delete-row');
-                bindRowEvents(row);
-            }
-            return;
+        const btnEdit = row.querySelector('button:first-of-type');
+        const btnDelete = row.querySelector('button:last-of-type');
+        if (btnEdit && btnDelete) {
+            btnEdit.classList.add('btn-edit-row');
+            btnDelete.classList.add('btn-delete-row');
+            bindRowEvents(row);
         }
-        bindRowEvents(row);
     });
 
-    // Focus on key input when clicking Add Variable header button
     if (btnAddVar) {
-        btnAddVar.addEventListener('click', () => {
-            newVarKey.focus();
-        });
+        btnAddVar.addEventListener('click', () => newVarKey.focus());
     }
 
-    // 4. Deploy changes loader
-    const btnDeploy = Array.from(document.querySelectorAll('button')).find(el => el.getAttribute('data-translate') === 'env-btn-deploy' || el.textContent.trim().includes('Deploy Changes'));
-    if (btnDeploy) {
-        btnDeploy.addEventListener('click', (e) => {
+    // Deploy changes loader
+    const deployBtn = document.getElementById('btn-deploy');
+    if (deployBtn) {
+        deployBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            const originalText = btnDeploy.innerHTML;
-            const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
-            btnDeploy.disabled = true;
-            btnDeploy.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">sync</span> ${currentLang === 'VIE' ? 'Đang áp dụng...' : 'Deploying...'}`;
+            const lang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+            const originalText = deployBtn.innerHTML;
+            deployBtn.disabled = true;
+            deployBtn.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">sync</span> ${lang === 'VIE' ? 'Đang áp dụng...' : 'Deploying...'}`;
 
             setTimeout(() => {
-                btnDeploy.disabled = false;
-                btnDeploy.innerHTML = originalText;
-                
-                const msg = currentLang === 'VIE'
-                    ? 'Cấu hình biến môi trường đã được triển khai đến toàn bộ máy chủ Edge.'
-                    : 'Environment variables deployed globally to edge nodes.';
-                window.showToast(msg, 'success');
-            }, 1800);
-        });
-    }
-
-    // 5. Connect Slack toggle mock
-    const btnSlack = document.querySelector('button[class*="Connect Slack"]') || Array.from(document.querySelectorAll('button')).find(el => el.textContent.trim().includes('Connect Slack'));
-    if (btnSlack) {
-        btnSlack.addEventListener('click', (e) => {
-            e.preventDefault();
-            const badge = btnSlack.parentElement.querySelector('span');
-            const isConnected = badge.textContent.trim().toLowerCase() === 'connected' || badge.textContent.trim() === 'Connected';
-            const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
-
-            if (isConnected) {
-                badge.className = 'px-2 py-1 bg-slate-100 text-outline rounded text-xs font-label-caps border border-outline-variant/30 font-bold';
-                badge.textContent = 'Disconnected';
-                btnSlack.innerHTML = '<span class="material-symbols-outlined text-[16px]">add_link</span> Connect Slack';
-                
-                const msg = currentLang === 'VIE'
-                    ? 'Đã ngắt kết nối Slack Workspace.'
-                    : 'Slack connection terminated.';
-                window.showToast(msg, 'info');
-            } else {
-                badge.className = 'px-2 py-1 bg-[#10b981]/20 text-[#10b981] rounded text-xs font-label-caps flex items-center gap-1 font-bold';
-                badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span> Connected';
-                btnSlack.innerHTML = `<span class="material-symbols-outlined text-[16px]">link_off</span> ${currentLang === 'VIE' ? 'Ngắt Kết Nối Slack' : 'Disconnect Slack'}`;
-                
-                const msg = currentLang === 'VIE'
-                    ? 'Đã liên kết thành công với Slack Workspace.'
-                    : 'Slack Workspace linked successfully.';
-                window.showToast(msg, 'success');
-            }
+                deployBtn.disabled = false;
+                deployBtn.innerHTML = originalText;
+                window.showToast(lang === 'VIE' ? 'Cấu hình biến môi trường đã được áp dụng.' : 'API and connection environment variables successfully updated.', 'success');
+            }, 1500);
         });
     }
 });
 </script>
-</body></html>
+</body>
+</html>

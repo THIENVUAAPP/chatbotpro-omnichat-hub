@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ChatbotPro - Team Permissions</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-fixed-dim": "#cfbcff",
+                        "tertiary-container": "#fef3c7",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f8fafc",
+                        "outline-variant": "#e2e8f0",
+                        "on-tertiary-fixed-variant": "#78350f",
+                        "secondary-fixed": "#e9ddff",
+                        "surface-tint": "#6750a4",
+                        "on-background": "#0f172a",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "secondary": "#625b71",
+                        "error-container": "#fee2e2",
+                        "outline": "#94a3b8",
+                        "primary-container": "#e9ddff",
+                        "surface-container": "#f1f3f9",
+                        "surface-dim": "#f1f5f9",
+                        "on-primary-fixed": "#22005d",
+                        "secondary-container": "#e8def8",
+                        "on-error-container": "#7f1d1d",
+                        "inverse-primary": "#cfbcff",
+                        "on-tertiary-container": "#451a03",
+                        "on-surface-variant": "#475569",
+                        "primary": "#6750a4",
+                        "inverse-surface": "#0f172a",
+                        "surface-variant": "#e2e8f0",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "primary-fixed": "#e9ddff",
+                        "on-primary-container": "#22005d",
+                        "surface": "#ffffff",
+                        "surface-container-high": "#e2e8f0",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#1d192b",
+                        "inverse-on-surface": "#f8fafc",
+                        "tertiary-fixed": "#fde68a",
+                        "on-tertiary-fixed": "#451a03",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f8fafc",
+                        "tertiary": "#d97706",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f8fafc",
+                        "on-secondary-container": "#1d192b",
+                        "on-surface": "#0f172a",
+                        "error": "#ef4444",
+                        "tertiary-fixed-dim": "#f59e0b",
+                        "surface-container-highest": "#cbd5e1",
+                        "on-primary": "#ffffff"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        "stack-lg": "48px",
+                        "unit": "8px",
+                        "stack-sm": "12px",
+                        "gutter": "24px",
+                        "stack-md": "24px",
+                        "container-margin": "40px"
+                    },
+                    fontFamily: {
+                        "label-caps": ["Sora"],
+                        "mono-data": ["JetBrains Mono"],
+                        "display-lg": ["Sora"],
+                        "body-lg": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "display-lg-mobile": ["Sora"],
+                        "body-sm": ["Sora"]
+                    },
+                    fontSize: {
+                        "label-caps": ["12px", { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "600" }],
+                        "mono-data": ["13px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "display-lg": ["48px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
+                        "display-lg-mobile": ["32px", { lineHeight: "1.2", fontWeight: "700" }],
+                        "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(103, 80, 164, 0.08);
+            box-shadow: 0 4px 30px rgba(103, 80, 164, 0.03);
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(103, 80, 164, 0.2);
+            box-shadow: 0 10px 30px rgba(103, 80, 164, 0.08);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6750a4 0%, #625b71 100%);
+            border: 1px solid rgba(103, 80, 164, 0.1);
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 4px 15px rgba(103, 80, 164, 0.2);
+            transform: scale(1.01);
+        }
+
+        .btn-luxury {
+            border: 1px solid #d97706;
+            color: #d97706;
+            background: transparent;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .btn-luxury:hover {
+            background: rgba(217, 119, 6, 0.05);
+            box-shadow: 0 0 15px rgba(217, 119, 6, 0.15);
+        }
+
+        .input-glass {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(103, 80, 164, 0.15);
+            color: #0f172a;
+            transition: all 0.3s ease;
+        }
+
+        .input-glass:focus {
+            outline: none;
+            border-color: #6750a4;
+            box-shadow: 0 0 10px rgba(103, 80, 164, 0.15);
+        }
+
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(103, 80, 164, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(103, 80, 164, 0.02) 1px, transparent 1px);
+        }
+
+        /* Modal custom layout styling */
+        .modal-active {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+        .modal-card {
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+        }
+        .modal-active .modal-card {
+            transform: scale(1) !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-sm text-body-sm text-on-background relative">
+<div class="fixed inset-0 bg-grid z-[-1] pointer-events-none"></div>
+<div class="fixed inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent z-[-1]"></div>
+
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/75 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_4px_20px_rgba(103,80,164,0.05)]">
+    <div class="flex justify-between items-center px-container-margin h-20 w-full">
+        <div class="flex items-center gap-gutter">
+            <h1 class="font-display-lg text-display-lg bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent hidden md:block" style="font-size: 28px; font-weight: 750; cursor: pointer;" onclick="window.location.href='index.html'">ChatbotPro</h1>
+            <h1 class="font-display-lg-mobile text-display-lg-mobile bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent md:hidden" style="font-size: 24px; font-weight: 750;" onclick="window.location.href='index.html'">ChatbotPro</h1>
+        </div>
+        <div class="flex items-center gap-stack-md">
+            <div class="relative hidden md:block">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+                <input id="search-staff" class="bg-slate-50 border border-outline-variant/50 rounded-full py-2 pl-10 pr-4 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all w-64 font-mono-data text-mono-data" data-translate-placeholder="dash-search-placeholder" placeholder="Tìm kiếm khách hàng, kênh kết nối..." type="text"/>
+            </div>
+            <button class="p-2 rounded-full hover:bg-primary/5 transition-all duration-300 active:scale-95 text-on-surface-variant">
+                <span class="material-symbols-outlined">language</span>
+            </button>
+            <button class="p-2 rounded-full hover:bg-primary/5 transition-all duration-300 active:scale-95 text-on-surface-variant relative">
+                <span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full shadow-[0_0_5px_rgba(239,68,68,0.5)]"></span>
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <div class="w-10 h-10 rounded-full bg-slate-100 border border-outline-variant/50 overflow-hidden cursor-pointer hover:border-primary transition-colors">
+                <img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBIUDhUh4WJokbt6eaR39WWnllSy3R5Y2ubYoM-BXYHAwjzsVLJ7F-UFxq44aIjStlSz4yIerWvEkrAPrzw6z_cFBn7pvuFAveUQWde_R54XtdWFoAOtbfenopAKkMYinI9KbPkuMa-nlTrq9G2gzMewhy4la7j1XcgHYQtKBKga_mdkLyPzwBiZsVtofpmOMVKuyV9-Gz1kR-qSnedfV9f4m3BtsRFQitanKo4j4TlgSahv5oYZPfuAbw9umqPv5J90xX_nb7TEf4"/>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="flex flex-1 pt-20 h-screen">
+    <!-- SideNavBar -->
+    <nav class="hidden md:flex flex-col py-stack-md px-4 fixed left-0 top-20 h-[calc(100vh-80px)] w-64 bg-white border-r border-outline-variant/30 shadow-sm z-40">
+        <div class="mb-stack-lg px-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined">terminal</span>
+            </div>
+            <div>
+                <div class="font-label-caps text-xs text-primary tracking-wider font-bold" data-translate="nav-admin-terminal">Admin Terminal</div>
+                <div class="font-mono-data text-mono-data text-on-surface-variant text-[10px] uppercase mt-1">ChatbotPro OS</div>
+            </div>
+        </div>
+        <ul class="flex flex-col gap-2 flex-1">
+            <li>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="dashboard.html">
+                    <span class="material-symbols-outlined">hub</span>
+                    <span data-translate="nav-crm">CRM Khách Hàng</span>
+                </a>
+            </li>
+            <li data-role-required="owner">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="env-vars.html">
+                    <span class="material-symbols-outlined">database</span>
+                    <span data-translate="nav-api">Cấu Hình API & Kênh</span>
+                </a>
+            </li>
+            <li data-role-required="owner">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary border-r-2 border-primary font-label-caps text-label-caps font-bold active" href="team.html">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+                    <span data-translate="nav-team">Phân Quyền Team</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="guides.html">
+                    <span class="material-symbols-outlined">menu_book</span>
+                    <span data-translate="nav-guides">Hướng Dẫn Sử Dụng</span>
+                </a>
+            </li>
+        </ul>
+        <div class="mt-auto">
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="index.html">
+                <span class="material-symbols-outlined">logout</span>
+                <span data-translate="nav-logout">Quay Lại Web</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 md:ml-64 p-4 md:p-container-margin overflow-y-auto" id="main-content">
+        <!-- Page Header -->
+        <header class="mb-stack-lg flex flex-col md:flex-row md:justify-between md:items-end gap-stack-md border-b border-outline-variant/30 pb-stack-md">
+            <div>
+                <h1 class="font-display-lg text-headline-md text-on-surface mb-unit font-bold" data-translate="team-title">Phân Quyền & Đội Ngũ Nhân Sự</h1>
+                <p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl" data-translate="team-sub">Thiết lập tài khoản, vai trò và phân quyền truy cập chức năng cho nhân viên.</p>
+            </div>
+            <div class="flex gap-stack-sm mt-4 md:mt-0">
+                <button id="btn-add-member" class="btn-primary px-6 py-2.5 rounded-full font-label-caps text-label-caps font-bold flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">person_add</span>
+                    <span data-translate="team-btn-add">Thêm Thành Viên</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Roster Table -->
+        <div class="glass-panel rounded-2xl border border-outline-variant/30 overflow-hidden flex flex-col bg-white shadow-sm">
+            <div class="overflow-x-auto w-full">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-outline-variant/30 bg-slate-50/50">
+                            <th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider font-bold" data-translate="team-col-name">NHÂN SỰ</th>
+                            <th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider font-bold" data-translate="team-col-role">VAI TRÒ HỆ THỐNG</th>
+                            <th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider font-bold" data-translate="team-col-status">TRẠNG THÁI</th>
+                            <th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider font-bold" data-translate="team-col-permissions">PHÂN QUYỀN TRUY CẬP TRANG</th>
+                            <th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider font-bold text-right" data-translate="team-col-action">HÀNH ĐỘNG</th>
+                        </tr>
+                    </thead>
+                    <tbody id="staff-table-body" class="font-mono-data text-mono-data text-sm">
+                        <!-- Owner Row -->
+                        <tr class="border-b border-outline-variant/10 hover:bg-slate-50/50 transition-colors group">
+                            <td class="py-4 px-6">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center font-bold text-primary text-sm">NQ</div>
+                                    <div>
+                                        <div class="text-on-surface font-body-sm text-body-sm font-semibold">Nguyễn Quốc Owner</div>
+                                        <div class="text-on-surface-variant text-xs opacity-70">owner@chatbotpro.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="px-2.5 py-1 rounded text-[10px] font-label-caps tracking-wider border border-primary/20 text-primary bg-primary/5 font-bold" data-translate="role-owner">Chủ Doanh Nghiệp</span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="px-2.5 py-1 rounded-full text-xs flex items-center w-max gap-1.5 font-bold bg-emerald-50 text-[#10b981] border border-emerald-200">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span>
+                                    <span data-translate="team-status-active">Hoạt động</span>
+                                </span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-crm">CRM &amp; Chat</span>
+                                    <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-api">Cấu hình API</span>
+                                    <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-guides">Guides</span>
+                                    <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-team">Quản lý Đội ngũ</span>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6 text-right">
+                                <span class="text-xs text-outline italic">Master Account</span>
+                            </td>
+                        </tr>
+                        <!-- Manager Row -->
+                        <tr class="border-b border-outline-variant/10 hover:bg-slate-50/50 transition-colors group">
+                            <td class="py-4 px-6">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-full bg-slate-100 border border-outline-variant/50 flex items-center justify-center font-bold text-[#625b71] text-sm">LM</div>
+                                    <div>
+                                        <div class="text-on-surface font-body-sm text-body-sm font-semibold">Lê Văn Manager</div>
+                                        <div class="text-on-surface-variant text-xs opacity-70">manager@chatbotpro.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="px-2.5 py-1 rounded text-[10px] font-label-caps tracking-wider border border-tertiary/20 text-tertiary bg-tertiary/5 font-bold">Quản Lý</span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="px-2.5 py-1 rounded-full text-xs flex items-center w-max gap-1.5 font-bold bg-emerald-50 text-[#10b981] border border-emerald-200">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>
+                                    <span data-translate="team-status-active">Hoạt động</span>
+                                </span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-crm">CRM &amp; Chat</span>
+                                    <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-guides">Guides</span>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6 text-right">
+                                <div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button class="btn-edit-staff p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+                                    <button class="btn-delete-staff p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Agent Row -->
+                        <tr class="border-b border-outline-variant/10 hover:bg-slate-50/50 transition-colors group">
+                            <td class="py-4 px-6">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-full bg-slate-100 border border-outline-variant/50 flex items-center justify-center font-bold text-slate-500 text-sm">TA</div>
+                                    <div>
+                                        <div class="text-on-surface font-body-sm text-body-sm font-semibold">Trần Thị Agent</div>
+                                        <div class="text-on-surface-variant text-xs opacity-70">agent@chatbotpro.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="px-2.5 py-1 rounded text-[10px] font-label-caps tracking-wider border border-slate-300 text-slate-600 bg-slate-50 font-bold" data-translate="role-staff">Nhân Viên Trực</span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="px-2.5 py-1 rounded-full text-xs flex items-center w-max gap-1.5 font-bold bg-emerald-50 text-[#10b981] border border-emerald-200">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>
+                                    <span data-translate="team-status-active">Hoạt động</span>
+                                </span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-crm">CRM &amp; Chat</span>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6 text-right">
+                                <div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button class="btn-edit-staff p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+                                    <button class="btn-delete-staff p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Add Team Member Modal -->
+<div id="add-member-modal" class="fixed inset-0 z-[110] flex items-center justify-center bg-[#050505]/30 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+    <div class="relative w-full max-w-lg px-4 md:px-0 mx-auto modal-card">
+        <div class="bg-white/95 backdrop-blur-[40px] rounded-[24px] border border-outline-variant/30 shadow-[0_15px_50px_rgba(103,80,164,0.15)] overflow-hidden text-on-surface p-8">
+            <!-- Close Button -->
+            <button id="close-add-modal" aria-label="Close dialog" class="absolute top-6 right-6 text-on-surface-variant hover:text-primary transition-colors group">
+                <span class="material-symbols-outlined text-[24px] group-hover:rotate-90 transition-transform duration-300">close</span>
+            </button>
+            
+            <div class="mb-6">
+                <h2 class="font-display-lg-mobile text-xl font-bold bg-gradient-to-r from-primary via-secondary to-tertiary bg-clip-text text-transparent mb-2" data-translate="team-modal-add-title">Thêm Nhân Sự Mới</h2>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Tạo tài khoản và phân quyền cho nhân viên của bạn.</p>
+            </div>
+            
+            <form id="add-member-form" class="space-y-4">
+                <!-- Name -->
+                <div class="space-y-2">
+                    <label class="font-label-caps text-label-caps text-on-surface block text-xs" data-translate="team-modal-label-name">Tên Nhân Viên</label>
+                    <input class="w-full bg-slate-50 border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg px-4 py-2.5 focus:ring-0 focus:border-primary focus:outline-none placeholder:text-outline/50" id="staff-name" required placeholder="Nguyen Van C" type="text"/>
+                </div>
+                <!-- Email -->
+                <div class="space-y-2">
+                    <label class="font-label-caps text-label-caps text-on-surface block text-xs" data-translate="team-modal-label-email">Địa Chỉ Email</label>
+                    <input class="w-full bg-slate-50 border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg px-4 py-2.5 focus:ring-0 focus:border-primary focus:outline-none placeholder:text-outline/50" id="staff-email" required placeholder="staff@company.com" type="email"/>
+                </div>
+                <!-- Role -->
+                <div class="space-y-2">
+                    <label class="font-label-caps text-label-caps text-on-surface block text-xs" data-translate="team-modal-label-role">Vai Trò Hệ Thống</label>
+                    <select class="w-full bg-slate-50 border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg px-4 py-2.5 focus:ring-0 focus:border-primary focus:outline-none" id="staff-role" required>
+                        <option value="staff" data-translate="role-staff">Nhân Viên Trực</option>
+                        <option value="owner" data-translate="role-owner">Chủ Doanh Nghiệp</option>
+                    </select>
+                </div>
+                <!-- Permissions -->
+                <div class="space-y-2 pt-2">
+                    <label class="font-label-caps text-label-caps text-on-surface block text-xs font-bold" data-translate="team-modal-label-permissions">Phân Quyền Chi Tiết</label>
+                    <div class="grid grid-cols-2 gap-3 mt-2">
+                        <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg cursor-pointer hover:bg-slate-100 transition-colors">
+                            <input checked id="chk-crm" type="checkbox" class="rounded border-outline-variant text-primary focus:ring-primary"/>
+                            <span class="text-xs font-semibold text-on-surface-variant" data-translate="team-perm-crm">CRM &amp; Chat</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg cursor-pointer hover:bg-slate-100 transition-colors">
+                            <input id="chk-api" type="checkbox" class="rounded border-outline-variant text-primary focus:ring-primary"/>
+                            <span class="text-xs font-semibold text-on-surface-variant" data-translate="team-perm-api">Cấu hình API</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg cursor-pointer hover:bg-slate-100 transition-colors">
+                            <input checked id="chk-guides" type="checkbox" class="rounded border-outline-variant text-primary focus:ring-primary"/>
+                            <span class="text-xs font-semibold text-on-surface-variant" data-translate="team-perm-guides">Guides</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg cursor-pointer hover:bg-slate-100 transition-colors">
+                            <input id="chk-team" type="checkbox" class="rounded border-outline-variant text-primary focus:ring-primary"/>
+                            <span class="text-xs font-semibold text-on-surface-variant" data-translate="team-perm-team">Quản lý Đội ngũ</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Action Button -->
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary hover:brightness-105 text-white font-label-caps text-label-caps py-3 px-6 rounded-lg transition-all shadow-[0_0_20px_rgba(103,80,164,0.1)] hover:shadow-[0_0_25px_rgba(103,80,164,0.2)] flex items-center justify-center space-x-2 font-bold">
+                        <span data-translate="team-btn-save">LƯU NHÂN SỰ</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const tableBody = document.getElementById('staff-table-body');
+    const addModal = document.getElementById('add-member-modal');
+    const openAddModalBtn = document.getElementById('btn-add-member');
+    const closeAddModalBtn = document.getElementById('close-add-modal');
+    const addForm = document.getElementById('add-member-form');
+    
+    // Inputs
+    const inputName = document.getElementById('staff-name');
+    const inputEmail = document.getElementById('staff-email');
+    const inputRole = document.getElementById('staff-role');
+    const chkCrm = document.getElementById('chk-crm');
+    const chkApi = document.getElementById('chk-api');
+    const chkGuides = document.getElementById('chk-guides');
+    const chkTeam = document.getElementById('chk-team');
+
+    // 1. Open modal
+    openAddModalBtn.addEventListener('click', () => {
+        addModal.classList.add('modal-active');
+    });
+
+    // 2. Close modal
+    closeAddModalBtn.addEventListener('click', () => {
+        addModal.classList.remove('modal-active');
+    });
+
+    addModal.addEventListener('click', (e) => {
+        if (e.target === addModal) addModal.classList.remove('modal-active');
+    });
+
+    // 3. Add staff action
+    addForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const name = inputName.value.trim();
+        const email = inputEmail.value.trim();
+        const role = inputRole.value;
+        const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+        
+        if (!name || !email) return;
+
+        // Initials for avatar
+        const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+
+        // Permissions labels
+        const perms = [];
+        if (chkCrm.checked) perms.push(`<span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-crm">CRM &amp; Chat</span>`);
+        if (chkApi.checked) perms.push(`<span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-api">Cấu hình API</span>`);
+        if (chkGuides.checked) perms.push(`<span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-guides">Guides</span>`);
+        if (chkTeam.checked) perms.push(`<span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-team">Quản lý Đội ngũ</span>`);
+
+        const roleText = role === 'owner' 
+            ? (currentLang === 'VIE' ? 'Chủ Doanh Nghiệp' : 'Owner / Admin')
+            : (currentLang === 'VIE' ? 'Nhân Viên Trực' : 'Chat Staff');
+
+        const newRow = document.createElement('tr');
+        newRow.className = 'border-b border-outline-variant/10 hover:bg-slate-50/50 transition-colors group';
+        newRow.innerHTML = `
+            <td class="py-4 px-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-slate-100 border border-outline-variant/50 flex items-center justify-center font-bold text-slate-500 text-sm">${initials}</div>
+                    <div>
+                        <div class="text-on-surface font-body-sm text-body-sm font-semibold">${name}</div>
+                        <div class="text-on-surface-variant text-xs opacity-70">${email}</div>
+                    </div>
+                </div>
+            </td>
+            <td class="py-4 px-6">
+                <span class="px-2.5 py-1 rounded text-[10px] font-label-caps tracking-wider border ${role === 'owner' ? 'border-primary/20 text-primary bg-primary/5' : 'border-slate-300 text-slate-600 bg-slate-50'} font-bold">${roleText}</span>
+            </td>
+            <td class="py-4 px-6">
+                <span class="px-2.5 py-1 rounded-full text-xs flex items-center w-max gap-1.5 font-bold bg-emerald-50 text-[#10b981] border border-emerald-200">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>
+                    <span data-translate="team-status-active">Hoạt động</span>
+                </span>
+            </td>
+            <td class="py-4 px-6">
+                <div class="flex flex-wrap gap-1">
+                    ${perms.join('')}
+                </div>
+            </td>
+            <td class="py-4 px-6 text-right">
+                <div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button class="btn-edit-staff p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+                    <button class="btn-delete-staff p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+                </div>
+            </td>
+        `;
+
+        tableBody.appendChild(newRow);
+        bindRowActions(newRow);
+
+        // Reset & Close
+        addForm.reset();
+        addModal.classList.remove('modal-active');
+
+        // Toast feedback
+        const msg = currentLang === 'VIE'
+            ? `Đã thêm thành công thành viên ${name}!`
+            : `Team member ${name} added successfully!`;
+        window.showToast(msg, 'success');
+    });
+
+    // 4. Bind delete/edit actions
+    function bindRowActions(row) {
+        const btnDelete = row.querySelector('.btn-delete-staff');
+        const btnEdit = row.querySelector('.btn-edit-staff');
+        const staffName = row.querySelector('.font-semibold').textContent;
+        const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+
+        if (btnDelete) {
+            btnDelete.addEventListener('click', () => {
+                row.remove();
+                const msg = currentLang === 'VIE'
+                    ? `Đã xóa nhân viên ${staffName} khỏi hệ thống.`
+                    : `Staff member ${staffName} removed.`;
+                window.showToast(msg, 'info');
+            });
+        }
+
+        if (btnEdit) {
+            btnEdit.addEventListener('click', () => {
+                const msg = currentLang === 'VIE'
+                    ? `Tính năng chỉnh sửa phân quyền đang được cập nhật.`
+                    : `Edit permission dialog coming soon.`;
+                window.showToast(msg, 'info');
+            });
+        }
+    }
+
+    // Bind initial rows
+    document.querySelectorAll('.group').forEach(row => {
+        bindRowActions(row);
+    });
+
+    // 5. Staff search filter
+    const searchInput = document.getElementById('search-staff');
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase().trim();
+            document.querySelectorAll('#staff-table-body tr').forEach(row => {
+                const name = row.querySelector('.font-semibold').textContent.toLowerCase();
+                const email = row.querySelector('.text-on-surface-variant').textContent.toLowerCase();
+                if (name.includes(query) || email.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    }
+});
+</script>
+</body>
+</html>
