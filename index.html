@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>ChatbotPro - Trợ lý AI đa kênh của doanh nghiệp</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
         tailwind.config = {
@@ -76,13 +76,13 @@
                         "container-margin": "40px"
                     },
                     fontFamily: {
-                        "label-caps": ["Sora"],
+                        "label-caps": ["Inter", "sans-serif"],
                         "mono-data": ["JetBrains Mono"],
-                        "display-lg": ["Sora"],
-                        "body-lg": ["Sora"],
-                        "headline-md": ["Sora"],
-                        "display-lg-mobile": ["Sora"],
-                        "body-sm": ["Sora"]
+                        "display-lg": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "display-lg-mobile": ["Inter", "sans-serif"],
+                        "body-sm": ["Inter", "sans-serif"]
                     },
                     fontSize: {
                         "label-caps": ["12px", { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "600" }],
@@ -223,15 +223,15 @@
             <div class="w-[600px] h-[600px] rounded-full border border-tertiary/5 absolute floating-icon" style="animation-delay: -2s; animation-duration: 8s;"></div>
         </div>
         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-stack-md">
-            <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+            <span class="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
             <span class="font-mono-data text-mono-data text-primary" data-translate="hero-badge">v4.0 Core Nhân Viên Số Hoạt Động</span>
         </div>
         <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg max-w-4xl mb-stack-md leading-tight" data-translate="hero-title">
-            Tự Động Hóa Tư Vấn. <br/>
-            <span class="luxury-gradient">Trợ Lý AI Đa Kênh.</span>
+            CỖ MÁY CHỐT ĐƠN <br/>
+            <span class="bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent font-extrabold">TỰ ĐỘNG 24/7</span>
         </h1>
         <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-stack-lg" data-translate="hero-desc">
-            Đừng để khách hàng chờ. AI phản hồi trong 5 giây, hoạt động 24/7. Trợ lý AI giảm tới 80% khối lượng tư vấn lặp lại, chốt đơn tự động theo dữ liệu riêng của bạn.
+            Đừng để khách hàng chờ. Trợ lý AI phản hồi nhanh trong 5 giây, tự động chăm sóc và chốt đơn đa kênh theo dữ liệu tri thức riêng của doanh nghiệp.
         </p>
         <div class="flex flex-col sm:flex-row gap-gutter items-center">
             <button onclick="window.location.href='checkout.html?tier=pro'" class="bg-gradient-to-r from-primary to-secondary text-white font-label-caps text-label-caps px-10 py-4 rounded-xl pulse-glow hover:brightness-105 active:scale-95 transition-all duration-300 flex items-center gap-2" data-translate="hero-acquire">
@@ -258,31 +258,31 @@
     <!-- How It Works (3 Steps) -->
     <section class="py-stack-lg relative">
         <div class="text-center mb-stack-lg">
-            <h2 class="font-headline-md text-headline-md mb-2" data-translate="steps-title">Quy Trình Triển Khai</h2>
-            <p class="font-mono-data text-mono-data text-on-surface-variant" data-translate="steps-sub">Chỉ từ 15 phút để đưa nhân viên số vào vận hành thực tế.</p>
+            <h2 class="font-headline-md text-headline-md mb-2" data-translate="steps-title">Lợi Ích Vượt Trội</h2>
+            <p class="font-mono-data text-mono-data text-on-surface-variant" data-translate="steps-sub">Đột phá doanh thu nhờ trợ lý AI thông minh thế hệ mới.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-unit relative">
             <div class="hidden md:block absolute top-1/2 left-[16%] right-[16%] h-px bg-gradient-to-r from-primary/10 via-tertiary/20 to-primary/10 -translate-y-1/2 z-0"></div>
             <div class="glass-panel rounded-2xl p-stack-md flex flex-col items-center text-center relative z-10 hover:border-primary/50 transition-colors">
                 <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6 shadow-[0_4px_15px_rgba(103,80,164,0.1)]">
-                    <span class="material-symbols-outlined text-3xl">cable</span>
+                    <span class="material-symbols-outlined text-3xl">chat</span>
                 </div>
-                <h3 class="font-label-caps text-label-caps mb-3" data-translate="step-1-title">1. Thu Thập Tri Thức</h3>
-                <p class="font-body-sm text-body-sm text-on-surface-variant" data-translate="step-1-desc">AI tự động học từ tài liệu PDF, DOCX, XLSX hoặc link website của doanh nghiệp.</p>
+                <h3 class="font-label-caps text-label-caps mb-3" data-translate="step-1-title">AI phản hồi nhanh như thật</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant" data-translate="step-1-desc">Trả lời khách hàng ngay lập tức trong 5 giây, hành văn tự nhiên mang lại cảm xúc giống như người thật.</p>
             </div>
             <div class="glass-panel rounded-2xl p-stack-md flex flex-col items-center text-center relative z-10 hover:border-tertiary/50 transition-colors">
                 <div class="w-16 h-16 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary mb-6 shadow-[0_4px_15px_rgba(217,119,6,0.1)]">
-                    <span class="material-symbols-outlined text-3xl">model_training</span>
+                    <span class="material-symbols-outlined text-3xl">schedule</span>
                 </div>
-                <h3 class="font-label-caps text-label-caps mb-3" data-translate="step-2-title">2. Huấn Luyện & Test</h3>
-                <p class="font-body-sm text-body-sm text-on-surface-variant" data-translate="step-2-desc">Tinh chỉnh kịch bản bán hàng, giọng điệu phản hồi và sản phẩm của doanh nghiệp.</p>
+                <h3 class="font-label-caps text-label-caps mb-3" data-translate="step-2-title">Tự động chăm sóc không bỏ sót</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant" data-translate="step-2-desc">Hoạt động bền bỉ 24/7 đa kênh Zalo, Facebook, TikTok, WhatsApp, giải quyết mọi yêu cầu tức thì.</p>
             </div>
             <div class="glass-panel rounded-2xl p-stack-md flex flex-col items-center text-center relative z-10 hover:border-secondary/50 transition-colors">
                 <div class="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center text-primary mb-6 shadow-[0_4px_15px_rgba(103,80,164,0.1)]">
-                    <span class="material-symbols-outlined text-3xl">rocket_launch</span>
+                    <span class="material-symbols-outlined text-3xl">trending_up</span>
                 </div>
-                <h3 class="font-label-caps text-label-caps mb-3" data-translate="step-3-title">3. Chạy Đa Kênh</h3>
-                <p class="font-body-sm text-body-sm text-on-surface-variant" data-translate="step-3-desc">Tự động tư vấn chốt đơn 24/7 trên Zalo, Messenger, WhatsApp, Instagram.</p>
+                <h3 class="font-label-caps text-label-caps mb-3" data-translate="step-3-title">Tăng chuyển đổi bền vững</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant" data-translate="step-3-desc">Tự động nhận diện nhu cầu mua sắm, đề xuất tư vấn thuyết phục để chốt đơn nhanh chóng.</p>
             </div>
         </div>
     </section>
@@ -441,45 +441,59 @@
             <h2 class="font-headline-md text-headline-md mb-2" data-translate="pricing-title">Gói Dịch Vụ Hợp Lý</h2>
             <p class="font-mono-data text-mono-data text-on-surface-variant" data-translate="pricing-sub">Chi phí trọn gói, hỗ trợ trọn đời, thanh toán hàng năm.</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             <!-- Basic -->
             <div class="glass-panel rounded-2xl p-8 flex flex-col h-full border-outline-variant/30 hover:border-outline-variant/60 hover:shadow-lg transition-all bg-white">
                 <h3 class="font-label-caps text-label-caps text-on-surface-variant font-bold mb-4">BASIC</h3>
-                <div class="font-display-lg text-3xl font-bold mb-2">550.000 VND<span class="text-sm text-on-surface-variant font-body-sm font-normal">/tháng</span></div>
+                <div class="font-display-lg text-2xl font-bold mb-2">550.000 VND<span class="text-sm text-on-surface-variant font-body-sm font-normal">/tháng</span></div>
                 <p class="font-body-sm text-body-sm text-on-surface-variant mb-8 pb-4 border-b border-outline-variant/20" data-translate="price-starter-sub">Phù hợp chủ shop, cá nhân kinh doanh.</p>
-                <ul class="flex flex-col gap-3 flex-grow mb-8 font-mono-data text-mono-data text-sm">
+                <ul class="flex flex-col gap-3 flex-grow mb-8 font-mono-data text-mono-data text-xs">
                     <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary">check</span> <span data-translate="price-starter-f1">5.000 tin trả lời / tháng</span></li>
                     <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary">check</span> <span data-translate="price-starter-f2">Tối đa 1 trợ lý AI</span></li>
                     <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary">check</span> <span data-translate="price-starter-f3">Đầy đủ tính năng cốt lõi</span></li>
                 </ul>
-                <button onclick="window.location.href='checkout.html?tier=starter'" class="w-full py-3 rounded-lg border border-primary/50 text-primary font-label-caps text-label-caps hover:bg-primary/5 transition-all font-bold" data-translate="price-starter-btn">MUA GÓI STARTER</button>
+                <button onclick="window.location.href='checkout.html?tier=starter'" class="w-full py-3 rounded-lg border border-primary/50 text-primary font-label-caps text-label-caps hover:bg-primary/5 transition-all font-bold mt-auto" data-translate="price-starter-btn">MUA GÓI STARTER</button>
             </div>
             <!-- Standard (Glowing) -->
-            <div class="glass-panel rounded-2xl p-8 flex flex-col h-[105%] neon-border active relative transform md:-translate-y-4 shadow-[0_10px_30px_rgba(103,80,164,0.1)] z-10 bg-white border-primary">
+            <div class="glass-panel rounded-2xl p-8 flex flex-col h-full border-primary hover:shadow-lg transition-all bg-white relative">
                 <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-primary to-tertiary text-white font-label-caps text-[10px] px-4 py-1.5 rounded-full whitespace-nowrap font-bold">PHỔ BIẾN NHẤT</div>
                 <h3 class="font-label-caps text-label-caps text-primary font-bold mb-4">STANDARD</h3>
-                <div class="font-display-lg text-3xl font-bold mb-2 text-primary">1.100.000 VND<span class="text-sm text-on-surface-variant font-body-sm font-normal">/tháng</span></div>
+                <div class="font-display-lg text-2xl font-bold mb-2 text-primary">1.100.000 VND<span class="text-sm text-on-surface-variant font-body-sm font-normal">/tháng</span></div>
                 <p class="font-body-sm text-body-sm text-on-surface-variant mb-8 pb-4 border-b border-outline-variant/20" data-translate="price-pro-sub">Phù hợp cho doanh nghiệp nhỏ.</p>
-                <ul class="flex flex-col gap-3 flex-grow mb-8 font-mono-data text-mono-data text-sm">
+                <ul class="flex flex-col gap-3 flex-grow mb-8 font-mono-data text-mono-data text-xs">
                     <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span> <span data-translate="price-pro-f1">10.000 tin trả lời / tháng</span></li>
                     <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span> <span data-translate="price-pro-f2">Tối đa 2 trợ lý AI</span></li>
                     <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span> <span data-translate="price-pro-f3">Đầy đủ tính năng & Tùy biến</span></li>
                     <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span> <span data-translate="price-pro-f4">Hỗ trợ Zalo OA, Fanpage</span></li>
                 </ul>
-                <button onclick="window.location.href='checkout.html?tier=pro'" class="w-full py-3.5 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-label-caps text-label-caps hover:brightness-105 active:scale-95 transition-all pulse-glow font-bold" data-translate="price-pro-btn">MUA GÓI STANDARD</button>
+                <button onclick="window.location.href='checkout.html?tier=pro'" class="w-full py-3.5 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-label-caps text-label-caps hover:brightness-105 active:scale-95 transition-all pulse-glow font-bold mt-auto" data-translate="price-pro-btn">MUA GÓI STANDARD</button>
             </div>
             <!-- Edition -->
             <div class="glass-panel rounded-2xl p-8 flex flex-col h-full border-outline-variant/30 hover:border-outline-variant/60 hover:shadow-lg transition-all bg-white">
                 <h3 class="font-label-caps text-label-caps text-tertiary font-bold mb-4">EDITION</h3>
-                <div class="font-display-lg text-3xl font-bold mb-2 text-tertiary">2.750.000 VND<span class="text-sm text-on-surface-variant font-body-sm font-normal">/tháng</span></div>
+                <div class="font-display-lg text-2xl font-bold mb-2 text-tertiary">2.750.000 VND<span class="text-sm text-on-surface-variant font-body-sm font-normal">/tháng</span></div>
                 <p class="font-body-sm text-body-sm text-on-surface-variant mb-8 pb-4 border-b border-outline-variant/20" data-translate="price-elite-sub">Doanh nghiệp vừa và lớn.</p>
-                <ul class="flex flex-col gap-3 flex-grow mb-8 font-mono-data text-mono-data text-sm">
+                <ul class="flex flex-col gap-3 flex-grow mb-8 font-mono-data text-mono-data text-xs">
                     <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary">diamond</span> <span data-translate="price-elite-f1">25.000 tin trả lời / tháng</span></li>
                     <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary">diamond</span> <span data-translate="price-elite-f2">Tối đa 5 trợ lý AI</span></li>
-                    <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary">diamond</span> <span data-translate="price-elite-f3">White-label (Thông tin, Logo riêng)</span></li>
+                    <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary">diamond</span> <span data-translate="price-elite-f3">White-label (Thông tin riêng)</span></li>
                     <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary">diamond</span> <span data-translate="price-elite-f4">Tích hợp API hệ thống</span></li>
                 </ul>
-                <button onclick="window.location.href='checkout.html?tier=enterprise'" class="w-full py-3 rounded-lg border border-tertiary/50 text-tertiary font-label-caps text-label-caps hover:bg-tertiary/5 transition-all font-bold" data-translate="price-elite-btn">MUA GÓI EDITION</button>
+                <button onclick="window.location.href='checkout.html?tier=enterprise'" class="w-full py-3 rounded-lg border border-tertiary/50 text-tertiary font-label-caps text-label-caps hover:bg-tertiary/5 transition-all font-bold mt-auto" data-translate="price-elite-btn">MUA GÓI EDITION</button>
+            </div>
+            <!-- Claude Sonnet 4.6 Credit Tier -->
+            <div class="glass-panel rounded-2xl p-8 flex flex-col h-full border-teal-500 hover:border-teal-600 hover:shadow-lg transition-all bg-white relative">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-teal-500 to-emerald-600 text-white font-label-caps text-[10px] px-4 py-1.5 rounded-full whitespace-nowrap font-bold">API SIÊU TIẾT KIỆM</div>
+                <h3 class="font-label-caps text-label-caps text-teal-600 font-bold mb-4">CLAUDE SONNET 4.6</h3>
+                <div class="font-display-lg text-2xl font-bold mb-2 text-teal-600">50.000 VND<span class="text-sm text-on-surface-variant font-body-sm font-normal">/ 100 Credits</span></div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mb-8 pb-4 border-b border-teal-500/20">Sử dụng model Claude 3.5 Sonnet thông minh & tối ưu nhất.</p>
+                <ul class="flex flex-col gap-3 flex-grow mb-8 font-mono-data text-mono-data text-xs">
+                    <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-teal-600">flash_on</span> <span>Claude 3.5 Sonnet chính chủ</span></li>
+                    <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-teal-600">flash_on</span> <span>Tốc độ phản hồi cực nhanh</span></li>
+                    <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-teal-600">flash_on</span> <span>Không giới hạn hạn sử dụng</span></li>
+                    <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-teal-600">flash_on</span> <span>Nạp tiền tự động linh hoạt</span></li>
+                </ul>
+                <button onclick="window.location.href='checkout.html?tier=credits'" class="w-full py-3 rounded-lg bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-label-caps text-label-caps hover:brightness-105 active:scale-95 transition-all font-bold mt-auto">NẠP CREDITS NGAY</button>
             </div>
         </div>
     </section>

@@ -30,13 +30,13 @@ const translations = {
         "nav-health": "API Health",
         "nav-support": "Hỗ Trợ",
         "nav-home": "Trang Chủ",
-        "nav-crm": "CRM Khách Hàng",
-        "nav-api": "Cấu Hình API & Kênh",
-        "nav-guides": "Hướng Dẫn Sử Dụng",
+        "nav-crm": "Hội thoại & CRM",
+        "nav-api": "Cài đặt API",
+        "nav-guides": "Hướng dẫn",
         "nav-settings": "Cài Đặt",
         "nav-admin-terminal": "Admin Terminal",
         "copyright": "© 2026 ChatbotPro. Trợ lý Trí Tuệ Nhân Tạo Doanh Nghiệp.",
-        "nav-team": "Phân Quyền Team",
+        "nav-team": "Phân quyền Team",
         "nav-logout": "Quay Lại Web",
         "nav-market": "Thị Trường AI",
 
@@ -50,21 +50,21 @@ const translations = {
 
         // Landing Page: Hero Section
         "hero-badge": "v4.0 Core Nhân Viên Số Hoạt Động",
-        "hero-title": "Tự Động Hóa Tư Vấn.<br/><span class=\"luxury-gradient\">Trợ Lý AI Đa Kênh.</span>",
-        "hero-desc": "Đừng để khách hàng chờ. AI phản hồi trong 5 giây, hoạt động 24/7. Trợ lý AI giảm tới 80% khối lượng tư vấn lặp lại, chốt đơn tự động theo dữ liệu riêng của bạn.",
+        "hero-title": "CỖ MÁY CHỐT ĐƠN <br/><span class=\"bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent font-extrabold\">TỰ ĐỘNG 24/7</span>",
+        "hero-desc": "Đừng để khách hàng chờ. Trợ lý AI phản hồi nhanh trong 5 giây, tự động chăm sóc và chốt đơn đa kênh theo dữ liệu tri thức riêng của doanh nghiệp.",
         "hero-acquire": "ĐĂNG KÝ SỬ DỤNG NGAY",
         "hero-demo": "ĐẶT LỊCH DEMO 1-1",
         "trust-title": "ĐƯỢC TIN DÙNG BỞI CÁC TỔ CHỨC ĐẦU NGÀNH",
 
         // Landing Page: Architectural Flow (Steps)
-        "steps-title": "Quy Trình Triển Khai",
-        "steps-sub": "Chỉ từ 15 phút để đưa nhân viên số vào vận hành thực tế.",
-        "step-1-title": "1. Thu Thập Tri Thức",
-        "step-1-desc": "AI tự động học từ tài liệu PDF, DOCX, XLSX hoặc link website của doanh nghiệp.",
-        "step-2-title": "2. Huấn Luyện & Test",
-        "step-2-desc": "Tinh chỉnh kịch bản bán hàng, giọng điệu phản hồi và sản phẩm của doanh nghiệp.",
-        "step-3-title": "3. Chạy Đa Kênh",
-        "step-3-desc": "Tự động tư vấn chốt đơn 24/7 trên Zalo, Messenger, WhatsApp, Instagram.",
+        "steps-title": "Lợi Ích Vượt Trội",
+        "steps-sub": "Đột phá doanh thu nhờ trợ lý AI thông minh thế hệ mới.",
+        "step-1-title": "AI phản hồi nhanh như thật",
+        "step-1-desc": "Trả lời khách hàng ngay lập tức trong 5 giây, hành văn tự nhiên mang lại cảm xúc giống như người thật.",
+        "step-2-title": "Tự động chăm sóc không bỏ sót",
+        "step-2-desc": "Hoạt động bền bỉ 24/7 đa kênh Zalo, Facebook, TikTok, WhatsApp, giải quyết mọi yêu cầu tức thì.",
+        "step-3-title": "Tăng chuyển đổi bền vững",
+        "step-3-desc": "Tự động nhận diện nhu cầu mua sắm, đề xuất tư vấn thuyết phục để chốt đơn nhanh chóng.",
 
         // Landing Page: Bento Grid & Features
         "bento-title": "Nền Tảng Đa Kênh Tiên Tiến",
@@ -264,22 +264,6 @@ const translations = {
         "owner-label-hotline": "Số Điện Thoại Hotline",
         "owner-btn-save": "LƯU CÀI ĐẶT CHỦ SỞ HỮU",
 
-
-        // TradingView Dashboard
-        "market-title": "Phân Tích Thị Trường AI",
-        "market-sub": "Giám sát biểu đồ nến thời gian thực và lịch sử trích xuất dữ liệu của 30 mã tài sản.",
-        "market-chart-header": "Biểu Đồ Nến Nâng Cao",
-        "market-grid-header": "Danh Mục Tài Sản Thị Trường (30 Mã)",
-        "market-history-header": "Lịch Sử Giao Dịch & Trích Xuất Dữ Liệu",
-        "market-col-date": "NGÀY",
-        "market-col-open": "MỞ CỬA",
-        "market-col-high": "CAO NHẤT",
-        "market-col-low": "THẤP NHẤT",
-        "market-col-close": "ĐÓNG CỬA",
-        "market-col-vol": "KHỐI LƯỢNG",
-        "market-col-ai": "AI NHẬN ĐỊNH",
-        "market-btn-extract": "Trích Xuất Dữ Liệu Sheet",
-        "market-realtime-simulator": "Simulate Ticks Real-Time",
 
         // Floating Sales Bot
         "bot-greeting": "Chào bạn! Mình là Trợ lý Voice AI của ChatbotPro. Bật Giọng Nói để nghe mình phản hồi trực tiếp nhé! Bạn cần tư vấn gói Starter (550k/tháng), Standard (1.1M/tháng) hay Edition (2.75M/tháng)? Hotline: 0901.234.567",
@@ -532,23 +516,6 @@ const translations = {
         "owner-label-voice-speed": "Speech Playback Rate",
         "owner-label-hotline": "Hotline Support Number",
         "owner-btn-save": "SAVE OWNER SETTINGS",
-
-
-        // TradingView Dashboard
-        "market-title": "AI Market Intelligence",
-        "market-sub": "Monitor candlestick widgets and trade reporting sheets for 30 global asset codes.",
-        "market-chart-header": "Advanced Chart Widget",
-        "market-grid-header": "Asset Classes Categories (30 Codes)",
-        "market-history-header": "Historical Ledger & Export Details",
-        "market-col-date": "DATE",
-        "market-col-open": "OPEN",
-        "market-col-high": "HIGH",
-        "market-col-low": "LOW",
-        "market-col-close": "CLOSE",
-        "market-col-vol": "VOLUME",
-        "market-col-ai": "AI LEDGER ANALYSIS",
-        "market-btn-extract": "Extract Data Sheet",
-        "market-realtime-simulator": "Simulate Ticks Real-Time",
 
         // Floating Sales Bot
         "bot-greeting": "Hello! I am ChatbotPro's voice assistant. Please turn Voice Mode ON to hear my spoken answers! Ask me about our Starter, Standard, or Edition plans. Hotline: 0901.234.567",
@@ -1000,7 +967,7 @@ function initGlobalLinkHandlers() {
 
 // 6. Role Switcher & Dynamic SideNavBar Permissions
 function initRoleSwitcher() {
-    const isAdminPage = ['dashboard.html', 'env-vars.html', 'team.html', 'guides.html', 'tradingview.html'].some(p => window.location.pathname.includes(p));
+    const isAdminPage = ['dashboard.html', 'env-vars.html', 'team.html', 'guides.html'].some(p => window.location.pathname.includes(p));
     if (!isAdminPage) return;
 
     const headerContainer = document.querySelector('header .flex.items-center.gap-stack-md');

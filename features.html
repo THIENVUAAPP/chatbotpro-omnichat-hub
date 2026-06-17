@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Tính năng & Tích hợp - ChatbotPro</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
         tailwind.config = {
@@ -20,27 +20,27 @@
                         "outline-variant": "#e2e8f0",
                         "on-tertiary-fixed-variant": "#78350f",
                         "secondary-fixed": "#e9ddff",
-                        "surface-tint": "#6750a4",
+                        "surface-tint": "#0052FF",
                         "on-background": "#0f172a",
                         "on-secondary-fixed-variant": "#4b4263",
                         "secondary": "#625b71",
                         "error-container": "#fee2e2",
                         "outline": "#94a3b8",
-                        "primary-container": "#e9ddff",
+                        "primary-container": "#e6f0ff",
                         "surface-container": "#f1f3f9",
                         "surface-dim": "#f1f5f9",
-                        "on-primary-fixed": "#22005d",
+                        "on-primary-fixed": "#001f66",
                         "secondary-container": "#e8def8",
                         "on-error-container": "#7f1d1d",
                         "inverse-primary": "#cfbcff",
                         "on-tertiary-container": "#451a03",
                         "on-surface-variant": "#475569",
-                        "primary": "#6750a4",
+                        "primary": "#0052FF",
                         "inverse-surface": "#0f172a",
                         "surface-variant": "#e2e8f0",
                         "secondary-fixed-dim": "#cdc0e9",
-                        "primary-fixed": "#e9ddff",
-                        "on-primary-container": "#22005d",
+                        "primary-fixed": "#e6f0ff",
+                        "on-primary-container": "#001f66",
                         "surface": "#ffffff",
                         "surface-container-high": "#e2e8f0",
                         "on-error": "#ffffff",
@@ -48,7 +48,7 @@
                         "inverse-on-surface": "#f8fafc",
                         "tertiary-fixed": "#fde68a",
                         "on-tertiary-fixed": "#451a03",
-                        "on-primary-fixed-variant": "#4f378a",
+                        "on-primary-fixed-variant": "#003bb3",
                         "on-secondary": "#ffffff",
                         "surface-bright": "#f8fafc",
                         "tertiary": "#d97706",
@@ -76,13 +76,13 @@
                         "unit": "8px"
                     },
                     fontFamily: {
-                        "headline-md": ["Sora"],
-                        "display-lg-mobile": ["Sora"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "display-lg-mobile": ["Inter", "sans-serif"],
                         "mono-data": ["JetBrains Mono"],
-                        "body-sm": ["Sora"],
-                        "label-caps": ["Sora"],
-                        "display-lg": ["Sora"],
-                        "body-lg": ["Sora"]
+                        "body-sm": ["Inter", "sans-serif"],
+                        "label-caps": ["Inter", "sans-serif"],
+                        "display-lg": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"]
                     },
                     fontSize: {
                         "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
@@ -108,34 +108,34 @@
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(103, 80, 164, 0.08);
-            box-shadow: 0 4px 30px rgba(103, 80, 164, 0.03);
+            border: 1px solid rgba(0, 82, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 82, 255, 0.03);
         }
         .glass-panel-hover:hover {
-            box-shadow: 0 10px 30px rgba(103, 80, 164, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 82, 255, 0.08);
             transform: translateY(-2px);
             transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         .text-gradient {
-            background: linear-gradient(to right, #6750a4, #d97706);
+            background: linear-gradient(to right, #0052FF, #d97706);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .btn-primary {
-            background: linear-gradient(to right, #6750a4, #d97706);
+            background: linear-gradient(to right, #0052FF, #d97706);
             color: #ffffff;
             transition: all 0.3s ease;
         }
         .btn-primary:hover {
             filter: brightness(1.05);
-            box-shadow: 0 4px 15px rgba(103, 80, 164, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 82, 255, 0.2);
         }
         .cyber-grid {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background-image: 
-                linear-gradient(rgba(103, 80, 164, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(103, 80, 164, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(0, 82, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 82, 255, 0.03) 1px, transparent 1px);
             background-size: 40px 40px;
             z-index: -2;
             pointer-events: none;
