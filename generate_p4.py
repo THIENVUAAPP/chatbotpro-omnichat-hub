@@ -1,35 +1,6 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>CHỐT NGHÌN ĐƠN SUPER ADMIN</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { "primary": "#10B981", "secondary": "#7B2DFF", "tertiary": "#FFD700", "accent": "#00F0FF", "background": "#0A0A0A", "surface": "#121214" },
-                    fontFamily: { "display": ["Plus Jakarta Sans", "sans-serif"], "body": ["Inter", "sans-serif"] }
-                }
-            }
-        }
-    </script>
-    <style>
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
-    </style>
-</head>
-<body>
-    <div id="root"></div>
-    <script src="js/layout.js"></script>
-    <script>
-        const content = `
+import os
+
+admin_html_content = '''
         <div x-data="{ 
             activeTab: 'overview',
             platforms: [
@@ -240,10 +211,51 @@
                 </div>
             </div>
         </div>
-`;
+'''
+
+TEMPLATE = '''<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>CHỐT NGHÌN ĐƠN SUPER ADMIN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { "primary": "#10B981", "secondary": "#7B2DFF", "tertiary": "#FFD700", "accent": "#00F0FF", "background": "#0A0A0A", "surface": "#121214" },
+                    fontFamily: { "display": ["Plus Jakarta Sans", "sans-serif"], "body": ["Inter", "sans-serif"] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="js/layout.js"></script>
+    <script>
+        const content = `{CONTENT}`;
         document.addEventListener('DOMContentLoaded', () => {
             renderLayout('admin_panel', content);
         });
     </script>
 </body>
-</html>
+</html>'''
+
+escaped_content = admin_html_content.replace("`", "\\`").replace("${", "\\${")
+final_html = TEMPLATE.replace('{CONTENT}', escaped_content)
+
+with open('admin_panel.html', 'w') as f:
+    f.write(final_html)
+
+print("Đã hoàn thành Đập Đi Xây Lại Super Admin Dashboard (Quản trị thanh toán cao cấp & Thêm nền tảng hệ thống).")
