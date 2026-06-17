@@ -1057,6 +1057,17 @@ function applyRolePermissions() {
             el.style.display = 'none';
         }
     });
+
+    const adminSidebar = document.getElementById('admin-sidebar');
+    if (adminSidebar) {
+        if (currentRole === 'owner') {
+            adminSidebar.classList.remove('hidden');
+            adminSidebar.classList.add('md:flex');
+        } else {
+            adminSidebar.classList.add('hidden');
+            adminSidebar.classList.remove('md:flex');
+        }
+    }
 }
 
 function checkRoleAccess() {
