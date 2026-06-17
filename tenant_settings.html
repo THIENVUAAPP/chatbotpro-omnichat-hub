@@ -39,14 +39,54 @@
     <script src="js/layout.js"></script>
     <script>
         const content = `
-            <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl min-h-[400px] flex flex-col items-center justify-center text-center">
-                <span class="material-symbols-outlined text-6xl text-slate-600 mb-4">construction</span>
-                <h2 class="text-2xl font-bold text-white mb-2">Giao Diện Tenant Settings Đang Hoàn Thiện</h2>
-                <p class="text-slate-400">Tính năng này đang trong quá trình lắp ráp giao diện theo chuẩn Vibe Coding.</p>
+        <div class="max-w-4xl">
+            <h2 class="text-xl font-bold mb-6">Thiết Lập Doanh Nghiệp (Tenant Settings)</h2>
+            <div class="bg-[#121214] border border-white/5 rounded-2xl p-6 mb-6">
+                <h3 class="font-bold text-sm mb-4 border-b border-white/5 pb-2 text-[#00F0FF]">Thông Tin Cơ Bản</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 mb-2">Tên Doanh Nghiệp</label>
+                        <input type="text" class="w-full max-w-md bg-[#0A0A0A] border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-[#00F0FF]" value="Cửa Hàng Thời Trang B">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 mb-2">Ngành Hàng</label>
+                        <select class="w-full max-w-md bg-[#0A0A0A] border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none">
+                            <option>Thời Trang</option>
+                            <option>Mỹ Phẩm</option>
+                            <option>F&B</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-        `;
+            
+            <div class="bg-[#121214] border border-white/5 rounded-2xl p-6 mb-6">
+                <h3 class="font-bold text-sm mb-4 border-b border-white/5 pb-2 text-[#10B981]">Giới Hạn Claude AI & Billing</h3>
+                <div class="flex justify-between items-center bg-[#0A0A0A] border border-white/5 rounded-xl p-4">
+                    <div>
+                        <div class="font-bold text-white text-sm mb-1">Gói Hiện Tại: <span class="text-[#FFD700]">PRO PLAN</span></div>
+                        <div class="text-xs text-slate-400">Giới hạn 100,000 tin nhắn AI / tháng. Đã dùng: 12,450.</div>
+                    </div>
+                    <button class="px-4 py-2 bg-white/10 text-white font-bold rounded-lg text-sm hover:bg-white/20 transition-colors">Đổi Gói</button>
+                </div>
+                <div class="mt-4">
+                    <label class="block text-xs font-bold text-slate-400 mb-2">Ngưỡng cảnh báo chi phí AI ($/ngày)</label>
+                    <input type="number" class="w-full max-w-xs bg-[#0A0A0A] border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-[#10B981]" value="5.0">
+                </div>
+            </div>
+            
+            <div class="bg-[#121214] border border-white/5 rounded-2xl p-6">
+                <h3 class="font-bold text-sm mb-4 border-b border-white/5 pb-2 text-[#7B2DFF]">API Keys (Tích Hợp Bên Thứ 3)</h3>
+                <p class="text-xs text-slate-400 mb-4">Sử dụng API Key này để kết nối CHỐT NGHÌN ĐƠN với ERP, hệ thống kế toán hoặc CRM bên ngoài.</p>
+                <div class="flex gap-2 max-w-xl">
+                    <input type="text" class="flex-1 bg-[#0A0A0A] border border-white/10 rounded-xl px-4 py-2 text-sm text-slate-500 font-mono" value="sk_tenant_9a8b7c6d5e4f3g2h1" readonly>
+                    <button class="px-4 py-2 bg-white/10 text-white font-bold rounded-xl text-sm hover:bg-white/20 transition-colors">Copy</button>
+                    <button class="px-4 py-2 border border-red-500/50 text-red-400 font-bold rounded-xl text-sm hover:bg-red-500/10 transition-colors">Revoke</button>
+                </div>
+            </div>
+        </div>
+    `;
         document.addEventListener('DOMContentLoaded', () => {
-            renderLayout('tenant_settings', content);
+            renderLayout('settings', content);
         });
     </script>
 </body>

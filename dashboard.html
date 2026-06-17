@@ -39,30 +39,96 @@
     <script src="js/layout.js"></script>
     <script>
         const content = `
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-4 opacity-10"><span class="material-symbols-outlined text-6xl text-[#00F0FF]">chat</span></div>
-                <div class="text-sm text-slate-400 mb-1">Tổng Hội Thoại</div>
-                <div class="text-3xl font-display font-bold text-[#00F0FF]">12,450</div>
-                <div class="text-xs text-primary mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">trending_up</span> +15% so với tuần trước</div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="p-5 bg-[#121214] border border-white/5 rounded-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-3 opacity-10"><span class="material-symbols-outlined text-5xl text-[#00F0FF]">chat</span></div>
+                <div class="text-xs text-slate-400 mb-1 uppercase tracking-wider">Tổng Hội Thoại</div>
+                <div class="text-2xl font-display font-bold text-[#00F0FF]">12,450</div>
+                <div class="text-[10px] text-primary mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_up</span> +15% tuần này</div>
             </div>
-            <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-4 opacity-10"><span class="material-symbols-outlined text-6xl text-[#FFD700]">shopping_bag</span></div>
-                <div class="text-sm text-slate-400 mb-1">Đơn Hàng Tự Động</div>
-                <div class="text-3xl font-display font-bold text-[#FFD700]">842</div>
-                <div class="text-xs text-primary mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">trending_up</span> +8% so với tuần trước</div>
+            <div class="p-5 bg-[#121214] border border-white/5 rounded-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-3 opacity-10"><span class="material-symbols-outlined text-5xl text-[#FFD700]">shopping_bag</span></div>
+                <div class="text-xs text-slate-400 mb-1 uppercase tracking-wider">Đơn Hàng Tự Động</div>
+                <div class="text-2xl font-display font-bold text-[#FFD700]">842</div>
+                <div class="text-[10px] text-primary mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_up</span> +8% tuần này</div>
             </div>
-            <div class="p-6 bg-[#121214] border border-[#10B981]/20 rounded-2xl relative overflow-hidden shadow-[0_0_20px_rgba(16,185,129,0.1)]">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-[#10B981]/20 rounded-full blur-[40px] -mr-10 -mt-10 pointer-events-none"></div>
-                <div class="text-sm text-slate-400 mb-1">Claude AI Token Used</div>
-                <div class="text-3xl font-display font-bold text-[#10B981]">1.2M</div>
-                <div class="text-xs text-slate-400 mt-2">Chi phí dự kiến: $12.50</div>
+            <div class="p-5 bg-[#121214] border border-white/5 rounded-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-3 opacity-10"><span class="material-symbols-outlined text-5xl text-[#10B981]">attach_money</span></div>
+                <div class="text-xs text-slate-400 mb-1 uppercase tracking-wider">Doanh Thu (Tháng)</div>
+                <div class="text-2xl font-display font-bold text-[#10B981]">420.5M</div>
+                <div class="text-[10px] text-primary mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_up</span> +12% tháng này</div>
+            </div>
+            <div class="p-5 bg-[#121214] border border-[#10B981]/20 rounded-2xl relative overflow-hidden shadow-[0_0_20px_rgba(16,185,129,0.1)]">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-[#10B981]/20 rounded-full blur-[30px] -mr-8 -mt-8 pointer-events-none"></div>
+                <div class="text-xs text-slate-400 mb-1 uppercase tracking-wider">Claude AI Token Used</div>
+                <div class="text-2xl font-display font-bold text-[#10B981]">1.2M</div>
+                <div class="text-[10px] text-slate-400 mt-2">Chi phí ước tính: $12.50</div>
             </div>
         </div>
-        <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl min-h-[400px]">
-            <h2 class="text-lg font-bold mb-4">Biểu đồ Tương Tác & Chuyển Đổi</h2>
-            <div class="flex items-center justify-center h-64 text-slate-500 border border-dashed border-white/10 rounded-xl bg-white/5">
-                [Khu vực tích hợp Chart.js hiển thị Biểu đồ]
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[600px]">
+            <!-- Inbox List -->
+            <div class="bg-[#121214] border border-white/5 rounded-2xl flex flex-col overflow-hidden">
+                <div class="p-4 border-b border-white/5 flex justify-between items-center bg-white/5">
+                    <h3 class="font-bold text-sm">Inbox Đa Kênh</h3>
+                    <button class="text-xs text-[#00F0FF] hover:underline">Lọc</button>
+                </div>
+                <div class="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-2">
+                    <div class="p-3 bg-white/5 rounded-xl cursor-pointer hover:bg-white/10 border-l-2 border-[#00F0FF]">
+                        <div class="flex justify-between items-start mb-1">
+                            <span class="font-bold text-sm text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Nguyễn Văn A</span>
+                            <span class="text-[10px] text-slate-500">Vừa xong</span>
+                        </div>
+                        <p class="text-xs text-slate-400 truncate">Sản phẩm này còn màu đen size M không shop?</p>
+                    </div>
+                    <div class="p-3 rounded-xl cursor-pointer hover:bg-white/5">
+                        <div class="flex justify-between items-start mb-1">
+                            <span class="font-bold text-sm text-slate-300 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> Trần Thị B</span>
+                            <span class="text-[10px] text-slate-500">5p trước</span>
+                        </div>
+                        <p class="text-xs text-slate-400 truncate">Cảm ơn shop, mình đã nhận hàng.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div class="bg-[#121214] border border-white/5 rounded-2xl flex flex-col overflow-hidden lg:col-span-2 relative">
+                <div class="absolute inset-0 bg-[#0A0A0A]/50 flex items-center justify-center z-10 backdrop-blur-sm hidden">
+                    <button class="px-6 py-2 bg-gradient-to-r from-primary to-[#7B2DFF] rounded-xl font-bold text-sm">Nhận Hỗ Trợ Khách Này</button>
+                </div>
+                <div class="p-4 border-b border-white/5 flex justify-between items-center bg-white/5">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-slate-700 rounded-full"></div>
+                        <div>
+                            <div class="font-bold text-sm">Nguyễn Văn A</div>
+                            <div class="text-[10px] text-slate-400">Đến từ Facebook Messenger</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="px-3 py-1.5 bg-[#FFD700]/10 text-[#FFD700] border border-[#FFD700]/30 rounded-lg text-xs font-bold hover:bg-[#FFD700]/20">Tạo Đơn Hàng</button>
+                        <button class="px-3 py-1.5 bg-[#7B2DFF]/10 text-[#7B2DFF] border border-[#7B2DFF]/30 rounded-lg text-xs font-bold hover:bg-[#7B2DFF]/20">Gắn Tag</button>
+                    </div>
+                </div>
+                <div class="flex-1 overflow-y-auto p-4 space-y-4">
+                    <div class="flex justify-start">
+                        <div class="max-w-[70%] bg-white/5 rounded-2xl rounded-tl-none p-3 text-sm text-slate-300">
+                            Sản phẩm này còn màu đen size M không shop?
+                        </div>
+                    </div>
+                    <div class="flex justify-end">
+                        <div class="max-w-[70%] bg-gradient-to-r from-primary to-[#10B981]/80 text-[#0A0A0A] rounded-2xl rounded-tr-none p-3 text-sm font-medium">
+                            <div class="text-[10px] text-[#0A0A0A]/60 mb-1 flex items-center justify-end gap-1"><span class="material-symbols-outlined text-[12px]">smart_toy</span> Claude AI tự động trả lời</div>
+                            Dạ chào anh A, sản phẩm Quần Jeans mã 01 màu Đen size M bên em vẫn còn hàng ạ. Anh có muốn em lên đơn luôn cho anh không ạ?
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 border-t border-white/5 bg-white/5">
+                    <div class="flex gap-2">
+                        <button class="p-2 text-slate-400 hover:text-white"><span class="material-symbols-outlined text-[20px]">add_circle</span></button>
+                        <input type="text" class="flex-1 bg-[#0A0A0A] border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-[#00F0FF]" placeholder="Nhập tin nhắn (Sẽ vô hiệu hóa AI nếu nhân viên nhắn)...">
+                        <button class="p-2 text-[#00F0FF] hover:text-[#00F0FF]/80"><span class="material-symbols-outlined text-[20px]">send</span></button>
+                    </div>
+                </div>
             </div>
         </div>
     `;

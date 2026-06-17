@@ -39,15 +39,49 @@
     <script src="js/layout.js"></script>
     <script>
         const content = `
-        <div class="p-6 bg-[#121214] border border-[#7B2DFF]/20 rounded-2xl min-h-[500px] relative">
+        <div class="mb-6 flex gap-4 border-b border-white/5">
+            <button class="pb-2 text-[#00F0FF] border-b-2 border-[#00F0FF] font-bold text-sm px-4">System Prompt</button>
+            <button class="pb-2 text-slate-400 hover:text-white font-bold text-sm px-4">Flow Builder</button>
+            <button class="pb-2 text-slate-400 hover:text-white font-bold text-sm px-4">Knowledge Base (RAG)</button>
+            <button class="pb-2 text-slate-400 hover:text-white font-bold text-sm px-4">Quy Tắc Escalate</button>
+            <button class="pb-2 text-slate-400 hover:text-white font-bold text-sm px-4">Test Sandbox</button>
+        </div>
+
+        <div class="p-6 bg-[#121214] border border-[#7B2DFF]/20 rounded-2xl min-h-[500px] relative shadow-[0_0_40px_rgba(123,45,255,0.05)]">
             <div class="absolute top-0 right-0 w-64 h-64 bg-[#7B2DFF]/10 rounded-full blur-[80px] pointer-events-none"></div>
-            <h2 class="text-xl font-bold mb-2 flex items-center gap-2"><span class="material-symbols-outlined text-[#7B2DFF]">psychology</span> Cấu Hình Tính Cách Claude AI</h2>
-            <p class="text-sm text-slate-400 mb-6">Nhập System Prompt để định hình cách bot tư vấn và chốt sale.</p>
             
-            <textarea class="w-full h-64 bg-[#0A0A0A] border border-white/10 rounded-xl p-4 text-sm text-white focus:border-[#7B2DFF] focus:outline-none mb-4" placeholder="Bạn là một chuyên gia bán hàng..."></textarea>
-            <button class="px-6 py-3 bg-gradient-to-r from-primary to-[#7B2DFF] rounded-xl font-bold text-sm flex items-center gap-2 hover:opacity-90 transition-opacity">
-                <span class="material-symbols-outlined text-[18px]">save</span> Lưu Cấu Hình Bot
-            </button>
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <h2 class="text-xl font-bold flex items-center gap-2"><span class="material-symbols-outlined text-[#7B2DFF]">psychology</span> Cấu Hình Tính Cách Claude AI</h2>
+                    <p class="text-sm text-slate-400 mt-1">Định hình cách bot tư vấn, chốt sale và giao tiếp với khách hàng.</p>
+                </div>
+                <button class="px-6 py-2 bg-gradient-to-r from-primary to-[#7B2DFF] rounded-xl font-bold text-sm flex items-center gap-2 hover:opacity-90 transition-opacity">
+                    <span class="material-symbols-outlined text-[18px]">save</span> Lưu Cấu Hình Bot
+                </button>
+            </div>
+            
+            <div class="space-y-4 relative z-10">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Vai Trò (Role)</label>
+                    <input type="text" class="w-full bg-[#0A0A0A] border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-[#7B2DFF]" value="Bạn là một chuyên gia bán hàng thời trang cao cấp của thương hiệu XYZ.">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Quy tắc ứng xử (Guidelines)</label>
+                    <textarea class="w-full h-40 bg-[#0A0A0A] border border-white/10 rounded-xl p-4 text-sm text-white focus:border-[#7B2DFF] focus:outline-none custom-scrollbar">1. Luôn chào hỏi thân thiện và gọi khách hàng bằng Anh/Chị.
+2. Trả lời ngắn gọn, tập trung vào lợi ích sản phẩm.
+3. Khi khách hỏi giá, hãy nhắc đến giá trị sản phẩm trước.
+4. Tự động đề xuất lên đơn nếu khách hàng đã chốt màu và size.
+5. Tuyệt đối không tự bịa ra chính sách bảo hành ngoài tài liệu.</textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Ngôn ngữ & Tone giọng</label>
+                    <select class="w-full bg-[#0A0A0A] border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-[#7B2DFF]">
+                        <option>Chuyên nghiệp, Lịch sự</option>
+                        <option selected>Trẻ trung, Năng động, Dùng Emoji</option>
+                        <option>Sang trọng, Đẳng cấp</option>
+                    </select>
+                </div>
+            </div>
         </div>
     `;
         document.addEventListener('DOMContentLoaded', () => {

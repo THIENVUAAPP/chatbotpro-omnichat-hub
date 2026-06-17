@@ -39,12 +39,42 @@
     <script src="js/layout.js"></script>
     <script>
         const content = `
-            <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl min-h-[400px] flex flex-col items-center justify-center text-center">
-                <span class="material-symbols-outlined text-6xl text-slate-600 mb-4">construction</span>
-                <h2 class="text-2xl font-bold text-white mb-2">Giao Diện Broadcast Đang Hoàn Thiện</h2>
-                <p class="text-slate-400">Tính năng này đang trong quá trình lắp ráp giao diện theo chuẩn Vibe Coding.</p>
-            </div>
-        `;
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold">Chiến Dịch Nhắn Tin (Broadcast)</h2>
+            <button class="px-4 py-2 bg-primary text-[#0A0A0A] font-bold rounded-lg text-sm hover:bg-[#0ea5e9] transition-colors flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">add</span> Tạo Chiến Dịch Mới
+            </button>
+        </div>
+        <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl">
+            <table class="w-full text-left text-sm text-slate-300">
+                <thead class="text-xs text-slate-500 uppercase bg-white/5 border-b border-white/5">
+                    <tr>
+                        <th class="px-4 py-3">Tên Chiến Dịch</th>
+                        <th class="px-4 py-3">Kênh</th>
+                        <th class="px-4 py-3">Đối Tượng (Tag)</th>
+                        <th class="px-4 py-3">Thời Gian Gửi</th>
+                        <th class="px-4 py-3">Trạng Thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-white/5 hover:bg-white/5">
+                        <td class="px-4 py-3 font-bold text-white">Khuyến Mãi Lễ 30/4</td>
+                        <td class="px-4 py-3 flex gap-1"><span class="material-symbols-outlined text-[#00F0FF] text-[16px]">forum</span> FB Messenger</td>
+                        <td class="px-4 py-3"><span class="px-2 py-1 bg-white/10 rounded text-xs">Khách Cũ</span></td>
+                        <td class="px-4 py-3 text-slate-400">28/04/2026 08:00</td>
+                        <td class="px-4 py-3"><span class="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs font-bold">Đã Gửi (1,240)</span></td>
+                    </tr>
+                    <tr class="hover:bg-white/5">
+                        <td class="px-4 py-3 font-bold text-white">Ra Mắt BST Mùa Hè</td>
+                        <td class="px-4 py-3 flex gap-1"><span class="material-symbols-outlined text-blue-400 text-[16px]">chat</span> Zalo OA</td>
+                        <td class="px-4 py-3"><span class="px-2 py-1 bg-white/10 rounded text-xs">VIP</span></td>
+                        <td class="px-4 py-3 text-slate-400">15/05/2026 10:00</td>
+                        <td class="px-4 py-3"><span class="px-2 py-1 bg-[#FFD700]/20 text-[#FFD700] rounded text-xs font-bold">Lên Lịch</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    `;
         document.addEventListener('DOMContentLoaded', () => {
             renderLayout('broadcast', content);
         });

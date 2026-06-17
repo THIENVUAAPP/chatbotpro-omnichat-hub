@@ -39,12 +39,57 @@
     <script src="js/layout.js"></script>
     <script>
         const content = `
-            <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl min-h-[400px] flex flex-col items-center justify-center text-center">
-                <span class="material-symbols-outlined text-6xl text-slate-600 mb-4">construction</span>
-                <h2 class="text-2xl font-bold text-white mb-2">Giao Diện Crm Đang Hoàn Thiện</h2>
-                <p class="text-slate-400">Tính năng này đang trong quá trình lắp ráp giao diện theo chuẩn Vibe Coding.</p>
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold">Quản Lý Khách Hàng (CRM)</h2>
+            <button class="px-4 py-2 bg-white/10 text-white font-bold rounded-lg text-sm hover:bg-white/20 transition-colors flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">person_add</span> Thêm Khách Hàng
+            </button>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div class="lg:col-span-1 space-y-4">
+                <div class="bg-[#121214] border border-white/5 rounded-2xl p-4">
+                    <h3 class="font-bold text-sm mb-3">Phân Khúc (Tags)</h3>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li class="flex justify-between items-center p-2 bg-white/5 rounded-lg text-[#FFD700] cursor-pointer">
+                            <span>VIP (Mua > 3 lần)</span> <span class="bg-[#0A0A0A] px-2 py-0.5 rounded text-xs">120</span>
+                        </li>
+                        <li class="flex justify-between items-center p-2 hover:bg-white/5 rounded-lg cursor-pointer">
+                            <span>Khách Mới</span> <span class="bg-[#0A0A0A] px-2 py-0.5 rounded text-xs">5,432</span>
+                        </li>
+                        <li class="flex justify-between items-center p-2 hover:bg-white/5 rounded-lg text-red-400 cursor-pointer">
+                            <span>Bỏ Giỏ Hàng</span> <span class="bg-[#0A0A0A] px-2 py-0.5 rounded text-xs">84</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-[#7B2DFF]/20 to-transparent border border-[#7B2DFF]/30 rounded-2xl p-4 cursor-pointer hover:border-[#7B2DFF] transition-colors">
+                    <h3 class="font-bold text-sm text-[#7B2DFF] mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">robot_2</span> Auto Follow-up</h3>
+                    <p class="text-xs text-slate-400">Cấu hình bot tự nhắn tin nhắc nhở khách hàng bỏ giỏ hàng sau 24h.</p>
+                </div>
             </div>
-        `;
+            <div class="lg:col-span-3 bg-[#121214] border border-white/5 rounded-2xl p-6">
+                <table class="w-full text-left text-sm text-slate-300">
+                    <thead class="text-xs text-slate-500 uppercase bg-white/5 border-b border-white/5">
+                        <tr>
+                            <th class="px-4 py-3">Tên Khách Hàng</th>
+                            <th class="px-4 py-3">SĐT / Email</th>
+                            <th class="px-4 py-3">LTV (Chi Tiêu)</th>
+                            <th class="px-4 py-3">Lần Chat Cuối</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-white/5 hover:bg-white/5 cursor-pointer">
+                            <td class="px-4 py-3 font-bold text-white flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-r from-pink-500 to-orange-400"></div> Lương Thu C
+                            </td>
+                            <td class="px-4 py-3 text-slate-400">0933111222</td>
+                            <td class="px-4 py-3 font-bold text-[#FFD700]">5,400,000đ <span class="px-1 bg-[#FFD700]/20 rounded text-[10px]">VIP</span></td>
+                            <td class="px-4 py-3 text-xs text-slate-500">Hôm nay 09:12</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
         document.addEventListener('DOMContentLoaded', () => {
             renderLayout('crm', content);
         });
