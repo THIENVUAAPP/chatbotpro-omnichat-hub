@@ -30,51 +30,81 @@
     <script src="js/layout.js"></script>
     <script>
         const content = `
-        <div x-data="{ fbConnected: true, zaloConnected: false, webConnected: true }">
-            <h2 class="text-xl font-bold mb-6">Kết Nối Kênh Bán Hàng</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div x-data="{ 
+            fbConnected: true, 
+            zaloConnected: false, 
+            webConnected: true,
+            tiktokConnected: false,
+            shopeeConnected: true,
+            lazadaConnected: false,
+            igConnected: false
+        }">
+            <h2 class="text-xl font-bold mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-[#00F0FF]">hub</span> Trung Tâm Kết Nối Đa Kênh (Omnichannel)</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Facebook -->
                 <div class="p-6 bg-[#121214] border border-blue-500/30 rounded-2xl flex flex-col items-center text-center">
-                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-4">
-                        <span class="material-symbols-outlined text-white text-3xl">forum</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-2">Facebook Messenger</h3>
-                    <p class="text-xs text-slate-400 mb-6">Kết nối Fanpage để Bot tự động trả lời.</p>
-                    
-                    <template x-if="fbConnected">
-                        <div class="w-full">
-                            <div class="w-full flex justify-between items-center px-4 py-2 bg-blue-500/10 rounded-xl mb-4">
-                                <span class="text-sm font-bold text-blue-400">Đang Kết Nối</span>
-                                <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-                            </div>
-                            <button @click="fbConnected = false" class="w-full py-2 text-sm font-bold text-red-400 hover:bg-white/5 rounded-xl">Ngắt Kết Nối</button>
-                        </div>
-                    </template>
-                    <template x-if="!fbConnected">
-                        <button @click="fbConnected = true" class="w-full py-3 bg-blue-500 text-white font-bold rounded-xl text-sm">Kết Nối Ngay</button>
-                    </template>
+                    <div class="w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center mb-4"><span class="material-symbols-outlined text-white text-3xl">forum</span></div>
+                    <h3 class="text-lg font-bold text-white mb-2">Facebook</h3>
+                    <p class="text-xs text-slate-400 mb-6 flex-1">Messenger & Bình luận Fanpage</p>
+                    <template x-if="fbConnected"><button @click="fbConnected = false" class="w-full py-2 text-sm font-bold text-green-400 border border-green-500/30 bg-green-500/10 rounded-xl">Đang Kết Nối</button></template>
+                    <template x-if="!fbConnected"><button @click="fbConnected = true" class="w-full py-2 bg-blue-500 text-white font-bold rounded-xl text-sm">Kết Nối Ngay</button></template>
                 </div>
                 
                 <!-- Zalo -->
                 <div class="p-6 bg-[#121214] border border-blue-400/30 rounded-2xl flex flex-col items-center text-center">
-                    <div class="w-16 h-16 bg-blue-400 rounded-full flex items-center justify-center mb-4">
-                        <span class="material-symbols-outlined text-white text-3xl">chat</span>
+                    <div class="w-14 h-14 bg-blue-400 rounded-full flex items-center justify-center mb-4"><span class="material-symbols-outlined text-white text-3xl">chat</span></div>
+                    <h3 class="text-lg font-bold text-white mb-2">Zalo OA</h3>
+                    <p class="text-xs text-slate-400 mb-6 flex-1">Zalo Official Account & ZNS</p>
+                    <template x-if="zaloConnected"><button @click="zaloConnected = false" class="w-full py-2 text-sm font-bold text-green-400 border border-green-500/30 bg-green-500/10 rounded-xl">Đang Kết Nối</button></template>
+                    <template x-if="!zaloConnected"><button @click="zaloConnected = true" class="w-full py-2 bg-blue-400 text-white font-bold rounded-xl text-sm">Kết Nối Ngay</button></template>
+                </div>
+
+                <!-- Tiktok Shop -->
+                <div class="p-6 bg-[#121214] border border-white/30 rounded-2xl flex flex-col items-center text-center">
+                    <div class="w-14 h-14 bg-white text-black rounded-full flex items-center justify-center mb-4 font-bold text-xl">TT</div>
+                    <h3 class="text-lg font-bold text-white mb-2">TikTok Shop</h3>
+                    <p class="text-xs text-slate-400 mb-6 flex-1">Quản lý tin nhắn & Đơn hàng Tiktok</p>
+                    <template x-if="tiktokConnected"><button @click="tiktokConnected = false" class="w-full py-2 text-sm font-bold text-green-400 border border-green-500/30 bg-green-500/10 rounded-xl">Đang Kết Nối</button></template>
+                    <template x-if="!tiktokConnected"><button @click="tiktokConnected = true" class="w-full py-2 bg-white text-black font-bold rounded-xl text-sm">Kết Nối Ngay</button></template>
+                </div>
+
+                <!-- Shopee -->
+                <div class="p-6 bg-[#121214] border border-[#EE4D2D]/30 rounded-2xl flex flex-col items-center text-center">
+                    <div class="w-14 h-14 bg-[#EE4D2D] text-white rounded-full flex items-center justify-center mb-4 font-bold text-xl">S</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Shopee</h3>
+                    <p class="text-xs text-slate-400 mb-6 flex-1">Đồng bộ tin nhắn Shopee Chat</p>
+                    <template x-if="shopeeConnected"><button @click="shopeeConnected = false" class="w-full py-2 text-sm font-bold text-green-400 border border-green-500/30 bg-green-500/10 rounded-xl">Đang Kết Nối</button></template>
+                    <template x-if="!shopeeConnected"><button @click="shopeeConnected = true" class="w-full py-2 bg-[#EE4D2D] text-white font-bold rounded-xl text-sm">Kết Nối Ngay</button></template>
+                </div>
+
+                <!-- Lazada -->
+                <div class="p-6 bg-[#121214] border border-[#0F146D]/50 rounded-2xl flex flex-col items-center text-center">
+                    <div class="w-14 h-14 bg-gradient-to-r from-[#F53D2D] to-[#0F146D] text-white rounded-full flex items-center justify-center mb-4 font-bold text-xl">L</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Lazada</h3>
+                    <p class="text-xs text-slate-400 mb-6 flex-1">Tích hợp Shop Assistant Lazada</p>
+                    <template x-if="lazadaConnected"><button @click="lazadaConnected = false" class="w-full py-2 text-sm font-bold text-green-400 border border-green-500/30 bg-green-500/10 rounded-xl">Đang Kết Nối</button></template>
+                    <template x-if="!lazadaConnected"><button @click="lazadaConnected = true" class="w-full py-2 bg-gradient-to-r from-[#F53D2D] to-[#0F146D] text-white font-bold rounded-xl text-sm">Kết Nối Ngay</button></template>
+                </div>
+
+                <!-- Instagram -->
+                <div class="p-6 bg-[#121214] border border-[#E1306C]/30 rounded-2xl flex flex-col items-center text-center">
+                    <div class="w-14 h-14 bg-gradient-to-tr from-[#F56040] to-[#833AB4] text-white rounded-full flex items-center justify-center mb-4"><span class="material-symbols-outlined text-2xl">photo_camera</span></div>
+                    <h3 class="text-lg font-bold text-white mb-2">Instagram</h3>
+                    <p class="text-xs text-slate-400 mb-6 flex-1">Instagram Direct Message (IG DM)</p>
+                    <template x-if="igConnected"><button @click="igConnected = false" class="w-full py-2 text-sm font-bold text-green-400 border border-green-500/30 bg-green-500/10 rounded-xl">Đang Kết Nối</button></template>
+                    <template x-if="!igConnected"><button @click="igConnected = true" class="w-full py-2 bg-gradient-to-r from-[#F56040] to-[#833AB4] text-white font-bold rounded-xl text-sm">Kết Nối Ngay</button></template>
+                </div>
+
+                <!-- Web Livechat -->
+                <div class="p-6 bg-[#121214] border border-[#10B981]/30 rounded-2xl flex flex-col items-center text-center lg:col-span-2">
+                    <div class="w-14 h-14 bg-[#10B981] text-black rounded-full flex items-center justify-center mb-4"><span class="material-symbols-outlined text-2xl">language</span></div>
+                    <h3 class="text-lg font-bold text-white mb-2">Web Live Chat (Mã Nhúng JS)</h3>
+                    <p class="text-xs text-slate-400 mb-4">Gắn đoạn mã sau vào thẻ &lt;head&gt; trên website của bạn để hiển thị bong bóng chat.</p>
+                    <div class="w-full bg-[#0A0A0A] border border-white/10 p-3 rounded-xl text-left relative">
+                        <code class="text-xs text-[#10B981] break-all">&lt;script src="https://chotnghindon.com/widget.js" tenant-id="12345" defer&gt;&lt;/script&gt;</code>
+                        <button class="absolute top-2 right-2 p-1 bg-white/10 rounded hover:bg-white/20"><span class="material-symbols-outlined text-sm">content_copy</span></button>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">Zalo Official Account</h3>
-                    <p class="text-xs text-slate-400 mb-6">Tích hợp Zalo OA và gửi tin nhắn ZNS.</p>
-                    
-                    <template x-if="zaloConnected">
-                        <div class="w-full">
-                            <div class="w-full flex justify-between items-center px-4 py-2 bg-blue-400/10 rounded-xl mb-4">
-                                <span class="text-sm font-bold text-blue-400">Đang Kết Nối</span>
-                                <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-                            </div>
-                            <button @click="zaloConnected = false" class="w-full py-2 text-sm font-bold text-red-400 hover:bg-white/5 rounded-xl">Ngắt Kết Nối</button>
-                        </div>
-                    </template>
-                    <template x-if="!zaloConnected">
-                        <button @click="zaloConnected = true" class="w-full py-3 bg-blue-400 text-white font-bold rounded-xl text-sm">Kết Nối Ngay</button>
-                    </template>
                 </div>
             </div>
         </div>
