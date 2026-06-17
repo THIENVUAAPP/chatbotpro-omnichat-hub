@@ -25,7 +25,7 @@
     <script>
         const content = `
         <div x-data="{ 
-            activeTab: 'rag',
+            activeTab: 'flow',
             isUploading: false,
             uploadProgress: 0,
             uploadedFile: null,
@@ -34,19 +34,13 @@
                 {name: 'banggia_si_v3.docx', size: '1.1 MB', status: 'Đã Vector hóa'}
             ],
             
-            triggerUpload() {
-                this.$refs.fileInput.click();
-            },
-            
+            triggerUpload() { this.$refs.fileInput.click(); },
             handleFileSelect(event) {
                 const file = event.target.files[0];
                 if(!file) return;
-                
                 this.isUploading = true;
                 this.uploadProgress = 0;
                 this.uploadedFile = file.name;
-                
-                // Simulate upload progress
                 const interval = setInterval(() => {
                     this.uploadProgress += Math.floor(Math.random() * 15) + 5;
                     if(this.uploadProgress >= 100) {
@@ -54,20 +48,13 @@
                         clearInterval(interval);
                         setTimeout(() => {
                             this.isUploading = false;
-                            this.docs.unshift({
-                                name: this.uploadedFile,
-                                size: (file.size / (1024*1024)).toFixed(2) + ' MB',
-                                status: 'Vừa tải lên (Đang xử lý)'
-                            });
-                            window.dispatchEvent(new CustomEvent('show-toast', { detail: { msg: 'Đã tải lên và đang nhúng (embedding) tài liệu ' + this.uploadedFile, type: 'success' } }));
-                            // reset input
+                            this.docs.unshift({ name: this.uploadedFile, size: (file.size / (1024*1024)).toFixed(2) + ' MB', status: 'Vừa tải lên (Đang xử lý)' });
+                            window.dispatchEvent(new CustomEvent('show-toast', { detail: { msg: 'Đã tải lên ' + this.uploadedFile, type: 'success' } }));
                             this.$refs.fileInput.value = '';
                         }, 800);
                     }
                 }, 300);
-            },
-            
-            simulateAction(msg) { window.dispatchEvent(new CustomEvent('show-toast', { detail: { msg: msg, type: 'success' } })); }
+            }
         }">
             <h2 class="text-2xl font-bold mb-6 font-display">Flow Builder & Đào Tạo RAG AI</h2>
             
@@ -76,64 +63,92 @@
                 <button @click="activeTab = 'rag'" :class="activeTab === 'rag' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Kho Tri Thức (RAG)</button>
             </div>
 
+            <!-- TAB FLOW: NEW FAKE DIAGRAM -->
+            <div x-show="activeTab === 'flow'" class="relative h-[600px] bg-[#121214] border border-white/5 rounded-2xl overflow-hidden bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]">
+                <!-- Toolbar -->
+                <div class="absolute top-4 left-4 flex gap-2 z-10">
+                    <button class="bg-black/80 backdrop-blur border border-white/10 px-4 py-2 rounded-xl text-xs font-bold text-[#00F0FF] hover:bg-white/5">+ Thêm Block Tin Nhắn</button>
+                    <button class="bg-black/80 backdrop-blur border border-white/10 px-4 py-2 rounded-xl text-xs font-bold text-[#10B981] hover:bg-white/5">+ Rẽ Nhánh Điều Kiện</button>
+                </div>
+                
+                <!-- Fake Nodes -->
+                <div class="absolute top-20 left-1/2 -translate-x-1/2 w-64 bg-[#0A0A0A] border border-[#00F0FF]/50 rounded-xl p-4 shadow-[0_0_20px_rgba(0,240,255,0.2)] z-10">
+                    <div class="flex items-center gap-2 mb-2 border-b border-white/10 pb-2">
+                        <span class="material-symbols-outlined text-[#00F0FF] text-[18px]">play_circle</span>
+                        <span class="font-bold text-sm text-[#00F0FF]">Bắt Đầu Kịch Bản</span>
+                    </div>
+                    <div class="text-xs text-slate-400">Kích hoạt khi: Khách nhắn tin lần đầu</div>
+                </div>
+                
+                <!-- Fake Line -->
+                <div class="absolute top-[150px] left-1/2 -translate-x-1/2 w-0.5 h-16 bg-[#00F0FF]/50 z-0"></div>
+
+                <div class="absolute top-[210px] left-1/2 -translate-x-1/2 w-64 bg-[#0A0A0A] border border-[#10B981]/50 rounded-xl p-4 shadow-[0_0_20px_rgba(16,185,129,0.2)] z-10">
+                    <div class="flex items-center gap-2 mb-2 border-b border-white/10 pb-2">
+                        <span class="material-symbols-outlined text-[#10B981] text-[18px]">chat</span>
+                        <span class="font-bold text-sm text-[#10B981]">Gửi Tin Nhắn AI</span>
+                    </div>
+                    <div class="text-xs text-slate-300">"Chào bạn, tôi có thể giúp gì cho bạn hôm nay?"</div>
+                </div>
+                
+                <!-- Sơ đồ rẽ nhánh -->
+                <div class="absolute top-[310px] left-1/2 -translate-x-[160px] w-[320px] h-0.5 bg-[#10B981]/50 z-0"></div>
+                <div class="absolute top-[310px] left-[calc(50%-160px)] w-0.5 h-10 bg-[#10B981]/50 z-0"></div>
+                <div class="absolute top-[310px] left-[calc(50%+160px)] w-0.5 h-10 bg-[#10B981]/50 z-0"></div>
+
+                <div class="absolute top-[350px] left-[calc(50%-220px)] w-56 bg-[#0A0A0A] border border-[#FFD700]/50 rounded-xl p-4 z-10">
+                    <div class="flex items-center gap-2 mb-2 border-b border-white/10 pb-2">
+                        <span class="material-symbols-outlined text-[#FFD700] text-[18px]">call_split</span>
+                        <span class="font-bold text-sm text-[#FFD700]">Hỏi về Sản Phẩm</span>
+                    </div>
+                    <div class="text-xs text-slate-400">Kích hoạt AI RAG tư vấn</div>
+                </div>
+
+                <div class="absolute top-[350px] left-[calc(50%+40px)] w-56 bg-[#0A0A0A] border border-red-500/50 rounded-xl p-4 z-10">
+                    <div class="flex items-center gap-2 mb-2 border-b border-white/10 pb-2">
+                        <span class="material-symbols-outlined text-red-500 text-[18px]">support_agent</span>
+                        <span class="font-bold text-sm text-red-500">Khiếu nại / Gặp NV</span>
+                    </div>
+                    <div class="text-xs text-slate-400">Chuyển đoạn chat cho Admin</div>
+                </div>
+            </div>
+
             <!-- TAB RAG -->
-            <div x-show="activeTab === 'rag'">
+            <div x-show="activeTab === 'rag'" style="display:none;">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="md:col-span-1">
                         <div class="bg-[#121214] border border-[#00F0FF]/30 p-6 rounded-2xl border-dashed relative text-center hover:bg-white/5 transition-colors cursor-pointer" @click="triggerUpload">
                             <input type="file" x-ref="fileInput" @change="handleFileSelect" class="hidden" accept=".pdf,.docx,.txt" />
-                            
                             <div x-show="!isUploading">
-                                <div class="w-16 h-16 bg-[#00F0FF]/10 text-[#00F0FF] rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <span class="material-symbols-outlined text-3xl">upload_file</span>
-                                </div>
+                                <div class="w-16 h-16 bg-[#00F0FF]/10 text-[#00F0FF] rounded-full flex items-center justify-center mx-auto mb-4"><span class="material-symbols-outlined text-3xl">upload_file</span></div>
                                 <h3 class="font-bold text-white mb-2">Tải Tài Liệu Mới</h3>
-                                <p class="text-xs text-slate-400">Kéo thả hoặc bấm để chọn file PDF, DOCX (Tối đa 10MB)</p>
+                                <p class="text-xs text-slate-400">Kéo thả hoặc bấm để chọn file PDF, DOCX</p>
                             </div>
-                            
-                            <!-- BARE BONES UPLOAD SIMULATOR -->
                             <div x-show="isUploading" style="display:none;" class="py-4">
                                 <span class="material-symbols-outlined text-[#00F0FF] animate-spin text-4xl mb-4">autorenew</span>
                                 <div class="text-sm font-bold text-white mb-2" x-text="'Đang tải lên: ' + uploadProgress + '%'"></div>
                                 <div class="w-full bg-white/10 rounded-full h-2">
                                     <div class="bg-gradient-to-r from-[#10B981] to-[#00F0FF] h-2 rounded-full transition-all duration-300" :style="'width: ' + uploadProgress + '%'"></div>
                                 </div>
-                                <div class="text-[10px] text-slate-400 mt-2">Hệ thống đang băm (chunking) và nhúng (embedding) dữ liệu...</div>
                             </div>
                         </div>
                     </div>
-                    
                     <div class="md:col-span-2 space-y-4">
-                        <h3 class="font-bold text-lg mb-2">Danh sách tài liệu đã học</h3>
                         <template x-for="(doc, idx) in docs" :key="idx">
                             <div class="bg-[#121214] border border-white/5 p-4 rounded-xl flex items-center justify-between">
                                 <div class="flex items-center gap-4">
                                     <span class="material-symbols-outlined text-red-400 text-3xl" x-show="doc.name.includes('.pdf')">picture_as_pdf</span>
                                     <span class="material-symbols-outlined text-blue-400 text-3xl" x-show="doc.name.includes('.doc')">description</span>
                                     <span class="material-symbols-outlined text-slate-400 text-3xl" x-show="!doc.name.includes('.pdf') && !doc.name.includes('.doc')">insert_drive_file</span>
-                                    
                                     <div>
                                         <div class="font-bold text-white text-sm" x-text="doc.name"></div>
-                                        <div class="text-xs text-slate-500 flex gap-4 mt-1">
-                                            <span x-text="doc.size"></span>
-                                            <span class="text-[#10B981]" x-text="doc.status"></span>
-                                        </div>
+                                        <div class="text-xs text-slate-500 flex gap-4 mt-1"><span x-text="doc.size"></span><span class="text-[#10B981]" x-text="doc.status"></span></div>
                                     </div>
                                 </div>
-                                <button @click="docs.splice(idx, 1); simulateAction('Đã xóa tài liệu khỏi Vector DB!')" class="text-slate-500 hover:text-red-500 transition-colors"><span class="material-symbols-outlined">delete</span></button>
+                                <button @click="docs.splice(idx, 1)" class="text-slate-500 hover:text-red-500"><span class="material-symbols-outlined">delete</span></button>
                             </div>
                         </template>
                     </div>
-                </div>
-            </div>
-            
-            <!-- TAB FLOW -->
-            <div x-show="activeTab === 'flow'" style="display:none;">
-                <div class="bg-[#121214] border border-white/5 rounded-2xl p-8 text-center">
-                    <span class="material-symbols-outlined text-6xl text-slate-600 mb-4">account_tree</span>
-                    <h3 class="font-bold text-xl mb-2">Flow Builder Đang Được Nâng Cấp</h3>
-                    <p class="text-slate-400 text-sm mb-6 max-w-md mx-auto">Trình thiết kế Kịch bản bằng giao diện kéo thả (Drag & Drop) siêu việt đang được hoàn thiện. Vui lòng sử dụng RAG AI thay thế trong lúc này.</p>
-                    <button class="bg-white/10 px-6 py-2 rounded-xl text-white font-bold cursor-not-allowed opacity-50">Sắp ra mắt</button>
                 </div>
             </div>
         </div>

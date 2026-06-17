@@ -6,7 +6,7 @@
     <title>CHỐT NGHÌN ĐƠN</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script>
         tailwind.config = {
@@ -24,46 +24,73 @@
     <script src="js/layout.js"></script>
     <script>
         const content = `
-        <div x-data="{ simulateAction(msg) { window.dispatchEvent(new CustomEvent('show-toast', { detail: { msg: msg, type: 'success' } })); } }">
+        <div x-data="{ 
+            showModal: false,
+            newCus: { name: '', phone: '', source: 'Manual' },
+            customers: [
+                { name: 'Nguyễn Văn Nam', phone: '0901***456', source: 'Shopee', tag: 'VIP Khách Sỉ' }
+            ],
+            saveCustomer() {
+                if(!this.newCus.name) return;
+                this.customers.unshift({
+                    name: this.newCus.name,
+                    phone: this.newCus.phone || 'N/A',
+                    source: this.newCus.source,
+                    tag: 'Khách Mới'
+                });
+                this.showModal = false;
+                this.newCus.name = ''; this.newCus.phone = '';
+                window.dispatchEvent(new CustomEvent('show-toast', { detail: { msg: 'Đã thêm Khách Hàng mới thành công!', type: 'success' } }));
+            }
+        }">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-xl font-bold">Quản Lý Khách Hàng (CRM)</h2>
-                <div class="flex gap-2">
-                    <button @click="simulateAction('Đã tải xuống file Excel danh sách khách hàng!')" class="px-4 py-2 bg-white/5 hover:bg-white/10 text-white font-bold rounded-xl text-sm flex items-center gap-2 border border-white/10"><span class="material-symbols-outlined text-[18px]">download</span> Xuất Data</button>
-                    <button @click="simulateAction('Mở form Thêm Khách Hàng Mới')" class="px-4 py-2 bg-[#10B981] text-black font-bold rounded-xl text-sm flex items-center gap-2 hover:bg-emerald-400"><span class="material-symbols-outlined text-[18px]">person_add</span> Thêm Khách Mới</button>
-                </div>
+                <button @click="showModal = true" class="px-4 py-2 bg-[#10B981] text-black font-bold rounded-xl text-sm flex items-center gap-2 hover:bg-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                    <span class="material-symbols-outlined text-[18px]">person_add</span> Thêm Khách Mới
+                </button>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <div class="p-4 bg-[#121214] border border-white/5 rounded-2xl flex items-center justify-between">
-                    <div><div class="text-xs text-slate-400">Tổng Khách Hàng</div><div class="text-2xl font-bold text-white">12,504</div></div>
-                    <div class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-slate-400">group</span></div>
-                </div>
-                <div class="p-4 bg-[#121214] border border-white/5 rounded-2xl flex items-center justify-between">
-                    <div><div class="text-xs text-slate-400">Khách VIP</div><div class="text-2xl font-bold text-[#FFD700]">340</div></div>
-                    <div class="w-10 h-10 bg-[#FFD700]/10 rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-[#FFD700]">stars</span></div>
-                </div>
-            </div>
-
             <table class="w-full text-left text-sm text-slate-300 bg-[#121214] rounded-2xl overflow-hidden border border-white/5">
                 <thead class="text-xs uppercase bg-white/5 border-b border-white/5">
-                    <tr><th class="px-4 py-4">Khách Hàng</th><th class="px-4 py-4">Nguồn</th><th class="px-4 py-4">Phân Loại (Tag)</th><th class="px-4 py-4">Đơn Hàng</th><th class="px-4 py-4 text-right">Tương Tác</th></tr>
+                    <tr><th class="px-4 py-4">Khách Hàng</th><th class="px-4 py-4">Nguồn</th><th class="px-4 py-4">Phân Loại (Tag)</th><th class="px-4 py-4 text-right">Thao Tác</th></tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
-                        <td class="px-4 py-4">
-                            <div class="font-bold text-white">Nguyễn Văn Nam</div>
-                            <div class="text-[10px] text-slate-500 mt-1">0901***456</div>
-                        </td>
-                        <td class="px-4 py-4"><span class="text-xs font-bold text-[#EE4D2D]">Shopee</span></td>
-                        <td class="px-4 py-4"><span class="px-2 py-1 bg-[#FFD700]/10 text-[#FFD700] rounded border border-[#FFD700]/30 text-[10px] font-bold">VIP Khách Sỉ</span></td>
-                        <td class="px-4 py-4 font-bold text-white">12 Đơn</td>
-                        <td class="px-4 py-4 text-right flex gap-2 justify-end">
-                            <button @click="simulateAction('Đã gắn thêm Tag cho khách hàng Nguyễn Văn Nam')" class="text-xs bg-[#00F0FF]/10 text-[#00F0FF] px-3 py-1 rounded hover:bg-[#00F0FF]/20 font-bold border border-[#00F0FF]/30">Gắn Tag</button>
-                            <button @click="simulateAction('Đang chuyển hướng sang giao diện Inbox...')" class="text-xs bg-white/10 text-white px-3 py-1 rounded hover:bg-white/20 font-bold">Chat</button>
-                        </td>
-                    </tr>
+                    <template x-for="(cus, idx) in customers" :key="idx">
+                        <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                            <td class="px-4 py-4">
+                                <div class="font-bold text-white" x-text="cus.name"></div>
+                                <div class="text-[10px] text-slate-500 mt-1" x-text="cus.phone"></div>
+                            </td>
+                            <td class="px-4 py-4"><span class="text-xs font-bold text-[#00F0FF]" x-text="cus.source"></span></td>
+                            <td class="px-4 py-4"><span class="px-2 py-1 bg-[#FFD700]/10 text-[#FFD700] rounded border border-[#FFD700]/30 text-[10px] font-bold" x-text="cus.tag"></span></td>
+                            <td class="px-4 py-4 text-right flex gap-2 justify-end">
+                                <button @click="customers.splice(idx,1)" class="text-xs bg-red-500/10 text-red-500 px-3 py-1 rounded hover:bg-red-500 hover:text-white transition-colors font-bold border border-red-500/30">Xóa</button>
+                            </td>
+                        </tr>
+                    </template>
                 </tbody>
             </table>
+
+            <!-- MODAL -->
+            <div x-show="showModal" style="display:none;" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center">
+                <div class="bg-[#121214] border border-[#10B981]/30 p-6 rounded-2xl w-96 shadow-2xl">
+                    <h3 class="text-lg font-bold mb-4 text-[#10B981]">Thêm Khách Hàng Thủ Công</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Họ Tên</label>
+                            <input x-model="newCus.name" type="text" class="w-full bg-[#0A0A0A] border border-white/10 p-2.5 rounded-lg text-sm text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Số Điện Thoại</label>
+                            <input x-model="newCus.phone" type="text" class="w-full bg-[#0A0A0A] border border-white/10 p-2.5 rounded-lg text-sm text-white">
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-2 mt-6">
+                        <button @click="showModal = false" class="px-4 py-2 bg-white/5 rounded-lg text-sm font-bold text-white hover:bg-white/10">Hủy</button>
+                        <button @click="saveCustomer" class="px-4 py-2 bg-[#10B981] rounded-lg text-sm font-bold text-black hover:bg-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]">Lưu Thông Tin</button>
+                    </div>
+                </div>
+            </div>
         </div>
 `;
         document.addEventListener('DOMContentLoaded', () => {
