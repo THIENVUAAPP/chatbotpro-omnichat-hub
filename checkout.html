@@ -203,17 +203,17 @@
                 </div>
                 <!-- Payment Options -->
                 <div class="flex gap-4">
-                    <button class="flex-1 glass-panel rounded-xl py-4 flex items-center justify-center gap-2 border border-primary bg-primary/10 shadow-sm">
+                    <button id="pay-btn-card" class="pay-method-btn flex-1 glass-panel rounded-xl py-4 flex items-center justify-center gap-2 border border-primary bg-primary/10 shadow-sm transition-all">
                         <span class="material-symbols-outlined text-primary">credit_card</span>
                         <span class="font-label-caps text-label-caps text-primary font-bold" data-translate="checkout-method-card">THẺ QUỐC TẾ</span>
                     </button>
-                    <button class="flex-1 glass-panel rounded-xl py-4 flex items-center justify-center gap-2 hover:border-primary hover:bg-[#1a1a1f] shadow-sm">
-                        <span class="material-symbols-outlined text-slate-300">account_balance_wallet</span>
-                        <span class="font-label-caps text-label-caps text-slate-300 font-bold" data-translate="checkout-method-wallet">PAYPAL</span>
+                    <button id="pay-btn-paypal" class="pay-method-btn flex-1 glass-panel rounded-xl py-4 flex items-center justify-center gap-2 border border-transparent hover:border-primary/50 hover:bg-[#1a1a1f] shadow-sm transition-all">
+                        <span class="material-symbols-outlined text-slate-400">account_balance_wallet</span>
+                        <span class="font-label-caps text-label-caps text-slate-400 font-bold" data-translate="checkout-method-wallet">PAYPAL</span>
                     </button>
-                    <button class="flex-1 glass-panel rounded-xl py-4 flex items-center justify-center gap-2 hover:border-primary hover:bg-[#1a1a1f] shadow-sm hidden sm:flex">
-                        <span class="material-symbols-outlined text-slate-300">apps</span>
-                        <span class="font-label-caps text-label-caps text-slate-300 font-bold" data-translate="checkout-method-apple">MOMO / ZALOPAY</span>
+                    <button id="pay-btn-momo" class="pay-method-btn flex-1 glass-panel rounded-xl py-4 flex items-center justify-center gap-2 border border-transparent hover:border-primary/50 hover:bg-[#1a1a1f] shadow-sm hidden sm:flex transition-all">
+                        <span class="material-symbols-outlined text-slate-400">apps</span>
+                        <span class="font-label-caps text-label-caps text-slate-400 font-bold" data-translate="checkout-method-apple">MOMO / ZALOPAY</span>
                     </button>
                 </div>
                 <!-- Credit Card Form -->
@@ -273,6 +273,7 @@
                     <div class="bg-surface-container-high p-1 rounded-full flex items-center gap-1 border border-outline-variant/30">
                         <button id="btn-monthly" class="px-6 py-2 rounded-full font-bold text-sm bg-primary text-white transition-all shadow-sm">Theo Tháng</button>
                         <button id="btn-yearly" class="px-6 py-2 rounded-full font-bold text-sm text-slate-400 hover:text-white transition-all">Theo Năm (-30%)</button>
+                        <button id="btn-5years" class="px-6 py-2 rounded-full font-bold text-sm text-slate-400 hover:text-white transition-all">5 Năm (-50%)</button>
                     </div>
                 </div>
                 <div>
@@ -436,28 +437,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    let isYearly = false;
+    let pricingMode = 'monthly'; // 'monthly', 'yearly', '5years'
     const btnMonthly = document.getElementById('btn-monthly');
     const btnYearly = document.getElementById('btn-yearly');
+    const btn5Years = document.getElementById('btn-5years');
+    
+    function resetPricingButtons() {
+        [btnMonthly, btnYearly, btn5Years].forEach(btn => {
+            if(btn) {
+                btn.classList.add('text-slate-400', 'hover:text-white');
+                btn.classList.remove('bg-primary', 'text-white', 'shadow-sm');
+            }
+        });
+    }
 
     if (btnMonthly && btnYearly) {
         btnMonthly.addEventListener('click', () => {
-            isYearly = false;
+            pricingMode = 'monthly';
+            resetPricingButtons();
             btnMonthly.classList.add('bg-primary', 'text-white', 'shadow-sm');
             btnMonthly.classList.remove('text-slate-400', 'hover:text-white');
-            btnYearly.classList.add('text-slate-400', 'hover:text-white');
-            btnYearly.classList.remove('bg-primary', 'text-white', 'shadow-sm');
             renderBenefits();
         });
 
         btnYearly.addEventListener('click', () => {
-            isYearly = true;
+            pricingMode = 'yearly';
+            resetPricingButtons();
             btnYearly.classList.add('bg-primary', 'text-white', 'shadow-sm');
             btnYearly.classList.remove('text-slate-400', 'hover:text-white');
-            btnMonthly.classList.add('text-slate-400', 'hover:text-white');
-            btnMonthly.classList.remove('bg-primary', 'text-white', 'shadow-sm');
             renderBenefits();
         });
+        
+        if (btn5Years) {
+            btn5Years.addEventListener('click', () => {
+                pricingMode = '5years';
+                resetPricingButtons();
+                btn5Years.classList.add('bg-primary', 'text-white', 'shadow-sm');
+                btn5Years.classList.remove('text-slate-400', 'hover:text-white');
+                renderBenefits();
+            });
+        }
     }
 
     const selectedTier = tiers[tier.toLowerCase()] || tiers.pro;
@@ -480,9 +499,13 @@ document.addEventListener('DOMContentLoaded', () => {
         let priceStr = selectedTier.total.replace(/[^0-9]/g, '');
         let price = parseInt(priceStr) || 0;
         
-        if (isYearly) {
+        if (pricingMode === 'yearly') {
             price = price * 12 * 0.7; // 30% discount
             summarySubtotal.textContent = price.toLocaleString('vi-VN') + ' VND / năm';
+            summaryTotal.textContent = price.toLocaleString('vi-VN') + ' VND';
+        } else if (pricingMode === '5years') {
+            price = price * 12 * 5 * 0.5; // 50% discount
+            summarySubtotal.textContent = price.toLocaleString('vi-VN') + ' VND / 5 năm';
             summaryTotal.textContent = price.toLocaleString('vi-VN') + ' VND';
         } else {
             summarySubtotal.textContent = price.toLocaleString('vi-VN') + ' VND / tháng';
@@ -498,32 +521,66 @@ document.addEventListener('DOMContentLoaded', () => {
     // Listen to language changes
     document.addEventListener('langChanged', renderBenefits);
 
+    
+    // Payment Method Selection
+    let selectedMethod = 'card';
+    const payBtns = document.querySelectorAll('.pay-method-btn');
+    payBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Reset all
+            payBtns.forEach(b => {
+                b.classList.remove('border-primary', 'bg-primary/10');
+                b.classList.add('border-transparent');
+                b.querySelector('span.material-symbols-outlined').classList.replace('text-primary', 'text-slate-400');
+                b.querySelectorAll('span')[1].classList.replace('text-primary', 'text-slate-400');
+            });
+            // Select current
+            btn.classList.add('border-primary', 'bg-primary/10');
+            btn.classList.remove('border-transparent');
+            btn.querySelector('span.material-symbols-outlined').classList.replace('text-slate-400', 'text-primary');
+            btn.querySelectorAll('span')[1].classList.replace('text-slate-400', 'text-primary');
+            selectedMethod = btn.id.replace('pay-btn-', '');
+            
+            // Hide/show card form based on selection
+            const cardForm = document.querySelector('form');
+            if (selectedMethod === 'card') {
+                cardForm.style.display = 'block';
+            } else {
+                cardForm.style.display = 'none';
+            }
+        });
+    });
+
+
     // Handle Payment form submission
     btnPay.addEventListener('click', (e) => {
         e.preventDefault();
         
         // Validate all inputs in main container
-        const inputs = document.querySelectorAll('main input');
-        let isValid = true;
-        inputs.forEach(input => {
-            if (input.type === 'button' || input.type === 'submit') return;
-            
-            if (!input.value.trim()) {
-                input.style.borderColor = '#ef4444'; // error border
-                isValid = false;
-            } else {
-                input.style.borderColor = 'rgba(148, 142, 156, 0.3)';
-            }
-        });
-
         const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+        let isValid = true;
+        
+        if (selectedMethod === 'card') {
+            const inputs = document.querySelectorAll('main input');
+            inputs.forEach(input => {
+                if (input.type === 'button' || input.type === 'submit') return;
+                
+                if (!input.value.trim()) {
+                    input.style.borderColor = '#ef4444'; // error border
+                    isValid = false;
+                } else {
+                    input.style.borderColor = 'rgba(148, 142, 156, 0.3)';
+                }
+            });
 
-        if (!isValid) {
-            const errorMsg = currentLang === 'VIE'
-                ? 'Vui lòng nhập đầy đủ thông tin thẻ và hóa đơn.'
-                : 'Please fill in all credit card and billing details.';
-            window.showToast(errorMsg, 'error');
-            return;
+            if (!isValid) {
+                const errorMsg = currentLang === 'VIE'
+                    ? 'Vui lòng nhập đầy đủ thông tin thẻ và hóa đơn.'
+                    : 'Please fill in all credit card and billing details.';
+                window.showToast(errorMsg, 'error');
+                return;
+            }
         }
 
         // Show loading state on button

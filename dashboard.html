@@ -189,19 +189,19 @@
     <nav id="admin-sidebar" class="hidden md:flex flex-col py-6 px-4 w-64 bg-white border-r border-outline-variant/30 shadow-[4px_0_24px_rgba(0,0,0,0.02)] z-40 transition-all duration-300 shrink-0 overflow-y-auto">
         <div class="text-xs font-bold text-slate-400 mb-4 tracking-wider uppercase px-2">Quản trị hệ thống</div>
         <div class="flex flex-col gap-2">
-            <a href="user_settings.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 text-primary font-bold">
+            <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 text-primary font-bold">
                 <span class="material-symbols-outlined">dashboard</span>
                 <span>Dashboard</span>
             </a>
-            <a href="user_settings.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors font-semibold">
+            <a href="user_settings.html#tab-team" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors font-semibold">
                 <span class="material-symbols-outlined">group</span>
                 <span>Quản lý Team</span>
             </a>
-            <a href="user_settings.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors font-semibold">
+            <a href="user_settings.html#tab-api" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors font-semibold">
                 <span class="material-symbols-outlined">api</span>
                 <span>Cấu hình API</span>
             </a>
-            <a href="user_settings.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors font-semibold">
+            <a href="user_settings.html#tab-general" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors font-semibold">
                 <span class="material-symbols-outlined">settings</span>
                 <span>Cài đặt chung</span>
             </a>
@@ -250,26 +250,14 @@
                 </label>
             </div>
 
-            <!-- FB Page -->
+            <!-- Facebook (Page, Group, Personal) -->
             <div data-platform="facebook" class="platform-tile flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-lg px-3 py-1.5 shrink-0 cursor-pointer hover:bg-blue-100 transition-colors opacity-60 hover:opacity-100">
                 <div class="w-6 h-6 rounded-full bg-[#1877f2] flex items-center justify-center text-white shadow-sm"><span class="material-symbols-outlined text-[12px]">thumb_up</span></div>
                 <div class="flex flex-col">
-                    <span class="font-bold text-[11px] text-on-surface">FB Page</span>
+                    <span class="font-bold text-[11px] text-on-surface">Facebook</span>
                 </div>
                 <label class="relative inline-flex items-center cursor-pointer ml-2" onclick="event.stopPropagation()">
                     <input type="checkbox" class="sr-only peer" checked>
-                    <div class="w-6 h-3 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1.5px] after:left-[1.5px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-2.5 after:w-2.5 after:transition-all peer-checked:bg-primary"></div>
-                </label>
-            </div>
-
-            <!-- FB Group -->
-            <div data-platform="facebook-group" class="platform-tile flex items-center gap-2 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 shrink-0 cursor-pointer hover:bg-indigo-100 transition-colors opacity-60 hover:opacity-100">
-                <div class="w-6 h-6 rounded-full bg-indigo-600 flex items-center justify-center text-white shadow-sm"><span class="material-symbols-outlined text-[12px]">groups</span></div>
-                <div class="flex flex-col">
-                    <span class="font-bold text-[11px] text-on-surface">FB Group</span>
-                </div>
-                <label class="relative inline-flex items-center cursor-pointer ml-2" onclick="event.stopPropagation()">
-                    <input type="checkbox" class="sr-only peer">
                     <div class="w-6 h-3 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1.5px] after:left-[1.5px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-2.5 after:w-2.5 after:transition-all peer-checked:bg-primary"></div>
                 </label>
             </div>
@@ -1021,5 +1009,64 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
     </div><!-- End main-content-wrapper -->
 </div><!-- End flex-1 container -->
+
+<script>
+    // Search Logic
+    document.addEventListener('DOMContentLoaded', () => {
+        const inboxSearch = document.getElementById('inbox-search');
+        const topSearch = document.getElementById('search-threads');
+        
+        function filterThreads(query) {
+            query = query.toLowerCase();
+            document.querySelectorAll('.thread-item').forEach(thread => {
+                const name = thread.querySelector('.text-on-surface')?.textContent.toLowerCase() || '';
+                const msg = thread.querySelector('.text-on-surface-variant')?.textContent.toLowerCase() || '';
+                if (name.includes(query) || msg.includes(query)) {
+                    thread.style.display = 'flex';
+                } else {
+                    thread.style.display = 'none';
+                }
+            });
+        }
+        
+        if (inboxSearch) {
+            inboxSearch.addEventListener('input', (e) => filterThreads(e.target.value));
+        }
+        if (topSearch) {
+            topSearch.addEventListener('input', (e) => filterThreads(e.target.value));
+        }
+        
+        // Platform Filtering Logic
+        document.querySelectorAll('.platform-tile').forEach(tile => {
+            tile.addEventListener('click', (e) => {
+                // If it's a click on the checkbox/label, ignore
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'LABEL') return;
+                
+                const platform = tile.getAttribute('data-platform');
+                
+                // Active UI state
+                document.querySelectorAll('.platform-tile').forEach(t => t.classList.remove('ring-2', 'ring-primary', 'ring-offset-1', 'opacity-100'));
+                tile.classList.add('ring-2', 'ring-primary', 'ring-offset-1', 'opacity-100');
+                
+                // Filter threads
+                document.querySelectorAll('.thread-item').forEach(thread => {
+                    if (platform === 'all') {
+                        thread.style.display = 'flex';
+                    } else {
+                        const threadPlatform = thread.getAttribute('data-channel-type');
+                        // For facebook, include 'facebook', 'messenger', 'facebook-group'
+                        if (platform === 'facebook' && (threadPlatform === 'facebook' || threadPlatform === 'messenger' || threadPlatform === 'facebook-group')) {
+                            thread.style.display = 'flex';
+                        } else if (threadPlatform === platform) {
+                            thread.style.display = 'flex';
+                        } else {
+                            thread.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+    });
+</script>
 </body>
 </html>

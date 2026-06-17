@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>ChatbotPro - Trợ lý AI đa kênh của doanh nghiệp</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
         tailwind.config = {
@@ -78,10 +78,10 @@
                     fontFamily: {
                         "label-caps": ["Inter", "sans-serif"],
                         "mono-data": ["JetBrains Mono"],
-                        "display-lg": ["Inter", "sans-serif"],
+                        "display-lg": ["Plus Jakarta Sans", "sans-serif"],
                         "body-lg": ["Inter", "sans-serif"],
-                        "headline-md": ["Inter", "sans-serif"],
-                        "display-lg-mobile": ["Inter", "sans-serif"],
+                        "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "display-lg-mobile": ["Plus Jakarta Sans", "sans-serif"],
                         "body-sm": ["Inter", "sans-serif"]
                     },
                     fontSize: {
@@ -483,20 +483,7 @@
                 </ul>
                 <button onclick="window.location.href='checkout.html?tier=enterprise'" class="w-full py-3 rounded-lg border border-tertiary/50 text-tertiary font-label-caps text-label-caps hover:bg-tertiary/15 transition-all font-bold mt-auto" data-translate="price-elite-btn">MUA GÓI EDITION</button>
             </div>
-            <!-- Claude Sonnet 4.6 Credit Tier -->
-            <div class="glass-panel rounded-2xl p-8 flex flex-col h-full border-emerald-500 hover:border-emerald-600 hover:shadow-lg transition-all relative">
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-label-caps text-[10px] px-4 py-1.5 rounded-full whitespace-nowrap font-bold">API SIÊU TIẾT KIỆM</div>
-                <h3 class="font-label-caps text-label-caps text-emerald-400 font-bold mb-4">CLAUDE SONNET 4.6</h3>
-                <div class="font-display-lg text-2xl font-bold mb-2 text-emerald-400">50.000 VND<span class="text-sm text-slate-400 font-body-sm font-normal">/ 100 Credits</span></div>
-                <p class="font-body-sm text-body-sm text-slate-300 mb-8 pb-4 border-b border-emerald-500/20">Sử dụng model Claude 3.5 Sonnet thông minh & tối ưu nhất.</p>
-                <ul class="flex flex-col gap-3 flex-grow mb-8 font-mono-data text-mono-data text-xs text-slate-300">
-                    <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-emerald-400">flash_on</span> <span>Claude 3.5 Sonnet chính chủ</span></li>
-                    <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-emerald-400">flash_on</span> <span>Tốc độ phản hồi cực nhanh</span></li>
-                    <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-emerald-400">flash_on</span> <span>Không giới hạn hạn sử dụng</span></li>
-                    <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-emerald-400">flash_on</span> <span>Nạp tiền tự động linh hoạt</span></li>
-                </ul>
-                <button onclick="window.location.href='checkout.html?tier=credits'" class="w-full py-3 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-label-caps text-label-caps hover:brightness-110 active:scale-95 transition-all font-bold mt-auto">NẠP CREDITS NGAY</button>
-            </div>
+
         </div>
     </section>
 
