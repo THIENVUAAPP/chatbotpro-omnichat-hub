@@ -90,6 +90,10 @@
                 <span class="material-symbols-outlined">monitoring</span>
                 <span>Báo Cáo & Tài Chính</span>
             </a>
+        <a href="#" onclick="switchTab('tab-landing', this)" class="tab-link flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors font-semibold mb-2">
+                <span class="material-symbols-outlined">web</span>
+                <span>Trang Bán Hàng</span>
+            </a>
         </nav>
 
         <!-- Main Content -->
@@ -323,6 +327,50 @@
                                 <div class="font-bold text-primary">+ 8.900.000 ₫</div>
                             </li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+
+        
+            <!-- TAB: Landing Pages -->
+            <div id="tab-landing" class="tab-content max-w-4xl mx-auto space-y-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-slate-800 mb-2">Cài Đặt Trang Bán Hàng</h1>
+                    <p class="text-slate-500">Quản lý và kích hoạt các trang bán hàng (Landing Pages) đã kết nối.</p>
+                </div>
+                
+                <div class="glass-panel p-8 rounded-2xl">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold">Danh Sách Trang Của Bạn</h2>
+                        <button onclick="alert('Mở Popup tạo trang bán hàng mới...')" class="px-4 py-2 bg-primary text-white font-bold rounded-lg hover:bg-emerald-600 transition-colors flex items-center gap-2">
+                            <span class="material-symbols-outlined">add</span> Thêm Trang Mới
+                        </button>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Page 1 -->
+                        <div class="p-4 border border-outline-variant rounded-xl bg-white flex justify-between items-center">
+                            <div>
+                                <div class="font-bold text-slate-800">Landing Page Khuyến Mãi Hè</div>
+                                <div class="text-xs text-slate-500">https://chatbotpro.com/he-2026</div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="alert('Bật/Tắt tính năng Auto AI Chat trên trang này.')" class="px-3 py-1.5 bg-green-100 text-green-700 font-bold rounded-lg text-xs">Auto Chat: ON</button>
+                                <button onclick="alert('Mở giao diện cấu hình Landing Page...')" class="px-3 py-1.5 bg-slate-100 text-slate-600 font-bold rounded-lg hover:bg-slate-200 text-xs">Chỉnh Sửa</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Page 2 -->
+                        <div class="p-4 border border-outline-variant rounded-xl bg-white flex justify-between items-center">
+                            <div>
+                                <div class="font-bold text-slate-800">Trang Giới Thiệu Công Ty</div>
+                                <div class="text-xs text-slate-500">https://chatbotpro.com/gioi-thieu</div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="alert('Nâng cấp gói để bật Auto Chat cho trang thứ 2 trở đi!')" class="px-3 py-1.5 bg-slate-100 text-slate-400 font-bold rounded-lg text-xs">Auto Chat: OFF</button>
+                                <button onclick="alert('Mở giao diện cấu hình Landing Page...')" class="px-3 py-1.5 bg-slate-100 text-slate-600 font-bold rounded-lg hover:bg-slate-200 text-xs">Chỉnh Sửa</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

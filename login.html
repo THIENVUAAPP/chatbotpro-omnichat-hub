@@ -109,16 +109,34 @@
             }, 3000);
         }
 
+        <!-- Modal Chờ Duyệt (Ẩn mặc định) -->
+        <div id="pending-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center">
+            <div class="glass-panel p-8 rounded-2xl max-w-sm w-full text-center m-4">
+                <span class="material-symbols-outlined text-tertiary text-5xl mb-4">hourglass_empty</span>
+                <h2 class="text-xl font-bold mb-2">Đang chờ xét duyệt</h2>
+                <p class="text-slate-400 text-sm mb-6">Tài khoản của bạn đã được ghi nhận. Quản trị viên đang xem xét và sẽ cấp quyền truy cập trong thời gian sớm nhất.</p>
+                <button onclick="document.getElementById('pending-modal').classList.add('hidden')" class="w-full py-3 bg-white/10 hover:bg-white/20 rounded-xl font-bold transition-colors">Đóng</button>
+            </div>
+        </div>
+
         // Simulate OAuth login
         function handleLogin() {
             const btn = document.querySelector('.btn-google');
             btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-[#333]">autorenew</span> Đang kết nối Google...`;
             
             setTimeout(() => {
-                // Giả lập lưu phiên đăng nhập của người dùng thường bằng Gmail
-                localStorage.setItem('chatbotpro_user', 'khachhang@gmail.com');
-                localStorage.setItem('chatbotpro_role', 'member');
-                window.location.href = 'dashboard.html';
+                // Giả lập ngẫu nhiên: 50% vào thẳng (đã duyệt Free Trial), 50% bị báo chờ duyệt
+                const isApproved = Math.random() > 0.5;
+                
+                if (isApproved) {
+                    localStorage.setItem('chatbotpro_user', 'khachhang@gmail.com');
+                    localStorage.setItem('chatbotpro_role', 'member');
+                    localStorage.setItem('chatbotpro_plan', 'free_trial');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    document.getElementById('pending-modal').classList.remove('hidden');
+                    btn.innerHTML = `<img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-6 h-6"> Tiếp tục với Google`;
+                }
             }, 1500);
         }
 

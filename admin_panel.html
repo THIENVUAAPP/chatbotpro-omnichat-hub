@@ -69,6 +69,44 @@
                 
                 <h1 class="text-3xl font-display font-bold mb-6">Quản Lý & Cấp Quyền Khách Hàng</h1>
                 
+                
+                <!-- Pending Approvals -->
+                <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-tertiary bg-gradient-to-r from-tertiary/5 to-transparent mb-8">
+                    <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-tertiary">how_to_reg</span> Xét Duyệt Thành Viên Mới</h2>
+                    <p class="text-sm text-slate-500 mb-4">Duyệt để cấp quyền truy cập Free Trial cho các tài khoản mới đăng ký.</p>
+                    
+                    <div class="space-y-3">
+                        <!-- Item 1 -->
+                        <div class="flex items-center justify-between p-3 bg-white border border-outline-variant rounded-xl">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-500">D</div>
+                                <div>
+                                    <div class="font-bold text-sm text-slate-800">doanhnghiep@gmail.com</div>
+                                    <div class="text-xs text-slate-400">Đăng ký lúc: 10:45 - 17/06/2026</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="alert('Đã cấp gói Free Trial'); this.parentElement.parentElement.style.display='none';" class="px-3 py-1.5 bg-primary text-white text-xs font-bold rounded-lg hover:bg-emerald-600 transition-colors">Duyệt Free Trial</button>
+                                <button onclick="this.parentElement.parentElement.style.display='none';" class="px-3 py-1.5 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-colors">Từ Chối</button>
+                            </div>
+                        </div>
+                        <!-- Item 2 -->
+                        <div class="flex items-center justify-between p-3 bg-white border border-outline-variant rounded-xl">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-500">H</div>
+                                <div>
+                                    <div class="font-bold text-sm text-slate-800">hoangtuan@gmail.com</div>
+                                    <div class="text-xs text-slate-400">Đăng ký lúc: 08:20 - 17/06/2026</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="alert('Đã cấp gói Free Trial'); this.parentElement.parentElement.style.display='none';" class="px-3 py-1.5 bg-primary text-white text-xs font-bold rounded-lg hover:bg-emerald-600 transition-colors">Duyệt Free Trial</button>
+                                <button onclick="this.parentElement.parentElement.style.display='none';" class="px-3 py-1.5 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-colors">Từ Chối</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Quick Action -->
                 <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-primary bg-gradient-to-r from-primary/5 to-transparent">
                     <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">person_add</span> Cấp Quyền Tài Khoản Mới</h2>

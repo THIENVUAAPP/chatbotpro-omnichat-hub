@@ -184,6 +184,16 @@
 </header>
 
 
+
+<!-- Upsell Banner -->
+<div id="upsell-banner" class="w-full bg-tertiary/10 border-b border-tertiary/30 px-6 py-3 flex items-center justify-between z-40 relative">
+    <div class="flex items-center gap-3 text-tertiary">
+        <span class="material-symbols-outlined">new_releases</span>
+        <span class="font-bold text-sm">Tài khoản đang trong chế độ Free Trial. Bạn còn 498 tin nhắn AI tự động.</span>
+    </div>
+    <button onclick="window.location.href='checkout.html?tier=pro'" class="px-4 py-1.5 bg-tertiary text-[#451a03] font-bold text-xs rounded-full hover:bg-yellow-400 transition-colors shadow-sm">Nâng Cấp Không Giới Hạn</button>
+</div>
+
 <div class="flex flex-1 pt-20 h-[calc(100vh-80px)]">
     <!-- ADMIN SIDEBAR (RESTORED) -->
     <nav id="admin-sidebar" class="hidden md:flex flex-col py-6 px-4 w-64 bg-white border-r border-outline-variant/30 shadow-[4px_0_24px_rgba(0,0,0,0.02)] z-40 transition-all duration-300 shrink-0 overflow-y-auto">
@@ -1085,5 +1095,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     </script>
     
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const plan = localStorage.getItem('chatbotpro_plan');
+            if (plan !== 'free_trial') {
+                const banner = document.getElementById('upsell-banner');
+                if (banner) banner.style.display = 'none';
+            }
+        });
+    </script>
+
 </body>
 </html>
