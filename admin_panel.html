@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS Admin Panel - ChatbotPro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#10B981",
+                        "secondary": "#00F0FF",
+                        "surface": "#ffffff",
+                        "on-surface": "#000000",
+                        "outline-variant": "#e2e8f0",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                        "mono-data": ["JetBrains Mono", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f1f5f9; }
+        .glass-panel {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+<body class="text-on-surface h-screen flex flex-col overflow-hidden">
+    <!-- Header -->
+    <header class="w-full h-16 bg-[#0f172a] text-white flex items-center justify-between px-6 z-50 shrink-0">
+        <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-2xl">admin_panel_settings</span>
+            <span class="font-bold text-lg tracking-tight">SaaS Admin Control</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center font-bold text-sm">A</div>
+                <span class="text-sm font-semibold">Super Admin</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex flex-1 h-full overflow-hidden">
+        <!-- Sidebar -->
+        <nav class="w-64 bg-white border-r border-outline-variant/30 flex flex-col py-6 px-4 shrink-0 overflow-y-auto">
+            <div class="text-xs font-bold text-slate-400 mb-4 tracking-wider uppercase px-2">Tổng quan</div>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-800 text-white font-bold mb-2 shadow-md">
+                <span class="material-symbols-outlined">group</span>
+                <span>Quản lý Khách hàng</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors font-semibold mb-2">
+                <span class="material-symbols-outlined">payments</span>
+                <span>Giao dịch & Doanh thu</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors font-semibold mb-2">
+                <span class="material-symbols-outlined">inventory_2</span>
+                <span>Quản lý Gói Cước</span>
+            </a>
+            <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors font-semibold mb-2 mt-auto text-red-500 hover:text-red-600 hover:bg-red-50">
+                <span class="material-symbols-outlined">logout</span>
+                <span>Thoát Admin</span>
+            </a>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto p-8">
+            <div class="max-w-6xl mx-auto space-y-6">
+                <!-- Stats -->
+                <div class="grid grid-cols-4 gap-6">
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <div class="text-sm font-bold text-slate-500 mb-1">Tổng Doanh Thu</div>
+                        <div class="text-3xl font-bold text-slate-800">125.5M ₫</div>
+                        <div class="text-xs text-green-500 font-bold mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">trending_up</span> +15% so với tháng trước</div>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <div class="text-sm font-bold text-slate-500 mb-1">Khách Hàng Đang Active</div>
+                        <div class="text-3xl font-bold text-slate-800">42</div>
+                        <div class="text-xs text-green-500 font-bold mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">trending_up</span> +3 user mới</div>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <div class="text-sm font-bold text-slate-500 mb-1">Chờ Kích Hoạt (Pending)</div>
+                        <div class="text-3xl font-bold text-orange-500">2</div>
+                        <div class="text-xs text-orange-500 font-bold mt-2">Cần duyệt ngay</div>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <div class="text-sm font-bold text-slate-500 mb-1">Tổng API Credits</div>
+                        <div class="text-3xl font-bold text-slate-800">1.2M</div>
+                        <div class="text-xs text-slate-400 font-bold mt-2">Đã sử dụng toàn hệ thống</div>
+                    </div>
+                </div>
+
+                <!-- User Table -->
+                <div class="glass-panel rounded-2xl overflow-hidden flex flex-col">
+                    <div class="px-6 py-4 border-b border-outline-variant flex justify-between items-center bg-white">
+                        <h2 class="text-lg font-bold text-slate-800">Danh Sách Khách Hàng</h2>
+                        <div class="flex gap-2">
+                            <input type="text" placeholder="Tìm email, số điện thoại..." class="px-4 py-2 border border-outline-variant rounded-lg text-sm w-64 focus:outline-primary">
+                            <button class="px-4 py-2 bg-primary text-white font-bold rounded-lg text-sm hover:bg-emerald-600 transition-colors">Thêm Khách Hàng</button>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm text-slate-600">
+                            <thead class="bg-slate-50 text-xs uppercase font-bold text-slate-500">
+                                <tr>
+                                    <th class="px-6 py-4">Tên Khách Hàng</th>
+                                    <th class="px-6 py-4">Gói Cước</th>
+                                    <th class="px-6 py-4">Trạng Thái</th>
+                                    <th class="px-6 py-4">Ngày Hết Hạn</th>
+                                    <th class="px-6 py-4 text-right">Hành Động</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-outline-variant/50 bg-white">
+                                <!-- User 1 (Pending) -->
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <div class="font-bold text-slate-800">Công ty TNHH ABC</div>
+                                        <div class="text-xs">contact@abc.vn • 0901234567</div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-2 py-1 bg-tertiary/10 text-yellow-700 font-bold rounded text-xs border border-tertiary/20">EDITION (1 Năm)</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-2 py-1 bg-orange-100 text-orange-700 font-bold rounded text-xs">Chờ Kích Hoạt</span>
+                                    </td>
+                                    <td class="px-6 py-4 font-mono-data">-</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button class="px-3 py-1.5 bg-primary text-white font-bold rounded text-xs hover:bg-emerald-600 transition-colors shadow-sm">Kích Hoạt Ngay</button>
+                                    </td>
+                                </tr>
+                                <!-- User 2 (Active) -->
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <div class="font-bold text-slate-800">Nguyễn Văn B (Shop QA)</div>
+                                        <div class="text-xs">nguyenvanb@gmail.com • 0987654321</div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-2 py-1 bg-blue-50 text-blue-700 font-bold rounded text-xs border border-blue-200">STANDARD (1 Tháng)</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-2 py-1 bg-green-100 text-green-700 font-bold rounded text-xs">Đang Hoạt Động</span>
+                                    </td>
+                                    <td class="px-6 py-4 font-mono-data">15/07/2026</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button class="px-3 py-1.5 bg-white border border-outline-variant text-slate-600 font-bold rounded text-xs hover:bg-slate-50 transition-colors shadow-sm">Quản lý</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>
