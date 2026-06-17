@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Đăng Nhập - ChatbotPro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#10B981", // Emerald Green
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #050505; color: #ffffff; }
+        .glass-panel {
+            background: rgba(18, 18, 20, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(16, 185, 129, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+        .btn-google {
+            background: white;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        .btn-google:hover {
+            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        .void-glow {
+            position: fixed;
+            top: 50%; left: 50%;
+            width: 100vw; height: 100vw;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex items-center justify-center p-6 relative font-body">
+    <div class="void-glow"></div>
+
+    <div class="glass-panel w-full max-w-md rounded-3xl p-10 flex flex-col items-center text-center relative z-10">
+        <!-- Logo -->
+        <div class="font-display font-extrabold text-3xl mb-8 bg-gradient-to-r from-primary to-emerald-300 bg-clip-text text-transparent cursor-pointer" onclick="window.location.href='index.html'">
+            ChatbotPro
+        </div>
+
+        <h1 class="text-2xl font-display font-bold mb-2">Chào mừng trở lại</h1>
+        <p class="text-slate-400 text-sm mb-10">Đăng nhập để vào bảng điều khiển của bạn</p>
+
+        <!-- OAuth Logic simulation -->
+        <button onclick="handleLogin()" class="btn-google flex items-center justify-center gap-3 w-full py-4 rounded-xl font-bold text-base shadow-xl mb-6">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-6 h-6">
+            Tiếp tục với Google
+        </button>
+
+        <div class="w-full flex items-center gap-4 mb-6">
+            <div class="h-px bg-white/10 flex-1"></div>
+            <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">Hoặc Admin</span>
+            <div class="h-px bg-white/10 flex-1"></div>
+        </div>
+
+        <!-- Hidden Admin Login -->
+        <form onsubmit="handleAdminLogin(event)" class="w-full space-y-4 text-left hidden" id="admin-form">
+            <div>
+                <label class="block text-xs font-bold text-slate-400 mb-1">Mật khẩu Quản Trị Hệ Thống</label>
+                <input type="password" id="admin-pw" class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary text-white" placeholder="••••••••">
+            </div>
+            <button type="submit" class="w-full py-3 rounded-xl bg-primary text-white font-bold hover:bg-emerald-500 transition-colors shadow-[0_0_20px_rgba(16,185,129,0.2)]">Vào Admin Panel</button>
+        </form>
+
+        <button onclick="document.getElementById('admin-form').classList.toggle('hidden')" class="text-sm text-primary font-bold hover:underline">
+            Tôi là Super Admin
+        </button>
+
+        <p class="text-xs text-slate-500 mt-8">Bằng việc đăng nhập, bạn đồng ý với <a href="#" class="text-primary hover:underline">Điều khoản dịch vụ</a> và <a href="#" class="text-primary hover:underline">Chính sách bảo mật</a> của chúng tôi.</p>
+    </div>
+
+    <!-- Toast UI -->
+    <div id="toast" class="fixed top-6 right-6 px-6 py-3 rounded-lg font-bold text-sm shadow-xl transition-all duration-300 transform translate-x-full opacity-0 z-50"></div>
+
+    <script>
+        function showToast(msg, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.className = `fixed top-6 right-6 px-6 py-3 rounded-lg font-bold text-sm shadow-xl transition-all duration-300 transform z-50 ${type === 'success' ? 'bg-primary text-white' : 'bg-red-500 text-white'}`;
+            
+            // Trigger animation
+            setTimeout(() => {
+                toast.classList.remove('translate-x-full', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('translate-x-full', 'opacity-0');
+            }, 3000);
+        }
+
+        // Simulate OAuth login
+        function handleLogin() {
+            const btn = document.querySelector('.btn-google');
+            btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-[#333]">autorenew</span> Đang kết nối Google...`;
+            
+            setTimeout(() => {
+                // Giả lập lưu phiên đăng nhập của người dùng thường bằng Gmail
+                localStorage.setItem('chatbotpro_user', 'khachhang@gmail.com');
+                localStorage.setItem('chatbotpro_role', 'member');
+                window.location.href = 'dashboard.html';
+            }, 1500);
+        }
+
+        // Simulate Admin Login
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const pw = document.getElementById('admin-pw').value;
+            if (pw === 'admin123') { // Mật khẩu mẫu
+                localStorage.setItem('chatbotpro_user', 'superadmin@chatbotpro.com');
+                localStorage.setItem('chatbotpro_role', 'admin');
+                showToast('Đăng nhập Admin thành công!');
+                setTimeout(() => {
+                    window.location.href = 'admin_panel.html';
+                }, 1000);
+            } else {
+                showToast('Mật khẩu Admin không chính xác!', 'error');
+            }
+        }
+    </script>
+</body>
+</html>

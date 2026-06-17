@@ -1068,5 +1068,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userEmail = localStorage.getItem('chatbotpro_user');
+            if (userEmail) {
+                // Find where to inject
+                const headerProfile = document.querySelector('header .flex.items-center.gap-4');
+                if (headerProfile) {
+                    const span = document.createElement('span');
+                    span.className = 'text-sm font-bold text-slate-600 bg-slate-100 px-3 py-1 rounded-full border border-slate-200 hidden sm:block';
+                    span.textContent = userEmail;
+                    headerProfile.insertBefore(span, headerProfile.firstChild);
+                }
+            }
+        });
+    </script>
+    
 </body>
 </html>
