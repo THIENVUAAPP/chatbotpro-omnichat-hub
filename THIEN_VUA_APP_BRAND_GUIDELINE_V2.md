@@ -2,9 +2,9 @@
 
 # 3 MÀU CHÍNH (PRIMARY COLORS)
 
-## 1. AI ROYAL BLUE
+## 1. AI EMERALD GREEN
 
-HEX: #0057FF
+HEX: #10B981
 Vai trò:
 
 - Màu nhận diện chính
@@ -71,7 +71,7 @@ Vai trò:
 # TỶ LỆ SỬ DỤNG
 
 50% Deep Black
-20% AI Royal Blue
+20% AI Emerald Green
 20% Victory Gold
 5% Royal Purple
 3% Pure White
@@ -83,7 +83,7 @@ Vai trò:
 
 Deep Black
 
-- Royal Blue
+- Emerald Green
 - Victory Gold
   = THIỆN VUA APP
 
