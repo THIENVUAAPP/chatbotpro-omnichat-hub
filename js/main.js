@@ -984,7 +984,7 @@ function initRoleSwitcher() {
     const roleTextKey = currentRole === 'owner' ? 'role-owner' : 'role-staff';
 
     roleContainer.innerHTML = `
-        <button id="role-switcher-btn" class="flex items-center gap-2 px-4 py-2 bg-slate-50 border border-outline-variant/50 rounded-full hover:border-primary/50 hover:bg-white transition-all text-xs font-semibold text-on-surface-variant active:scale-95">
+        <button id="role-switcher-btn" class="flex items-center gap-2 px-4 py-2 bg-slate-800 border border-slate-700 rounded-full hover:bg-slate-900 transition-all text-xs font-bold text-white shadow-sm active:scale-95">
             <span class="material-symbols-outlined text-[18px]">admin_panel_settings</span>
             <span id="active-role-text" data-translate="${roleTextKey}">${currentRole === 'owner' ? 'Chủ Doanh Nghiệp' : 'Nhân Viên Trực'}</span>
             <span class="material-symbols-outlined text-[16px] transition-transform duration-200">expand_more</span>
@@ -1431,7 +1431,78 @@ document.addEventListener('click', (e) => {
                 span.textContent = 'AI OFF';
                 span.className = 'ml-1.5 text-[9px] font-bold text-slate-400 uppercase';
             }
-            window.showToast(input.checked ? 'Đã bật AI Tự Động' : 'Đã tắt AI', 'success');
+            window.showToast(input.checked ? 'AI Agent đã tiếp quản. Đang đồng bộ và xử lý dữ liệu...' : 'AI Agent đã tạm ngưng. Chuyển về thủ công.', 'success');
         }, 10);
+    }
+});
+
+// Omnichannel UI Logic
+document.addEventListener('DOMContentLoaded', () => {
+    if (!window.location.pathname.includes('dashboard.html')) return;
+
+    const omnichannelBar = document.getElementById('omnichannel-bar');
+    const collapseBtn = document.getElementById('collapse-omnichannel-btn');
+    const wrapper = document.getElementById('omnichannel-wrapper');
+    const threads = document.querySelectorAll('.thread-item');
+    const platforms = document.querySelectorAll('.platform-tile');
+
+    if (collapseBtn && wrapper && omnichannelBar) {
+        let isCollapsed = false;
+        collapseBtn.addEventListener('click', () => {
+            isCollapsed = !isCollapsed;
+            if (isCollapsed) {
+                omnichannelBar.style.display = 'none';
+                wrapper.classList.remove('border-b', 'shadow-sm');
+                collapseBtn.innerHTML = '<span class="material-symbols-outlined text-[14px]">keyboard_arrow_down</span>';
+            } else {
+                omnichannelBar.style.display = 'flex';
+                wrapper.classList.add('border-b', 'shadow-sm');
+                collapseBtn.innerHTML = '<span class="material-symbols-outlined text-[14px]">keyboard_arrow_up</span>';
+            }
+        });
+    }
+
+    if (platforms && threads) {
+        platforms.forEach(p => {
+            p.addEventListener('click', () => {
+                const type = p.getAttribute('data-platform');
+                
+                // Highlight active platform
+                platforms.forEach(pt => {
+                    pt.classList.remove('ring-2', 'ring-primary', 'ring-offset-1', 'opacity-100');
+                    pt.classList.add('opacity-60');
+                });
+                p.classList.remove('opacity-60');
+                p.classList.add('ring-2', 'ring-primary', 'ring-offset-1', 'opacity-100');
+
+                // Filter threads
+                threads.forEach(t => {
+                    if (type === 'all' || t.getAttribute('data-channel-type') === type) {
+                        t.style.display = 'flex';
+                    } else {
+                        t.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Chat loading logic simulation
+        threads.forEach(t => {
+            t.addEventListener('click', () => {
+                // remove active state from all
+                threads.forEach(th => th.classList.remove('bg-primary/5', 'border-l-4', 'border-l-primary'));
+                // add active state to clicked
+                t.classList.add('bg-primary/5', 'border-l-4', 'border-l-primary');
+                
+                // Simulate loading chat
+                const chatContainer = document.getElementById('chat-messages-container');
+                if(chatContainer) {
+                    chatContainer.style.opacity = '0.5';
+                    setTimeout(() => {
+                        chatContainer.style.opacity = '1';
+                    }, 200);
+                }
+            });
+        });
     }
 });
