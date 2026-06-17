@@ -5,24 +5,15 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>CHỐT NGHÌN ĐƠN</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        "primary": "#10B981",
-                        "secondary": "#7B2DFF",
-                        "tertiary": "#FFD700",
-                        "accent": "#00F0FF",
-                        "background": "#0A0A0A",
-                        "surface": "#121214"
-                    },
-                    fontFamily: {
-                        "display": ["Plus Jakarta Sans", "sans-serif"],
-                        "body": ["Inter", "sans-serif"],
-                    }
+                    colors: { "primary": "#10B981", "secondary": "#7B2DFF", "tertiary": "#FFD700", "accent": "#00F0FF", "background": "#0A0A0A", "surface": "#121214" },
+                    fontFamily: { "display": ["Plus Jakarta Sans", "sans-serif"], "body": ["Inter", "sans-serif"] }
                 }
             }
         }
@@ -39,60 +30,56 @@
     <script src="js/layout.js"></script>
     <script>
         const content = `
-        <div class="mb-6 flex gap-4 border-b border-white/5">
-            <button class="pb-2 text-[#FFD700] border-b-2 border-[#FFD700] font-bold text-sm px-4">Quản Lý Tenants</button>
-            <button class="pb-2 text-slate-400 hover:text-white font-bold text-sm px-4">Gói & Bảng Giá Platform</button>
-            <button class="pb-2 text-slate-400 hover:text-white font-bold text-sm px-4">Giám Sát Chi Phí AI</button>
-            <button class="pb-2 text-slate-400 hover:text-white font-bold text-sm px-4">Cấu Hình White-label</button>
-        </div>
-        <div class="p-6 bg-[#121214] border border-[#FFD700]/20 rounded-2xl min-h-[500px] shadow-[0_0_30px_rgba(255,215,0,0.05)] relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-96 h-96 bg-[#FFD700]/5 rounded-full blur-[100px] pointer-events-none"></div>
-            
-            <div class="flex justify-between items-center mb-6 relative z-10">
-                <div>
-                    <h2 class="text-xl font-bold flex items-center gap-2"><span class="material-symbols-outlined text-[#FFD700]">corporate_fare</span> Tất Cả Doanh Nghiệp Đăng Ký</h2>
-                    <p class="text-sm text-slate-400 mt-1">Danh sách các doanh nghiệp đang sử dụng nền tảng CHỐT NGHÌN ĐƠN.</p>
+        <div x-data="{
+            tenants: [
+                {name: 'Shop Thời Trang A', owner: 'shopA@gmail.com', plan: 'PRO', status: 'Active', cost: 12.50},
+                {name: 'Trà Sữa C', owner: 'trasua@gmail.com', plan: 'FREE TRIAL', status: 'Locked', cost: 0.10}
+            ],
+            toggleStatus(index) {
+                this.tenants[index].status = this.tenants[index].status === 'Active' ? 'Locked' : 'Active';
+            }
+        }">
+            <div class="p-6 bg-[#121214] border border-[#FFD700]/20 rounded-2xl min-h-[500px] shadow-[0_0_30px_rgba(255,215,0,0.05)] relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-96 h-96 bg-[#FFD700]/5 rounded-full blur-[100px] pointer-events-none"></div>
+                <div class="flex justify-between items-center mb-6 relative z-10">
+                    <div>
+                        <h2 class="text-xl font-bold flex items-center gap-2"><span class="material-symbols-outlined text-[#FFD700]">corporate_fare</span> Quản Lý Tất Cả Tenant</h2>
+                        <p class="text-sm text-slate-400 mt-1">Danh sách doanh nghiệp sử dụng nền tảng CHỐT NGHÌN ĐƠN.</p>
+                    </div>
+                    <button @click="tenants.unshift({name: 'Cửa Hàng Mới', owner: 'new@gmail.com', plan: 'PRO', status: 'Active', cost: 0.0})" class="px-4 py-2 bg-[#FFD700] text-[#0A0A0A] font-bold rounded-lg hover:bg-yellow-400 transition-colors text-sm">+ Tạo Tenant Mới</button>
                 </div>
-                <button class="px-4 py-2 bg-[#FFD700] text-[#0A0A0A] font-bold rounded-lg hover:bg-yellow-400 transition-colors text-sm">+ Tạo Tenant Mới</button>
-            </div>
-            
-            <div class="overflow-x-auto relative z-10">
-                <table class="w-full text-left text-sm text-slate-300">
-                    <thead class="text-xs text-slate-500 uppercase bg-white/5 border-b border-white/5">
-                        <tr>
-                            <th class="px-4 py-3">Tên Doanh Nghiệp</th>
-                            <th class="px-4 py-3">Chủ Sở Hữu</th>
-                            <th class="px-4 py-3">Gói (Plan)</th>
-                            <th class="px-4 py-3">Chi Phí AI Tháng</th>
-                            <th class="px-4 py-3">Trạng Thái</th>
-                            <th class="px-4 py-3 text-right">Hành Động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
-                            <td class="px-4 py-3 font-bold text-white">Shop Thời Trang A</td>
-                            <td class="px-4 py-3">shopA@gmail.com</td>
-                            <td class="px-4 py-3"><span class="px-2 py-1 bg-[#FFD700]/20 text-[#FFD700] rounded text-[10px] font-bold border border-[#FFD700]/30">PRO</span></td>
-                            <td class="px-4 py-3 text-[#10B981]">$12.50</td>
-                            <td class="px-4 py-3"><span class="px-2 py-1 bg-primary/20 text-primary rounded text-xs">Active</span></td>
-                            <td class="px-4 py-3 text-right">
-                                <button class="text-[#00F0FF] hover:underline text-xs font-bold mr-2">Cấu Hình</button>
-                                <button class="text-red-400 hover:underline text-xs font-bold">Khóa</button>
-                            </td>
-                        </tr>
-                        <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
-                            <td class="px-4 py-3 font-bold text-white">Trà Sữa C</td>
-                            <td class="px-4 py-3">trasua@gmail.com</td>
-                            <td class="px-4 py-3"><span class="px-2 py-1 bg-white/10 text-slate-300 rounded text-[10px] font-bold">FREE TRIAL</span></td>
-                            <td class="px-4 py-3 text-[#10B981]">$0.10</td>
-                            <td class="px-4 py-3"><span class="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs">Locked</span></td>
-                            <td class="px-4 py-3 text-right">
-                                <button class="text-[#00F0FF] hover:underline text-xs font-bold mr-2">Cấu Hình</button>
-                                <button class="text-green-400 hover:underline text-xs font-bold">Mở Khóa</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                
+                <div class="overflow-x-auto relative z-10">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="text-xs text-slate-500 uppercase bg-white/5 border-b border-white/5">
+                            <tr>
+                                <th class="px-4 py-3">Tên Doanh Nghiệp</th>
+                                <th class="px-4 py-3">Chủ Sở Hữu</th>
+                                <th class="px-4 py-3">Gói (Plan)</th>
+                                <th class="px-4 py-3">Chi Phí AI</th>
+                                <th class="px-4 py-3">Trạng Thái</th>
+                                <th class="px-4 py-3 text-right">Hành Động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template x-for="(t, index) in tenants" :key="index">
+                                <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 font-bold text-white" x-text="t.name"></td>
+                                    <td class="px-4 py-3" x-text="t.owner"></td>
+                                    <td class="px-4 py-3"><span class="px-2 py-1 bg-white/10 rounded text-[10px] font-bold" x-text="t.plan"></span></td>
+                                    <td class="px-4 py-3 text-[#10B981]" x-text="'$' + t.cost.toFixed(2)"></td>
+                                    <td class="px-4 py-3">
+                                        <span x-show="t.status === 'Active'" class="px-2 py-1 bg-primary/20 text-primary rounded text-xs">Active</span>
+                                        <span x-show="t.status === 'Locked'" class="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs">Locked</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        <button @click="toggleStatus(index)" class="text-[#00F0FF] hover:underline text-xs font-bold mr-2" x-text="t.status === 'Active' ? 'Khóa' : 'Mở Khóa'"></button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     `;

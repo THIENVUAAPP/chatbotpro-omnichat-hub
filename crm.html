@@ -5,24 +5,15 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>CHỐT NGHÌN ĐƠN</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        "primary": "#10B981",
-                        "secondary": "#7B2DFF",
-                        "tertiary": "#FFD700",
-                        "accent": "#00F0FF",
-                        "background": "#0A0A0A",
-                        "surface": "#121214"
-                    },
-                    fontFamily: {
-                        "display": ["Plus Jakarta Sans", "sans-serif"],
-                        "body": ["Inter", "sans-serif"],
-                    }
+                    colors: { "primary": "#10B981", "secondary": "#7B2DFF", "tertiary": "#FFD700", "accent": "#00F0FF", "background": "#0A0A0A", "surface": "#121214" },
+                    fontFamily: { "display": ["Plus Jakarta Sans", "sans-serif"], "body": ["Inter", "sans-serif"] }
                 }
             }
         }
@@ -39,54 +30,70 @@
     <script src="js/layout.js"></script>
     <script>
         const content = `
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-xl font-bold">Quản Lý Khách Hàng (CRM)</h2>
-            <button class="px-4 py-2 bg-white/10 text-white font-bold rounded-lg text-sm hover:bg-white/20 transition-colors flex items-center gap-2">
-                <span class="material-symbols-outlined text-[18px]">person_add</span> Thêm Khách Hàng
-            </button>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            <div class="lg:col-span-1 space-y-4">
-                <div class="bg-[#121214] border border-white/5 rounded-2xl p-4">
-                    <h3 class="font-bold text-sm mb-3">Phân Khúc (Tags)</h3>
-                    <ul class="space-y-2 text-sm text-slate-300">
-                        <li class="flex justify-between items-center p-2 bg-white/5 rounded-lg text-[#FFD700] cursor-pointer">
-                            <span>VIP (Mua > 3 lần)</span> <span class="bg-[#0A0A0A] px-2 py-0.5 rounded text-xs">120</span>
-                        </li>
-                        <li class="flex justify-between items-center p-2 hover:bg-white/5 rounded-lg cursor-pointer">
-                            <span>Khách Mới</span> <span class="bg-[#0A0A0A] px-2 py-0.5 rounded text-xs">5,432</span>
-                        </li>
-                        <li class="flex justify-between items-center p-2 hover:bg-white/5 rounded-lg text-red-400 cursor-pointer">
-                            <span>Bỏ Giỏ Hàng</span> <span class="bg-[#0A0A0A] px-2 py-0.5 rounded text-xs">84</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="bg-gradient-to-br from-[#7B2DFF]/20 to-transparent border border-[#7B2DFF]/30 rounded-2xl p-4 cursor-pointer hover:border-[#7B2DFF] transition-colors">
-                    <h3 class="font-bold text-sm text-[#7B2DFF] mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">robot_2</span> Auto Follow-up</h3>
-                    <p class="text-xs text-slate-400">Cấu hình bot tự nhắn tin nhắc nhở khách hàng bỏ giỏ hàng sau 24h.</p>
+        <div x-data="{ showModal: false, customers: [{name: 'Lương Thu C', phone: '0933111222', ltv: 5400000, vip: true}], newName: '', newPhone: '' }">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold">Quản Lý Khách Hàng (CRM)</h2>
+                <button @click="showModal = true" class="px-4 py-2 bg-white/10 text-white font-bold rounded-lg text-sm hover:bg-white/20 transition-colors flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">person_add</span> Thêm Khách Hàng
+                </button>
+            </div>
+            
+            <!-- Modal Thêm Khách -->
+            <div x-show="showModal" style="display:none;" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+                <div class="bg-[#121214] border border-white/10 p-6 rounded-2xl w-96 relative" @click.outside="showModal = false">
+                    <h3 class="text-lg font-bold mb-4">Thêm Khách Hàng Thủ Công</h3>
+                    <div class="space-y-4">
+                        <input x-model="newName" type="text" placeholder="Tên khách hàng" class="w-full bg-[#0A0A0A] border border-white/10 p-2 text-sm rounded focus:outline-none focus:border-[#00F0FF] text-white">
+                        <input x-model="newPhone" type="text" placeholder="Số điện thoại" class="w-full bg-[#0A0A0A] border border-white/10 p-2 text-sm rounded focus:outline-none focus:border-[#00F0FF] text-white">
+                        <div class="flex gap-2 justify-end mt-4">
+                            <button @click="showModal = false" class="px-4 py-2 text-sm font-bold text-slate-400">Hủy</button>
+                            <button @click="customers.push({name: newName, phone: newPhone, ltv: 0, vip: false}); showModal = false; newName=''; newPhone=''" class="px-4 py-2 bg-[#00F0FF] text-black font-bold rounded text-sm">Lưu</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="lg:col-span-3 bg-[#121214] border border-white/5 rounded-2xl p-6">
-                <table class="w-full text-left text-sm text-slate-300">
-                    <thead class="text-xs text-slate-500 uppercase bg-white/5 border-b border-white/5">
-                        <tr>
-                            <th class="px-4 py-3">Tên Khách Hàng</th>
-                            <th class="px-4 py-3">SĐT / Email</th>
-                            <th class="px-4 py-3">LTV (Chi Tiêu)</th>
-                            <th class="px-4 py-3">Lần Chat Cuối</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b border-white/5 hover:bg-white/5 cursor-pointer">
-                            <td class="px-4 py-3 font-bold text-white flex items-center gap-2">
-                                <div class="w-8 h-8 rounded-full bg-gradient-to-r from-pink-500 to-orange-400"></div> Lương Thu C
-                            </td>
-                            <td class="px-4 py-3 text-slate-400">0933111222</td>
-                            <td class="px-4 py-3 font-bold text-[#FFD700]">5,400,000đ <span class="px-1 bg-[#FFD700]/20 rounded text-[10px]">VIP</span></td>
-                            <td class="px-4 py-3 text-xs text-slate-500">Hôm nay 09:12</td>
-                        </tr>
-                    </tbody>
-                </table>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <!-- Tags sidebar -->
+                <div class="lg:col-span-1 space-y-4">
+                    <div class="bg-[#121214] border border-white/5 rounded-2xl p-4">
+                        <h3 class="font-bold text-sm mb-3">Phân Khúc (Tags)</h3>
+                        <ul class="space-y-2 text-sm text-slate-300">
+                            <li class="flex justify-between items-center p-2 bg-white/5 rounded-lg text-[#FFD700]">
+                                <span>VIP</span> <span class="bg-[#0A0A0A] px-2 py-0.5 rounded text-xs" x-text="customers.filter(c=>c.vip).length"></span>
+                            </li>
+                            <li class="flex justify-between items-center p-2 hover:bg-white/5 rounded-lg">
+                                <span>Tất Cả</span> <span class="bg-[#0A0A0A] px-2 py-0.5 rounded text-xs" x-text="customers.length"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Customer List -->
+                <div class="lg:col-span-3 bg-[#121214] border border-white/5 rounded-2xl p-6">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="text-xs text-slate-500 uppercase bg-white/5 border-b border-white/5">
+                            <tr>
+                                <th class="px-4 py-3">Tên Khách Hàng</th>
+                                <th class="px-4 py-3">SĐT / Email</th>
+                                <th class="px-4 py-3">LTV (Chi Tiêu)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template x-for="(c, i) in customers" :key="i">
+                                <tr class="border-b border-white/5 hover:bg-white/5">
+                                    <td class="px-4 py-3 font-bold text-white flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-full bg-slate-700"></div> <span x-text="c.name"></span>
+                                    </td>
+                                    <td class="px-4 py-3 text-slate-400" x-text="c.phone"></td>
+                                    <td class="px-4 py-3 font-bold text-[#FFD700]">
+                                        <span x-text="c.ltv.toLocaleString() + 'đ'"></span>
+                                        <span x-show="c.vip" class="ml-2 px-1 bg-[#FFD700]/20 rounded text-[10px]">VIP</span>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     `;
