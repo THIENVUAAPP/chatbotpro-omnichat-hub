@@ -967,7 +967,7 @@ function initGlobalLinkHandlers() {
 
 // 6. Role Switcher & Dynamic SideNavBar Permissions
 function initRoleSwitcher() {
-    const isAdminPage = ['dashboard.html', 'env-vars.html', 'team.html', 'guides.html'].some(p => window.location.pathname.includes(p));
+    const isAdminPage = ['dashboard.html', 'env-vars.html', 'team.html', 'guides.html', 'tradingview.html'].some(p => window.location.pathname.includes(p));
     if (!isAdminPage) return;
 
     const headerContainer = document.querySelector('header .flex.items-center.gap-stack-md');

@@ -13,52 +13,52 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary-fixed-dim": "#cfbcff",
-                        "tertiary-container": "#fef3c7",
-                        "surface-container-lowest": "#ffffff",
-                        "surface-container-low": "#f8fafc",
-                        "outline-variant": "#e2e8f0",
-                        "on-tertiary-fixed-variant": "#78350f",
-                        "secondary-fixed": "#e9ddff",
-                        "surface-tint": "#6750a4",
-                        "on-background": "#0f172a",
-                        "on-secondary-fixed-variant": "#4b4263",
-                        "secondary": "#625b71",
-                        "error-container": "#fee2e2",
-                        "outline": "#94a3b8",
-                        "primary-container": "#e9ddff",
-                        "surface-container": "#f1f3f9",
-                        "surface-dim": "#f1f5f9",
-                        "on-primary-fixed": "#22005d",
-                        "secondary-container": "#e8def8",
-                        "on-error-container": "#7f1d1d",
-                        "inverse-primary": "#cfbcff",
-                        "on-tertiary-container": "#451a03",
-                        "on-surface-variant": "#475569",
-                        "primary": "#6750a4",
-                        "inverse-surface": "#0f172a",
-                        "surface-variant": "#e2e8f0",
-                        "secondary-fixed-dim": "#cdc0e9",
-                        "primary-fixed": "#e9ddff",
-                        "on-primary-container": "#22005d",
-                        "surface": "#ffffff",
-                        "surface-container-high": "#e2e8f0",
+                        "primary-fixed-dim": "#80aaff",
+                        "tertiary-container": "#4d4100",
+                        "surface-container-lowest": "#050505",
+                        "surface-container-low": "#0d0d0f",
+                        "outline-variant": "rgba(0, 87, 255, 0.15)",
+                        "on-tertiary-fixed-variant": "#ffd700",
+                        "secondary-fixed": "#e0ccff",
+                        "surface-tint": "#0057FF",
+                        "on-background": "#ffffff",
+                        "on-secondary-fixed-variant": "#7b2dff",
+                        "secondary": "#7B2DFF",
+                        "error-container": "#7f1d1d",
+                        "outline": "#475569",
+                        "primary-container": "rgba(0, 87, 255, 0.1)",
+                        "surface-container": "#121214",
+                        "surface-dim": "#0a0a0c",
+                        "on-primary-fixed": "#001b4c",
+                        "secondary-container": "rgba(123, 45, 255, 0.1)",
+                        "on-error-container": "#fca5a5",
+                        "inverse-primary": "#80aaff",
+                        "on-tertiary-container": "#ffd700",
+                        "on-surface-variant": "#94a3b8",
+                        "primary": "#0057FF",
+                        "inverse-surface": "#ffffff",
+                        "surface-variant": "#1e1e24",
+                        "secondary-fixed-dim": "#b380ff",
+                        "primary-fixed": "#cce0ff",
+                        "on-primary-container": "#ffffff",
+                        "surface": "#121214",
+                        "surface-container-high": "#1a1a1f",
                         "on-error": "#ffffff",
-                        "on-secondary-fixed": "#1d192b",
-                        "inverse-on-surface": "#f8fafc",
-                        "tertiary-fixed": "#fde68a",
-                        "on-tertiary-fixed": "#451a03",
-                        "on-primary-fixed-variant": "#4f378a",
+                        "on-secondary-fixed": "#ffffff",
+                        "inverse-on-surface": "#0a0a0a",
+                        "tertiary-fixed": "#ffd700",
+                        "on-tertiary-fixed": "#000000",
+                        "on-primary-fixed-variant": "#003bbb",
                         "on-secondary": "#ffffff",
-                        "surface-bright": "#f8fafc",
-                        "tertiary": "#d97706",
-                        "on-tertiary": "#ffffff",
-                        "background": "#f8fafc",
-                        "on-secondary-container": "#1d192b",
-                        "on-surface": "#0f172a",
+                        "surface-bright": "#1a1a1f",
+                        "tertiary": "#FFD700",
+                        "on-tertiary": "#000000",
+                        "background": "#0A0A0A",
+                        "on-secondary-container": "#ffffff",
+                        "on-surface": "#ffffff",
                         "error": "#ef4444",
-                        "tertiary-fixed-dim": "#f59e0b",
-                        "surface-container-highest": "#cbd5e1",
+                        "tertiary-fixed-dim": "#e6c300",
+                        "surface-container-highest": "#24242b",
                         "on-primary": "#ffffff"
                     },
                     borderRadius: {
@@ -99,86 +99,86 @@
     </script>
     <style>
         body {
-            background: linear-gradient(135deg, #0b1426 0%, #0d1f3c 50%, #0b2040 100%);
+            background: #0A0A0A;
             color: #e2e8f0;
             overflow-x: hidden;
             min-height: 100vh;
         }
 
         .glass-panel {
-            background: rgba(255,255,255,0.04);
+            background: rgba(18, 18, 20, 0.75);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(100,180,255,0.12);
-            box-shadow: 0 4px 30px rgba(0,100,255,0.06);
+            border: 1px solid rgba(0, 87, 255, 0.15);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
             transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         .glass-panel-hover:hover {
-            border-color: rgba(100,180,255,0.25);
-            box-shadow: 0 10px 40px rgba(0,100,255,0.1);
+            border-color: rgba(0, 87, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 87, 255, 0.15);
             transform: scale(1.01);
         }
 
         .text-gradient {
-            background: linear-gradient(135deg, #0052FF 0%, #00d4ff 100%);
+            background: linear-gradient(135deg, #0057FF 0%, #00F0FF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #0052FF 0%, #0041CC 100%);
-            border: 1px solid rgba(0,82,255,0.3);
+            background: linear-gradient(135deg, #0057FF 0%, #7B2DFF 100%);
+            border: 1px solid rgba(0, 87, 255, 0.3);
             color: #ffffff;
             transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
-            box-shadow: 0 4px 20px rgba(0,82,255,0.4);
+            box-shadow: 0 4px 20px rgba(0, 87, 255, 0.4);
             transform: scale(1.01);
         }
 
         .glass-play-btn {
-            background: rgba(0,82,255,0.15);
+            background: rgba(0, 87, 255, 0.15);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(0,82,255,0.25);
+            border: 1px solid rgba(0, 87, 255, 0.25);
             transition: all 0.3s ease;
         }
 
         .glass-play-btn:hover {
-            background: rgba(0,82,255,0.25);
+            background: rgba(0, 87, 255, 0.25);
             transform: scale(1.1);
         }
 
         .input-glass {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(100,180,255,0.15);
+            background: rgba(30, 30, 35, 0.5);
+            border: 1px solid rgba(0, 87, 255, 0.2);
             color: #e2e8f0;
             transition: all 0.3s ease;
         }
 
         .input-glass:focus {
             outline: none;
-            border-color: #0052FF;
-            box-shadow: 0 0 10px rgba(0,82,255,0.2);
+            border-color: #0057FF;
+            box-shadow: 0 0 10px rgba(0, 87, 255, 0.3);
         }
 
         .bg-grid {
             background-size: 40px 40px;
             background-image: 
-                linear-gradient(to right, rgba(0, 82, 255, 0.04) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 82, 255, 0.04) 1px, transparent 1px);
+                linear-gradient(to right, rgba(0, 87, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 87, 255, 0.05) 1px, transparent 1px);
         }
 
         /* Admin dark sidebar */
         nav {
-            background: rgba(8,18,38,0.97) !important;
-            border-right-color: rgba(0,82,255,0.15) !important;
+            background: rgba(10, 10, 12, 0.97) !important;
+            border-right-color: rgba(0, 87, 255, 0.15) !important;
         }
 
         header {
-            background: rgba(8,18,38,0.92) !important;
-            border-bottom-color: rgba(0,82,255,0.15) !important;
+            background: rgba(10, 10, 12, 0.92) !important;
+            border-bottom-color: rgba(0, 87, 255, 0.15) !important;
         }
     </style>
 </head>
@@ -252,13 +252,14 @@
             <li data-role-required="owner">
                 <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="team.html">
                     <span class="material-symbols-outlined">groups</span>
-                    <span>Phân quyền Team</span>
+                    <span data-translate="nav-team">Phân quyền Team</span>
                 </a>
             </li>
+            
             <li>
                 <a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-[rgba(0,82,255,0.15)] text-[#60a5fa] border-r-2 border-[#0052FF] font-label-caps text-label-caps font-bold active" href="guides.html">
                     <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
-                    <span>Hướng dẫn</span>
+                    <span data-translate="nav-guides">Hướng dẫn</span>
                 </a>
             </li>
         </ul>
