@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>ChatbotPro - Cấu Hình API & Kênh</title>
+    <title>CHỐT NGHÌN ĐƠN - Cấu Hình API & Kênh</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -219,8 +219,8 @@
 <header class="fixed top-0 w-full z-50 bg-white/75 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_4px_20px_rgba(103,80,164,0.05)]">
     <div class="flex justify-between items-center px-container-margin h-20 w-full">
         <div class="flex items-center gap-gutter">
-            <h1 class="font-display-lg text-display-lg bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent hidden md:block" style="font-size: 28px; font-weight: 750; cursor: pointer;" onclick="window.location.href='index.html'">ChatbotPro</h1>
-            <h1 class="font-display-lg-mobile text-display-lg-mobile bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent md:hidden" style="font-size: 24px; font-weight: 750;" onclick="window.location.href='index.html'">ChatbotPro</h1>
+            <h1 class="font-display-lg text-display-lg bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent hidden md:block" style="font-size: 28px; font-weight: 750; cursor: pointer;" onclick="window.location.href='index.html'">CHỐT NGHÌN ĐƠN</h1>
+            <h1 class="font-display-lg-mobile text-display-lg-mobile bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent md:hidden" style="font-size: 24px; font-weight: 750;" onclick="window.location.href='index.html'">CHỐT NGHÌN ĐƠN</h1>
         </div>
         <div class="flex items-center gap-stack-md">
             <div class="relative hidden md:block">
@@ -250,7 +250,7 @@
             </div>
             <div>
                 <div class="font-label-caps text-xs text-primary tracking-wider font-bold" data-translate="nav-admin-terminal">Admin Terminal</div>
-                <div class="font-mono-data text-mono-data text-on-surface-variant text-[10px] uppercase mt-1">ChatbotPro OS</div>
+                <div class="font-mono-data text-mono-data text-on-surface-variant text-[10px] uppercase mt-1">CHỐT NGHÌN ĐƠN OS</div>
             </div>
         </div>
         <ul class="flex flex-col gap-2 flex-1">
@@ -618,7 +618,7 @@
                 <div class="space-y-2">
                     <label class="font-label-caps text-label-caps text-on-surface block text-xs" data-translate="chan-modal-webhook-label">Webhook URL (Nhận sự kiện tin nhắn)</label>
                     <div class="flex gap-2">
-                        <input id="modal-webhook-url" class="input-glass flex-grow rounded-lg py-2 px-3 font-mono-data text-mono-data text-xs bg-slate-50 border-outline-variant/30" readonly type="text" value="https://api.chatbotpro.com/webhook/v1/sync/zalo"/>
+                        <input id="modal-webhook-url" class="input-glass flex-grow rounded-lg py-2 px-3 font-mono-data text-mono-data text-xs bg-slate-50 border-outline-variant/30" readonly type="text" value="https://api.chotnghindon.com/webhook/v1/sync/zalo"/>
                         <button id="btn-copy-webhook" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 border border-outline-variant/50 rounded-lg font-label-caps text-label-caps text-xs font-semibold flex items-center gap-1 active:scale-95 transition-all">
                             <span class="material-symbols-outlined text-[14px]">content_copy</span>
                             <span data-translate="chan-btn-copy">Sao Chép</span>
@@ -742,7 +742,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modalSubtitle.textContent = subtitle;
             idLabel.textContent = idLabelText;
             idInput.placeholder = idPlaceholder;
-            webhookInput.value = `https://api.chatbotpro.com/webhook/v1/sync/${channelSlug}?shop_id=983-A12`;
+            webhookInput.value = `https://api.chotnghindon.com/webhook/v1/sync/${channelSlug}?shop_id=983-A12`;
 
             // If already connected, prepopulate mock data
             const isConnected = card.querySelector('.badge-status').textContent.trim().toLowerCase().includes('connected') || card.querySelector('.badge-status').textContent.trim().toLowerCase().includes('hoạt động');
