@@ -85,24 +85,7 @@
             </div>
         </div>
 
-        <div class="w-full flex items-center gap-4 mb-6">
-            <div class="h-px bg-white/10 flex-1"></div>
-            <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">Hoặc Admin</span>
-            <div class="h-px bg-white/10 flex-1"></div>
-        </div>
 
-        <!-- Hidden Admin Login -->
-        <form onsubmit="handleAdminLogin(event)" class="w-full space-y-4 text-left hidden" id="admin-form">
-            <div>
-                <label class="block text-xs font-bold text-slate-400 mb-1">Mật khẩu Quản Trị Hệ Thống</label>
-                <input type="password" id="admin-pw" class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary text-white" placeholder="••••••••">
-            </div>
-            <button type="submit" class="w-full py-3 rounded-xl bg-primary text-white font-bold hover:bg-emerald-500 transition-colors shadow-[0_0_20px_rgba(16,185,129,0.2)]">Vào Admin Panel</button>
-        </form>
-
-        <button onclick="document.getElementById('admin-form').classList.toggle('hidden')" class="text-sm text-primary font-bold hover:underline">
-            Tôi là Super Admin
-        </button>
 
         <p class="text-xs text-slate-500 mt-8">Bằng việc đăng nhập, bạn đồng ý với <a href="#" class="text-primary hover:underline">Điều khoản dịch vụ</a> và <a href="#" class="text-primary hover:underline">Chính sách bảo mật</a> của chúng tôi.</p>
     </div>
@@ -137,40 +120,33 @@
                 const userEmail = responsePayload.email;
                 const userName = responsePayload.name;
                 
-                // Lưu vào hệ thống
-                localStorage.setItem('chatbotpro_user', userEmail);
-                localStorage.setItem('chatbotpro_role', 'member');
-                
                 showToast('Đăng nhập thành công: ' + userName);
 
-                // Giả lập luồng: 50% duyệt thẳng vào Free Trial, 50% chờ admin
-                const isApproved = Math.random() > 0.5;
-                setTimeout(() => {
-                    if (isApproved) {
-                        localStorage.setItem('chatbotpro_plan', 'free_trial');
-                        window.location.href = 'dashboard.html';
-                    } else {
-                        document.getElementById('pending-modal').classList.remove('hidden');
-                    }
-                }, 1000);
+                if (userEmail === 'quocthiencr7@gmail.com') {
+                    // Cấp quyền Admin ngay lập tức mà không cần mật khẩu
+                    localStorage.setItem('chatbotpro_user', userEmail);
+                    localStorage.setItem('chatbotpro_role', 'admin');
+                    setTimeout(() => { window.location.href = 'admin_panel.html'; }, 1000);
+                } else {
+                    // Quyền Member thông thường
+                    localStorage.setItem('chatbotpro_user', userEmail);
+                    localStorage.setItem('chatbotpro_role', 'member');
+                    
+                    // Giả lập luồng: 50% duyệt thẳng vào Free Trial, 50% chờ admin
+                    const isApproved = Math.random() > 0.5;
+                    setTimeout(() => {
+                        if (isApproved) {
+                            localStorage.setItem('chatbotpro_plan', 'free_trial');
+                            window.location.href = 'dashboard.html';
+                        } else {
+                            document.getElementById('pending-modal').classList.remove('hidden');
+                        }
+                    }, 1000);
+                }
 
             } catch(e) {
                 console.error('Lỗi khi đăng nhập bằng Google:', e);
                 showToast('Không thể kết nối với Google. Vui lòng thử lại.', 'error');
-            }
-        }
-
-        // --- ADMIN LOGIN ---
-        function handleAdminLogin(e) {
-            e.preventDefault();
-            const pw = document.getElementById('admin-pw').value;
-            if (pw === 'admin123') {
-                localStorage.setItem('chatbotpro_user', 'superadmin@chotnghindon.com');
-                localStorage.setItem('chatbotpro_role', 'admin');
-                showToast('Đăng nhập Admin thành công!');
-                setTimeout(() => { window.location.href = 'admin_panel.html'; }, 1000);
-            } else {
-                showToast('Mật khẩu Admin không chính xác!', 'error');
             }
         }
     </script>
