@@ -18,60 +18,58 @@
             }
         }
     </script>
-    <style>
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
-    </style>
 </head>
 <body>
     <div id="root"></div>
     <script src="js/layout.js"></script>
     <script>
         const content = `
-        <div x-data="{ activeTab: 'audit' }">
-            <h2 class="text-xl font-bold mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-slate-400">health_and_safety</span> Hệ Thống & Bảo Mật</h2>
-            <div class="mb-6 flex gap-4 border-b border-white/5">
-                <button @click="activeTab = 'audit'" :class="activeTab === 'audit' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Audit Log</button>
-                <button @click="activeTab = 'status'" :class="activeTab === 'status' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Status Page</button>
-                <button @click="activeTab = 'faq'" :class="activeTab === 'faq' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Trung Tâm Trợ Giúp</button>
-            </div>
-
-            <div x-show="activeTab === 'audit'" class="p-6 bg-[#121214] border border-white/5 rounded-2xl">
-                <h3 class="font-bold mb-4">Nhật Ký Hoạt Động Của Hệ Thống (Bảo Mật)</h3>
-                <table class="w-full text-left text-sm text-slate-300">
-                    <thead class="text-xs text-slate-500 uppercase bg-white/5 border-b border-white/5">
-                        <tr><th class="px-4 py-3">Thời gian</th><th class="px-4 py-3">Tài khoản</th><th class="px-4 py-3">IP</th><th class="px-4 py-3">Hành động</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b border-white/5">
-                            <td class="px-4 py-3">18/06/2026 14:30</td><td class="px-4 py-3 font-bold text-[#00F0FF]">quocthiencr7@gmail.com</td>
-                            <td class="px-4 py-3 text-xs text-slate-500">113.190.22.1</td><td class="px-4 py-3">Chỉnh sửa Prompt Kịch Bản Bot</td>
-                        </tr>
-                        <tr class="border-b border-white/5">
-                            <td class="px-4 py-3">18/06/2026 10:15</td><td class="px-4 py-3 font-bold text-[#00F0FF]">sale1@gmail.com</td>
-                            <td class="px-4 py-3 text-xs text-slate-500">113.190.22.1</td><td class="px-4 py-3">Đăng nhập thành công</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div x-show="activeTab === 'status'" style="display:none;" class="space-y-4">
-                <div class="p-4 bg-green-500/10 border border-green-500/30 rounded-xl flex items-center justify-between">
-                    <div>
-                        <h4 class="font-bold text-green-400">Claude API Connection</h4>
-                        <p class="text-xs text-slate-400">99.99% Uptime trong 30 ngày qua</p>
+        <div x-data="{ simulateAction(msg) { window.dispatchEvent(new CustomEvent('show-toast', { detail: { msg: msg, type: 'success' } })); } }">
+            <h2 class="text-2xl font-bold mb-6 font-display">Trung Tâm Hỗ Trợ Kỹ Thuật (24/7)</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-[#121214] p-8 rounded-3xl border border-[#00F0FF]/20 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-[#00F0FF]/10 rounded-full blur-[80px]"></div>
+                    <h3 class="text-xl font-bold text-[#00F0FF] mb-2 relative z-10">Tạo Ticket Hỗ Trợ Mới</h3>
+                    <p class="text-sm text-slate-400 mb-6 relative z-10">Đội ngũ kỹ thuật Super Admin sẽ phản hồi trong vòng 5-10 phút.</p>
+                    
+                    <div class="space-y-4 relative z-10">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-2">Chủ đề hỗ trợ</label>
+                            <select class="w-full bg-[#0A0A0A] border border-white/10 p-3 text-sm rounded-xl text-white focus:outline-none focus:border-[#00F0FF]">
+                                <option>Lỗi không kết nối được Tiktok/Shopee</option>
+                                <option>Hỏi cách cài đặt kịch bản Bot AI</option>
+                                <option>Vấn đề về thanh toán/Gói cước</option>
+                                <option>Lỗi khác...</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-2">Mô tả chi tiết</label>
+                            <textarea class="w-full bg-[#0A0A0A] border border-white/10 p-3 text-sm rounded-xl text-white h-32 focus:outline-none focus:border-[#00F0FF]" placeholder="Mô tả lỗi hoặc câu hỏi của bạn..."></textarea>
+                        </div>
+                        <button @click="simulateAction('Đã gửi Ticket Hỗ Trợ! Mã Ticket của bạn là #TK-992. Kỹ thuật viên sẽ phản hồi sớm nhất.')" class="w-full py-3 bg-[#00F0FF] text-black font-bold rounded-xl text-sm hover:bg-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.3)]">Gửi Yêu Cầu Hỗ Trợ Ngay</button>
                     </div>
-                    <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-bold flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> Operational</span>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-bold text-lg mb-4">Lịch Sử Ticket Của Bạn</h3>
+                    <div class="bg-[#121214] border border-white/5 p-4 rounded-xl flex justify-between items-center cursor-pointer hover:bg-white/5">
+                        <div>
+                            <div class="font-bold text-sm text-white">#TK-801: Lỗi đồng bộ tin nhắn Shopee</div>
+                            <div class="text-xs text-slate-500 mt-1">Gửi lúc: 10:45 Hôm nay</div>
+                        </div>
+                        <span class="px-3 py-1 bg-green-500/10 text-green-400 border border-green-500/30 rounded text-xs font-bold">Đã xử lý</span>
+                    </div>
+                    <div class="bg-[#121214] border border-white/5 p-4 rounded-xl flex justify-between items-center cursor-pointer hover:bg-white/5">
+                        <div>
+                            <div class="font-bold text-sm text-white">#TK-742: Bot trả lời chậm</div>
+                            <div class="text-xs text-slate-500 mt-1">Gửi lúc: Hôm qua</div>
+                        </div>
+                        <span class="px-3 py-1 bg-green-500/10 text-green-400 border border-green-500/30 rounded text-xs font-bold">Đã xử lý</span>
+                    </div>
                 </div>
             </div>
-
-            <div x-show="activeTab === 'faq'" style="display:none;" class="p-6 bg-[#121214] border border-white/5 rounded-2xl">
-                <p class="text-slate-400 text-sm">Các tài liệu HDSD và Video hướng dẫn sử dụng tính năng của phần mềm sẽ hiển thị tại đây.</p>
-            </div>
         </div>
-    `;
+`;
         document.addEventListener('DOMContentLoaded', () => {
             renderLayout('support', content);
         });

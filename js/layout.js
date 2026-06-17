@@ -137,6 +137,47 @@ function renderLayout(activeId, contentHtml) {
                     </template>
                 </div>
 
+                <!-- AI AGENT FLOATING WIDGET (TỰ ĐỘNG HƯỚNG DẪN NGƯỜI DÙNG) -->
+                <div class="fixed bottom-6 left-6 md:left-auto md:right-20 z-[90] flex flex-col items-end">
+                    <!-- Agent Chatbox -->
+                    <div x-show="showAgent" x-transition style="display:none;" class="mb-4 w-80 bg-[#121214] border border-[#00F0FF]/30 rounded-2xl shadow-[0_0_30px_rgba(0,240,255,0.15)] overflow-hidden flex flex-col">
+                        <div class="bg-gradient-to-r from-[#10B981] to-[#00F0FF] p-4 flex justify-between items-center text-black">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center"><span class="material-symbols-outlined">smart_toy</span></div>
+                                <span class="font-bold text-sm">AI Assistant (Hướng Dẫn)</span>
+                            </div>
+                            <button @click="showAgent = false" class="hover:text-white transition-colors"><span class="material-symbols-outlined text-[18px]">close</span></button>
+                        </div>
+                        <div class="p-4 flex-1 h-64 overflow-y-auto custom-scrollbar flex flex-col gap-3 text-sm">
+                            <div class="flex gap-2">
+                                <div class="w-6 h-6 bg-gradient-to-r from-[#10B981] to-[#00F0FF] rounded-full shrink-0 flex items-center justify-center text-black text-[10px] font-bold">AI</div>
+                                <div class="bg-white/5 p-2.5 rounded-xl rounded-tl-sm text-slate-300">
+                                    Chào bạn! Mình là AI Hướng dẫn của Chốt Nghìn Đơn. Bạn là chủ doanh nghiệp mới phải không? Bạn đang cần hỗ trợ phần nào?
+                                </div>
+                            </div>
+                            <!-- AI Suggestions -->
+                            <div class="pl-8 flex flex-col gap-2">
+                                <button @click="agentAction('Hướng dẫn kết nối Tiktok Shop')" class="text-left bg-[#00F0FF]/10 text-[#00F0FF] text-xs px-3 py-2 rounded-lg border border-[#00F0FF]/30 hover:bg-[#00F0FF]/20">1. Hướng dẫn kết nối Tiktok Shop</button>
+                                <button @click="agentAction('Cách tạo Kịch bản Chatbot Tự Động')" class="text-left bg-[#00F0FF]/10 text-[#00F0FF] text-xs px-3 py-2 rounded-lg border border-[#00F0FF]/30 hover:bg-[#00F0FF]/20">2. Cách tạo Kịch bản Bot tự động</button>
+                                <button @click="agentAction('Cách cấu hình Phân quyền Nhân viên')" class="text-left bg-[#00F0FF]/10 text-[#00F0FF] text-xs px-3 py-2 rounded-lg border border-[#00F0FF]/30 hover:bg-[#00F0FF]/20">3. Quản lý phân quyền Nhân viên</button>
+                            </div>
+                            
+                            <!-- Dynamic Agent response -->
+                            <template x-if="agentReply">
+                                <div class="flex gap-2 mt-2">
+                                    <div class="w-6 h-6 bg-gradient-to-r from-[#10B981] to-[#00F0FF] rounded-full shrink-0 flex items-center justify-center text-black text-[10px] font-bold">AI</div>
+                                    <div class="bg-[#10B981]/20 border border-[#10B981]/30 p-2.5 rounded-xl rounded-tl-sm text-white font-bold text-xs" x-text="agentReply"></div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <!-- Agent Bubble -->
+                    <button @click="showAgent = !showAgent" class="w-14 h-14 bg-gradient-to-r from-[#10B981] to-[#00F0FF] rounded-full flex items-center justify-center text-black shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-[28px]" x-show="!showAgent">smart_toy</span>
+                        <span class="material-symbols-outlined text-[28px]" x-show="showAgent" style="display:none;">keyboard_arrow_down</span>
+                    </button>
+                </div>
+
             </div>
         </div>
         
@@ -149,12 +190,22 @@ function renderLayout(activeId, contentHtml) {
                     unreadCount: 0,
                     notifications: [],
                     
+                    showAgent: false,
+                    agentReply: '',
+                    
                     init() {
                         setInterval(() => {
                             if(!this.showNotif && Math.random() > 0.6) {
                                 this.triggerNewMessage();
                             }
                         }, 6000);
+                        
+                        // Show agent notification automatically after 3s
+                        setTimeout(() => {
+                            if(!this.showAgent) {
+                                this.addToast('Trợ lý AI Hướng Dẫn luôn sẵn sàng hỗ trợ bạn ở góc dưới màn hình nhé!', 'info');
+                            }
+                        }, 3000);
                     },
 
                     triggerNewMessage() {
@@ -188,6 +239,10 @@ function renderLayout(activeId, contentHtml) {
                         setTimeout(() => {
                             this.toasts = this.toasts.filter(t => t.id !== id);
                         }, 3500);
+                    },
+                    
+                    agentAction(topic) {
+                        this.agentReply = 'Mình đang phân tích hệ thống... Để thực hiện "' + topic + '", bạn vui lòng điều hướng trên Menu bên trái và làm theo hướng dẫn trên màn hình nhé!';
                     }
                 }));
             });

@@ -18,89 +18,70 @@
             }
         }
     </script>
-    <style>
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
-    </style>
 </head>
 <body>
     <div id="root"></div>
     <script src="js/layout.js"></script>
     <script>
         const content = `
-        <div x-data="{ activeTab: 'orders' }">
-            <h2 class="text-xl font-bold mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-[#FFD700]">storefront</span> Quản Lý Bán Hàng Điện Tử</h2>
-            <div class="mb-6 flex gap-4 border-b border-white/5 overflow-x-auto custom-scrollbar whitespace-nowrap">
-                <button @click="activeTab = 'orders'" :class="activeTab === 'orders' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Đơn Hàng</button>
-                <button @click="activeTab = 'inventory'" :class="activeTab === 'inventory' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Sản Phẩm & Tồn Kho</button>
-                <button @click="activeTab = 'shipping'" :class="activeTab === 'shipping' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Đối Tác Vận Chuyển</button>
-                <button @click="activeTab = 'payment'" :class="activeTab === 'payment' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Cổng Thanh Toán</button>
+        <div x-data="{ 
+            activeTab: 'products',
+            simulateAction(msg) { window.dispatchEvent(new CustomEvent('show-toast', { detail: { msg: msg, type: 'success' } })); }
+        }">
+            <h2 class="text-xl font-bold mb-6">Quản Lý Sản Phẩm & Đơn Hàng (Đa Kênh)</h2>
+            <div class="mb-6 flex gap-4 border-b border-white/5">
+                <button @click="activeTab = 'products'" :class="activeTab === 'products' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Kho Sản Phẩm</button>
+                <button @click="activeTab = 'orders'" :class="activeTab === 'orders' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Đơn Hàng Vận Chuyển</button>
             </div>
 
-            <!-- Tabs cũ giữ nguyên -->
-            <div x-show="activeTab === 'orders'" class="p-6 bg-[#121214] border border-white/5 rounded-2xl">
+            <div x-show="activeTab === 'products'">
+                <div class="flex justify-between items-center mb-4">
+                    <input type="text" placeholder="Tìm sản phẩm..." class="bg-[#0A0A0A] border border-white/10 rounded-xl px-4 py-2 text-sm w-64 text-white">
+                    <button @click="simulateAction('Đã mở form thêm Sản phẩm mới!')" class="bg-[#00F0FF] text-black px-4 py-2 rounded-xl text-sm font-bold hover:bg-cyan-400">+ Thêm Sản Phẩm</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="bg-[#121214] border border-white/5 rounded-2xl overflow-hidden group">
+                        <div class="h-40 bg-white/5 flex items-center justify-center relative">
+                            <span class="material-symbols-outlined text-4xl text-slate-600">checkroom</span>
+                            <div class="absolute top-2 right-2 bg-black/80 px-2 py-1 rounded text-xs text-[#00F0FF] border border-[#00F0FF]/30">Shopee/Tiktok</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-white mb-1">Áo Thun Cổ Tròn Mẫu 01</h3>
+                            <div class="text-[#10B981] font-bold text-sm mb-3">150,000đ</div>
+                            <div class="flex gap-2">
+                                <button @click="simulateAction('Đã lưu thay đổi cho Áo Thun Cổ Tròn!')" class="flex-1 bg-white/5 py-1.5 rounded-lg text-xs font-bold hover:bg-white/10 text-white">Sửa</button>
+                                <button @click="simulateAction('Đã khóa bán sản phẩm này trên đa kênh!')" class="w-8 flex items-center justify-center bg-red-500/10 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-colors"><span class="material-symbols-outlined text-[14px]">delete</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div x-show="activeTab === 'orders'" style="display:none;">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex gap-2">
+                        <button class="bg-[#10B981]/20 text-[#10B981] px-4 py-1.5 rounded-lg text-xs font-bold border border-[#10B981]/30">Giao Hàng Nhanh (GHN)</button>
+                        <button class="bg-white/5 text-slate-300 px-4 py-1.5 rounded-lg text-xs font-bold border border-white/10">Viettel Post</button>
+                    </div>
+                    <button @click="simulateAction('Đã đồng bộ đơn hàng mới nhất từ GHN')" class="px-4 py-2 bg-white/5 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-white/10"><span class="material-symbols-outlined text-[16px]">sync</span> Đồng Bộ</button>
+                </div>
                 <table class="w-full text-left text-sm text-slate-300">
-                    <thead class="text-xs text-slate-500 uppercase bg-white/5 border-b border-white/5">
-                        <tr><th class="px-4 py-3">Mã Đơn</th><th class="px-4 py-3">Khách Hàng</th><th class="px-4 py-3">Nguồn</th><th class="px-4 py-3">Trạng Thái</th></tr>
+                    <thead class="text-xs uppercase bg-white/5">
+                        <tr><th class="px-4 py-3">Mã Đơn</th><th class="px-4 py-3">Khách Hàng</th><th class="px-4 py-3">Tổng Tiền</th><th class="px-4 py-3">Trạng Thái (ĐVVC)</th><th class="px-4 py-3 text-right">Thao Tác</th></tr>
                     </thead>
                     <tbody>
-                        <tr class="border-b border-white/5"><td class="px-4 py-3 font-bold">#ORD-999</td><td class="px-4 py-3">Nguyễn Văn A</td><td class="px-4 py-3"><span class="px-2 py-0.5 bg-[#EE4D2D]/20 text-[#EE4D2D] rounded text-xs">Shopee</span></td><td class="px-4 py-3"><span class="text-[#FFD700] text-xs">Đang giao</span></td></tr>
+                        <tr class="border-b border-white/5">
+                            <td class="px-4 py-3 font-bold text-[#00F0FF]">#ORD-991</td>
+                            <td class="px-4 py-3">Lê Văn A</td>
+                            <td class="px-4 py-3 font-bold text-white">350,000đ</td>
+                            <td class="px-4 py-3"><span class="px-2 py-1 bg-[#FFD700]/10 text-[#FFD700] border border-[#FFD700]/30 rounded text-[10px] font-bold">Đang lấy hàng</span></td>
+                            <td class="px-4 py-3 text-right"><button @click="simulateAction('Đã in vận đơn #ORD-991')" class="text-xs bg-white/10 px-3 py-1 rounded hover:bg-white/20 text-white font-bold">In Vận Đơn</button></td>
+                        </tr>
                     </tbody>
                 </table>
-            </div>
-
-            <div x-show="activeTab === 'inventory'" style="display:none;" class="p-6 bg-[#121214] border border-white/5 rounded-2xl">
-                <table class="w-full text-left text-sm text-slate-300">
-                    <thead class="text-xs text-slate-500 uppercase bg-white/5 border-b border-white/5">
-                        <tr><th class="px-4 py-3">Tên Sản Phẩm</th><th class="px-4 py-3">Tồn Kho Kho Bãi</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b border-white/5"><td class="px-4 py-3 font-bold">Áo Thun Basic M</td><td class="px-4 py-3 font-bold text-red-400">2 (Sắp hết)</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- TAB MỚI: VẬN CHUYỂN -->
-            <div x-show="activeTab === 'shipping'" style="display:none;" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                 <div class="p-6 bg-[#121214] border border-green-500/30 rounded-2xl flex flex-col items-center">
-                    <div class="w-16 h-16 bg-green-500 text-white rounded-xl flex items-center justify-center font-bold text-xl mb-4">GHTK</div>
-                    <h3 class="font-bold text-white mb-2">Giao Hàng Tiết Kiệm</h3>
-                    <button class="w-full mt-4 py-2 bg-green-500/20 text-green-400 border border-green-500/30 font-bold rounded-xl text-sm">Đã Kết Nối</button>
-                 </div>
-                 <div class="p-6 bg-[#121214] border border-orange-500/30 rounded-2xl flex flex-col items-center">
-                    <div class="w-16 h-16 bg-orange-500 text-white rounded-xl flex items-center justify-center font-bold text-xl mb-4">GHN</div>
-                    <h3 class="font-bold text-white mb-2">Giao Hàng Nhanh</h3>
-                    <button class="w-full mt-4 py-2 bg-white/5 text-slate-300 hover:bg-orange-500 hover:text-white font-bold rounded-xl text-sm transition-colors">Kết Nối Ngay</button>
-                 </div>
-                 <div class="p-6 bg-[#121214] border border-red-500/30 rounded-2xl flex flex-col items-center">
-                    <div class="w-16 h-16 bg-red-600 text-white rounded-xl flex items-center justify-center font-bold text-xl mb-4">VTP</div>
-                    <h3 class="font-bold text-white mb-2">Viettel Post</h3>
-                    <button class="w-full mt-4 py-2 bg-white/5 text-slate-300 hover:bg-red-600 hover:text-white font-bold rounded-xl text-sm transition-colors">Kết Nối Ngay</button>
-                 </div>
-            </div>
-
-            <!-- TAB MỚI: THANH TOÁN -->
-            <div x-show="activeTab === 'payment'" style="display:none;" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                 <div class="p-6 bg-[#121214] border border-blue-500/30 rounded-2xl flex flex-col items-center">
-                    <div class="w-full py-4 text-center font-bold text-2xl text-blue-500 tracking-wider mb-4 border-b border-white/5">VNPAY</div>
-                    <h3 class="font-bold text-white mb-2">Cổng VNPay</h3>
-                    <button class="w-full mt-4 py-2 bg-blue-500/20 text-blue-400 border border-blue-500/30 font-bold rounded-xl text-sm">Đã Kết Nối</button>
-                 </div>
-                 <div class="p-6 bg-[#121214] border border-pink-500/30 rounded-2xl flex flex-col items-center">
-                    <div class="w-full py-4 text-center font-bold text-2xl text-pink-500 tracking-wider mb-4 border-b border-white/5">MoMo</div>
-                    <h3 class="font-bold text-white mb-2">Ví Điện Tử MoMo</h3>
-                    <button class="w-full mt-4 py-2 bg-white/5 text-slate-300 hover:bg-pink-500 hover:text-white font-bold rounded-xl text-sm transition-colors">Kết Nối Ngay</button>
-                 </div>
-                 <div class="p-6 bg-[#121214] border border-purple-500/30 rounded-2xl flex flex-col items-center">
-                    <div class="w-full py-4 text-center font-bold text-2xl text-purple-500 tracking-wider mb-4 border-b border-white/5">stripe</div>
-                    <h3 class="font-bold text-white mb-2">Stripe (Quốc Tế)</h3>
-                    <button class="w-full mt-4 py-2 bg-white/5 text-slate-300 hover:bg-purple-500 hover:text-white font-bold rounded-xl text-sm transition-colors">Kết Nối Ngay</button>
-                 </div>
             </div>
         </div>
-    `;
+`;
         document.addEventListener('DOMContentLoaded', () => {
             renderLayout('ecommerce', content);
         });
