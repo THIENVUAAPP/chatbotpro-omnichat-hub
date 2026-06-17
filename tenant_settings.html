@@ -5,24 +5,15 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>CHỐT NGHÌN ĐƠN</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        "primary": "#10B981",
-                        "secondary": "#7B2DFF",
-                        "tertiary": "#FFD700",
-                        "accent": "#00F0FF",
-                        "background": "#0A0A0A",
-                        "surface": "#121214"
-                    },
-                    fontFamily: {
-                        "display": ["Plus Jakarta Sans", "sans-serif"],
-                        "body": ["Inter", "sans-serif"],
-                    }
+                    colors: { "primary": "#10B981", "secondary": "#7B2DFF", "tertiary": "#FFD700", "accent": "#00F0FF", "background": "#0A0A0A", "surface": "#121214" },
+                    fontFamily: { "display": ["Plus Jakarta Sans", "sans-serif"], "body": ["Inter", "sans-serif"] }
                 }
             }
         }
@@ -39,54 +30,42 @@
     <script src="js/layout.js"></script>
     <script>
         const content = `
-        <div class="max-w-4xl">
-            <h2 class="text-xl font-bold mb-6">Thiết Lập Doanh Nghiệp (Tenant Settings)</h2>
-            <div class="bg-[#121214] border border-white/5 rounded-2xl p-6 mb-6">
-                <h3 class="font-bold text-sm mb-4 border-b border-white/5 pb-2 text-[#00F0FF]">Thông Tin Cơ Bản</h3>
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-400 mb-2">Tên Doanh Nghiệp</label>
-                        <input type="text" class="w-full max-w-md bg-[#0A0A0A] border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-[#00F0FF]" value="Cửa Hàng Thời Trang B">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-400 mb-2">Ngành Hàng</label>
-                        <select class="w-full max-w-md bg-[#0A0A0A] border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none">
-                            <option>Thời Trang</option>
-                            <option>Mỹ Phẩm</option>
-                            <option>F&B</option>
-                        </select>
-                    </div>
-                </div>
+        <div x-data="{ activeTab: 'general' }">
+            <h2 class="text-xl font-bold mb-6">Cài Đặt Cửa Hàng (Tenant)</h2>
+            <div class="mb-6 flex gap-4 border-b border-white/5">
+                <button @click="activeTab = 'general'" :class="activeTab === 'general' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Chung</button>
+                <button @click="activeTab = 'api'" :class="activeTab === 'api' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">API & Tích Hợp</button>
+                <button @click="activeTab = 'billing'" :class="activeTab === 'billing' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Lịch Sử Thanh Toán</button>
             </div>
-            
-            <div class="bg-[#121214] border border-white/5 rounded-2xl p-6 mb-6">
-                <h3 class="font-bold text-sm mb-4 border-b border-white/5 pb-2 text-[#10B981]">Giới Hạn Claude AI & Billing</h3>
-                <div class="flex justify-between items-center bg-[#0A0A0A] border border-white/5 rounded-xl p-4">
-                    <div>
-                        <div class="font-bold text-white text-sm mb-1">Gói Hiện Tại: <span class="text-[#FFD700]">PRO PLAN</span></div>
-                        <div class="text-xs text-slate-400">Giới hạn 100,000 tin nhắn AI / tháng. Đã dùng: 12,450.</div>
-                    </div>
-                    <button class="px-4 py-2 bg-white/10 text-white font-bold rounded-lg text-sm hover:bg-white/20 transition-colors">Đổi Gói</button>
-                </div>
-                <div class="mt-4">
-                    <label class="block text-xs font-bold text-slate-400 mb-2">Ngưỡng cảnh báo chi phí AI ($/ngày)</label>
-                    <input type="number" class="w-full max-w-xs bg-[#0A0A0A] border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-[#10B981]" value="5.0">
-                </div>
+
+            <div x-show="activeTab === 'general'" class="p-6 bg-[#121214] border border-white/5 rounded-2xl space-y-4">
+                <label class="block text-xs font-bold text-slate-400">Tên Cửa Hàng</label>
+                <input type="text" class="w-full bg-[#0A0A0A] border border-white/10 p-2 text-sm rounded text-white" value="My Store VIP">
             </div>
-            
-            <div class="bg-[#121214] border border-white/5 rounded-2xl p-6">
-                <h3 class="font-bold text-sm mb-4 border-b border-white/5 pb-2 text-[#7B2DFF]">API Keys (Tích Hợp Bên Thứ 3)</h3>
-                <p class="text-xs text-slate-400 mb-4">Sử dụng API Key này để kết nối CHỐT NGHÌN ĐƠN với ERP, hệ thống kế toán hoặc CRM bên ngoài.</p>
-                <div class="flex gap-2 max-w-xl">
-                    <input type="text" class="flex-1 bg-[#0A0A0A] border border-white/10 rounded-xl px-4 py-2 text-sm text-slate-500 font-mono" value="sk_tenant_9a8b7c6d5e4f3g2h1" readonly>
-                    <button class="px-4 py-2 bg-white/10 text-white font-bold rounded-xl text-sm hover:bg-white/20 transition-colors">Copy</button>
-                    <button class="px-4 py-2 border border-red-500/50 text-red-400 font-bold rounded-xl text-sm hover:bg-red-500/10 transition-colors">Revoke</button>
-                </div>
+
+            <div x-show="activeTab === 'api'" style="display:none;" class="p-6 bg-[#121214] border border-white/5 rounded-2xl space-y-4">
+                 <label class="block text-xs font-bold text-slate-400">API Key (Riêng cho Cửa Hàng Này)</label>
+                <div class="flex gap-2"><input type="text" class="flex-1 bg-[#0A0A0A] border border-white/10 p-2 text-sm text-slate-400 rounded" value="sk-ant-xxxxxxxxxxxxxx" readonly> <button class="bg-[#10B981] px-4 rounded font-bold text-black text-sm">Copy</button></div>
+            </div>
+
+            <div x-show="activeTab === 'billing'" style="display:none;" class="p-6 bg-[#121214] border border-white/5 rounded-2xl">
+                 <table class="w-full text-left text-sm text-slate-300">
+                    <thead class="text-xs text-slate-500 uppercase bg-white/5 border-b border-white/5">
+                        <tr><th class="px-4 py-3">Mã Hóa Đơn</th><th class="px-4 py-3">Ngày</th><th class="px-4 py-3">Số Tiền</th><th class="px-4 py-3">Trạng Thái</th><th class="px-4 py-3 text-right">Tải PDF</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-white/5">
+                            <td class="px-4 py-3 font-bold">INV-001</td><td class="px-4 py-3">01/06/2026</td><td class="px-4 py-3 text-white font-bold">$12.50</td>
+                            <td class="px-4 py-3"><span class="text-green-400 text-xs bg-green-500/20 px-2 py-1 rounded">Đã Thanh Toán</span></td>
+                            <td class="px-4 py-3 text-right"><span class="material-symbols-outlined text-slate-400 hover:text-white cursor-pointer">download</span></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     `;
         document.addEventListener('DOMContentLoaded', () => {
-            renderLayout('settings', content);
+            renderLayout('tenant_settings', content);
         });
     </script>
 </body>
