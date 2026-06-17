@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Admin Control - CHỐT NGHÌN ĐƠN</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>CHỐT NGHÌN ĐƠN</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script>
         tailwind.config = {
@@ -13,173 +13,70 @@
                 extend: {
                     colors: {
                         "primary": "#10B981",
-                        "surface": "#ffffff",
-                        "outline-variant": "#e2e8f0",
+                        "secondary": "#7B2DFF",
+                        "tertiary": "#FFD700",
+                        "accent": "#00F0FF",
+                        "background": "#0A0A0A",
+                        "surface": "#121214"
                     },
                     fontFamily: {
-                        "sans": ["Inter", "sans-serif"],
-                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                        "display": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
                     }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: #f1f5f9; }
-        .glass-panel {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
     </style>
 </head>
-<body class="text-slate-800 h-screen flex flex-col overflow-hidden">
-    <!-- Header -->
-    <header class="w-full h-16 bg-[#0f172a] text-white flex items-center justify-between px-6 z-50 shrink-0">
-        <div class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-primary text-2xl">admin_panel_settings</span>
-            <span class="font-display font-bold text-lg tracking-tight">SaaS Super Admin</span>
-        </div>
-        <div class="flex items-center gap-4">
-            <button onclick="window.location.href='index.html'" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-lg text-sm transition-colors">Đăng Xuất</button>
-        </div>
-    </header>
-
-    <div class="flex flex-1 h-full overflow-hidden">
-        <!-- Sidebar -->
-        <nav class="w-64 bg-white border-r border-outline-variant/30 flex flex-col py-6 px-4 shrink-0 overflow-y-auto">
-            <div class="text-xs font-bold text-slate-400 mb-4 tracking-wider uppercase px-2">Quản trị Toàn Cục</div>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 text-primary font-bold mb-2">
-                <span class="material-symbols-outlined">group</span>
-                <span>Quản Lý Gmail Users</span>
-            </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors font-semibold mb-2">
-                <span class="material-symbols-outlined">payments</span>
-                <span>Giao Dịch & Doanh Thu</span>
-            </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors font-semibold mb-2">
-                <span class="material-symbols-outlined">inventory_2</span>
-                <span>Cấu Hình Gói Cước</span>
-            </a>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="flex-1 overflow-y-auto p-8">
-            <div class="max-w-6xl mx-auto space-y-6">
-                
-                <h1 class="text-3xl font-display font-bold mb-6">Quản Lý & Cấp Quyền Khách Hàng</h1>
-                
-                
-                <!-- Pending Approvals -->
-                <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-tertiary bg-gradient-to-r from-tertiary/5 to-transparent mb-8">
-                    <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-tertiary">how_to_reg</span> Xét Duyệt Thành Viên Mới</h2>
-                    <p class="text-sm text-slate-500 mb-4">Duyệt để cấp quyền truy cập Free Trial cho các tài khoản mới đăng ký.</p>
-                    
-                    <div class="space-y-3">
-                        <!-- Item 1 -->
-                        <div class="flex items-center justify-between p-3 bg-white border border-outline-variant rounded-xl">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-500">D</div>
-                                <div>
-                                    <div class="font-bold text-sm text-slate-800">doanhnghiep@gmail.com</div>
-                                    <div class="text-xs text-slate-400">Đăng ký lúc: 10:45 - 17/06/2026</div>
-                                </div>
-                            </div>
-                            <div class="flex gap-2">
-                                <button onclick="alert('Đã cấp gói Free Trial'); this.parentElement.parentElement.style.display='none';" class="px-3 py-1.5 bg-primary text-white text-xs font-bold rounded-lg hover:bg-emerald-600 transition-colors">Duyệt Free Trial</button>
-                                <button onclick="this.parentElement.parentElement.style.display='none';" class="px-3 py-1.5 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-colors">Từ Chối</button>
-                            </div>
-                        </div>
-                        <!-- Item 2 -->
-                        <div class="flex items-center justify-between p-3 bg-white border border-outline-variant rounded-xl">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-500">H</div>
-                                <div>
-                                    <div class="font-bold text-sm text-slate-800">hoangtuan@gmail.com</div>
-                                    <div class="text-xs text-slate-400">Đăng ký lúc: 08:20 - 17/06/2026</div>
-                                </div>
-                            </div>
-                            <div class="flex gap-2">
-                                <button onclick="alert('Đã cấp gói Free Trial'); this.parentElement.parentElement.style.display='none';" class="px-3 py-1.5 bg-primary text-white text-xs font-bold rounded-lg hover:bg-emerald-600 transition-colors">Duyệt Free Trial</button>
-                                <button onclick="this.parentElement.parentElement.style.display='none';" class="px-3 py-1.5 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-colors">Từ Chối</button>
-                            </div>
-                        </div>
-                    </div>
+<body>
+    <div id="root"></div>
+    <script src="js/layout.js"></script>
+    <script>
+        const content = `
+        <div class="p-6 bg-[#121214] border border-[#FFD700]/20 rounded-2xl min-h-[500px] shadow-[0_0_30px_rgba(255,215,0,0.05)]">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-xl font-bold flex items-center gap-2"><span class="material-symbols-outlined text-[#FFD700]">corporate_fare</span> Quản Lý Tenants (Doanh Nghiệp)</h2>
+                    <p class="text-sm text-slate-400 mt-1">Danh sách các doanh nghiệp đang sử dụng nền tảng CHỐT NGHÌN ĐƠN.</p>
                 </div>
-
-                <!-- Quick Action -->
-                <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-primary bg-gradient-to-r from-primary/5 to-transparent">
-                    <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">person_add</span> Cấp Quyền Tài Khoản Mới</h2>
-                    <form class="flex gap-4 items-end" onsubmit="event.preventDefault(); alert('Đã cấp quyền cho tài khoản ' + document.getElementById('new-gmail').value); document.getElementById('new-gmail').value='';">
-                        <div class="flex-1">
-                            <label class="block text-xs font-bold text-slate-500 mb-1 uppercase tracking-wider">Địa chỉ Gmail của Khách</label>
-                            <input type="email" id="new-gmail" required class="w-full bg-white border border-outline-variant rounded-xl px-4 py-3 focus:outline-primary" placeholder="khachhang@gmail.com">
-                        </div>
-                        <div class="w-64">
-                            <label class="block text-xs font-bold text-slate-500 mb-1 uppercase tracking-wider">Gói Cước Mua</label>
-                            <select class="w-full bg-white border border-outline-variant rounded-xl px-4 py-3 focus:outline-primary">
-                                <option>Gói Standard (1 Tháng)</option>
-                                <option>Gói Standard (1 Năm)</option>
-                                <option>Gói Enterprise (1 Năm)</option>
-                                <option>Gói Enterprise (5 Năm)</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-emerald-600 transition-colors shadow-sm">
-                            Lưu & Kích Hoạt
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Users List -->
-                <div class="glass-panel rounded-2xl overflow-hidden mt-8">
-                    <div class="p-6 border-b border-outline-variant/50 flex justify-between items-center">
-                        <h2 class="text-lg font-bold">Danh sách Tài Khoản Hệ Thống</h2>
-                        <div class="relative">
-                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
-                            <input type="text" class="pl-9 pr-4 py-2 border border-outline-variant rounded-lg text-sm focus:outline-primary" placeholder="Tìm Gmail...">
-                        </div>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-sm">
-                            <thead class="bg-slate-50 text-slate-500 font-bold uppercase text-xs tracking-wider">
-                                <tr>
-                                    <th class="px-6 py-4">Tài khoản Gmail</th>
-                                    <th class="px-6 py-4">Gói Cước</th>
-                                    <th class="px-6 py-4">Trạng thái</th>
-                                    <th class="px-6 py-4">Ngày hết hạn</th>
-                                    <th class="px-6 py-4 text-right">Hành động</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-outline-variant/30">
-                                <tr class="hover:bg-slate-50">
-                                    <td class="px-6 py-4 font-bold text-slate-800">nguyenvana@gmail.com</td>
-                                    <td class="px-6 py-4"><span class="px-2 py-1 bg-blue-100 text-blue-700 font-bold rounded text-xs">Enterprise</span></td>
-                                    <td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 font-bold rounded text-xs">Đang Active</span></td>
-                                    <td class="px-6 py-4 text-slate-500">20/12/2031 (5 Năm)</td>
-                                    <td class="px-6 py-4 text-right">
-                                        <button class="text-primary hover:underline font-bold">Sửa</button>
-                                        <span class="text-slate-300 mx-2">|</span>
-                                        <button class="text-red-500 hover:underline font-bold">Khóa</button>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-slate-50">
-                                    <td class="px-6 py-4 font-bold text-slate-800">tranb@gmail.com</td>
-                                    <td class="px-6 py-4"><span class="px-2 py-1 bg-slate-100 text-slate-700 font-bold rounded text-xs">Standard</span></td>
-                                    <td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 font-bold rounded text-xs">Đang Active</span></td>
-                                    <td class="px-6 py-4 text-slate-500">15/07/2026</td>
-                                    <td class="px-6 py-4 text-right">
-                                        <button class="text-primary hover:underline font-bold">Sửa</button>
-                                        <span class="text-slate-300 mx-2">|</span>
-                                        <button class="text-red-500 hover:underline font-bold">Khóa</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
+                <button class="px-4 py-2 bg-[#FFD700] text-[#0A0A0A] font-bold rounded-lg hover:bg-yellow-400 transition-colors">+ Tạo Tenant Mới</button>
             </div>
-        </main>
-    </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm text-slate-300">
+                    <thead class="text-xs text-slate-500 uppercase bg-white/5 border-b border-white/5">
+                        <tr>
+                            <th class="px-4 py-3">Tên Doanh Nghiệp</th>
+                            <th class="px-4 py-3">Chủ Sở Hữu</th>
+                            <th class="px-4 py-3">Gói (Plan)</th>
+                            <th class="px-4 py-3">Trạng Thái</th>
+                            <th class="px-4 py-3 text-right">Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                            <td class="px-4 py-3 font-bold text-white">Shop Thời Trang A</td>
+                            <td class="px-4 py-3">shopA@gmail.com</td>
+                            <td class="px-4 py-3"><span class="px-2 py-1 bg-[#FFD700]/20 text-[#FFD700] rounded text-xs font-bold">PRO</span></td>
+                            <td class="px-4 py-3"><span class="px-2 py-1 bg-primary/20 text-primary rounded text-xs">Active</span></td>
+                            <td class="px-4 py-3 text-right">
+                                <button class="text-[#00F0FF] hover:underline text-xs font-bold">Quản lý</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+        document.addEventListener('DOMContentLoaded', () => {
+            renderLayout('admin_panel', content);
+        });
+    </script>
 </body>
 </html>
