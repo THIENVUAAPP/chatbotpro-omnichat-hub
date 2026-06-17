@@ -18,58 +18,47 @@
             }
         }
     </script>
-    <style>
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
-    </style>
 </head>
 <body>
     <div id="root"></div>
     <script src="js/layout.js"></script>
     <script>
         const content = `
-        <div x-data="{ activeTab: 'blog' }">
+        <div x-data="{ 
+            activeTab: 'media',
+            uploading: false,
+            images: ['https://placehold.co/400x400/121214/475569?text=Banner+Tet', 'https://placehold.co/400x400/121214/475569?text=Sale+Thang+8'],
+            simulateUpload() {
+                this.uploading = true;
+                setTimeout(() => {
+                    this.uploading = false;
+                    this.images.unshift('https://placehold.co/400x400/10B981/0A0A0A?text=Anh+San+Pham+Moi');
+                }, 1500);
+            }
+        }">
             <h2 class="text-xl font-bold mb-6">Quản Lý Nội Dung & Media</h2>
             <div class="mb-6 flex gap-4 border-b border-white/5">
-                <button @click="activeTab = 'blog'" :class="activeTab === 'blog' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Bài Viết / Blog</button>
-                <button @click="activeTab = 'banner'" :class="activeTab === 'banner' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Banner Khuyến Mãi</button>
-                <button @click="activeTab = 'media'" :class="activeTab === 'media' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Thư Viện Media</button>
+                <button class="pb-2 font-bold text-sm px-4 text-[#00F0FF] border-b-2 border-[#00F0FF]">Thư Viện Media Đa Phương Tiện</button>
             </div>
 
-            <div x-show="activeTab === 'blog'" class="p-6 bg-[#121214] border border-white/5 rounded-2xl">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="font-bold">Danh sách Bài Viết</h3>
-                    <button class="px-4 py-2 bg-primary text-black font-bold rounded-lg text-sm">+ Bài Viết Mới</button>
-                </div>
-                <table class="w-full text-left text-sm text-slate-300">
-                    <thead class="text-xs text-slate-500 uppercase bg-white/5 border-b border-white/5">
-                        <tr><th class="px-4 py-3">Tiêu đề</th><th class="px-4 py-3">Danh mục</th><th class="px-4 py-3">Trạng thái</th><th class="px-4 py-3 text-right">Hành động</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b border-white/5">
-                            <td class="px-4 py-3 font-bold text-white">5 Cách Tăng Doanh Số 2026</td>
-                            <td class="px-4 py-3">Kinh Doanh</td>
-                            <td class="px-4 py-3"><span class="text-green-400 text-xs">Đã xuất bản</span></td>
-                            <td class="px-4 py-3 text-right text-[#00F0FF] cursor-pointer">Sửa</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold">Kho Ảnh / Video Của Doanh Nghiệp</h3>
+                <button @click="simulateUpload()" class="px-6 py-2 bg-[#00F0FF] text-black font-bold rounded-xl text-sm flex items-center gap-2 hover:bg-cyan-400">
+                    <span x-show="!uploading" class="material-symbols-outlined text-[18px]">upload</span> 
+                    <span x-show="!uploading">Tải Lên Media</span>
+                    <span x-show="uploading" class="material-symbols-outlined animate-spin text-[18px]">sync</span>
+                    <span x-show="uploading">Đang xử lý...</span>
+                </button>
             </div>
 
-            <div x-show="activeTab === 'banner'" style="display:none;" class="grid grid-cols-2 gap-6">
-                <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl text-center border-dashed cursor-pointer hover:bg-white/5">
-                    <span class="material-symbols-outlined text-4xl mb-2 text-slate-400">add_photo_alternate</span>
-                    <p class="font-bold text-sm text-white">Thêm Banner Trang Chủ</p>
-                    <p class="text-xs text-slate-500">1920x1080px (Tối đa 2MB)</p>
-                </div>
-            </div>
-
-            <div x-show="activeTab === 'media'" style="display:none;" class="grid grid-cols-4 gap-4">
-                <template x-for="i in 4">
-                    <div class="aspect-square bg-[#0A0A0A] border border-white/10 rounded-xl flex items-center justify-center">
-                        <span class="material-symbols-outlined text-slate-600">image</span>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <template x-for="img in images" :key="img">
+                    <div class="aspect-square rounded-2xl overflow-hidden border border-white/10 relative group">
+                        <img :src="img" class="w-full h-full object-cover transition-transform group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                            <button class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/40"><span class="material-symbols-outlined text-white">visibility</span></button>
+                            <button class="w-10 h-10 bg-red-500/80 rounded-full flex items-center justify-center hover:bg-red-500"><span class="material-symbols-outlined text-white">delete</span></button>
+                        </div>
                     </div>
                 </template>
             </div>

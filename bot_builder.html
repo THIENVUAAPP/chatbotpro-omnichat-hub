@@ -18,84 +18,66 @@
             }
         }
     </script>
-    <style>
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
-    </style>
 </head>
 <body>
     <div id="root"></div>
     <script src="js/layout.js"></script>
     <script>
         const content = `
-        <div x-data="{ activeTab: 'prompt', showToast: false, files: [] }">
-            <div class="mb-6 flex gap-4 border-b border-white/5 overflow-x-auto custom-scrollbar whitespace-nowrap">
-                <button @click="activeTab = 'prompt'" :class="activeTab === 'prompt' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">System Prompt</button>
-                <button @click="activeTab = 'flow'" :class="activeTab === 'flow' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Flow Builder</button>
-                <button @click="activeTab = 'rag'" :class="activeTab === 'rag' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Knowledge Base</button>
-                <button @click="activeTab = 'ab'" :class="activeTab === 'ab' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">A/B Testing</button>
-                <button @click="activeTab = 'escalate'" :class="activeTab === 'escalate' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Escalate Rules</button>
+        <div x-data="{ 
+            activeTab: 'rag', 
+            uploading: false, 
+            progress: 0,
+            files: ['Chinh_sach_doi_tra.pdf'],
+            uploadFile() {
+                this.uploading = true;
+                this.progress = 0;
+                let interval = setInterval(() => {
+                    this.progress += 10;
+                    if(this.progress >= 100) {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            this.uploading = false;
+                            this.files.unshift('Bao_Cao_San_Pham_2026.docx');
+                        }, 500);
+                    }
+                }, 200);
+            }
+        }">
+            <div class="mb-6 flex gap-4 border-b border-white/5">
+                <button @click="activeTab = 'rag'" class="pb-2 font-bold text-sm px-4 text-[#00F0FF] border-b-2 border-[#00F0FF]">Knowledge Base (RAG Training)</button>
             </div>
 
-            <!-- Toast -->
-            <div x-show="showToast" x-transition class="fixed top-20 right-8 bg-green-500 text-white px-4 py-2 rounded-lg font-bold text-sm shadow-lg z-50">Đã lưu thành công!</div>
-
-            <!-- TAB 1 -->
-            <div x-show="activeTab === 'prompt'" class="p-6 bg-[#121214] border border-[#7B2DFF]/20 rounded-2xl relative shadow-[0_0_40px_rgba(123,45,255,0.05)]">
-                <div class="flex justify-between items-start mb-6">
-                    <div>
-                        <h2 class="text-xl font-bold">Cấu Hình Tính Cách Claude AI</h2>
-                        <p class="text-sm text-slate-400 mt-1">Định hình cách bot tư vấn, chốt sale.</p>
+            <div x-show="activeTab === 'rag'" class="p-6 bg-[#121214] border border-white/5 rounded-2xl min-h-[400px]">
+                <h2 class="text-xl font-bold mb-4">Kho Dữ Liệu RAG (Tài Liệu Đào Tạo Cho AI)</h2>
+                
+                <div @click="!uploading && uploadFile()" class="border-2 border-dashed border-white/10 rounded-xl p-10 flex flex-col items-center justify-center text-center cursor-pointer transition-colors" :class="uploading ? 'bg-white/5' : 'hover:bg-white/5'">
+                    <span x-show="!uploading" class="material-symbols-outlined text-4xl text-slate-500 mb-2">cloud_upload</span>
+                    <p x-show="!uploading" class="font-bold text-sm">Bấm vào đây để tải file tài liệu (PDF, DOCX) lên</p>
+                    
+                    <!-- Progress Bar Simulator -->
+                    <div x-show="uploading" style="display:none;" class="w-full max-w-md">
+                        <div class="flex justify-between text-xs mb-1"><span class="text-[#00F0FF]">Đang Vector hóa tài liệu (Training AI)...</span><span x-text="progress + '%'"></span></div>
+                        <div class="w-full bg-white/10 rounded-full h-2 overflow-hidden">
+                            <div class="bg-[#00F0FF] h-2 transition-all duration-200" :style="'width: ' + progress + '%'"></div>
+                        </div>
                     </div>
-                    <button @click="showToast = true; setTimeout(() => showToast = false, 3000)" class="px-6 py-2 bg-gradient-to-r from-primary to-[#7B2DFF] rounded-xl font-bold text-sm text-white">Lưu Cấu Hình</button>
                 </div>
-                <div class="space-y-4">
-                    <input type="text" class="w-full bg-[#0A0A0A] border border-white/10 rounded-xl px-4 py-2 text-sm text-white" value="Chuyên gia bán hàng">
-                    <textarea class="w-full h-40 bg-[#0A0A0A] border border-white/10 rounded-xl p-4 text-sm text-white custom-scrollbar">Luôn chào khách và tư vấn chốt đơn.</textarea>
-                </div>
-            </div>
 
-            <!-- TAB 2 -->
-            <div x-show="activeTab === 'flow'" style="display:none;" class="p-6 bg-[#121214] border border-white/5 rounded-2xl min-h-[400px] flex items-center justify-center text-center">
-                <div><span class="material-symbols-outlined text-6xl text-[#00F0FF] mb-4">account_tree</span><h2 class="text-2xl font-bold">Flow Builder Trực Quan</h2></div>
-            </div>
-
-            <!-- TAB 3: RAG -->
-            <div x-show="activeTab === 'rag'" style="display:none;" class="p-6 bg-[#121214] border border-white/5 rounded-2xl min-h-[400px]">
-                <h2 class="text-xl font-bold mb-4">Kho Dữ Liệu RAG (Tài Liệu Đào Tạo)</h2>
-                <div class="border-2 border-dashed border-white/10 rounded-xl p-10 flex flex-col items-center justify-center text-center hover:bg-white/5 cursor-pointer transition-colors" @click="files.push('Bao_Hanh_Chinh_Sach_2026.pdf')">
-                    <span class="material-symbols-outlined text-4xl text-slate-500 mb-2">cloud_upload</span>
-                    <p class="font-bold text-sm">Bấm vào đây để tải file PDF/DOCX lên</p>
-                </div>
-                <ul class="mt-4 space-y-2">
+                <ul class="mt-6 space-y-2">
                     <template x-for="f in files" :key="f">
-                        <li class="flex justify-between bg-white/5 p-3 rounded-lg text-sm text-white">
-                            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-[#10B981]">description</span> <span x-text="f"></span></span>
-                            <span class="text-xs text-green-400 bg-green-500/20 px-2 py-1 rounded">Đã Embed (Vectorized)</span>
+                        <li class="flex justify-between items-center bg-white/5 p-4 rounded-xl text-sm text-white">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-red-500/20 text-red-400 rounded flex items-center justify-center"><span class="material-symbols-outlined">picture_as_pdf</span></div>
+                                <div>
+                                    <p class="font-bold" x-text="f"></p>
+                                    <p class="text-[10px] text-slate-400">Kích thước: 2.4 MB</p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-green-400 bg-green-500/20 px-3 py-1 rounded border border-green-500/30">✓ Đã Vectorized</span>
                         </li>
                     </template>
                 </ul>
-            </div>
-
-            <!-- TAB 4: AB Testing -->
-            <div x-show="activeTab === 'ab'" style="display:none;" class="p-6 bg-[#121214] border border-white/5 rounded-2xl min-h-[400px]">
-                <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[#FFD700]">compare_arrows</span> A/B Testing Kịch Bản</h2>
-                <div class="grid grid-cols-2 gap-6">
-                    <div class="border border-white/10 p-4 rounded-xl"><h3 class="font-bold text-primary mb-2">Version A (Hiện tại)</h3><p class="text-sm text-slate-400">Tỷ lệ chốt đơn: 15%</p></div>
-                    <div class="border border-[#7B2DFF]/50 bg-[#7B2DFF]/10 p-4 rounded-xl"><h3 class="font-bold text-[#7B2DFF] mb-2">Version B (Thử nghiệm)</h3><p class="text-sm text-slate-400">Tỷ lệ chốt đơn: 18% <span class="text-green-400">(+3%)</span></p></div>
-                </div>
-                <button class="mt-6 px-4 py-2 bg-[#FFD700] text-black font-bold rounded-lg text-sm">Áp Dụng Version B</button>
-            </div>
-
-            <!-- TAB 5: Escalate -->
-            <div x-show="activeTab === 'escalate'" style="display:none;" class="p-6 bg-[#121214] border border-white/5 rounded-2xl min-h-[400px]">
-                <h2 class="text-xl font-bold mb-4">Quy Tắc Chuyển Người Thật (Escalate)</h2>
-                <div class="space-y-3">
-                    <label class="flex items-center gap-3"><input type="checkbox" checked class="w-4 h-4 accent-primary"> <span class="text-sm text-white">Chuyển ngay khi khách chat từ "bảo hành" hoặc "lỗi"</span></label>
-                    <label class="flex items-center gap-3"><input type="checkbox" checked class="w-4 h-4 accent-primary"> <span class="text-sm text-white">Chuyển khi khách tức giận (Sentiment Analysis = Negative)</span></label>
-                </div>
             </div>
         </div>
     `;

@@ -18,49 +18,72 @@
             }
         }
     </script>
-    <style>
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
-    </style>
 </head>
 <body>
     <div id="root"></div>
     <script src="js/layout.js"></script>
     <script>
         const content = `
-        <div x-data="{ activeTab: 'general' }">
-            <h2 class="text-xl font-bold mb-6">Cài Đặt Cửa Hàng (Tenant)</h2>
+        <div x-data="{ activeTab: 'strategy' }">
+            <h2 class="text-xl font-bold mb-6">Cài Đặt Cửa Hàng (Quản Trị Doanh Nghiệp)</h2>
             <div class="mb-6 flex gap-4 border-b border-white/5">
-                <button @click="activeTab = 'general'" :class="activeTab === 'general' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Chung</button>
-                <button @click="activeTab = 'api'" :class="activeTab === 'api' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">API & Tích Hợp</button>
-                <button @click="activeTab = 'billing'" :class="activeTab === 'billing' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Lịch Sử Thanh Toán</button>
+                <button @click="activeTab = 'general'" :class="activeTab === 'general' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Quản Trị Vận Hành</button>
+                <button @click="activeTab = 'strategy'" :class="activeTab === 'strategy' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Chiến Lược Bán Hàng</button>
             </div>
 
-            <div x-show="activeTab === 'general'" class="p-6 bg-[#121214] border border-white/5 rounded-2xl space-y-4">
-                <label class="block text-xs font-bold text-slate-400">Tên Cửa Hàng</label>
-                <input type="text" class="w-full bg-[#0A0A0A] border border-white/10 p-2 text-sm rounded text-white" value="My Store VIP">
+            <!-- TAB QUẢN TRỊ VẬN HÀNH -->
+            <div x-show="activeTab === 'general'" class="p-6 bg-[#121214] border border-white/5 rounded-2xl grid grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <label class="block text-xs font-bold text-slate-400">Tên Pháp Lý / Tên Cửa Hàng</label>
+                    <input type="text" class="w-full bg-[#0A0A0A] border border-white/10 p-3 text-sm rounded-xl text-white" value="Công ty TNHH Bán Lẻ ABC">
+                    
+                    <label class="block text-xs font-bold text-slate-400 pt-4">Địa Chỉ Trụ Sở</label>
+                    <input type="text" class="w-full bg-[#0A0A0A] border border-white/10 p-3 text-sm rounded-xl text-white" value="Tầng 5, Tòa nhà X, Hà Nội">
+                </div>
+                <div class="space-y-4 border-l border-white/5 pl-8">
+                    <h3 class="font-bold text-sm text-primary mb-4">Khung Giờ Hoạt Động Của Nhân Viên</h3>
+                    <div class="flex items-center gap-4">
+                        <label class="text-xs text-slate-400 w-16">Giờ mở</label>
+                        <input type="time" class="bg-[#0A0A0A] border border-white/10 p-2 text-sm rounded-lg text-white" value="08:00">
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <label class="text-xs text-slate-400 w-16">Giờ đóng</label>
+                        <input type="time" class="bg-[#0A0A0A] border border-white/10 p-2 text-sm rounded-lg text-white" value="22:00">
+                    </div>
+                    <label class="block text-xs font-bold text-slate-400 pt-4">Tin nhắn tự động ngoài giờ làm việc</label>
+                    <textarea class="w-full bg-[#0A0A0A] border border-white/10 p-3 text-sm rounded-xl text-white h-20">Hiện tại đã hết giờ làm việc. Bot AI của chúng tôi sẽ tạm thời ghi nhận yêu cầu của quý khách...</textarea>
+                </div>
             </div>
 
-            <div x-show="activeTab === 'api'" style="display:none;" class="p-6 bg-[#121214] border border-white/5 rounded-2xl space-y-4">
-                 <label class="block text-xs font-bold text-slate-400">API Key (Riêng cho Cửa Hàng Này)</label>
-                <div class="flex gap-2"><input type="text" class="flex-1 bg-[#0A0A0A] border border-white/10 p-2 text-sm text-slate-400 rounded" value="sk-ant-xxxxxxxxxxxxxx" readonly> <button class="bg-[#10B981] px-4 rounded font-bold text-black text-sm">Copy</button></div>
-            </div>
+            <!-- TAB CHIẾN LƯỢC BÁN HÀNG -->
+            <div x-show="activeTab === 'strategy'" style="display:none;" class="p-6 bg-[#121214] border border-white/5 rounded-2xl">
+                 <h3 class="font-bold text-lg text-[#FFD700] mb-4">Cấu Hình Chiến Lược Gói & Upsell (Cho Khách Hàng Của Bạn)</h3>
+                 <div class="grid grid-cols-2 gap-6">
+                    <div class="border border-white/10 p-6 rounded-2xl">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="font-bold">Kích hoạt Gói Dùng Thử (Free Trial)</h4>
+                            <div class="relative inline-block w-10 align-middle select-none transition duration-200 ease-in cursor-pointer">
+                                <input type="checkbox" name="toggle" id="toggle1" class="toggle-checkbox absolute block w-4 h-4 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                <label for="toggle1" class="toggle-label block overflow-hidden h-6 rounded-full bg-green-500 cursor-pointer"></label>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-4">Cho phép khách hàng đăng ký trải nghiệm miễn phí sản phẩm của cửa hàng.</p>
+                        <label class="block text-xs font-bold text-slate-400 mb-2">Số ngày dùng thử</label>
+                        <input type="number" class="w-full bg-[#0A0A0A] border border-white/10 p-3 text-sm rounded-xl text-white" value="7">
+                    </div>
 
-            <div x-show="activeTab === 'billing'" style="display:none;" class="p-6 bg-[#121214] border border-white/5 rounded-2xl">
-                 <table class="w-full text-left text-sm text-slate-300">
-                    <thead class="text-xs text-slate-500 uppercase bg-white/5 border-b border-white/5">
-                        <tr><th class="px-4 py-3">Mã Hóa Đơn</th><th class="px-4 py-3">Ngày</th><th class="px-4 py-3">Số Tiền</th><th class="px-4 py-3">Trạng Thái</th><th class="px-4 py-3 text-right">Tải PDF</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b border-white/5">
-                            <td class="px-4 py-3 font-bold">INV-001</td><td class="px-4 py-3">01/06/2026</td><td class="px-4 py-3 text-white font-bold">$12.50</td>
-                            <td class="px-4 py-3"><span class="text-green-400 text-xs bg-green-500/20 px-2 py-1 rounded">Đã Thanh Toán</span></td>
-                            <td class="px-4 py-3 text-right"><span class="material-symbols-outlined text-slate-400 hover:text-white cursor-pointer">download</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <div class="border border-[#7B2DFF]/30 p-6 rounded-2xl bg-[#7B2DFF]/5">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="font-bold text-[#7B2DFF]">Tự Động Upsell (Gợi ý Mua Kèm)</h4>
+                            <div class="relative inline-block w-10 align-middle select-none transition duration-200 ease-in cursor-pointer">
+                                <input type="checkbox" checked class="accent-[#7B2DFF] w-5 h-5"/>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-4">Bot AI sẽ tự động phân tích giỏ hàng và đề xuất sản phẩm liên quan khi khách sắp thanh toán.</p>
+                        <label class="block text-xs font-bold text-slate-400 mb-2">Giới hạn số sản phẩm gợi ý</label>
+                        <input type="number" class="w-full bg-[#0A0A0A] border border-white/10 p-3 text-sm rounded-xl text-white" value="2">
+                    </div>
+                 </div>
             </div>
         </div>
     `;
