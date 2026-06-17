@@ -18,12 +18,6 @@
             }
         }
     </script>
-    <style>
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
-    </style>
 </head>
 <body>
     <div id="root"></div>
@@ -31,75 +25,114 @@
     <script>
         const content = `
         <div x-data="{ 
-            users: [
-                {email: 'quocthiencr7@gmail.com', role: 'Tenant Admin', online: true, resolved: 1205, speed: 0.8},
-                {email: 'sale1@gmail.com', role: 'Agent', online: false, resolved: 342, speed: 1.5}
-            ],
-            newEmail: '',
-            newRole: 'Agent',
-            addUser() {
-                if(this.newEmail) {
-                    this.users.push({ email: this.newEmail, role: this.newRole, online: true, resolved: 0, speed: 0 });
-                    this.newEmail = '';
-                }
+            showInviteModal: false,
+            showGmailModal: false,
+            importing: false,
+            simulateAction(msg) {
+                window.dispatchEvent(new CustomEvent('show-toast', { detail: { msg: msg, type: 'success' } }));
             },
-            removeUser(index) {
-                if(confirm('Xác nhận xóa?')) this.users.splice(index, 1);
+            startGmailImport() {
+                this.importing = true;
+                setTimeout(() => {
+                    this.importing = false;
+                    this.showGmailModal = false;
+                    this.simulateAction('Đã đồng bộ thành công 2 tài khoản từ Google Workspace!');
+                }, 2000);
             }
         }">
-            <div class="flex justify-between items-center mb-6">
-                <div>
-                    <h2 class="text-xl font-bold flex items-center gap-2"><span class="material-symbols-outlined text-primary">groups</span> Quản Lý Đội Ngũ & Hiệu Suất (KPI)</h2>
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-xl font-bold">Phân Quyền Nhóm Cửa Hàng</h2>
+                <div class="flex gap-2">
+                    <!-- Nút Mới: Add Google Workspace -->
+                    <button @click="showGmailModal = true" class="px-4 py-2 bg-white text-black font-bold rounded-xl text-sm flex items-center gap-2 hover:bg-slate-200">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24"><path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        Thêm Bằng Gmail (Direct)
+                    </button>
+                    <!-- Nút Email thông thường -->
+                    <button @click="showInviteModal = true" class="px-4 py-2 bg-[#10B981] text-black font-bold rounded-xl text-sm flex items-center gap-2 hover:bg-emerald-400">
+                        <span class="material-symbols-outlined text-[18px]">person_add</span> Thêm Nhân Viên
+                    </button>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 xl:grid-cols-4 gap-6">
-                <div class="xl:col-span-1 bg-[#121214] border border-white/5 rounded-2xl p-6 h-fit">
-                    <h3 class="font-bold text-sm mb-4">Thêm Nhân Viên</h3>
-                    <div class="space-y-4">
-                        <input x-model="newEmail" type="email" class="w-full bg-[#0A0A0A] border border-white/10 rounded-xl px-4 py-2 text-sm text-white" placeholder="Email...">
-                        <select x-model="newRole" class="w-full bg-[#0A0A0A] border border-white/10 rounded-xl px-4 py-2 text-sm text-white">
-                            <option>Manager</option><option>Agent</option>
-                        </select>
-                        <button @click="addUser()" class="w-full py-2 bg-primary text-[#0A0A0A] rounded-xl font-bold text-sm">Gửi Lời Mời</button>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- User card -->
+                <div class="bg-[#121214] p-6 rounded-2xl border border-white/5">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-[#7B2DFF] to-[#00F0FF] rounded-full flex items-center justify-center font-bold text-lg">TC</div>
+                        <div>
+                            <div class="font-bold">Thiên CR7</div>
+                            <div class="text-xs text-slate-400">quocthiencr7@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="mb-4"><span class="px-3 py-1 bg-[#FFD700]/20 text-[#FFD700] rounded text-[10px] font-bold border border-[#FFD700]/50 uppercase tracking-wider">Super Admin Hệ Thống</span></div>
+                    <div class="flex gap-2">
+                        <button @click="simulateAction('Không thể chỉnh sửa Super Admin!')" class="flex-1 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-sm text-slate-300 font-bold">Chỉnh sửa</button>
                     </div>
                 </div>
 
-                <div class="xl:col-span-3 bg-[#121214] border border-white/5 rounded-2xl overflow-x-auto">
-                    <table class="w-full text-left text-sm text-slate-300">
-                        <thead class="text-xs text-slate-500 uppercase bg-white/5 border-b border-white/5">
-                            <tr>
-                                <th class="px-6 py-4">Tài Khoản</th>
-                                <th class="px-6 py-4">Vai Trò</th>
-                                <th class="px-6 py-4 text-center">ĐH Chốt Thành Công</th>
-                                <th class="px-6 py-4 text-center">Tốc Độ Phản Hồi</th>
-                                <th class="px-6 py-4 text-right">Hành Động</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template x-for="(user, index) in users" :key="index">
-                                <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
-                                    <td class="px-6 py-4 font-bold text-white flex items-center gap-3">
-                                        <div class="relative">
-                                            <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-xs uppercase" x-text="user.email.charAt(0)"></div>
-                                            <span x-show="user.online" class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-[#121214] rounded-full"></span>
-                                        </div>
-                                        <span x-text="user.email"></span>
-                                    </td>
-                                    <td class="px-6 py-4"><span class="px-2 py-1 bg-white/10 rounded text-[10px] font-bold" x-text="user.role"></span></td>
-                                    <td class="px-6 py-4 text-center font-bold text-[#FFD700]" x-text="user.resolved + ' đơn'"></td>
-                                    <td class="px-6 py-4 text-center font-bold text-[#10B981]" x-text="user.speed + ' giây'"></td>
-                                    <td class="px-6 py-4 text-right">
-                                        <button @click="removeUser(index)" class="text-red-400 text-xs font-bold" x-show="user.role !== 'Tenant Admin'">Xóa</button>
-                                    </td>
-                                </tr>
-                            </template>
-                        </tbody>
-                    </table>
+                <div class="bg-[#121214] p-6 rounded-2xl border border-white/5">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center font-bold text-lg">H</div>
+                        <div>
+                            <div class="font-bold">Trần Minh Hiếu</div>
+                            <div class="text-xs text-slate-400">hieu.sale@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="mb-4"><span class="px-3 py-1 bg-[#10B981]/10 text-[#10B981] rounded text-[10px] font-bold border border-[#10B981]/30 uppercase tracking-wider">Sale / CSKH</span></div>
+                    <div class="flex gap-2">
+                        <button @click="simulateAction('Đã lưu phân quyền cho nhân viên Hiếu')" class="flex-1 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-sm text-slate-300 font-bold">Chỉnh sửa</button>
+                        <button @click="simulateAction('Đã xóa nhân viên khỏi hệ thống')" class="w-10 flex items-center justify-center bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white rounded-lg transition-colors"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL THÊM BẰNG GMAIL -->
+            <div x-show="showGmailModal" style="display:none;" class="fixed inset-0 bg-black/90 flex items-center justify-center z-50 backdrop-blur-sm">
+                <div class="bg-[#121214] border border-white/10 p-8 rounded-3xl w-[450px] text-center" @click.outside="!importing && (showGmailModal = false)">
+                    <svg class="w-16 h-16 mx-auto mb-4" viewBox="0 0 24 24"><path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                    <h3 class="text-xl font-bold mb-2">Thêm Trực Tiếp Từ Google Workspace</h3>
+                    <p class="text-sm text-slate-400 mb-6">Đồng bộ tự động tài khoản Gmail của nhân viên/khách hàng vào hệ thống.</p>
+                    
+                    <div x-show="!importing">
+                        <div class="text-left bg-[#0A0A0A] p-4 rounded-xl border border-white/5 mb-6 text-sm">
+                            <label class="flex items-center gap-3 mb-3 cursor-pointer">
+                                <input type="checkbox" checked class="accent-[#10B981] w-4 h-4">
+                                <span>nguyen.a@gmail.com (Quyền Sale)</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" checked class="accent-[#10B981] w-4 h-4">
+                                <span>tran.b@gmail.com (Quyền Media)</span>
+                            </label>
+                        </div>
+                        <div class="flex gap-4">
+                            <button @click="showGmailModal = false" class="flex-1 py-3 bg-white/5 hover:bg-white/10 rounded-xl font-bold">Hủy</button>
+                            <button @click="startGmailImport()" class="flex-1 py-3 bg-white text-black font-bold rounded-xl hover:bg-slate-200">Import Ngay</button>
+                        </div>
+                    </div>
+
+                    <div x-show="importing" class="py-8">
+                        <span class="material-symbols-outlined animate-spin text-4xl text-blue-500 mb-2">sync</span>
+                        <p class="text-blue-400 font-bold">Đang kết nối Google API & Thêm User...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MODAL THÊM EMAIL -->
+            <div x-show="showInviteModal" style="display:none;" class="fixed inset-0 bg-black/90 flex items-center justify-center z-50 backdrop-blur-sm">
+                <div class="bg-[#121214] border border-[#10B981]/30 p-8 rounded-3xl w-[400px]" @click.outside="showInviteModal = false">
+                    <h3 class="text-xl font-bold mb-4 text-[#10B981]">Thêm Nhân Viên (Thủ Công)</h3>
+                    <input type="email" placeholder="Nhập email nhân viên..." class="w-full bg-[#0A0A0A] border border-white/10 p-3 text-sm rounded-xl mb-4 focus:outline-none focus:border-[#10B981] text-white">
+                    <select class="w-full bg-[#0A0A0A] border border-white/10 p-3 text-sm rounded-xl mb-6 text-white focus:outline-none focus:border-[#10B981]">
+                        <option>Quyền: Admin Cửa Hàng</option>
+                        <option>Quyền: Sale / CSKH</option>
+                        <option>Quyền: Marketing / Content</option>
+                    </select>
+                    <button @click="showInviteModal = false; simulateAction('Đã gửi email lời mời kích hoạt!')" class="w-full py-3 bg-[#10B981] text-black font-bold rounded-xl text-sm hover:bg-emerald-400">Gửi Lời Mời</button>
                 </div>
             </div>
         </div>
-    `;
+`;
         document.addEventListener('DOMContentLoaded', () => {
             renderLayout('team_management', content);
         });

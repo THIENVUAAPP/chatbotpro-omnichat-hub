@@ -18,45 +18,51 @@
             }
         }
     </script>
-    <style>
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
-    </style>
 </head>
 <body>
     <div id="root"></div>
     <script src="js/layout.js"></script>
     <script>
         const content = `
-        <div x-data="{ activeTab: 'sales' }">
-            <h2 class="text-xl font-bold mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-[#00F0FF]">insights</span> Báo Cáo & Thống Kê</h2>
-            <div class="mb-6 flex gap-4 border-b border-white/5">
-                <button @click="activeTab = 'sales'" :class="activeTab === 'sales' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Doanh Số</button>
-                <button @click="activeTab = 'bot'" :class="activeTab === 'bot' ? 'text-[#00F0FF] border-b-2 border-[#00F0FF]' : 'text-slate-400'" class="pb-2 font-bold text-sm px-4">Hiệu Suất Bot</button>
-            </div>
-
-            <div x-show="activeTab === 'sales'" class="space-y-6">
-                <div class="grid grid-cols-3 gap-6">
-                    <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl"><p class="text-sm text-slate-400">Doanh thu hôm nay</p><h3 class="text-2xl font-bold text-white mt-2">12.500.000đ</h3></div>
-                    <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl"><p class="text-sm text-slate-400">Đơn hàng mới</p><h3 class="text-2xl font-bold text-[#00F0FF] mt-2">342 Đơn</h3></div>
-                    <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl"><p class="text-sm text-slate-400">AOV (Giá trị ĐH TB)</p><h3 class="text-2xl font-bold text-[#10B981] mt-2">365.000đ</h3></div>
-                </div>
-                <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl h-[300px] flex items-center justify-center">
-                    <span class="text-slate-500">[Khu vực render Biểu đồ Line Chart Doanh Số 30 Ngày qua Chart.js]</span>
+        <div x-data="{
+            simulateAction(msg) {
+                window.dispatchEvent(new CustomEvent('show-toast', { detail: { msg: msg, type: 'success' } }));
+            }
+        }">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold">Báo Cáo Phân Tích (Analytics)</h2>
+                <div class="flex gap-2">
+                    <button @click="simulateAction('Đang tạo và tải file PDF báo cáo...')" class="px-4 py-2 bg-white/5 hover:bg-white/10 text-white font-bold rounded-xl text-sm flex items-center gap-2 border border-white/10"><span class="material-symbols-outlined text-[18px]">picture_as_pdf</span> Xuất PDF</button>
+                    <button @click="simulateAction('Dữ liệu đã được xuất ra file Excel. Bắt đầu tải xuống...')" class="px-4 py-2 bg-[#10B981]/20 hover:bg-[#10B981]/30 text-[#10B981] font-bold rounded-xl text-sm flex items-center gap-2 border border-[#10B981]/30"><span class="material-symbols-outlined text-[18px]">table_chart</span> Xuất Excel</button>
                 </div>
             </div>
-
-            <div x-show="activeTab === 'bot'" style="display:none;" class="space-y-6">
-                 <div class="grid grid-cols-3 gap-6">
-                    <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl"><p class="text-sm text-slate-400">Tỷ lệ Bot giải quyết (Resolution Rate)</p><h3 class="text-2xl font-bold text-[#10B981] mt-2">87.5%</h3></div>
-                    <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl"><p class="text-sm text-slate-400">Tỷ lệ Escalate (Chuyển cho Nhân viên)</p><h3 class="text-2xl font-bold text-red-400 mt-2">12.5%</h3></div>
-                    <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl"><p class="text-sm text-slate-400">Thời gian phản hồi TB</p><h3 class="text-2xl font-bold text-[#FFD700] mt-2">1.2s</h3></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl">
+                    <div class="text-xs text-slate-400 mb-1">Tổng Doanh Thu (T10)</div>
+                    <div class="text-3xl font-display font-black text-[#10B981]">85.4M</div>
+                    <div class="text-xs text-green-400 mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">trending_up</span> +12% so với tháng trước</div>
                 </div>
+                <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl">
+                    <div class="text-xs text-slate-400 mb-1">Đơn Chốt Qua AI</div>
+                    <div class="text-3xl font-display font-black text-[#00F0FF]">1,402</div>
+                    <div class="text-xs text-green-400 mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">trending_up</span> +5.2%</div>
+                </div>
+                <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl">
+                    <div class="text-xs text-slate-400 mb-1">Khách Hàng Mới</div>
+                    <div class="text-3xl font-display font-black text-white">450</div>
+                </div>
+                <div class="p-6 bg-[#121214] border border-white/5 rounded-2xl">
+                    <div class="text-xs text-slate-400 mb-1">Tỷ Lệ Chốt Đơn (CR)</div>
+                    <div class="text-3xl font-display font-black text-[#FFD700]">32.4%</div>
+                </div>
+            </div>
+            <div class="p-8 bg-[#121214] border border-white/5 rounded-2xl text-center text-slate-500">
+                <span class="material-symbols-outlined text-6xl mb-4 text-white/5">insert_chart</span>
+                <p>Khu vực nhúng biểu đồ TradingView / Chart.js cho Phân tích dòng tiền</p>
             </div>
         </div>
-    `;
+`;
         document.addEventListener('DOMContentLoaded', () => {
             renderLayout('analytics', content);
         });
