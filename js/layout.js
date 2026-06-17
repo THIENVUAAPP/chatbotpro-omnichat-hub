@@ -1,55 +1,87 @@
-const NAV_ITEMS = [
-    { id: 'dashboard', icon: 'chat', label: 'Inbox & Chat', role: 'all' },
-    { id: 'crm', icon: 'group', label: 'Quản Lý Khách Hàng (CRM)', role: 'all' },
-    { id: 'ecommerce', icon: 'storefront', label: 'Đơn Hàng & Vận Chuyển', role: 'all' },
-    { id: 'bot_builder', icon: 'smart_toy', label: 'AI Bot Builder & RAG', role: 'admin' },
-    { id: 'content', icon: 'perm_media', label: 'Media & Nội Dung', role: 'all' },
-    { id: 'analytics', icon: 'monitoring', label: 'Báo Cáo & Phân Tích', role: 'all' },
-    { id: 'affiliate', icon: 'diversity_3', label: 'Affiliate & CTV', role: 'admin' },
-    { id: 'channels', icon: 'hub', label: 'Kết Nối Kênh', role: 'admin' },
-    { id: 'team_management', icon: 'badge', label: 'Team & Phân Quyền', role: 'admin' },
-    { id: 'support', icon: 'help_clinic', label: 'Hỗ Trợ (24/7)', role: 'all' },
-    { id: 'tenant_settings', icon: 'settings', label: 'Cài Đặt Cửa Hàng', role: 'admin' },
-    { id: 'admin_panel', icon: 'local_police', label: 'Super Admin', role: 'super_admin' },
+const NAV_GROUPS = [
+    {
+        title: 'CỐT LÕI (NHÓM B & C)',
+        items: [
+            { id: 'dashboard', icon: 'dashboard', label: 'Dashboard & Inbox', role: 'all' },
+            { id: 'bot_builder', icon: 'smart_toy', label: 'Flow Builder & RAG', role: 'admin' },
+            { id: 'campaigns', icon: 'campaign', label: 'Chiến Dịch & Mẫu', role: 'all' }
+        ]
+    },
+    {
+        title: 'VẬN HÀNH BÁN HÀNG',
+        items: [
+            { id: 'channels', icon: 'hub', label: 'Quản Lý Kênh', role: 'admin' },
+            { id: 'ecommerce', icon: 'shopping_cart', label: 'Sản Phẩm & Đơn', role: 'all' },
+            { id: 'crm', icon: 'group', label: 'CRM Khách Hàng', role: 'all' },
+            { id: 'content', icon: 'article', label: 'Nội Dung & Banner', role: 'all' }
+        ]
+    },
+    {
+        title: 'CÀI ĐẶT DOANH NGHIỆP',
+        items: [
+            { id: 'team_management', icon: 'admin_panel_settings', label: 'Phân Quyền Team', role: 'admin' },
+            { id: 'tenant_settings', icon: 'settings', label: 'Thiết Lập Tenant', role: 'admin' },
+            { id: 'analytics', icon: 'insert_chart', label: 'Báo Cáo Phân Tích', role: 'all' }
+        ]
+    },
+    {
+        title: 'HỆ THỐNG',
+        items: [
+            { id: 'affiliate', icon: 'diversity_3', label: 'Affiliate & CTV', role: 'admin' },
+            { id: 'support', icon: 'help_clinic', label: 'Hỗ Trợ 24/7', role: 'all' },
+            { id: 'admin_panel', icon: 'local_police', label: 'Super Admin', role: 'super_admin' }
+        ]
+    }
 ];
 
 function renderLayout(activeId, contentHtml) {
     const root = document.getElementById('root');
     const role = 'super_admin'; 
     
-    const visibleNav = NAV_ITEMS.filter(item => {
-        if (role === 'super_admin') return true;
-        if (role === 'admin' && item.role !== 'super_admin') return true;
-        return item.role === 'all';
+    let navHtml = '';
+    NAV_GROUPS.forEach(group => {
+        const visibleItems = group.items.filter(item => {
+            if (role === 'super_admin') return true;
+            if (role === 'admin' && item.role !== 'super_admin') return true;
+            return item.role === 'all';
+        });
+
+        if (visibleItems.length > 0) {
+            navHtml += `
+                <div class="mt-6 mb-2 px-6 hidden md:block">
+                    <span class="text-[11px] font-black text-slate-500 uppercase tracking-widest">${group.title}</span>
+                </div>
+            `;
+            visibleItems.forEach(item => {
+                navHtml += `
+                    <a href="${item.id}.html" class="flex items-center gap-4 px-6 py-3 transition-all ${item.id === activeId ? 'text-[#10B981] bg-white/5 border-l-4 border-[#10B981]' : 'text-slate-400 hover:text-white hover:bg-white/5'}">
+                        <span class="material-symbols-outlined text-[22px]">${item.icon}</span>
+                        <span class="font-bold text-[15px] hidden md:block">${item.label}</span>
+                    </a>
+                `;
+            });
+        }
     });
 
-    const navHtml = visibleNav.map(item => `
-        <a href="${item.id}.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${item.id === activeId ? 'bg-gradient-to-r from-[#10B981]/20 to-transparent text-[#10B981] border-l-4 border-[#10B981]' : 'text-slate-400 hover:bg-white/5 hover:text-white'}">
-            <span class="material-symbols-outlined">${item.icon}</span>
-            <span class="font-bold text-sm hidden md:block">${item.label}</span>
-        </a>
-    `).join('');
-
     root.innerHTML = `
-        <!-- X-DATA TOÀN CỤC CHỨA TOAST VÀ THÔNG BÁO CHUÔNG -->
         <div class="flex h-screen bg-[#0A0A0A] text-white font-body overflow-hidden" 
              x-data="globalState()" 
              @show-toast.window="addToast($event.detail.msg, $event.detail.type)">
             
             <!-- Sidebar -->
-            <div class="w-20 md:w-64 bg-[#121214] border-r border-white/5 flex flex-col transition-all duration-300 z-20">
-                <div class="h-16 flex items-center justify-center md:justify-start md:px-6 border-b border-white/5">
+            <div class="w-20 md:w-72 bg-[#121214] border-r border-white/5 flex flex-col transition-all duration-300 z-20">
+                <div class="h-[72px] flex items-center justify-center md:justify-start md:px-6 border-b border-white/5 shrink-0">
                     <div class="w-8 h-8 rounded bg-gradient-to-br from-[#10B981] to-[#00F0FF] flex items-center justify-center font-bold text-black font-display shadow-[0_0_15px_rgba(16,185,129,0.5)]">CN</div>
-                    <span class="ml-3 font-display font-black tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400 hidden md:block">CHỐT NGHÌN ĐƠN</span>
+                    <span class="ml-3 font-display font-black tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400 hidden md:block text-lg">CHỐT NGHÌN ĐƠN</span>
                 </div>
-                <div class="flex-1 overflow-y-auto custom-scrollbar p-3 space-y-1">
+                <div class="flex-1 overflow-y-auto custom-scrollbar py-4">
                     ${navHtml}
                 </div>
-                <div class="p-4 border-t border-white/5 flex items-center gap-3">
+                <div class="p-4 border-t border-white/5 flex items-center gap-3 shrink-0 bg-[#0A0A0A]/50">
                     <div class="w-10 h-10 rounded-full bg-gradient-to-r from-[#7B2DFF] to-[#00F0FF] flex items-center justify-center font-bold">TC</div>
                     <div class="hidden md:block">
                         <div class="text-sm font-bold">Thiên CR7</div>
-                        <div class="text-xs text-[#FFD700]">Super Admin</div>
+                        <div class="text-[11px] font-bold text-[#FFD700] uppercase tracking-wider">Super Admin</div>
                     </div>
                 </div>
             </div>
@@ -57,34 +89,29 @@ function renderLayout(activeId, contentHtml) {
             <!-- Main Content -->
             <div class="flex-1 flex flex-col h-screen overflow-hidden relative">
                 <!-- Header / Global Bell -->
-                <header class="h-16 bg-[#121214]/80 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-6 z-10">
+                <header class="h-[72px] bg-[#121214]/80 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-8 z-10 shrink-0">
                     <div class="font-bold text-lg hidden sm:block">Không gian làm việc</div>
                     
-                    <!-- BELL NOTIFICATIONS -->
-                    <div class="flex items-center gap-4">
-                        <!-- Nút báo động hệ thống / Toast Test -->
+                    <div class="flex items-center gap-6">
                         <div class="relative cursor-pointer" @click="showNotif = !showNotif">
-                            <span class="material-symbols-outlined text-slate-300 hover:text-white transition-colors">notifications</span>
-                            
-                            <!-- Dấu chấm đỏ báo tin nhắn mới -->
-                            <span x-show="unreadCount > 0" style="display:none;" class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-[9px] font-bold text-white shadow-[0_0_10px_rgba(239,68,68,0.8)] animate-pulse" x-text="unreadCount"></span>
+                            <span class="material-symbols-outlined text-slate-300 hover:text-white transition-colors text-3xl">notifications</span>
+                            <span x-show="unreadCount > 0" style="display:none;" class="absolute 0 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-[10px] font-bold text-white shadow-[0_0_10px_rgba(239,68,68,0.8)] animate-pulse" x-text="unreadCount"></span>
 
-                            <!-- Dropdown thông báo -->
-                            <div x-show="showNotif" @click.outside="showNotif = false" style="display:none;" class="absolute right-0 top-10 w-80 bg-[#121214] border border-white/10 rounded-2xl shadow-2xl z-50 overflow-hidden">
+                            <div x-show="showNotif" @click.outside="showNotif = false" style="display:none;" class="absolute right-0 top-12 w-80 bg-[#121214] border border-white/10 rounded-2xl shadow-2xl z-50 overflow-hidden">
                                 <div class="p-4 border-b border-white/10 font-bold flex justify-between">
                                     <span>Thông Báo Đa Kênh</span>
                                     <span class="text-xs text-[#00F0FF] cursor-pointer" @click="unreadCount = 0; notifications = []">Đọc tất cả</span>
                                 </div>
-                                <div class="max-h-64 overflow-y-auto custom-scrollbar">
+                                <div class="max-h-80 overflow-y-auto custom-scrollbar">
                                     <template x-for="n in notifications" :key="n.id">
                                         <div class="p-4 border-b border-white/5 hover:bg-white/5 flex gap-3 text-sm">
-                                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-white" :class="n.platform === 'Tiktok' ? 'bg-black border border-white/20' : (n.platform==='Shopee' ? 'bg-[#EE4D2D]' : 'bg-blue-500')">
+                                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-white shrink-0" :class="n.platform === 'Tiktok' ? 'bg-black border border-white/20' : (n.platform==='Shopee' ? 'bg-[#EE4D2D]' : 'bg-blue-500')">
                                                 <span class="material-symbols-outlined text-[16px]" x-text="n.icon"></span>
                                             </div>
                                             <div>
-                                                <div class="font-bold text-white" x-text="n.title"></div>
-                                                <div class="text-xs text-slate-400 mt-1" x-text="n.message"></div>
-                                                <div class="text-[10px] text-slate-500 mt-1" x-text="n.time"></div>
+                                                <div class="font-bold text-white text-[13px]" x-text="n.title"></div>
+                                                <div class="text-xs text-slate-400 mt-1 line-clamp-2" x-text="n.message"></div>
+                                                <div class="text-[10px] text-slate-500 mt-2" x-text="n.time"></div>
                                             </div>
                                         </div>
                                     </template>
@@ -95,7 +122,7 @@ function renderLayout(activeId, contentHtml) {
                     </div>
                 </header>
 
-                <main class="flex-1 overflow-y-auto p-4 md:p-8 custom-scrollbar">
+                <main class="flex-1 overflow-y-auto p-4 md:p-8 custom-scrollbar bg-[#0A0A0A]">
                     ${contentHtml}
                 </main>
 
@@ -114,7 +141,6 @@ function renderLayout(activeId, contentHtml) {
         </div>
         
         <script>
-            // Alpine Component cho Global State (Toast & Real-time Inbox Notification)
             document.addEventListener('alpine:init', () => {
                 Alpine.data('globalState', () => ({
                     toasts: [],
@@ -124,13 +150,11 @@ function renderLayout(activeId, contentHtml) {
                     notifications: [],
                     
                     init() {
-                        // Kích hoạt giả lập hệ thống Real-time nhắn tin (Auto Bell)
                         setInterval(() => {
-                            // Chỉ giả lập ngẫu nhiên nếu người dùng đang không mở bảng thông báo
-                            if(!this.showNotif && Math.random() > 0.7) {
+                            if(!this.showNotif && Math.random() > 0.6) {
                                 this.triggerNewMessage();
                             }
-                        }, 8000); // Mỗi 8s có cơ hội nổ tin nhắn
+                        }, 6000);
                     },
 
                     triggerNewMessage() {
@@ -147,11 +171,10 @@ function renderLayout(activeId, contentHtml) {
                             platform: rand.p,
                             icon: rand.i,
                             title: rand.title,
-                            message: 'Khách hàng vừa gửi 1 yêu cầu cần hỗ trợ ngay.',
+                            message: 'Khách hàng vừa gửi 1 yêu cầu cần hỗ trợ ngay. Hãy kiểm tra Inbox.',
                             time: 'Vừa xong'
                         });
                         
-                        // Kêu 1 tiếng tinh (Dùng audio base64 nhỏ để giả lập tiếng chuông nếu cần, ở đây dùng toast)
                         this.addToast('🔔 ' + rand.title, 'warning');
                     },
 
