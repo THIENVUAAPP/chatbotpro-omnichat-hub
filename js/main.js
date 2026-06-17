@@ -6,10 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initToastSystem();
     initGlobalLinkHandlers();
     
-    // Core Role Permissions Init
+    // Core Role Permissions & SideBar Link adjustments
     initRoleSwitcher();
     applyRolePermissions();
     checkRoleAccess();
+    
+    // Global floating voice sales chatbot
+    initFloatingSalesBot();
     
     // Run translation on load
     translatePage();
@@ -35,6 +38,7 @@ const translations = {
         "copyright": "© 2026 ChatbotPro. Trợ lý Trí Tuệ Nhân Tạo Doanh Nghiệp.",
         "nav-team": "Phân Quyền Team",
         "nav-logout": "Quay Lại Web",
+        "nav-market": "Thị Trường AI",
 
         // Role Switcher & Access Control
         "role-label": "VAI TRÒ:",
@@ -131,7 +135,7 @@ const translations = {
         // Checkout Page
         "checkout-title": "Phương Thức Thanh Toán",
         "checkout-desc": "Mọi giao dịch đều được mã hóa bảo mật 256-bit SSL.",
-        "checkout-method-card": "THÈ QUỐC TẾ",
+        "checkout-method-card": "THẺ QUỐC TẾ",
         "checkout-method-wallet": "VÍ ĐIỆN TỬ",
         "checkout-method-apple": "MOMO / ZALOPAY",
         "checkout-label-number": "SỐ THẺ",
@@ -145,7 +149,7 @@ const translations = {
         "checkout-subtotal": "Tạm tính",
         "checkout-tax": "Thuế (10% VAT gồm trong giá)",
         "checkout-btn-pay": "THANH TOÁN NGAY",
-        "checkout-secure": "Thanh toán bảo mật chuẩn quốc tế",
+        "copyright-secure": "Thanh toán bảo mật chuẩn quốc tế",
 
         // Dashboard & CRM
         "dash-title": "Bảng Điều Khiển CRM",
@@ -156,7 +160,7 @@ const translations = {
         "dash-card-satisfaction": "Mức Độ Hài Lòng",
         "dash-roster-title": "Danh Sách Khách Hàng",
         "dash-roster-sub": "Tự động đồng bộ từ Messenger, Zalo OA và Zalo cá nhân.",
-        "dash-search-placeholder": "Tìm kiếm khách hàng, kênh kết nối...",
+        "dash-search-placeholder": "Tìm kiếm...",
         "dash-col-name": "KHÁCH HÀNG",
         "dash-col-channel": "KÊNH KẾT NỐI",
         "dash-col-status": "TRẠNG THÁI",
@@ -195,7 +199,7 @@ const translations = {
         
         // Social Connections (Integrations Grid)
         "channels-tab-title": "Cấu Hình Kênh Kết Nối",
-        "channels-tab-sub": "Đồng bộ Access Token, Webhook và tài khoản mạng xã hội / sàn thương mại điện tử để tự động hóa chốt đơn.",
+        "channels-tab-sub": "Đồng bộ Access Token, Webhook và tài khoản mạng xã hội để tự động hóa chốt đơn.",
         "chan-status-connected": "Đang hoạt động",
         "chan-status-disconnected": "Chưa kết nối",
         "chan-btn-connect": "KẾT NỐI KÊNH",
@@ -217,7 +221,7 @@ const translations = {
         "chat-autopilot-active": "AI tự động trực",
         "chat-autopilot-inactive": "Nhân viên trực chat",
         "chat-autopilot-toggle": "Chế độ tự động (AI Autopilot)",
-        "chat-input-placeholder": "Nhập nội dung tin nhắn tư vấn... (Gõ nội dung sẽ tự tắt AI để bạn tiếp quản)",
+        "chat-input-placeholder": "Nhập tin nhắn... (Gõ tin nhắn tự động tắt AI)",
         "chat-ai-suggestions": "AI GỢI Ý PHẢN HỒI",
         "chat-crm-details": "THÔNG TIN KHÁCH HÀNG CRM",
         "chat-crm-phone": "Số điện thoại",
@@ -249,49 +253,41 @@ const translations = {
         "team-perm-api": "Cấu hình API & Kênh",
         "team-perm-guides": "Xem tài liệu Hướng dẫn",
         "team-perm-team": "Quản lý Đội ngũ",
+        "team-tab-roster": "Phân Quyền Nhân Sự",
+        "team-tab-owner": "Cấu Hình Chủ Sở Hữu & Giọng Nói AI",
+        "owner-card-profile": "Hồ Sơ & Logo Doanh Nghiệp",
+        "owner-card-voice": "Cấu Hình Giọng Nói AI & Kênh Hotline",
+        "owner-label-avatar": "Avatar Chủ Doanh Nghiệp (Ảnh/Video)",
+        "owner-label-logo": "Logo Thương Hiệu",
+        "owner-label-voice-model": "Mô Hình Giọng Nói AI",
+        "owner-label-voice-speed": "Tốc Độ Đọc Giọng Nói",
+        "owner-label-hotline": "Số Điện Thoại Hotline",
+        "owner-btn-save": "LƯU CÀI ĐẶT CHỦ SỞ HỮU",
 
-        // Guides Page
-        "guides-title": "Trung Tâm Hướng Dẫn Sử Dụng",
-        "dash-guides-sub": "Tài liệu hướng dẫn cấu hình AI, Zalo OA và tối ưu tri thức.",
-        "guide-doc-title": "Cẩm Nang Triển Khai Trợ Lý AI",
-        "guide-section-1": "1. Hướng dẫn nạp tri thức (Knowledge Ingestion)",
-        "guide-section-1-desc": "AI Chatbot có thể tự học từ các file .pdf, .docx, .xlsx hoặc website URL. Bạn chỉ cần tải tệp lên trong mục quản lý tri thức, hệ thống sẽ tự động phân tách và xử lý bối cảnh trong 1-2 phút.",
-        "guide-section-2": "2. Cấu hình đồng bộ Zalo OA & Messenger",
-        "guide-section-2-desc": "Truy cập mục Cấu HÌnh API, điền Access Token của Zalo Developer và Messenger Webhook. Trợ lý AI sẽ ngay lập tức tiếp nhận inbox mới và phản hồi tự động trong 5 giây.",
-        "guides-hero-title": "Làm Chủ <span class=\"luxury-gradient\">Trí Tuệ AI</span>",
-        "guides-hero-desc": "Khám phá tài liệu hướng dẫn chuyên sâu, tài liệu API và các bài học nâng cao cho hệ thống ChatbotPro.",
-        "guides-tile-start-title": "Bắt Đầu Triển Khai",
-        "guides-tile-start-desc": "Các khái niệm cốt lõi, thiết lập ban đầu và chiến lược khởi chạy nhân viên số AI.",
-        "guides-tile-api-title": "Tích Hợp API",
-        "guides-tile-api-desc": "Tài liệu Endpoint, Webhook và các giao thức xác thực bảo mật hệ thống.",
-        "guides-tile-skills-title": "Kỹ Năng AI Chuyên Sâu",
-        "guides-tile-skills-desc": "Prompt engineering, quản lý ngữ cảnh (context window) và cơ chế định tuyến LLM.",
-        "guides-btn-read": "Đọc Hướng Dẫn",
-        "guides-btn-docs": "Xem Tài Liệu",
-        "guides-btn-master": "Làm Chủ Kỹ Năng",
-        "guides-video-title": "Video Hướng Dẫn Nổi Bật",
-        "guides-video-archive": "Xem Toàn Bộ Kho Lưu Trữ",
-        "guides-v1-title": "Cấu HÌnh Đường Truyền Neural",
-        "guides-v2-title": "Tối Ưu Ngữ Cảnh AI (Context Windows)",
-        "guides-search-placeholder": "Tìm kiếm tài liệu...",
-        "guides-video-tag-tutorial": "HƯỚNG DẪN",
-        "guides-video-tag-deep": "CHUYÊN SÂU",
 
-        // Lead capture modal
-        "modal-title": "Mở Khóa Trợ Lý AI",
-        "modal-subtitle": "Nhận ngay tài liệu hướng dẫn tích hợp Zalo/Messenger chi tiết.",
-        "modal-label-name": "Họ và Tên",
-        "modal-label-email": "Email Doanh Nghiệp",
-        "modal-label-business": "Lĩnh Vực Hoạt Động",
-        "modal-select-placeholder": "Chọn lĩnh vực...",
-        "modal-option-finance": "Dịch vụ Tài chính / BĐS",
-        "modal-option-saas": "SaaS / Phần mềm",
-        "modal-option-ecommerce": "Bán lẻ / E-Commerce",
-        "modal-option-other": "Khác / Dịch vụ tư vấn",
-        "modal-btn-submit": "Đăng Ký Nhận Hướng Dẫn",
-        "modal-benefit-1": "Nhận kịch bản tư vấn chốt đơn mẫu.",
-        "modal-benefit-2": "Nhận tài liệu API Webhook Zalo OA.",
-        "modal-benefit-3": "Tặng 1 buổi tư vấn 1-1 cùng chuyên gia."
+        // TradingView Dashboard
+        "market-title": "Phân Tích Thị Trường AI",
+        "market-sub": "Giám sát biểu đồ nến thời gian thực và lịch sử trích xuất dữ liệu của 30 mã tài sản.",
+        "market-chart-header": "Biểu Đồ Nến Nâng Cao",
+        "market-grid-header": "Danh Mục Tài Sản Thị Trường (30 Mã)",
+        "market-history-header": "Lịch Sử Giao Dịch & Trích Xuất Dữ Liệu",
+        "market-col-date": "NGÀY",
+        "market-col-open": "MỞ CỬA",
+        "market-col-high": "CAO NHẤT",
+        "market-col-low": "THẤP NHẤT",
+        "market-col-close": "ĐÓNG CỬA",
+        "market-col-vol": "KHỐI LƯỢNG",
+        "market-col-ai": "AI NHẬN ĐỊNH",
+        "market-btn-extract": "Trích Xuất Dữ Liệu Sheet",
+        "market-realtime-simulator": "Simulate Ticks Real-Time",
+
+        // Floating Sales Bot
+        "bot-greeting": "Chào bạn! Mình là Trợ lý Voice AI của ChatbotPro. Bật Giọng Nói để nghe mình phản hồi trực tiếp nhé! Bạn cần tư vấn gói Starter (550k/tháng), Standard (1.1M/tháng) hay Edition (2.75M/tháng)? Hotline: 0901.234.567",
+        "bot-voice-on": "Bật Giọng Nói Real-time 🔊",
+        "bot-voice-off": "Tắt Giọng Nói 🔇",
+        "bot-placeholder": "Hỏi bot bán hàng... (Bằng tiếng Việt)",
+        "bot-socials-title": "Mạng xã hội:",
+        "bot-hotline-title": "Hotline hỗ trợ:"
     },
     ENG: {
         // Navigation Global
@@ -311,6 +307,7 @@ const translations = {
         "copyright": "© 2026 ChatbotPro. Digital Luxury AI Assistant Platform.",
         "nav-team": "Team Permissions",
         "nav-logout": "Back to Web",
+        "nav-market": "AI Markets",
 
         // Role Switcher & Access Control
         "role-label": "ROLE:",
@@ -432,7 +429,7 @@ const translations = {
         "dash-card-satisfaction": "Satisfaction Rate",
         "dash-roster-title": "Client Roster",
         "dash-roster-sub": "Synced in real-time from Zalo, Messenger, and Website.",
-        "dash-search-placeholder": "Search clients, channels...",
+        "dash-search-placeholder": "Search...",
         "dash-col-name": "CLIENT NAME",
         "dash-col-channel": "CHANNEL",
         "dash-col-status": "STATUS",
@@ -525,64 +522,53 @@ const translations = {
         "team-perm-api": "Modify API & Channel Settings",
         "team-perm-guides": "View Help Manuals & Guides",
         "team-perm-team": "Manage Team Members",
+        "team-tab-roster": "Staff Permissions",
+        "team-tab-owner": "Owner Profile & Voice AI Config",
+        "owner-card-profile": "Profile & Business Logo",
+        "owner-card-voice": "AI Voice & Hotline Setup",
+        "owner-label-avatar": "Owner Avatar (Image/Video)",
+        "owner-label-logo": "Brand Logo",
+        "owner-label-voice-model": "AI Voice Model",
+        "owner-label-voice-speed": "Speech Playback Rate",
+        "owner-label-hotline": "Hotline Support Number",
+        "owner-btn-save": "SAVE OWNER SETTINGS",
 
-        // Guides Page
-        "guides-title": "User Mastery Support Center",
-        "dash-guides-sub": "Documentation on training, integrations, and performance.",
-        "guide-doc-title": "AI Agent Deployment Playbook",
-        "guide-section-1": "1. Knowledge Base Ingestion Guide",
-        "guide-section-1-desc": "Ingest document files (.pdf, .docx, .xlsx) or website links. The crawler index will parse and structure data within 1-2 minutes for immediate retrieval.",
-        "guide-section-2": "2. Zalo OA & Messenger Webhook Setup",
-        "guide-section-2-desc": "Retrieve access tokens from Zalo Developer or Meta Developer portals, input them in API Configs, and verify webhooks for instant 5s response automation.",
-        "guides-hero-title": "Master Your <span class=\"luxury-gradient\">Intelligence</span>",
-        "guides-hero-desc": "Explore comprehensive guides, API references, and advanced tutorials designed for power users operating the ChatbotPro framework.",
-        "guides-tile-start-title": "Getting Started",
-        "guides-tile-start-desc": "Core concepts, initial setup, and deployment strategies for your first autonomous agent.",
-        "guides-tile-api-title": "API Integration",
-        "guides-tile-api-desc": "RESTful endpoints, webhooks, and secure authentication protocols for custom telemetry.",
-        "guides-tile-skills-title": "Advanced AI Skills",
-        "guides-tile-skills-desc": "Prompt engineering, context window management, and custom LLM routing mechanics.",
-        "guides-btn-read": "Read Guide",
-        "guides-btn-docs": "View Docs",
-        "guides-btn-master": "Master Skills",
-        "guides-video-title": "Featured Transmissions",
-        "guides-video-archive": "View All Archive",
-        "guides-v1-title": "Configuring Neural Pathways",
-        "guides-v2-title": "Mastering Context Windows",
-        "guides-search-placeholder": "Search documentation...",
-        "guides-video-tag-tutorial": "TUTORIAL",
-        "guides-video-tag-deep": "DEEP DIVE",
 
-        // Lead capture modal
-        "modal-title": "Unlock AI Sales",
-        "modal-subtitle": "Request your bespoke integration guide and join the automated tier.",
-        "modal-label-name": "Full Name",
-        "modal-label-email": "Enterprise Email",
-        "modal-label-business": "Business Type",
-        "modal-select-placeholder": "Select category...",
-        "modal-option-finance": "Financial Services / Real Estate",
-        "modal-option-saas": "Enterprise SaaS",
-        "modal-option-ecommerce": "High-Volume E-Commerce",
-        "modal-option-other": "Other / Consultancy",
-        "modal-btn-submit": "Get Elite Access",
-        "modal-benefit-1": "Access to sales scripts.",
-        "modal-benefit-2": "API Webhook blueprints.",
-        "modal-benefit-3": "Onboarding consultation."
+        // TradingView Dashboard
+        "market-title": "AI Market Intelligence",
+        "market-sub": "Monitor candlestick widgets and trade reporting sheets for 30 global asset codes.",
+        "market-chart-header": "Advanced Chart Widget",
+        "market-grid-header": "Asset Classes Categories (30 Codes)",
+        "market-history-header": "Historical Ledger & Export Details",
+        "market-col-date": "DATE",
+        "market-col-open": "OPEN",
+        "market-col-high": "HIGH",
+        "market-col-low": "LOW",
+        "market-col-close": "CLOSE",
+        "market-col-vol": "VOLUME",
+        "market-col-ai": "AI LEDGER ANALYSIS",
+        "market-btn-extract": "Extract Data Sheet",
+        "market-realtime-simulator": "Simulate Ticks Real-Time",
+
+        // Floating Sales Bot
+        "bot-greeting": "Hello! I am ChatbotPro's voice assistant. Please turn Voice Mode ON to hear my spoken answers! Ask me about our Starter, Standard, or Edition plans. Hotline: 0901.234.567",
+        "bot-voice-on": "Voice Mode ON 🔊",
+        "bot-voice-off": "Voice Mode OFF 🔇",
+        "bot-placeholder": "Ask our sales bot...",
+        "bot-socials-title": "Social media:",
+        "bot-hotline-title": "Hotline support:"
     }
 };
 
-// 1. Inject common cyber-glass light mode styles dynamically
+// 1. Inject common styles dynamically
 function initCommonStyles() {
     const styleId = 'chatbotpro-common-styles';
     if (document.getElementById(styleId)) return;
 
     const styles = `
-        /* Language Selector custom styles */
         .lang-active-indicator {
             background: linear-gradient(90deg, #6750a4 0%, #d97706 100%);
         }
-        
-        /* Lead modal animation & transitions */
         .modal-visible {
             opacity: 1 !important;
             pointer-events: auto !important;
@@ -595,7 +581,6 @@ function initCommonStyles() {
             transform: scale(1) !important;
         }
         
-        /* Toast Notification Styles - Bright Premium Mode */
         .luxury-toast {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -618,7 +603,6 @@ function initCommonStyles() {
             transition: width linear;
         }
         
-        /* Access Denied Overlay style */
         .access-denied-overlay {
             position: fixed;
             inset: 0;
@@ -635,6 +619,34 @@ function initCommonStyles() {
         .access-denied-visible {
             opacity: 1 !important;
         }
+
+        /* Floating voice widget wave animation styles */
+        .sound-wave {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            height: 20px;
+        }
+        .sound-wave span {
+            display: block;
+            width: 3px;
+            height: 4px;
+            background: #6750a4;
+            border-radius: 2px;
+            transition: height 0.15s ease;
+        }
+        .sound-wave.speaking span {
+            animation: wave-rise 1s infinite alternate;
+        }
+        .sound-wave.speaking span:nth-child(2) { animation-delay: 0.15s; }
+        .sound-wave.speaking span:nth-child(3) { animation-delay: 0.3s; }
+        .sound-wave.speaking span:nth-child(4) { animation-delay: 0.45s; }
+        .sound-wave.speaking span:nth-child(5) { animation-delay: 0.6s; }
+
+        @keyframes wave-rise {
+            0% { height: 4px; }
+            100% { height: 18px; }
+        }
     `;
 
     const styleEl = document.createElement('style');
@@ -646,13 +658,10 @@ function initCommonStyles() {
 // Translate page contents dynamically
 function translatePage() {
     const lang = localStorage.getItem('chatbotpro_lang') || 'VIE';
-    
-    // Set document lang attribute
     document.documentElement.setAttribute('lang', lang === 'VIE' ? 'vi' : 'en');
     
     const dict = translations[lang] || translations.VIE;
     
-    // Find all elements with data-translate attribute
     document.querySelectorAll('[data-translate]').forEach(el => {
         const key = el.getAttribute('data-translate');
         if (dict[key]) {
@@ -660,7 +669,6 @@ function translatePage() {
         }
     });
 
-    // Find all inputs/textareas with data-translate-placeholder
     document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
         const key = el.getAttribute('data-translate-placeholder');
         if (dict[key]) {
@@ -676,28 +684,21 @@ const languages = [
 ];
 
 function initLanguageSelector() {
-    // Check if selector element already exists
     if (document.getElementById('language-selector-overlay')) return;
 
-    // Create Language Selector Overlay
     const overlay = document.createElement('div');
     overlay.id = 'language-selector-overlay';
     overlay.className = 'fixed inset-0 z-[100] flex items-center justify-center bg-[#f8f9fc]/90 backdrop-blur-2xl opacity-0 pointer-events-none transition-all duration-300';
     
-    // Default selected language
     let activeLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
 
     const overlayContent = `
         <div class="relative w-full max-w-2xl px-6 py-12 text-center modal-scale">
-            <!-- Close Button -->
             <button id="close-lang-selector" class="absolute top-0 right-6 text-on-surface-variant hover:text-primary transition-colors group">
                 <span class="material-symbols-outlined text-[32px] group-hover:rotate-90 transition-transform duration-300">close</span>
             </button>
-            
-            <h2 class="font-display-lg text-headline-md bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent font-bold mb-4" data-translate="modal-title-lang">Chọn Ngôn Ngữ / Select Language</h2>
+            <h2 class="font-display-lg text-headline-md bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent font-bold mb-4">Chọn Ngôn Ngữ / Select Language</h2>
             <p class="font-body-lg text-body-sm text-on-surface-variant mb-12 max-w-md mx-auto">Chọn ngôn ngữ để cập nhật toàn bộ nội dung hệ thống.</p>
-            
-            <!-- Grid of Languages -->
             <div class="grid grid-cols-2 gap-6 text-left max-w-md mx-auto">
                 ${languages.map(lang => `
                     <div data-lang="${lang.code}" class="lang-card bg-white border ${lang.code === activeLang ? 'border-primary shadow-[0_0_15px_rgba(103,80,164,0.15)]' : 'border-outline-variant/30'} p-6 rounded-2xl cursor-pointer hover:border-primary/50 relative overflow-hidden group transition-all duration-300 hover:-translate-y-0.5">
@@ -716,7 +717,6 @@ function initLanguageSelector() {
     overlay.innerHTML = overlayContent;
     document.body.appendChild(overlay);
 
-    // Bind event listeners to open the selector
     document.body.addEventListener('click', (e) => {
         const langBtn = e.target.closest('[aria-label="language"]') || 
                         e.target.closest('.material-symbols-outlined')?.parentElement?.classList.contains('language') || 
@@ -727,18 +727,15 @@ function initLanguageSelector() {
         }
     });
 
-    // Close button
     document.getElementById('close-lang-selector').addEventListener('click', () => {
         overlay.classList.remove('modal-visible');
     });
 
-    // Clicking language cards
     overlay.querySelectorAll('.lang-card').forEach(card => {
         card.addEventListener('click', () => {
             const selectedLang = card.getAttribute('data-lang');
             localStorage.setItem('chatbotpro_lang', selectedLang);
             
-            // Update UI indicators
             overlay.querySelectorAll('.lang-card').forEach(c => {
                 c.classList.remove('border-primary', 'shadow-[0_0_15px_rgba(103,80,164,0.15)]');
                 c.classList.add('border-outline-variant/30');
@@ -753,11 +750,8 @@ function initLanguageSelector() {
 
             setTimeout(() => {
                 overlay.classList.remove('modal-visible');
-                
-                // Translate the elements
                 translatePage();
                 
-                // Call global triggers for calculators or charts if any
                 const event = new CustomEvent('langChanged', { detail: selectedLang });
                 document.dispatchEvent(event);
 
@@ -771,15 +765,12 @@ function initLanguageSelector() {
         });
     });
 
-    // Close on clicking backdrop
     overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) {
-            overlay.classList.remove('modal-visible');
-        }
+        if (e.target === overlay) overlay.classList.remove('modal-visible');
     });
 }
 
-// 3. Lead Capture Modal Injection and Binding
+// 3. Lead Capture Modal Ingestion and Binding
 function initLeadCaptureModal() {
     if (document.getElementById('lead-capture-modal')) return;
 
@@ -790,12 +781,10 @@ function initLeadCaptureModal() {
     const modalContent = `
         <div class="relative w-full max-w-2xl px-4 md:px-0 mx-auto modal-scale">
             <div class="bg-white/95 backdrop-blur-[40px] rounded-[24px] border border-outline-variant/30 shadow-[0_15px_50px_rgba(103,80,164,0.15)] overflow-hidden text-on-surface">
-                <!-- Close Button -->
                 <button id="close-lead-modal" aria-label="Close dialog" class="absolute top-6 right-6 text-on-surface-variant hover:text-primary transition-colors z-20 group">
                     <span class="material-symbols-outlined text-[24px] group-hover:rotate-90 transition-transform duration-300">close</span>
                 </button>
                 <div class="flex flex-col md:flex-row">
-                    <!-- Visual / Branding Area -->
                     <div class="md:w-5/12 bg-primary/5 p-8 flex flex-col justify-between border-b md:border-b-0 md:border-r border-outline-variant/20 relative overflow-hidden">
                         <div class="absolute -top-20 -left-20 w-40 h-40 bg-primary-container/40 blur-[50px] rounded-full"></div>
                         <div class="relative z-10">
@@ -818,39 +807,31 @@ function initLeadCaptureModal() {
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-12 relative z-10">
-                            <p class="font-mono-data text-mono-data text-on-surface-variant opacity-60 uppercase tracking-widest text-xs">ChatbotPro AI</p>
-                        </div>
                     </div>
-                    
-                    <!-- Form Area -->
                     <div class="md:w-7/12 p-8 md:p-10 relative bg-white">
                         <div class="mb-6">
                             <h2 class="font-display-lg-mobile text-xl font-bold bg-gradient-to-r from-primary via-secondary to-tertiary bg-clip-text text-transparent mb-2" data-translate="modal-title">Mở Khóa Trợ Lý AI</h2>
                             <p class="font-body-sm text-body-sm text-on-surface-variant" data-translate="modal-subtitle">Nhận ngay tài liệu hướng dẫn tích hợp Zalo/Messenger chi tiết.</p>
                         </div>
                         <form id="lead-capture-form" class="space-y-4">
-                            <!-- Name Field -->
                             <div class="space-y-2">
                                 <label class="font-label-caps text-label-caps text-on-surface block text-xs" for="modal-name" data-translate="modal-label-name">Họ và Tên</label>
                                 <div class="relative">
                                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-on-surface-variant">
                                         <span class="material-symbols-outlined text-[18px]">person</span>
                                     </span>
-                                    <input class="w-full bg-surface-container border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg pl-10 pr-4 py-2.5 focus:ring-0 focus:border-primary focus:outline-none transition-colors placeholder:text-outline/50" id="modal-name" required placeholder="Jane Doe" type="text"/>
+                                    <input class="w-full bg-surface-container border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg pl-10 pr-4 py-2.5 focus:ring-0 focus:border-primary focus:outline-none transition-colors" id="modal-name" required placeholder="Jane Doe" type="text"/>
                                 </div>
                             </div>
-                            <!-- Email Field -->
                             <div class="space-y-2">
                                 <label class="font-label-caps text-label-caps text-on-surface block text-xs" for="modal-email" data-translate="modal-label-email">Email Doanh Nghiệp</label>
                                 <div class="relative">
                                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-on-surface-variant">
                                         <span class="material-symbols-outlined text-[18px]">mail</span>
                                     </span>
-                                    <input class="w-full bg-surface-container border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg pl-10 pr-4 py-2.5 focus:ring-0 focus:border-primary focus:outline-none transition-colors placeholder:text-outline/50" id="modal-email" required placeholder="jane@company.com" type="email"/>
+                                    <input class="w-full bg-surface-container border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg pl-10 pr-4 py-2.5 focus:ring-0 focus:border-primary focus:outline-none transition-colors" id="modal-email" required placeholder="jane@company.com" type="email"/>
                                 </div>
                             </div>
-                            <!-- Business Type Dropdown -->
                             <div class="space-y-2">
                                 <label class="font-label-caps text-label-caps text-on-surface block text-xs" for="modal-business" data-translate="modal-label-business">Lĩnh Vực Hoạt Động</label>
                                 <div class="relative">
@@ -864,16 +845,11 @@ function initLeadCaptureModal() {
                                         <option value="ecommerce" data-translate="modal-option-ecommerce">Bán lẻ / E-Commerce</option>
                                         <option value="other" data-translate="modal-option-other">Khác / Dịch vụ tư vấn</option>
                                     </select>
-                                    <span class="absolute inset-y-0 right-0 flex items-center pr-3 text-on-surface-variant pointer-events-none">
-                                        <span class="material-symbols-outlined text-[20px]">expand_more</span>
-                                    </span>
                                 </div>
                             </div>
-                            <!-- Action Button -->
                             <div class="pt-2">
-                                <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary hover:brightness-105 text-white font-label-caps text-label-caps py-3 px-6 rounded-lg transition-all shadow-[0_0_20px_rgba(103,80,164,0.1)] hover:shadow-[0_0_25px_rgba(103,80,164,0.2)] flex items-center justify-center space-x-2">
+                                <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary hover:brightness-105 text-white font-label-caps text-label-caps py-3 px-6 rounded-lg transition-all shadow-[0_0_20px_rgba(103,80,164,0.1)] flex items-center justify-center space-x-2">
                                     <span data-translate="modal-btn-submit">Đăng Ký Nhận Hướng Dẫn</span>
-                                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                                 </button>
                             </div>
                         </form>
@@ -886,37 +862,28 @@ function initLeadCaptureModal() {
     modal.innerHTML = modalContent;
     document.body.appendChild(modal);
 
-    // Bind event listeners to close buttons
     document.getElementById('close-lead-modal').addEventListener('click', () => {
         modal.classList.remove('modal-visible');
     });
     
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('modal-visible');
-        }
+        if (e.target === modal) modal.classList.remove('modal-visible');
     });
 
-    // Form submission
     document.getElementById('lead-capture-form').addEventListener('submit', (e) => {
         e.preventDefault();
         const name = document.getElementById('modal-name').value;
         const email = document.getElementById('modal-email').value;
-        
         modal.classList.remove('modal-visible');
         
-        // Show success toast
-        const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
-        const successMsg = currentLang === 'VIE'
-            ? `Đã đăng ký thành công cho ${name} (${email}). Hướng dẫn đã gửi vào hộp thư!`
-            : `Access requested successfully for ${name} (${email}). Integration playbook sent!`;
-        window.showToast(successMsg, 'success');
-        
-        // Clear fields
+        const lang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+        window.showToast(
+            lang === 'VIE' ? `Đăng ký thành công cho ${name} (${email}).` : `Access requested successfully for ${name} (${email}).`,
+            'success'
+        );
         document.getElementById('lead-capture-form').reset();
     });
 
-    // Bind CTA click triggers
     document.body.addEventListener('click', (e) => {
         const ctaBtn = e.target.closest('.trigger-lead-capture') || 
                        (e.target.innerText && (
@@ -927,7 +894,6 @@ function initLeadCaptureModal() {
                        ));
         if (ctaBtn) {
             e.preventDefault();
-            // Translate the modal before showing
             translatePage();
             modal.classList.add('modal-visible');
         }
@@ -980,7 +946,6 @@ function initToastSystem() {
         `;
 
         toastContainer.appendChild(toast);
-        
         toast.offsetHeight;
         toast.classList.add('toast-show');
 
@@ -1006,30 +971,24 @@ function initToastSystem() {
 // 5. Global Link Handlers & Nav Active Synchronization
 function initGlobalLinkHandlers() {
     const currentPath = window.location.pathname;
-    
-    // Sidebar Active State Auto-matching
-    const sidebarLinks = document.querySelectorAll('aside nav a, nav.desktop-nav a, nav.desktop-nav + nav a, .desktop-nav nav a, nav ul a');
+    const sidebarLinks = document.querySelectorAll('aside nav a, nav.desktop-nav a, nav ul a');
     if (sidebarLinks.length > 0) {
         sidebarLinks.forEach(link => {
             const href = link.getAttribute('href');
             if (!href || href === '#' || href.startsWith('#')) return;
-            
-            const isMatch = currentPath.includes(href) || 
-                            (currentPath.endsWith('/') && href === 'index.html');
+            const isMatch = currentPath.includes(href) || (currentPath.endsWith('/') && href === 'index.html');
             
             if (isMatch) {
                 sidebarLinks.forEach(l => {
                     l.classList.remove('bg-primary/10', 'text-primary', 'border-r-2', 'border-primary', 'active');
                     l.classList.add('text-on-surface-variant');
                 });
-                
                 link.classList.add('bg-primary/10', 'text-primary', 'border-r-2', 'border-primary', 'active');
                 link.classList.remove('text-on-surface-variant');
             }
         });
     }
 
-    // Bind login buttons on public site
     document.body.addEventListener('click', (e) => {
         const loginBtn = e.target.closest('button');
         if (loginBtn && (loginBtn.textContent.trim().includes('LOGIN') || loginBtn.textContent.trim().includes('ĐĂNG NHẬP') || loginBtn.getAttribute('data-translate') === 'nav-login')) {
@@ -1041,15 +1000,12 @@ function initGlobalLinkHandlers() {
 
 // 6. Role Switcher & Dynamic SideNavBar Permissions
 function initRoleSwitcher() {
-    // Check if selector is needed on current page
-    const isAdminPage = ['dashboard.html', 'env-vars.html', 'team.html', 'guides.html'].some(p => window.location.pathname.includes(p));
+    const isAdminPage = ['dashboard.html', 'env-vars.html', 'team.html', 'guides.html', 'tradingview.html'].some(p => window.location.pathname.includes(p));
     if (!isAdminPage) return;
 
-    // Find insertion target in the navbar
     const headerContainer = document.querySelector('header .flex.items-center.gap-stack-md');
     if (!headerContainer) return;
 
-    // Remove existing role switcher if any
     const existing = document.getElementById('role-switcher-container');
     if (existing) existing.remove();
 
@@ -1080,7 +1036,6 @@ function initRoleSwitcher() {
         </div>
     `;
 
-    // Insert before profile picture (which is the last element inside gap-stack-md container)
     headerContainer.insertBefore(roleContainer, headerContainer.lastElementChild);
 
     const btn = document.getElementById('role-switcher-btn');
@@ -1107,17 +1062,13 @@ function initRoleSwitcher() {
         opt.addEventListener('click', () => {
             const role = opt.getAttribute('data-role');
             localStorage.setItem('chatbotpro_role', role);
-            dropdown.classList.add('opacity-0', 'pointer-events-none');
-            btn.querySelector('.material-symbols-outlined:last-child').style.transform = 'rotate(0deg)';
-
-            // Toast feedback
+            
             const lang = localStorage.getItem('chatbotpro_lang') || 'VIE';
             const msg = role === 'owner' 
                 ? (lang === 'VIE' ? 'Đã chuyển sang vai trò: Chủ Doanh Nghiệp' : 'Switched to Owner role') 
                 : (lang === 'VIE' ? 'Đã chuyển sang vai trò: Nhân Viên Trực Chat' : 'Switched to Staff role');
             window.showToast(msg, 'info');
 
-            // Apply modifications
             applyRolePermissions();
             checkRoleAccess();
             translatePage();
@@ -1132,7 +1083,6 @@ function applyRolePermissions() {
         textSpan.setAttribute('data-translate', currentRole === 'owner' ? 'role-owner' : 'role-staff');
     }
 
-    // Hide or show Owner specific items in the sidebar
     document.querySelectorAll('[data-role-required="owner"]').forEach(el => {
         if (currentRole === 'owner') {
             el.style.display = '';
@@ -1145,11 +1095,9 @@ function applyRolePermissions() {
 function checkRoleAccess() {
     const currentRole = localStorage.getItem('chatbotpro_role') || 'owner';
     const currentPath = window.location.pathname;
-
     const isRestrictedPage = ['env-vars.html', 'team.html'].some(p => currentPath.includes(p));
     
     if (isRestrictedPage && currentRole === 'staff') {
-        // Render Access Denied overlay immediately
         if (document.getElementById('access-denied-blocker')) return;
 
         const overlay = document.createElement('div');
@@ -1158,11 +1106,10 @@ function checkRoleAccess() {
 
         overlay.innerHTML = `
             <div class="glass-panel p-10 rounded-2xl max-w-lg w-full text-center border-l-4 border-l-[#ef4444] bg-white shadow-2xl relative overflow-hidden">
-                <div class="absolute -right-10 -top-10 w-24 h-24 bg-[#ef4444]/5 rounded-full blur-xl"></div>
                 <span class="material-symbols-outlined text-[#ef4444] text-[64px] mb-4">gavel</span>
                 <h2 class="font-display-lg text-2xl font-bold text-on-surface mb-4" data-translate="role-access-denied-title">TRUY CẬP BỊ TỪ CHỐI</h2>
-                <p class="font-body-sm text-body-sm text-on-surface-variant mb-8 leading-relaxed" data-translate="role-access-denied-desc">Bạn đang ở vai trò Nhân Viên. Bạn không có quyền truy cập vào trang cấu hình API hoặc phân quyền team. Vui lòng liên hệ Chủ Doanh Nghiệp để cấu hình hệ thống.</p>
-                <button onclick="window.location.href='dashboard.html'" class="btn-gradient w-full py-3 rounded-lg text-white font-label-caps text-label-caps font-bold transition-all shadow-[0_4px_15px_rgba(103,80,164,0.1)] active:scale-95 flex items-center justify-center gap-2">
+                <p class="font-body-sm text-body-sm text-on-surface-variant mb-8 leading-relaxed" data-translate="role-access-denied-desc">Bạn không có quyền truy cập trang cấu hình API hoặc phân quyền team.</p>
+                <button onclick="window.location.href='dashboard.html'" class="btn-gradient w-full py-3 rounded-lg text-white font-label-caps text-label-caps font-bold active:scale-95 flex items-center justify-center gap-2">
                     <span class="material-symbols-outlined text-sm">hub</span>
                     <span data-translate="role-access-denied-btn">Quay lại Bảng CRM</span>
                 </button>
@@ -1172,17 +1119,13 @@ function checkRoleAccess() {
         document.body.appendChild(overlay);
         translatePage();
         
-        // Trigger reflow & show
         overlay.offsetHeight;
         overlay.classList.add('access-denied-visible');
-
-        // Block scrolling on body
         document.body.style.overflow = 'hidden';
 
-        // Auto redirect after 3 seconds
         setTimeout(() => {
             window.location.href = 'dashboard.html';
-        }, 3200);
+        }, 3000);
     } else {
         const blocker = document.getElementById('access-denied-blocker');
         if (blocker) {
@@ -1194,3 +1137,288 @@ function checkRoleAccess() {
         }
     }
 }
+
+// 7. Floating Voice-Enabled Sales Chatbot Widget (NEW REQUIREMENT)
+function initFloatingSalesBot() {
+    if (document.getElementById('floating-sales-bot-root')) return;
+
+    // Load configs from LocalStorage with fallback defaults
+    const savedHotline = localStorage.getItem('chatbotpro_hotline') || '0901.234.567';
+    const cleanHotline = savedHotline.replace(/\./g, '').trim();
+    const savedZalo = localStorage.getItem('chatbotpro_zalo') || 'https://zalo.me/0901234567';
+    const savedFb = localStorage.getItem('chatbotpro_fb') || 'https://m.me/chatbotpro';
+    const savedYt = localStorage.getItem('chatbotpro_youtube') || 'https://youtube.com/chatbotpro';
+    const savedTiktok = localStorage.getItem('chatbotpro_tiktok') || 'https://tiktok.com/@chatbotpro';
+    
+    // Avatar
+    const savedAvatar = localStorage.getItem('chatbotpro_avatar') || 'https://lh3.googleusercontent.com/aida-public/AB6AXuCBIUDhUh4WJokbt6eaR39WWnllSy3R5Y2ubYoM-BXYHAwjzsVLJ7F-UFxq44aIjStlSz4yIerWvEkrAPrzw6z_cFBn7pvuFAveUQWde_R54XtdWFoAOtbfenopAKkMYinI9KbPkuMa-nlTrq9G2gzMewhy4la7j1XcgHYQtKBKga_mdkLyPzwBiZsVtofpmOMVKuyV9-Gz1kR-qSnedfV9f4m3BtsRFQitanKo4j4TlgSahv5oYZPfuAbw9umqPv5J90xX_nb7TEf4';
+    const isVideoAvatar = savedAvatar.startsWith('data:video') || savedAvatar.includes('blob:') || savedAvatar.includes('.mp4');
+
+    // Create wrapper element
+    const widgetRoot = document.createElement('div');
+    widgetRoot.id = 'floating-sales-bot-root';
+    widgetRoot.className = 'fixed bottom-6 right-6 z-[90] flex flex-col items-end gap-3';
+    
+    // Injected button and chat panel
+    widgetRoot.innerHTML = `
+        <!-- Floating Toggle Button -->
+        <button id="sales-bot-trigger" class="w-14 h-14 bg-gradient-to-r from-primary to-secondary text-white rounded-full shadow-[0_5px_25px_rgba(103,80,164,0.3)] hover:brightness-105 active:scale-95 transition-all duration-300 flex items-center justify-center relative border border-white/20">
+            <span class="material-symbols-outlined text-[28px] animate-pulse">voice_chat</span>
+            <span class="absolute -top-1 -right-1 w-3 h-3 bg-[#10b981] rounded-full border border-white"></span>
+        </button>
+
+        <!-- Glass Chat Panel -->
+        <div id="sales-bot-panel" class="w-96 h-[530px] bg-white/95 backdrop-blur-[32px] border border-outline-variant/30 rounded-3xl shadow-[0_15px_50px_rgba(103,80,164,0.18)] flex flex-col overflow-hidden opacity-0 pointer-events-none translate-y-6 transition-all duration-300">
+            <!-- Header -->
+            <div class="px-5 py-4 border-b border-outline-variant/30 flex justify-between items-center bg-slate-50/50">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary relative shrink-0 overflow-hidden">
+                        ${isVideoAvatar 
+                            ? `<video src="${savedAvatar}" autoplay loop muted playsinline class="w-full h-full object-cover"></video>` 
+                            : `<img src="${savedAvatar}" class="w-full h-full object-cover" />`}
+                        <span class="absolute bottom-0 right-0 w-2 h-2 bg-[#10b981] rounded-full border border-white"></span>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-xs text-on-surface">ChatbotPro Voice AI</h4>
+                        <!-- Glowing Voice Waves -->
+                        <div class="sound-wave mt-1" id="bot-voice-waves">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Close Button -->
+                <button id="close-sales-bot" class="text-on-surface-variant hover:text-on-surface transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">close</span>
+                </button>
+            </div>
+
+            <!-- Voice Toggle & Contact bar -->
+            <div class="px-5 py-2.5 border-b border-outline-variant/10 flex justify-between items-center bg-slate-50/20 text-[11px]">
+                <button id="btn-toggle-bot-voice" class="px-3 py-1 bg-slate-100 hover:bg-slate-200 border border-outline-variant/40 rounded-full font-bold text-slate-700 flex items-center gap-1 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-[14px]">volume_off</span>
+                    <span data-translate="bot-voice-off">Voice Mode OFF 🔇</span>
+                </button>
+                <div class="text-on-surface-variant">
+                    <span data-translate="bot-hotline-title">Hotline:</span> 
+                    <a href="tel:${cleanHotline}" class="font-bold text-primary hover:underline">${savedHotline}</a>
+                </div>
+            </div>
+
+            <!-- Messages Stream -->
+            <div class="flex-grow overflow-y-auto p-4 chat-scroll flex flex-col gap-3.5 bg-slate-50/20" id="sales-bot-stream">
+                <!-- Initial Bot Message -->
+                <div class="flex items-start gap-2.5 max-w-[85%]">
+                    <div class="w-7 h-7 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 text-xs">
+                        🤖
+                    </div>
+                    <div class="bg-slate-100 text-on-surface px-3.5 py-2 rounded-2xl rounded-tl-none text-[11.5px] leading-relaxed shadow-sm" id="bot-initial-bubble">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Action Links -->
+            <div class="px-4 py-2 bg-slate-50/80 border-t border-outline-variant/20 flex gap-2 overflow-x-auto text-[10px] shrink-0 select-none">
+                <a href="${savedZalo}" target="_blank" class="px-2.5 py-1.5 bg-primary/10 text-primary border border-primary/20 rounded-lg font-bold shrink-0 flex items-center gap-1 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-xs">chat</span> Zalo OA
+                </a>
+                <a href="${savedFb}" target="_blank" class="px-2.5 py-1.5 bg-[#1877f2]/10 text-[#1877f2] border border-[#1877f2]/20 rounded-lg font-bold shrink-0 flex items-center gap-1 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-xs">forum</span> Messenger
+                </a>
+                <a href="${savedYt}" target="_blank" class="px-2.5 py-1.5 bg-red-600/10 text-red-600 border border-red-600/20 rounded-lg font-bold shrink-0 flex items-center gap-1 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-xs">video_library</span> YouTube
+                </a>
+                <a href="${savedTiktok}" target="_blank" class="px-2.5 py-1.5 bg-slate-900/10 text-slate-800 border border-slate-900/20 rounded-lg font-bold shrink-0 flex items-center gap-1 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-xs">music_note</span> TikTok
+                </a>
+                <a href="checkout.html" class="px-2.5 py-1.5 bg-amber-500/10 text-amber-600 border border-amber-500/20 rounded-lg font-bold shrink-0 flex items-center gap-1 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-xs">shopping_cart</span> Mua Gói
+                </a>
+            </div>
+
+            <!-- Text Input Area -->
+            <div class="p-3 border-t border-outline-variant/30 flex gap-2 bg-slate-50/50 shrink-0">
+                <input class="flex-grow bg-white border border-outline-variant/40 rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:border-primary placeholder:text-slate-400" id="sales-bot-input" data-translate-placeholder="bot-placeholder" placeholder="Hỏi bot bán hàng... (Bằng tiếng Việt)" type="text"/>
+                <button id="btn-send-sales-bot" class="btn-gradient p-2.5 rounded-xl flex items-center justify-center active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-[16px]">send</span>
+                </button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(widgetRoot);
+
+    const trigger = document.getElementById('sales-bot-trigger');
+    const panel = document.getElementById('sales-bot-panel');
+    const closeBtn = document.getElementById('close-sales-bot');
+    const toggleVoiceBtn = document.getElementById('btn-toggle-bot-voice');
+    const waves = document.getElementById('bot-voice-waves');
+    
+    const input = document.getElementById('sales-bot-input');
+    const sendBtn = document.getElementById('btn-send-sales-bot');
+    const stream = document.getElementById('sales-bot-stream');
+    const initialBubble = document.getElementById('bot-initial-bubble');
+
+    let voiceEnabled = false;
+
+    // Set dynamic initial message
+    const lang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+    const initialText = lang === 'VIE'
+        ? `Chào bạn! Mình là Trợ lý Voice AI của ChatbotPro. Bật Giọng Nói để nghe mình phản hồi trực tiếp nhé! Bạn cần tư vấn gói Starter (550k/tháng), Standard (1.1M/tháng) hay Edition (2.75M/tháng)? Hotline: ${savedHotline}`
+        : `Hello! I am ChatbotPro's voice assistant. Please turn Voice Mode ON to hear my spoken answers! Ask me about our Starter, Standard, or Edition plans. Hotline: ${savedHotline}`;
+    initialBubble.textContent = initialText;
+
+    // Trigger toggle
+    trigger.addEventListener('click', () => {
+        const isClosed = panel.classList.contains('pointer-events-none');
+        if (isClosed) {
+            panel.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-6');
+            trigger.classList.add('scale-0');
+            setTimeout(() => {
+                if (voiceEnabled) speakText(initialText);
+            }, 300);
+        }
+    });
+
+    closeBtn.addEventListener('click', () => {
+        panel.classList.add('opacity-0', 'pointer-events-none', 'translate-y-6');
+        trigger.classList.remove('scale-0');
+        window.speechSynthesis.cancel();
+        waves.classList.remove('speaking');
+    });
+
+    // Voice mode toggling
+    toggleVoiceBtn.addEventListener('click', () => {
+        voiceEnabled = !voiceEnabled;
+        const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+        if (voiceEnabled) {
+            toggleVoiceBtn.innerHTML = `<span class="material-symbols-outlined text-[14px]">volume_up</span> <span>${currentLang === 'VIE' ? 'Bật Giọng Nói Real-time 🔊' : 'Voice Mode ON 🔊'}</span>`;
+            toggleVoiceBtn.className = 'px-3 py-1 bg-[#10b981]/15 border border-[#10b981]/30 rounded-full font-bold text-[#10b981] flex items-center gap-1 active:scale-95 transition-all';
+            
+            // Speak last bot message
+            const botMessages = stream.querySelectorAll('.bg-slate-100');
+            if (botMessages.length > 0) {
+                const lastMsgText = botMessages[botMessages.length - 1].textContent.trim();
+                speakText(lastMsgText);
+            } else {
+                speakText(initialText);
+            }
+        } else {
+            toggleVoiceBtn.innerHTML = `<span class="material-symbols-outlined text-[14px]">volume_off</span> <span>${currentLang === 'VIE' ? 'Tắt Giọng Nói 🔇' : 'Voice Mode OFF 🔇'}</span>`;
+            toggleVoiceBtn.className = 'px-3 py-1 bg-slate-100 hover:bg-slate-200 border border-outline-variant/40 rounded-full font-bold text-slate-700 flex items-center gap-1 active:scale-95 transition-all';
+            window.speechSynthesis.cancel();
+            waves.classList.remove('speaking');
+        }
+    });
+
+    // Speech synthesis function
+    function speakText(text) {
+        if (!('speechSynthesis' in window)) return;
+        window.speechSynthesis.cancel(); // Stop current speech
+
+        // Remove html/markdown and prepare phone number read out
+        const spokenHotline = savedHotline.split('').map(c => c === '.' ? ', ' : c).join('');
+        const cleanText = text
+            .replace(/<[^>]*>/g, '')
+            .replace(/hotline:?/i, 'hót lai')
+            .replace(new RegExp(savedHotline.replace(/\./g, '\\.'), 'g'), spokenHotline);
+
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.lang = 'vi-VN';
+        
+        // Find best Vietnamese voice
+        const voices = window.speechSynthesis.getVoices();
+        const viVoice = voices.find(v => v.lang.includes('vi') || v.lang.includes('VI'));
+        if (viVoice) utterance.voice = viVoice;
+
+        // Load custom playback speed configured by the Owner
+        const savedSpeed = parseFloat(localStorage.getItem('chatbotpro_voice_speed')) || 1.0;
+        utterance.rate = savedSpeed;
+        utterance.pitch = 1.05;
+
+        utterance.onstart = () => {
+            waves.classList.add('speaking');
+        };
+
+        utterance.onend = () => {
+            waves.classList.remove('speaking');
+        };
+
+        utterance.onerror = () => {
+            waves.classList.remove('speaking');
+        };
+
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // Send logic
+    function handleSend() {
+        const text = input.value.trim();
+        if (!text) return;
+
+        // User message bubble
+        const userBubble = document.createElement('div');
+        userBubble.className = 'flex items-start gap-2.5 max-w-[85%] self-end flex-row-reverse';
+        userBubble.innerHTML = `
+            <div class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 shrink-0 text-xs font-semibold">
+                👤
+            </div>
+            <div class="bg-primary/10 text-on-surface px-3.5 py-2 rounded-2xl rounded-tr-none text-[11.5px] leading-relaxed shadow-sm">
+                ${text}
+            </div>
+        `;
+        stream.appendChild(userBubble);
+        input.value = '';
+        stream.scrollTop = stream.scrollHeight;
+
+        // Simulate chatbot reply
+        setTimeout(() => {
+            const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+            let botReply = '';
+            
+            const q = text.toLowerCase();
+            if (q.includes('giá') || q.includes('gói') || q.includes('package') || q.includes('standard') || q.includes('starter') || q.includes('edition')) {
+                botReply = currentLang === 'VIE'
+                    ? 'Bên em có 3 gói: Starter (550k/tháng), Standard (1.1 triệu/tháng - khuyên dùng), và Edition (2.75 triệu/tháng). Có hỗ trợ thanh toán hàng năm và giảm giá 15% đấy ạ.'
+                    : 'We offer 3 tiers: Starter (550k VND/mo), Standard (1.1M VND/mo - recommended), and Edition (2.75M VND/mo). Get 15% off on annual billing.';
+            } else if (q.includes('hotline') || q.includes('sđt') || q.includes('liên hệ') || q.includes('contact') || q.includes('điện thoại') || q.includes('zalo')) {
+                botReply = currentLang === 'VIE'
+                    ? `Anh chị có thể kết nối ngay với tụi em qua Hotline/Zalo: ${savedHotline}. Tụi em trực hỗ trợ 24/7!`
+                    : `Please reach us immediately via Hotline/Zalo: ${savedHotline}. We support you 24/7!`;
+            } else if (q.includes('dữ liệu') || q.includes('nạp') || q.includes('file') || q.includes('pdf') || q.includes('website')) {
+                botReply = currentLang === 'VIE'
+                    ? 'ChatbotPro có thể tự động học thông tin từ các tệp PDF, DOCX, Excel XLSX hoặc trực tiếp từ website của bạn. Nạp tri thức chỉ mất 1-2 phút thôi.'
+                    : 'ChatbotPro ingests and learns automatically from PDF, DOCX, XLSX files, or website URLs in under 2 minutes.';
+            } else {
+                botReply = currentLang === 'VIE'
+                    ? `Cảm ơn câu hỏi của bạn. ChatbotPro là giải pháp AI trả lời tự động khách hàng dưới 5 giây trên Zalo OA, Messenger và Website. Bạn có muốn gọi hotline ${savedHotline} tư vấn trực tiếp không?`
+                    : `Thank you. ChatbotPro is the premium multi-channel AI responder (Zalo, Messenger, Website) under 5 seconds. Connect to our Sales team via Zalo/Hotline: ${savedHotline}!`;
+            }
+
+            const botBubble = document.createElement('div');
+            botBubble.className = 'flex items-start gap-2.5 max-w-[85%]';
+            botBubble.innerHTML = `
+                <div class="w-7 h-7 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 text-xs">
+                    🤖
+                </div>
+                <div class="bg-slate-100 text-on-surface px-3.5 py-2 rounded-2xl rounded-tl-none text-[11.5px] leading-relaxed shadow-sm">
+                    ${botReply}
+                </div>
+            `;
+            stream.appendChild(botBubble);
+            stream.scrollTop = stream.scrollHeight;
+
+            if (voiceEnabled) speakText(botReply);
+        }, 1000);
+    }
+
+    sendBtn.addEventListener('click', handleSend);
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') handleSend();
+    });
+}
+

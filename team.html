@@ -238,6 +238,12 @@
                 </a>
             </li>
             <li>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="tradingview.html">
+                    <span class="material-symbols-outlined">monitoring</span>
+                    <span data-translate="nav-market">Thị Trường AI</span>
+                </a>
+            </li>
+            <li>
                 <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="guides.html">
                     <span class="material-symbols-outlined">menu_book</span>
                     <span data-translate="nav-guides">Hướng Dẫn Sử Dụng</span>
@@ -255,12 +261,12 @@
     <!-- Main Content Area -->
     <main class="flex-1 md:ml-64 p-4 md:p-container-margin overflow-y-auto" id="main-content">
         <!-- Page Header -->
-        <header class="mb-stack-lg flex flex-col md:flex-row md:justify-between md:items-end gap-stack-md border-b border-outline-variant/30 pb-stack-md">
+        <header class="mb-6 flex flex-col md:flex-row md:justify-between md:items-end gap-stack-md border-b border-outline-variant/30 pb-4">
             <div>
                 <h1 class="font-display-lg text-headline-md text-on-surface mb-unit font-bold" data-translate="team-title">Phân Quyền & Đội Ngũ Nhân Sự</h1>
                 <p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl" data-translate="team-sub">Thiết lập tài khoản, vai trò và phân quyền truy cập chức năng cho nhân viên.</p>
             </div>
-            <div class="flex gap-stack-sm mt-4 md:mt-0">
+            <div class="flex gap-stack-sm mt-4 md:mt-0" id="roster-actions-header">
                 <button id="btn-add-member" class="btn-primary px-6 py-2.5 rounded-full font-label-caps text-label-caps font-bold flex items-center gap-2">
                     <span class="material-symbols-outlined text-[18px]">person_add</span>
                     <span data-translate="team-btn-add">Thêm Thành Viên</span>
@@ -268,123 +274,244 @@
             </div>
         </header>
 
-        <!-- Roster Table -->
-        <div class="glass-panel rounded-2xl border border-outline-variant/30 overflow-hidden flex flex-col bg-white shadow-sm">
-            <div class="overflow-x-auto w-full">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="border-b border-outline-variant/30 bg-slate-50/50">
-                            <th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider font-bold" data-translate="team-col-name">NHÂN SỰ</th>
-                            <th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider font-bold" data-translate="team-col-role">VAI TRÒ HỆ THỐNG</th>
-                            <th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider font-bold" data-translate="team-col-status">TRẠNG THÁI</th>
-                            <th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider font-bold" data-translate="team-col-permissions">PHÂN QUYỀN TRUY CẬP TRANG</th>
-                            <th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider font-bold text-right" data-translate="team-col-action">HÀNH ĐỘNG</th>
-                        </tr>
-                    </thead>
-                    <tbody id="staff-table-body" class="font-mono-data text-mono-data text-sm">
-                        <!-- Owner Row -->
-                        <tr class="border-b border-outline-variant/10 hover:bg-slate-50/50 transition-colors group">
-                            <td class="py-4 px-6">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center font-bold text-primary text-sm">NQ</div>
-                                    <div>
-                                        <div class="text-on-surface font-body-sm text-body-sm font-semibold">Nguyễn Quốc Owner</div>
-                                        <div class="text-on-surface-variant text-xs opacity-70">owner@chatbotpro.com</div>
+        <!-- Tabs Navigation -->
+        <div class="flex border-b border-outline-variant/30 mb-6 gap-6">
+            <button id="tab-roster-btn" class="py-3 px-1 border-b-2 border-primary text-primary font-bold text-xs font-label-caps uppercase transition-all flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">groups</span>
+                <span data-translate="team-tab-roster">Phân Quyền Nhân Sự</span>
+            </button>
+            <button id="tab-owner-btn" class="py-3 px-1 border-b-2 border-transparent text-on-surface-variant hover:text-primary font-semibold text-xs font-label-caps uppercase transition-all flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">manage_accounts</span>
+                <span data-translate="team-tab-owner">Cấu Hình Chủ Sở Hữu & Giọng Nói AI</span>
+            </button>
+        </div>
+
+        <!-- Roster Table Tab Content -->
+        <div id="roster-tab-content" class="tab-content-block">
+            <div class="glass-panel rounded-2xl border border-outline-variant/30 overflow-hidden flex flex-col bg-white shadow-sm">
+                <div class="overflow-x-auto w-full">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-outline-variant/30 bg-slate-50/50">
+                                <th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider font-bold" data-translate="team-col-name">NHÂN SỰ</th>
+                                <th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider font-bold" data-translate="team-col-role">VAI TRÒ HỆ THỐNG</th>
+                                <th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider font-bold" data-translate="team-col-status">TRẠNG THÁI</th>
+                                <th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider font-bold" data-translate="team-col-permissions">PHÂN QUYỀN TRUY CẬP TRANG</th>
+                                <th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider font-bold text-right" data-translate="team-col-action">HÀNH ĐỘNG</th>
+                            </tr>
+                        </thead>
+                        <tbody id="staff-table-body" class="font-mono-data text-mono-data text-sm">
+                            <!-- Owner Row -->
+                            <tr class="border-b border-outline-variant/10 hover:bg-slate-50/50 transition-colors group">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center font-bold text-primary text-sm">NQ</div>
+                                        <div>
+                                            <div class="text-on-surface font-body-sm text-body-sm font-semibold">Nguyễn Quốc Owner</div>
+                                            <div class="text-on-surface-variant text-xs opacity-70">owner@chatbotpro.com</div>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <span class="px-2.5 py-1 rounded text-[10px] font-label-caps tracking-wider border border-primary/20 text-primary bg-primary/5 font-bold" data-translate="role-owner">Chủ Doanh Nghiệp</span>
-                            </td>
-                            <td class="py-4 px-6">
-                                <span class="px-2.5 py-1 rounded-full text-xs flex items-center w-max gap-1.5 font-bold bg-emerald-50 text-[#10b981] border border-emerald-200">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span>
-                                    <span data-translate="team-status-active">Hoạt động</span>
-                                </span>
-                            </td>
-                            <td class="py-4 px-6">
-                                <div class="flex flex-wrap gap-1">
-                                    <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-crm">CRM &amp; Chat</span>
-                                    <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-api">Cấu hình API</span>
-                                    <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-guides">Guides</span>
-                                    <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-team">Quản lý Đội ngũ</span>
-                                </div>
-                            </td>
-                            <td class="py-4 px-6 text-right">
-                                <span class="text-xs text-outline italic">Master Account</span>
-                            </td>
-                        </tr>
-                        <!-- Manager Row -->
-                        <tr class="border-b border-outline-variant/10 hover:bg-slate-50/50 transition-colors group">
-                            <td class="py-4 px-6">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 rounded-full bg-slate-100 border border-outline-variant/50 flex items-center justify-center font-bold text-[#625b71] text-sm">LM</div>
-                                    <div>
-                                        <div class="text-on-surface font-body-sm text-body-sm font-semibold">Lê Văn Manager</div>
-                                        <div class="text-on-surface-variant text-xs opacity-70">manager@chatbotpro.com</div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="px-2.5 py-1 rounded text-[10px] font-label-caps tracking-wider border border-primary/20 text-primary bg-primary/5 font-bold" data-translate="role-owner">Chủ Doanh Nghiệp</span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="px-2.5 py-1 rounded-full text-xs flex items-center w-max gap-1.5 font-bold bg-emerald-50 text-[#10b981] border border-emerald-200">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span>
+                                        <span data-translate="team-status-active">Hoạt động</span>
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-crm">CRM &amp; Chat</span>
+                                        <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-api">Cấu hình API</span>
+                                        <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-guides">Guides</span>
+                                        <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-team">Quản lý Đội ngũ</span>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <span class="px-2.5 py-1 rounded text-[10px] font-label-caps tracking-wider border border-tertiary/20 text-tertiary bg-tertiary/5 font-bold">Quản Lý</span>
-                            </td>
-                            <td class="py-4 px-6">
-                                <span class="px-2.5 py-1 rounded-full text-xs flex items-center w-max gap-1.5 font-bold bg-emerald-50 text-[#10b981] border border-emerald-200">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>
-                                    <span data-translate="team-status-active">Hoạt động</span>
-                                </span>
-                            </td>
-                            <td class="py-4 px-6">
-                                <div class="flex flex-wrap gap-1">
-                                    <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-crm">CRM &amp; Chat</span>
-                                    <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-guides">Guides</span>
-                                </div>
-                            </td>
-                            <td class="py-4 px-6 text-right">
-                                <div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <button class="btn-edit-staff p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
-                                    <button class="btn-delete-staff p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Agent Row -->
-                        <tr class="border-b border-outline-variant/10 hover:bg-slate-50/50 transition-colors group">
-                            <td class="py-4 px-6">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 rounded-full bg-slate-100 border border-outline-variant/50 flex items-center justify-center font-bold text-slate-500 text-sm">TA</div>
-                                    <div>
-                                        <div class="text-on-surface font-body-sm text-body-sm font-semibold">Trần Thị Agent</div>
-                                        <div class="text-on-surface-variant text-xs opacity-70">agent@chatbotpro.com</div>
+                                </td>
+                                <td class="py-4 px-6 text-right">
+                                    <span class="text-xs text-outline italic">Master Account</span>
+                                </td>
+                            </tr>
+                            <!-- Manager Row -->
+                            <tr class="border-b border-outline-variant/10 hover:bg-slate-50/50 transition-colors group">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-full bg-slate-100 border border-outline-variant/50 flex items-center justify-center font-bold text-[#625b71] text-sm">LM</div>
+                                        <div>
+                                            <div class="text-on-surface font-body-sm text-body-sm font-semibold">Lê Văn Manager</div>
+                                            <div class="text-on-surface-variant text-xs opacity-70">manager@chatbotpro.com</div>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <span class="px-2.5 py-1 rounded text-[10px] font-label-caps tracking-wider border border-slate-300 text-slate-600 bg-slate-50 font-bold" data-translate="role-staff">Nhân Viên Trực</span>
-                            </td>
-                            <td class="py-4 px-6">
-                                <span class="px-2.5 py-1 rounded-full text-xs flex items-center w-max gap-1.5 font-bold bg-emerald-50 text-[#10b981] border border-emerald-200">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>
-                                    <span data-translate="team-status-active">Hoạt động</span>
-                                </span>
-                            </td>
-                            <td class="py-4 px-6">
-                                <div class="flex flex-wrap gap-1">
-                                    <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-crm">CRM &amp; Chat</span>
-                                </div>
-                            </td>
-                            <td class="py-4 px-6 text-right">
-                                <div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <button class="btn-edit-staff p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
-                                    <button class="btn-delete-staff p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="px-2.5 py-1 rounded text-[10px] font-label-caps tracking-wider border border-tertiary/20 text-tertiary bg-tertiary/5 font-bold">Quản Lý</span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="px-2.5 py-1 rounded-full text-xs flex items-center w-max gap-1.5 font-bold bg-emerald-50 text-[#10b981] border border-emerald-200">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>
+                                        <span data-translate="team-status-active">Hoạt động</span>
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-crm">CRM &amp; Chat</span>
+                                        <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-guides">Guides</span>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 text-right">
+                                    <div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <button class="btn-edit-staff p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+                                        <button class="btn-delete-staff p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Agent Row -->
+                            <tr class="border-b border-outline-variant/10 hover:bg-slate-50/50 transition-colors group">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-full bg-slate-100 border border-outline-variant/50 flex items-center justify-center font-bold text-slate-500 text-sm">TA</div>
+                                        <div>
+                                            <div class="text-on-surface font-body-sm text-body-sm font-semibold">Trần Thị Agent</div>
+                                            <div class="text-on-surface-variant text-xs opacity-70">agent@chatbotpro.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="px-2.5 py-1 rounded text-[10px] font-label-caps tracking-wider border border-slate-300 text-slate-600 bg-slate-50 font-bold" data-translate="role-staff">Nhân Viên Trực</span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="px-2.5 py-1 rounded-full text-xs flex items-center w-max gap-1.5 font-bold bg-emerald-50 text-[#10b981] border border-emerald-200">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>
+                                        <span data-translate="team-status-active">Hoạt động</span>
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="px-2 py-0.5 bg-slate-100 border border-outline-variant/50 text-[10px] text-on-surface-variant rounded font-semibold" data-translate="team-perm-crm">CRM &amp; Chat</span>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 text-right">
+                                    <div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <button class="btn-edit-staff p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+                                        <button class="btn-delete-staff p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Owner & Voice Settings Tab Content -->
+        <div id="owner-tab-content" class="tab-content-block hidden flex flex-col gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Col 1: Profile & Logo Config -->
+                <div class="glass-panel rounded-2xl border border-outline-variant/30 overflow-hidden bg-white shadow-sm flex flex-col p-6 gap-5">
+                    <div class="flex items-center gap-2 border-b border-outline-variant/30 pb-3 mb-2">
+                        <span class="material-symbols-outlined text-primary text-[20px]">portrait</span>
+                        <h3 class="font-bold text-xs uppercase tracking-wider text-on-surface" data-translate="owner-card-profile">Hồ Sơ & Logo Doanh Nghiệp</h3>
+                    </div>
+                    
+                    <!-- Avatar Upload & Live Preview -->
+                    <div class="flex flex-col sm:flex-row items-center gap-6">
+                        <div class="relative w-28 h-28 rounded-full border border-outline-variant/50 overflow-hidden bg-slate-50 flex items-center justify-center shrink-0">
+                            <!-- Image Preview -->
+                            <img id="avatar-img-preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBIUDhUh4WJokbt6eaR39WWnllSy3R5Y2ubYoM-BXYHAwjzsVLJ7F-UFxq44aIjStlSz4yIerWvEkrAPrzw6z_cFBn7pvuFAveUQWde_R54XtdWFoAOtbfenopAKkMYinI9KbPkuMa-nlTrq9G2gzMewhy4la7j1XcgHYQtKBKga_mdkLyPzwBiZsVtofpmOMVKuyV9-Gz1kR-qSnedfV9f4m3BtsRFQitanKo4j4TlgSahv5oYZPfuAbw9umqPv5J90xX_nb7TEf4" class="w-full h-full object-cover" />
+                            <!-- Video Preview -->
+                            <video id="avatar-vid-preview" autoplay loop muted playsinline class="w-full h-full object-cover hidden"></video>
+                        </div>
+                        <div class="flex-grow space-y-2">
+                            <label class="font-label-caps text-label-caps text-on-surface block text-xs" data-translate="owner-label-avatar">Avatar Chủ Doanh Nghiệp (Ảnh/Video)</label>
+                            <input type="file" id="owner-avatar-input" accept="image/*, video/*" class="w-full text-xs text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer" />
+                            <p class="text-[10px] text-on-surface-variant leading-relaxed">Hỗ trợ các định dạng tệp ảnh PNG, JPG, GIF hoặc tệp video MP4 làm ảnh đại diện động cho bot bán hàng.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Logo Upload & Live Preview -->
+                    <div class="flex flex-col sm:flex-row items-center gap-6 pt-4 border-t border-outline-variant/10">
+                        <div class="w-20 h-20 rounded-xl border border-outline-variant/50 overflow-hidden bg-slate-50 flex items-center justify-center shrink-0 p-2">
+                            <img id="logo-img-preview" src="https://aichatbot.com.vn/wp-content/uploads/2023/11/logo.png" class="max-w-full max-h-full object-contain" onerror="this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuCBIUDhUh4WJokbt6eaR39WWnllSy3R5Y2ubYoM-BXYHAwjzsVLJ7F-UFxq44aIjStlSz4yIerWvEkrAPrzw6z_cFBn7pvuFAveUQWde_R54XtdWFoAOtbfenopAKkMYinI9KbPkuMa-nlTrq9G2gzMewhy4la7j1XcgHYQtKBKga_mdkLyPzwBiZsVtofpmOMVKuyV9-Gz1kR-qSnedfV9f4m3BtsRFQitanKo4j4TlgSahv5oYZPfuAbw9umqPv5J90xX_nb7TEf4';" />
+                        </div>
+                        <div class="flex-grow space-y-2">
+                            <label class="font-label-caps text-label-caps text-on-surface block text-xs" data-translate="owner-label-logo">Logo Thương Hiệu</label>
+                            <input type="file" id="owner-logo-input" accept="image/*" class="w-full text-xs text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer" />
+                            <p class="text-[10px] text-on-surface-variant leading-relaxed">Hỗ trợ định dạng tệp PNG, SVG hoặc JPG để cấu hình logo chính thức.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Col 2: Voice & Contacts Setup -->
+                <div class="glass-panel rounded-2xl border border-outline-variant/30 overflow-hidden bg-white shadow-sm flex flex-col p-6 gap-4">
+                    <div class="flex items-center gap-2 border-b border-outline-variant/30 pb-3 mb-2">
+                        <span class="material-symbols-outlined text-primary text-[20px]">mic</span>
+                        <h3 class="font-bold text-xs uppercase tracking-wider text-on-surface" data-translate="owner-card-voice">Cấu Hình Giọng Nói AI & Kênh Hotline</h3>
+                    </div>
+                    
+                    <!-- Voice Model Select -->
+                    <div class="space-y-1.5">
+                        <label class="font-label-caps text-label-caps text-on-surface block text-xs" data-translate="owner-label-voice-model">Mô Hình Giọng Nói AI</label>
+                        <select id="owner-voice-model" class="w-full bg-slate-50 border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg px-4 py-2 focus:ring-0 focus:border-primary focus:outline-none">
+                            <option value="gpt-4o-voice">GPT-4o Voice Real-Time (OpenAI)</option>
+                            <option value="gemini-live">Gemini 1.5 Live Speech (Google)</option>
+                            <option value="elevenlabs">ElevenLabs Multilingual v2</option>
+                            <option value="standard" selected>Standard TTS Web Speech Synthesis</option>
+                        </select>
+                    </div>
+
+                    <!-- Speech Rate (Speed) -->
+                    <div class="space-y-1.5 pt-1">
+                        <div class="flex justify-between text-xs">
+                            <label class="font-label-caps text-label-caps text-on-surface font-semibold" data-translate="owner-label-voice-speed">Tốc Độ Đọc Giọng Nói</label>
+                            <span id="speed-val-indicator" class="font-bold font-mono-data text-primary">1.0x</span>
+                        </div>
+                        <input type="range" id="owner-voice-speed" min="0.5" max="2.0" step="0.1" value="1.0" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary" />
+                    </div>
+
+                    <!-- Hotline Number -->
+                    <div class="space-y-1.5 pt-1">
+                        <label class="font-label-caps text-label-caps text-on-surface block text-xs" data-translate="owner-label-hotline">Số Điện Thoại Hotline</label>
+                        <input type="text" id="owner-hotline-input" class="w-full bg-slate-50 border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg px-4 py-2 focus:ring-0 focus:border-primary focus:outline-none" placeholder="0901.234.567" value="0901.234.567" />
+                    </div>
+
+                    <!-- Zalo OA & Facebook Messenger links -->
+                    <div class="grid grid-cols-2 gap-4 pt-1">
+                        <div class="space-y-1.5">
+                            <label class="font-label-caps text-label-caps text-on-surface block text-xs">Zalo OA Link</label>
+                            <input type="text" id="owner-zalo-input" class="w-full bg-slate-50 border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg px-4 py-2 focus:ring-0 focus:border-primary focus:outline-none" placeholder="https://zalo.me/..." value="https://zalo.me/0901234567" />
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="font-label-caps text-label-caps text-on-surface block text-xs">Messenger/FB Link</label>
+                            <input type="text" id="owner-fb-input" class="w-full bg-slate-50 border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg px-4 py-2 focus:ring-0 focus:border-primary focus:outline-none" placeholder="https://m.me/..." value="https://m.me/chatbotpro" />
+                        </div>
+                    </div>
+
+                    <!-- YouTube & TikTok links -->
+                    <div class="grid grid-cols-2 gap-4 pt-1">
+                        <div class="space-y-1.5">
+                            <label class="font-label-caps text-label-caps text-on-surface block text-xs">YouTube Channel</label>
+                            <input type="text" id="owner-yt-input" class="w-full bg-slate-50 border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg px-4 py-2 focus:ring-0 focus:border-primary focus:outline-none" placeholder="https://youtube.com/..." value="https://youtube.com/chatbotpro" />
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="font-label-caps text-label-caps text-on-surface block text-xs">TikTok Account</label>
+                            <input type="text" id="owner-tiktok-input" class="w-full bg-slate-50 border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg px-4 py-2 focus:ring-0 focus:border-primary focus:outline-none" placeholder="https://tiktok.com/@..." value="https://tiktok.com/@chatbotpro" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Save Button -->
+            <div class="flex justify-end pt-2">
+                <button id="btn-save-owner" class="btn-primary px-8 py-3 rounded-full font-label-caps text-label-caps font-bold flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">save</span>
+                    <span data-translate="owner-btn-save">LƯU CÀI ĐẶT CHỦ SỞ HỮU</span>
+                </button>
             </div>
         </div>
     </main>
 </div>
+
 
 <!-- Add Team Member Modal -->
 <div id="add-member-modal" class="fixed inset-0 z-[110] flex items-center justify-center bg-[#050505]/30 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
@@ -605,7 +732,182 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // 6. Tabs switcher logic
+    const tabRosterBtn = document.getElementById('tab-roster-btn');
+    const tabOwnerBtn = document.getElementById('tab-owner-btn');
+    const rosterTabContent = document.getElementById('roster-tab-content');
+    const ownerTabContent = document.getElementById('owner-tab-content');
+    const rosterActionsHeader = document.getElementById('roster-actions-header');
+
+    tabRosterBtn.addEventListener('click', () => {
+        tabRosterBtn.className = 'py-3 px-1 border-b-2 border-primary text-primary font-bold text-xs font-label-caps uppercase transition-all flex items-center gap-2';
+        tabOwnerBtn.className = 'py-3 px-1 border-b-2 border-transparent text-on-surface-variant hover:text-primary font-semibold text-xs font-label-caps uppercase transition-all flex items-center gap-2';
+        
+        rosterTabContent.classList.remove('hidden');
+        ownerTabContent.classList.add('hidden');
+        rosterActionsHeader.style.display = '';
+    });
+
+    tabOwnerBtn.addEventListener('click', () => {
+        tabOwnerBtn.className = 'py-3 px-1 border-b-2 border-primary text-primary font-bold text-xs font-label-caps uppercase transition-all flex items-center gap-2';
+        tabRosterBtn.className = 'py-3 px-1 border-b-2 border-transparent text-on-surface-variant hover:text-primary font-semibold text-xs font-label-caps uppercase transition-all flex items-center gap-2';
+        
+        rosterTabContent.classList.add('hidden');
+        ownerTabContent.classList.remove('hidden');
+        rosterActionsHeader.style.display = 'none';
+    });
+
+    // 7. Owner Settings elements
+    const avatarInput = document.getElementById('owner-avatar-input');
+    const avatarImgPreview = document.getElementById('avatar-img-preview');
+    const avatarVidPreview = document.getElementById('avatar-vid-preview');
+    
+    const logoInput = document.getElementById('owner-logo-input');
+    const logoImgPreview = document.getElementById('logo-img-preview');
+    
+    const voiceModelSelect = document.getElementById('owner-voice-model');
+    const voiceSpeedSlider = document.getElementById('owner-voice-speed');
+    const speedValIndicator = document.getElementById('speed-val-indicator');
+    
+    const hotlineInput = document.getElementById('owner-hotline-input');
+    const zaloInput = document.getElementById('owner-zalo-input');
+    const fbInput = document.getElementById('owner-fb-input');
+    const ytInput = document.getElementById('owner-yt-input');
+    const tiktokInput = document.getElementById('owner-tiktok-input');
+    const btnSaveOwner = document.getElementById('btn-save-owner');
+
+    // Update speed indicator label
+    voiceSpeedSlider.addEventListener('input', () => {
+        speedValIndicator.textContent = voiceSpeedSlider.value + 'x';
+    });
+
+    // Handle Avatar File Upload Preview
+    avatarInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        if (file.type.startsWith('video/')) {
+            // It is a video
+            const videoUrl = URL.createObjectURL(file);
+            avatarImgPreview.classList.add('hidden');
+            avatarVidPreview.classList.remove('hidden');
+            avatarVidPreview.src = videoUrl;
+            
+            localStorage.setItem('chatbotpro_avatar_type', 'video');
+            
+            // Try reading as DataURL to persist small videos
+            const readerVideo = new FileReader();
+            readerVideo.onload = function(evt) {
+                try {
+                    localStorage.setItem('chatbotpro_avatar', evt.target.result);
+                } catch(err) {
+                    console.log("Video too large to persist, using temporary object URL.");
+                }
+            };
+            readerVideo.readAsDataURL(file);
+        } else {
+            // It is an image
+            reader.onload = function(evt) {
+                avatarVidPreview.classList.add('hidden');
+                avatarImgPreview.classList.remove('hidden');
+                avatarImgPreview.src = evt.target.result;
+                localStorage.setItem('chatbotpro_avatar', evt.target.result);
+                localStorage.setItem('chatbotpro_avatar_type', 'image');
+                
+                // Update TopNavBar avatar instantly!
+                const navAvatar = document.querySelector('header img[alt="User profile"]');
+                if (navAvatar) navAvatar.src = evt.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Handle Logo File Upload Preview
+    logoInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+            logoImgPreview.src = evt.target.result;
+            localStorage.setItem('chatbotpro_logo', evt.target.result);
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // Load saved Owner Settings from LocalStorage
+    function loadOwnerSettings() {
+        const savedHotline = localStorage.getItem('chatbotpro_hotline') || '0901.234.567';
+        const savedZalo = localStorage.getItem('chatbotpro_zalo') || 'https://zalo.me/0901234567';
+        const savedFb = localStorage.getItem('chatbotpro_fb') || 'https://m.me/chatbotpro';
+        const savedYt = localStorage.getItem('chatbotpro_youtube') || 'https://youtube.com/chatbotpro';
+        const savedTiktok = localStorage.getItem('chatbotpro_tiktok') || 'https://tiktok.com/@chatbotpro';
+        const savedVoiceModel = localStorage.getItem('chatbotpro_voice_model') || 'standard';
+        const savedVoiceSpeed = localStorage.getItem('chatbotpro_voice_speed') || '1.0';
+        
+        hotlineInput.value = savedHotline;
+        zaloInput.value = savedZalo;
+        fbInput.value = savedFb;
+        ytInput.value = savedYt;
+        tiktokInput.value = savedTiktok;
+        voiceModelSelect.value = savedVoiceModel;
+        voiceSpeedSlider.value = savedVoiceSpeed;
+        speedValIndicator.textContent = savedVoiceSpeed + 'x';
+        
+        const savedAvatar = localStorage.getItem('chatbotpro_avatar');
+        const avatarType = localStorage.getItem('chatbotpro_avatar_type') || 'image';
+        if (savedAvatar) {
+            if (avatarType === 'video') {
+                avatarImgPreview.classList.add('hidden');
+                avatarVidPreview.classList.remove('hidden');
+                avatarVidPreview.src = savedAvatar;
+            } else {
+                avatarVidPreview.classList.add('hidden');
+                avatarImgPreview.classList.remove('hidden');
+                avatarImgPreview.src = savedAvatar;
+            }
+            // Update header avatar too
+            const navAvatar = document.querySelector('header img[alt="User profile"]');
+            if (navAvatar) navAvatar.src = savedAvatar;
+        }
+
+        const savedLogo = localStorage.getItem('chatbotpro_logo');
+        if (savedLogo) {
+            logoImgPreview.src = savedLogo;
+        }
+    }
+
+    loadOwnerSettings();
+
+    // Save Owner Settings Action
+    btnSaveOwner.addEventListener('click', () => {
+        const isVie = (localStorage.getItem('chatbotpro_lang') || 'VIE') === 'VIE';
+        
+        localStorage.setItem('chatbotpro_hotline', hotlineInput.value.trim());
+        localStorage.setItem('chatbotpro_zalo', zaloInput.value.trim());
+        localStorage.setItem('chatbotpro_fb', fbInput.value.trim());
+        localStorage.setItem('chatbotpro_youtube', ytInput.value.trim());
+        localStorage.setItem('chatbotpro_tiktok', tiktokInput.value.trim());
+        localStorage.setItem('chatbotpro_voice_model', voiceModelSelect.value);
+        localStorage.setItem('chatbotpro_voice_speed', voiceSpeedSlider.value);
+        
+        const msg = isVie
+            ? "Đã lưu thành công cấu hình Chủ sở hữu & Giọng nói AI!"
+            : "Owner configurations and voice settings saved successfully!";
+        window.showToast(msg, 'success');
+
+        // Dynamically recreate/reload sales bot so changes reflect instantly
+        const oldBot = document.getElementById('floating-sales-bot-root');
+        if (oldBot) {
+            oldBot.remove();
+            if (typeof initFloatingSalesBot === 'function') {
+                initFloatingSalesBot();
+            }
+        }
+    });
 });
+
 </script>
 </body>
 </html>
