@@ -1,188 +1,129 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ChatbotPro - Unlock the Future of AI Sales</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="light" lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ChatbotPro - Mở Khóa Trợ Lý AI</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
         theme: {
           extend: {
-            "colors": {
-                    "primary-fixed-dim": "#cfbcff",
-                    "tertiary-container": "#c9a74d",
-                    "surface-container-lowest": "#0f0d13",
-                    "surface-container-low": "#1d1b20",
-                    "outline-variant": "#494551",
-                    "on-tertiary-fixed-variant": "#594400",
-                    "secondary-fixed": "#e9ddff",
-                    "surface-tint": "#cfbcff",
-                    "on-background": "#e6e0e9",
-                    "on-secondary-fixed-variant": "#4b4263",
-                    "secondary": "#cdc0e9",
-                    "error-container": "#93000a",
-                    "outline": "#948e9c",
-                    "primary-container": "#6750a4",
-                    "surface-container": "#211f24",
-                    "surface-dim": "#141218",
-                    "on-primary-fixed": "#22005d",
-                    "secondary-container": "#4d4465",
-                    "on-error-container": "#ffdad6",
-                    "inverse-primary": "#6750a4",
-                    "on-tertiary-container": "#503d00",
-                    "on-surface-variant": "#cbc4d2",
-                    "primary": "#cfbcff",
-                    "inverse-surface": "#e6e0e9",
-                    "surface-variant": "#36343a",
-                    "secondary-fixed-dim": "#cdc0e9",
-                    "primary-fixed": "#e9ddff",
-                    "on-primary-container": "#e0d2ff",
-                    "surface": "#141218",
-                    "surface-container-high": "#2b292f",
-                    "on-error": "#690005",
-                    "on-secondary-fixed": "#1f1635",
-                    "inverse-on-surface": "#322f35",
-                    "tertiary-fixed": "#ffdf93",
-                    "on-tertiary-fixed": "#241a00",
-                    "on-primary-fixed-variant": "#4f378a",
-                    "on-secondary": "#342b4b",
-                    "surface-bright": "#3b383e",
-                    "tertiary": "#e7c365",
-                    "on-tertiary": "#3e2e00",
-                    "background": "#141218",
-                    "on-secondary-container": "#bfb2da",
-                    "on-surface": "#e6e0e9",
-                    "error": "#ffb4ab",
-                    "tertiary-fixed-dim": "#e7c365",
-                    "surface-container-highest": "#36343a",
-                    "on-primary": "#381e72"
+            colors: {
+              "primary-fixed-dim": "#cfbcff",
+              "tertiary-container": "#fef3c7",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-low": "#f8fafc",
+              "outline-variant": "#e2e8f0",
+              "on-tertiary-fixed-variant": "#78350f",
+              "secondary-fixed": "#e9ddff",
+              "surface-tint": "#6750a4",
+              "on-background": "#0f172a",
+              "on-secondary-fixed-variant": "#4b4263",
+              "secondary": "#625b71",
+              "error-container": "#fee2e2",
+              "outline": "#94a3b8",
+              "primary-container": "#e9ddff",
+              "surface-container": "#f1f3f9",
+              "surface-dim": "#f1f5f9",
+              "on-primary-fixed": "#22005d",
+              "secondary-container": "#e8def8",
+              "on-error-container": "#7f1d1d",
+              "inverse-primary": "#cfbcff",
+              "on-tertiary-container": "#451a03",
+              "on-surface-variant": "#475569",
+              "primary": "#6750a4",
+              "inverse-surface": "#0f172a",
+              "surface-variant": "#e2e8f0",
+              "secondary-fixed-dim": "#cdc0e9",
+              "primary-fixed": "#e9ddff",
+              "on-primary-container": "#22005d",
+              "surface": "#ffffff",
+              "surface-container-high": "#e2e8f0",
+              "on-error": "#ffffff",
+              "on-secondary-fixed": "#1d192b",
+              "inverse-on-surface": "#f8fafc",
+              "tertiary-fixed": "#fde68a",
+              "on-tertiary-fixed": "#451a03",
+              "on-primary-fixed-variant": "#4f378a",
+              "on-secondary": "#ffffff",
+              "surface-bright": "#f8fafc",
+              "tertiary": "#d97706",
+              "on-tertiary": "#ffffff",
+              "background": "#f8fafc",
+              "on-secondary-container": "#1d192b",
+              "on-surface": "#0f172a",
+              "error": "#ef4444",
+              "tertiary-fixed-dim": "#f59e0b",
+              "surface-container-highest": "#cbd5e1",
+              "on-primary": "#ffffff"
             },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px"
             },
-            "spacing": {
-                    "stack-lg": "48px",
-                    "unit": "8px",
-                    "stack-sm": "12px",
-                    "gutter": "24px",
-                    "stack-md": "24px",
-                    "container-margin": "40px"
+            spacing: {
+              "stack-lg": "48px",
+              "unit": "8px",
+              "stack-sm": "12px",
+              "gutter": "24px",
+              "stack-md": "24px",
+              "container-margin": "40px"
             },
-            "fontFamily": {
-                    "label-caps": [
-                            "Sora"
-                    ],
-                    "mono-data": [
-                            "JetBrains Mono"
-                    ],
-                    "display-lg": [
-                            "Sora"
-                    ],
-                    "body-lg": [
-                            "Sora"
-                    ],
-                    "headline-md": [
-                            "Sora"
-                    ],
-                    "display-lg-mobile": [
-                            "Sora"
-                    ],
-                    "body-sm": [
-                            "Sora"
-                    ]
+            fontFamily: {
+              "label-caps": ["Sora"],
+              "mono-data": ["JetBrains Mono"],
+              "display-lg": ["Sora"],
+              "body-lg": ["Sora"],
+              "headline-md": ["Sora"],
+              "display-lg-mobile": ["Sora"],
+              "body-sm": ["Sora"]
             },
-            "fontSize": {
-                    "label-caps": [
-                            "12px",
-                            {
-                                    "lineHeight": "1",
-                                    "letterSpacing": "0.1em",
-                                    "fontWeight": "600"
-                            }
-                    ],
-                    "mono-data": [
-                            "13px",
-                            {
-                                    "lineHeight": "1.5",
-                                    "fontWeight": "400"
-                            }
-                    ],
-                    "display-lg": [
-                            "48px",
-                            {
-                                    "lineHeight": "1.1",
-                                    "letterSpacing": "-0.02em",
-                                    "fontWeight": "700"
-                            }
-                    ],
-                    "body-lg": [
-                            "18px",
-                            {
-                                    "lineHeight": "1.6",
-                                    "fontWeight": "400"
-                            }
-                    ],
-                    "headline-md": [
-                            "24px",
-                            {
-                                    "lineHeight": "1.3",
-                                    "fontWeight": "600"
-                            }
-                    ],
-                    "display-lg-mobile": [
-                            "32px",
-                            {
-                                    "lineHeight": "1.2",
-                                    "fontWeight": "700"
-                            }
-                    ],
-                    "body-sm": [
-                            "14px",
-                            {
-                                    "lineHeight": "1.5",
-                                    "fontWeight": "400"
-                            }
-                    ]
+            fontSize: {
+              "label-caps": ["12px", { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "600" }],
+              "mono-data": ["13px", { lineHeight: "1.5", fontWeight: "400" }],
+              "display-lg": ["48px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
+              "display-lg-mobile": ["32px", { lineHeight: "1.2", fontWeight: "700" }],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }]
             }
           },
         }
       }
     </script>
-<style>
+    <style>
         .glass-stroke {
-            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 0 0 1px rgba(103, 80, 164, 0.08);
         }
         .luxury-gradient-text {
-            background: linear-gradient(90deg, #cfbcff 0%, #cdc0e9 50%, #e7c365 100%);
+            background: linear-gradient(135deg, #6750a4 0%, #d97706 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             color: transparent;
         }
         .luxury-button-glow {
-            box-shadow: 0 0 20px rgba(207, 188, 255, 0.2);
-            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(103, 80, 164, 0.15);
+            transition: all 0.3s ease;
         }
         .luxury-button-glow:hover {
-            box-shadow: 0 0 30px rgba(207, 188, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(103, 80, 164, 0.25);
             transform: scale(1.02);
         }
         .input-glow:focus-within {
-            box-shadow: 0 0 15px rgba(207, 188, 255, 0.15);
-            border-color: #cfbcff;
+            box-shadow: 0 0 10px rgba(103, 80, 164, 0.15);
+            border-color: #6750a4;
         }
         .cyber-grid {
             background-image: 
-                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+                linear-gradient(to right, rgba(103,80,164,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(103,80,164,0.02) 1px, transparent 1px);
             background-size: 40px 40px;
         }
     </style>
@@ -190,116 +131,134 @@
 <body class="bg-background text-on-background min-h-screen font-body-lg antialiased overflow-hidden flex items-center justify-center">
 <!-- Background Context (Simulated webpage behind modal) -->
 <div class="absolute inset-0 z-0">
-<div class="absolute inset-0 bg-surface-dim cyber-grid"></div>
-<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-container/20 rounded-full blur-[100px] animate-pulse"></div>
-<div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-tertiary-container/10 rounded-full blur-[100px] animate-pulse" style="animation-delay: 2s;"></div>
-<!-- Blurred Overlay to emphasize Modal -->
-<div class="absolute inset-0 bg-background/60 backdrop-blur-md z-10"></div>
+    <div class="absolute inset-0 bg-slate-50 cyber-grid"></div>
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-container/10 rounded-full blur-[100px] animate-pulse"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-tertiary-container/5 rounded-full blur-[100px] animate-pulse" style="animation-delay: 2s;"></div>
+    <!-- Blurred Overlay to emphasize Modal -->
+    <div class="absolute inset-0 bg-[#f8fafc]/60 backdrop-blur-md z-10"></div>
 </div>
+
 <!-- Lead Magnet Modal Container (Level 3 Elevation) -->
 <main class="relative z-50 w-full max-w-2xl px-4 md:px-0 mx-auto">
-<div class="bg-surface/80 backdrop-blur-[40px] rounded-[24px] glass-stroke shadow-[0_0_50px_rgba(207,188,255,0.15)] overflow-hidden transition-all duration-500 hover:shadow-[0_0_60px_rgba(207,188,255,0.2)]">
-<!-- Close Button -->
-<button aria-label="Close dialog" class="absolute top-6 right-6 text-on-surface-variant hover:text-primary transition-colors z-20 group">
-<span class="material-symbols-outlined text-[24px] group-hover:rotate-90 transition-transform duration-300">close</span>
-</button>
-<div class="flex flex-col md:flex-row">
-<!-- Visual / Branding Area -->
-<div class="md:w-5/12 bg-surface-container-low/50 p-8 flex flex-col justify-between border-b md:border-b-0 md:border-r border-outline-variant/20 relative overflow-hidden">
-<!-- Subtle inner glow -->
-<div class="absolute -top-20 -left-20 w-40 h-40 bg-primary/20 blur-[50px] rounded-full"></div>
-<div class="relative z-10">
-<div class="flex items-center space-x-2 mb-8">
-<span class="material-symbols-outlined text-primary text-[28px]">smart_toy</span>
-<span class="font-display-lg text-body-lg font-bold tracking-tight">ChatbotPro</span>
-</div>
-<div class="mt-8 space-y-6">
-<div class="flex items-start space-x-3">
-<span class="material-symbols-outlined text-tertiary text-[20px] mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Access to proprietary LLM sales scripts.</p>
-</div>
-<div class="flex items-start space-x-3">
-<span class="material-symbols-outlined text-tertiary text-[20px] mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Advanced CRM integration blueprints.</p>
-</div>
-<div class="flex items-start space-x-3">
-<span class="material-symbols-outlined text-tertiary text-[20px] mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Priority white-glove onboarding.</p>
-</div>
-</div>
-</div>
-<div class="mt-12 relative z-10">
-<p class="font-mono-data text-mono-data text-on-surface-variant opacity-60 uppercase tracking-widest">Digital Luxury AI</p>
-</div>
-</div>
-<!-- Form Area -->
-<div class="md:w-7/12 p-8 md:p-10 relative">
-<div class="mb-8">
-<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg luxury-gradient-text mb-2">Unlock the Future of AI Sales.</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant">Request your bespoke integration guide and join the elite tier of automated enterprises.</p>
-</div>
-<form action="#" class="space-y-5" method="POST">
-<!-- Name Field -->
-<div class="space-y-2 group input-glow transition-all duration-300">
-<label class="font-label-caps text-label-caps text-on-surface block" for="name">Full Name</label>
-<div class="relative">
-<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-on-surface-variant">
-<span class="material-symbols-outlined text-[18px]">person</span>
-</span>
-<input class="w-full bg-surface-container-highest border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg pl-10 pr-4 py-3 focus:ring-0 focus:border-primary transition-colors placeholder:text-outline/50" id="name" name="name" placeholder="Jane Doe" required="" type="text"/>
-</div>
-</div>
-<!-- Enterprise Email Field -->
-<div class="space-y-2 group input-glow transition-all duration-300">
-<label class="font-label-caps text-label-caps text-on-surface block" for="email">Enterprise Email</label>
-<div class="relative">
-<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-on-surface-variant">
-<span class="material-symbols-outlined text-[18px]">mail</span>
-</span>
-<input class="w-full bg-surface-container-highest border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg pl-10 pr-4 py-3 focus:ring-0 focus:border-primary transition-colors placeholder:text-outline/50" id="email" name="email" placeholder="jane@company.com" required="" type="email"/>
-</div>
-</div>
-<!-- Business Type Dropdown -->
-<div class="space-y-2 group input-glow transition-all duration-300">
-<label class="font-label-caps text-label-caps text-on-surface block" for="business_type">Business Type</label>
-<div class="relative">
-<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-on-surface-variant z-10 pointer-events-none">
-<span class="material-symbols-outlined text-[18px]">domain</span>
-</span>
-<select class="w-full bg-surface-container-highest border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg pl-10 pr-10 py-3 focus:ring-0 focus:border-primary transition-colors appearance-none cursor-pointer" id="business_type" name="business_type" required="">
-<option class="text-outline/50" disabled="" selected="" value="">Select category...</option>
-<option value="finance">Financial Services</option>
-<option value="saas">Enterprise SaaS</option>
-<option value="ecommerce">High-Volume E-Commerce</option>
-<option value="other">Other / Consultancy</option>
-</select>
-<span class="absolute inset-y-0 right-0 flex items-center pr-3 text-on-surface-variant pointer-events-none">
-<span class="material-symbols-outlined text-[20px]">expand_more</span>
-</span>
-</div>
-</div>
-<!-- Action Button -->
-<div class="pt-4">
-<button class="w-full bg-gradient-to-r from-primary-container to-on-primary-fixed-variant text-white font-label-caps text-label-caps py-4 px-6 rounded-lg luxury-button-glow flex items-center justify-center space-x-2 relative overflow-hidden group" type="submit">
-<span class="relative z-10">Get Elite Access</span>
-<span class="material-symbols-outlined relative z-10 text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
-<!-- Shine effect on hover -->
-<div class="absolute top-0 -inset-full h-full w-1/2 z-0 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-20 group-hover:animate-[shine_1.5s_ease-in-out]"></div>
-</button>
-</div>
-<p class="text-center font-mono-data text-mono-data text-outline text-[11px] mt-4">
-                            By requesting access, you agree to our <a class="text-primary hover:underline" href="#">Privacy Protocol</a>.
-                        </p>
-</form>
-</div>
-</div>
-</div>
+    <div class="bg-white/95 backdrop-blur-[40px] rounded-[24px] glass-stroke shadow-[0_15px_50px_rgba(103,80,164,0.12)] overflow-hidden transition-all duration-500 hover:shadow-[0_20px_60px_rgba(103,80,164,0.18)]">
+        <!-- Close Button -->
+        <button aria-label="Close dialog" class="absolute top-6 right-6 text-on-surface-variant hover:text-primary transition-colors z-20 group" onclick="window.location.href='index.html'">
+            <span class="material-symbols-outlined text-[24px] group-hover:rotate-90 transition-transform duration-300">close</span>
+        </button>
+        <div class="flex flex-col md:flex-row">
+            <!-- Visual / Branding Area -->
+            <div class="md:w-5/12 bg-primary/5 p-8 flex flex-col justify-between border-b md:border-b-0 md:border-r border-outline-variant/20 relative overflow-hidden">
+                <!-- Subtle inner glow -->
+                <div class="absolute -top-20 -left-20 w-40 h-40 bg-primary/15 blur-[50px] rounded-full"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center space-x-2 mb-8">
+                        <span class="material-symbols-outlined text-primary text-[28px]">smart_toy</span>
+                        <span class="font-display-lg text-body-lg font-bold tracking-tight text-primary">ChatbotPro</span>
+                    </div>
+                    <div class="mt-8 space-y-6">
+                        <div class="flex items-start space-x-3">
+                            <span class="material-symbols-outlined text-tertiary text-[20px] mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant" data-translate="modal-benefit-1">Access to proprietary LLM sales scripts.</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="material-symbols-outlined text-tertiary text-[20px] mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant" data-translate="modal-benefit-2">Advanced CRM integration blueprints.</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="material-symbols-outlined text-tertiary text-[20px] mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant" data-translate="modal-benefit-3">Priority white-glove onboarding.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-12 relative z-10">
+                    <p class="font-mono-data text-mono-data text-on-surface-variant opacity-60 uppercase tracking-widest text-xs">Digital Luxury AI</p>
+                </div>
+            </div>
+            
+            <!-- Form Area -->
+            <div class="md:w-7/12 p-8 md:p-10 relative bg-white">
+                <div class="mb-8">
+                    <h2 class="font-display-lg-mobile md:font-display-lg text-headline-md font-bold luxury-gradient-text mb-2 animate-pulse" data-translate="modal-title">Unlock the Future of AI Sales.</h2>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant" data-translate="modal-subtitle">Request your bespoke integration guide and join the elite tier of automated enterprises.</p>
+                </div>
+                <form id="popup-lead-form" class="space-y-4">
+                    <!-- Name Field -->
+                    <div class="space-y-2 group input-glow transition-all duration-300">
+                        <label class="font-label-caps text-label-caps text-on-surface block text-xs font-bold" for="name" data-translate="modal-label-name">Full Name</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-on-surface-variant">
+                                <span class="material-symbols-outlined text-[18px]">person</span>
+                            </span>
+                            <input class="w-full bg-slate-50 border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg pl-10 pr-4 py-2.5 focus:ring-0 focus:border-primary transition-colors placeholder:text-outline/50" id="name" placeholder="Jane Doe" required="" type="text"/>
+                        </div>
+                    </div>
+                    <!-- Enterprise Email Field -->
+                    <div class="space-y-2 group input-glow transition-all duration-300">
+                        <label class="font-label-caps text-label-caps text-on-surface block text-xs font-bold" for="email" data-translate="modal-label-email">Enterprise Email</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-on-surface-variant">
+                                <span class="material-symbols-outlined text-[18px]">mail</span>
+                            </span>
+                            <input class="w-full bg-slate-50 border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg pl-10 pr-4 py-2.5 focus:ring-0 focus:border-primary transition-colors placeholder:text-outline/50" id="email" placeholder="jane@company.com" required="" type="email"/>
+                        </div>
+                    </div>
+                    <!-- Business Type Dropdown -->
+                    <div class="space-y-2 group input-glow transition-all duration-300">
+                        <label class="font-label-caps text-label-caps text-on-surface block text-xs font-bold" for="business_type" data-translate="modal-label-business">Business Type</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-on-surface-variant z-10 pointer-events-none">
+                                <span class="material-symbols-outlined text-[18px]">domain</span>
+                            </span>
+                            <select class="w-full bg-slate-50 border border-outline-variant/30 text-on-surface font-mono-data text-mono-data rounded-lg pl-10 pr-10 py-2.5 focus:ring-0 focus:border-primary transition-colors appearance-none cursor-pointer" id="business_type" required="">
+                                <option disabled="" selected="" value="" data-translate="modal-select-placeholder">Select category...</option>
+                                <option value="finance" data-translate="modal-option-finance">Financial Services</option>
+                                <option value="saas" data-translate="modal-option-saas">Enterprise SaaS</option>
+                                <option value="ecommerce" data-translate="modal-option-ecommerce">High-Volume E-Commerce</option>
+                                <option value="other" data-translate="modal-option-other">Other / Consultancy</option>
+                            </select>
+                            <span class="absolute inset-y-0 right-0 flex items-center pr-3 text-on-surface-variant pointer-events-none">
+                                <span class="material-symbols-outlined text-[20px]">expand_more</span>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Action Button -->
+                    <div class="pt-2">
+                        <button class="w-full bg-gradient-to-r from-primary to-secondary text-white font-label-caps text-label-caps py-3 px-6 rounded-lg luxury-button-glow flex items-center justify-center space-x-2 relative overflow-hidden group font-bold" type="submit">
+                            <span class="relative z-10" data-translate="modal-btn-submit">Get Elite Access</span>
+                            <span class="material-symbols-outlined relative z-10 text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </main>
-<style>
-        @keyframes shine {
-            100% {
-                left: 200%;
-            }
-        }
-    </style>
-</body></html>
+
+<!-- Floating Language Button -->
+<button class="fixed bottom-6 right-6 z-[120] p-4 rounded-full bg-white border border-outline-variant/30 shadow-lg hover:border-primary transition-all duration-300 active:scale-95 text-on-surface-variant flex items-center justify-center" aria-label="language" id="lang-floating-btn">
+    <span class="material-symbols-outlined text-[24px]">language</span>
+</button>
+
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('popup-lead-form');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+            
+            const successMsg = currentLang === 'VIE'
+                ? `Đăng ký thành công cho ${name} (${email}). Tài liệu tích hợp đã được gửi!`
+                : `Access requested successfully for ${name} (${email}). Integration blueprint sent!`;
+                
+            window.showToast(successMsg, 'success');
+            form.reset();
+        });
+    }
+});
+</script>
+</body>
+</html>

@@ -1,68 +1,65 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Environment Variables - ChatbotPro</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&amp;family=Sora:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="light" lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ChatbotPro - Cấu Hình API</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
                         "primary-fixed-dim": "#cfbcff",
-                        "tertiary-container": "#c9a74d",
-                        "surface-container-lowest": "#0f0d13",
-                        "surface-container-low": "#1d1b20",
-                        "outline-variant": "#494551",
-                        "on-tertiary-fixed-variant": "#594400",
+                        "tertiary-container": "#fef3c7",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f8fafc",
+                        "outline-variant": "#e2e8f0",
+                        "on-tertiary-fixed-variant": "#78350f",
                         "secondary-fixed": "#e9ddff",
-                        "surface-tint": "#cfbcff",
-                        "on-background": "#e6e0e9",
+                        "surface-tint": "#6750a4",
+                        "on-background": "#0f172a",
                         "on-secondary-fixed-variant": "#4b4263",
-                        "secondary": "#cdc0e9",
-                        "error-container": "#93000a",
-                        "outline": "#948e9c",
-                        "primary-container": "#6750a4",
-                        "surface-container": "#211f24",
-                        "surface-dim": "#141218",
+                        "secondary": "#625b71",
+                        "error-container": "#fee2e2",
+                        "outline": "#94a3b8",
+                        "primary-container": "#e9ddff",
+                        "surface-container": "#f1f3f9",
+                        "surface-dim": "#f1f5f9",
                         "on-primary-fixed": "#22005d",
-                        "secondary-container": "#4d4465",
-                        "on-error-container": "#ffdad6",
-                        "inverse-primary": "#6750a4",
-                        "on-tertiary-container": "#503d00",
-                        "on-surface-variant": "#cbc4d2",
-                        "primary": "#cfbcff",
-                        "inverse-surface": "#e6e0e9",
-                        "surface-variant": "#36343a",
+                        "secondary-container": "#e8def8",
+                        "on-error-container": "#7f1d1d",
+                        "inverse-primary": "#cfbcff",
+                        "on-tertiary-container": "#451a03",
+                        "on-surface-variant": "#475569",
+                        "primary": "#6750a4",
+                        "inverse-surface": "#0f172a",
+                        "surface-variant": "#e2e8f0",
                         "secondary-fixed-dim": "#cdc0e9",
                         "primary-fixed": "#e9ddff",
-                        "on-primary-container": "#e0d2ff",
-                        "surface": "#141218",
-                        "surface-container-high": "#2b292f",
-                        "on-error": "#690005",
-                        "on-secondary-fixed": "#1f1635",
-                        "inverse-on-surface": "#322f35",
-                        "tertiary-fixed": "#ffdf93",
-                        "on-tertiary-fixed": "#241a00",
+                        "on-primary-container": "#22005d",
+                        "surface": "#ffffff",
+                        "surface-container-high": "#e2e8f0",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#1d192b",
+                        "inverse-on-surface": "#f8fafc",
+                        "tertiary-fixed": "#fde68a",
+                        "on-tertiary-fixed": "#451a03",
                         "on-primary-fixed-variant": "#4f378a",
-                        "on-secondary": "#342b4b",
-                        "surface-bright": "#3b383e",
-                        "tertiary": "#e7c365",
-                        "on-tertiary": "#3e2e00",
-                        "background": "#141218",
-                        "on-secondary-container": "#bfb2da",
-                        "on-surface": "#e6e0e9",
-                        "error": "#ffb4ab",
-                        "tertiary-fixed-dim": "#e7c365",
-                        "surface-container-highest": "#36343a",
-                        "on-primary": "#381e72"
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f8fafc",
+                        "tertiary": "#d97706",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f8fafc",
+                        "on-secondary-container": "#1d192b",
+                        "on-surface": "#0f172a",
+                        "error": "#ef4444",
+                        "tertiary-fixed-dim": "#f59e0b",
+                        "surface-container-highest": "#cbd5e1",
+                        "on-primary": "#ffffff"
                     },
                     borderRadius: {
                         DEFAULT: "0.25rem",
@@ -100,66 +97,62 @@
             }
         }
     </script>
-<style>
+    <style>
         body {
-            background-color: #050505;
-            color: #e6e0e9;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            background-color: #f8fafc;
+            color: #0f172a;
             overflow-x: hidden;
         }
 
         .glass-panel {
-            background: rgba(20, 18, 24, 0.6);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(73, 69, 81, 0.3);
-        }
-
-        .glass-panel-hover:hover {
-            box-shadow: 0 0 15px rgba(207, 188, 255, 0.1);
-            transform: scale(1.005);
-        }
-
-        .text-glow {
-            text-shadow: 0 0 10px rgba(207, 188, 255, 0.5);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #cfbcff 0%, #e7c365 100%);
-            color: #141218;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(103, 80, 164, 0.08);
+            box-shadow: 0 4px 30px rgba(103, 80, 164, 0.03);
             transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
+        .glass-panel:hover {
+            border-color: rgba(103, 80, 164, 0.2);
+            box-shadow: 0 10px 30px rgba(103, 80, 164, 0.08);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6750a4 0%, #625b71 100%);
+            border: 1px solid rgba(103, 80, 164, 0.1);
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
         .btn-primary:hover {
-            filter: brightness(1.2);
-            box-shadow: 0 0 20px rgba(207, 188, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(103, 80, 164, 0.2);
+            transform: scale(1.01);
         }
 
         .btn-luxury {
-            border: 1px solid #c9a74d;
-            color: #c9a74d;
+            border: 1px solid #d97706;
+            color: #d97706;
             background: transparent;
             transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         .btn-luxury:hover {
-            background: rgba(201, 167, 77, 0.1);
-            box-shadow: 0 0 15px rgba(201, 167, 77, 0.2);
+            background: rgba(217, 119, 6, 0.05);
+            box-shadow: 0 0 15px rgba(217, 119, 6, 0.15);
         }
 
         .input-glass {
-            background: rgba(15, 13, 19, 0.8);
-            border: 1px solid rgba(73, 69, 81, 0.5);
-            color: #e6e0e9;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(103, 80, 164, 0.15);
+            color: #0f172a;
             transition: all 0.3s ease;
         }
 
         .input-glass:focus {
             outline: none;
-            border-color: #cfbcff;
-            box-shadow: 0 0 10px rgba(207, 188, 255, 0.3);
+            border-color: #6750a4;
+            box-shadow: 0 0 10px rgba(103, 80, 164, 0.15);
         }
 
         .obscured-value {
@@ -172,291 +165,291 @@
             filter: blur(0);
         }
 
-        /* Material Symbols Fill Configuration */
         .material-symbols-outlined[data-weight="fill"] {
             font-variation-settings: 'FILL' 1;
         }
 
-        /* Nav layout adjustments */
-        #main-content {
-            margin-left: 16rem; /* 64px (w-64) */
-            margin-top: 5rem;  /* 80px (h-20) */
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        @media (max-width: 768px) {
-            #main-content {
-                margin-left: 0;
-            }
-            .desktop-nav {
-                display: none;
-            }
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(103, 80, 164, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(103, 80, 164, 0.02) 1px, transparent 1px);
         }
     </style>
 </head>
-<body class="bg-background text-on-background font-body-sm text-body-sm antialiased selection:bg-primary-container selection:text-on-primary-container">
+<body class="min-h-screen flex flex-col font-body-sm text-body-sm text-on-background relative">
+<div class="fixed inset-0 bg-grid z-[-1] pointer-events-none"></div>
+<div class="fixed inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent z-[-1]"></div>
+
 <!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-surface-container/60 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_0_15px_rgba(207,188,255,0.1)] flex justify-between items-center px-container-margin h-20 w-full">
-<div class="flex items-center gap-gutter">
-<!-- Mobile Menu Toggle (hidden on md) -->
-<button class="md:hidden text-on-surface-variant hover:text-primary transition-colors">
-<span class="material-symbols-outlined text-[24px]">menu</span>
-</button>
-<div class="font-display-lg text-display-lg bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent font-bold tracking-tight">ChatbotPro</div>
-</div>
-<!-- Search Bar (on_right) & Actions -->
-<div class="flex items-center gap-stack-md">
-<!-- Search -->
-<div class="hidden md:flex relative group">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
-<input class="input-glass rounded-full py-2 pl-10 pr-4 w-64 font-mono-data text-mono-data text-sm placeholder:text-outline/70 focus:w-72 transition-all" placeholder="Search config..." type="text"/>
-</div>
-<div class="flex items-center gap-unit">
-<button aria-label="language" class="p-2 text-on-surface-variant hover:bg-white/5 transition-all duration-300 rounded-full active:scale-95">
-<span class="material-symbols-outlined text-[24px]">language</span>
-</button>
-<button aria-label="notifications" class="p-2 text-on-surface-variant hover:bg-white/5 transition-all duration-300 rounded-full active:scale-95 relative">
-<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full animate-pulse"></span>
-<span class="material-symbols-outlined text-[24px]">notifications</span>
-</button>
-<div class="ml-stack-sm w-10 h-10 rounded-full border border-outline-variant overflow-hidden cursor-pointer hover:border-primary transition-colors">
-<img alt="User profile" class="w-full h-full object-cover" data-alt="Close up portrait photograph of a young professional wearing high-tech minimalist eyewear against a very dark studio background. High contrast cinematic lighting creates subtle glowing highlights on the face and glasses. The overall tone aligns with a premium cyberpunk or advanced AI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgi5wKT_SxbotQJZu8uZVCyh9my7piGTPuDJROByphHOj3Y5L3CmF6TqtHugX7ia45f5tIOBrDorDdoIN0ohpVojD7bvsdaRq41srs1ZNNRQyNhxgl-Lw2YI3nNVyoi_4pw35QE7fCrkSSYEEzss4LdOKezgTIZgKiLkzPLbcStS0jNGtawrg-flPrhbt7MrP05kZNKpk_IVSWSSyhGOZsBWZc9i7h2x67y-6uhPOyYbFKZmmrWFFrYiNn15q7VGr-XYRc3APwKAlf"/>
-</div>
-</div>
-</div>
-</nav>
-<!-- SideNavBar (Desktop Only) -->
-<aside class="desktop-nav fixed left-0 top-20 h-[calc(100vh-80px)] w-64 bg-surface-dim/80 backdrop-blur-2xl border-r border-outline-variant/20 shadow-xl flex flex-col py-stack-md px-4 z-40">
-<!-- Header -->
-<div class="mb-stack-lg flex items-center gap-stack-sm px-2">
-<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center border border-outline-variant">
-<span class="material-symbols-outlined text-primary text-[24px]">terminal</span>
-</div>
-<div>
-<h2 class="font-label-caps text-label-caps text-on-surface">Admin Terminal</h2>
-<p class="font-mono-data text-mono-data text-xs text-primary/70 mt-1">Elite Access</p>
-</div>
-</div>
-<!-- Navigation Links -->
-<nav class="flex-1 flex flex-col gap-unit">
-<a class="flex items-center gap-stack-sm px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-white/5 hover:translate-x-1 transition-all duration-300 group" href="dashboard.html">
-<span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
-<span class="font-label-caps text-label-caps">Dashboard</span>
-</a>
-<a class="flex items-center gap-stack-sm px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-white/5 hover:translate-x-1 transition-all duration-300 group" href="features.html">
-<span class="material-symbols-outlined group-hover:text-primary transition-colors">smart_toy</span>
-<span class="font-label-caps text-label-caps">Chatbot Library</span>
-</a>
-<a class="flex items-center gap-stack-sm px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-white/5 hover:translate-x-1 transition-all duration-300 group" href="dashboard.html">
-<span class="material-symbols-outlined group-hover:text-primary transition-colors">hub</span>
-<span class="font-label-caps text-label-caps">CRM Intelligence</span>
-</a>
-<a class="flex items-center gap-stack-sm px-4 py-3 rounded-lg bg-primary-container/20 text-primary border-r-2 border-primary hover:translate-x-1 transition-all duration-300 group active" href="env-vars.html">
-<span class="material-symbols-outlined text-primary" data-weight="fill">database</span>
-<span class="font-label-caps text-label-caps font-bold">Environment Variables</span>
-</a>
-<a class="flex items-center gap-stack-sm px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-white/5 hover:translate-x-1 transition-all duration-300 group" href="guides.html">
-<span class="material-symbols-outlined group-hover:text-primary transition-colors">menu_book</span>
-<span class="font-label-caps text-label-caps">User Guides</span>
-</a>
-<a class="flex items-center gap-stack-sm px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-white/5 hover:translate-x-1 transition-all duration-300 group mt-auto" href="env-vars.html">
-<span class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
-<span class="font-label-caps text-label-caps">Settings</span>
-</a>
-</nav>
-</aside>
-<!-- Main Content Area -->
-<main class="p-container-margin md:p-[40px] p-[16px]" id="main-content">
-<!-- Page Header -->
-<header class="mb-stack-lg flex flex-col md:flex-row md:justify-between md:items-end gap-stack-md border-b border-outline-variant/20 pb-stack-md">
-<div>
-<h1 class="font-display-lg text-display-lg text-on-surface mb-unit">Environment Variables</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Securely manage your API keys, authentication tokens, and system configuration. Changes sync immediately across your Chatbot ecosystem.</p>
-</div>
-<div class="flex gap-stack-sm">
-<button class="btn-luxury px-6 py-2 rounded-full font-label-caps text-label-caps flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px]">history</span>
-                    Audit Log
-                </button>
-<button class="btn-primary px-6 py-2 rounded-full font-label-caps text-label-caps font-bold flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px]">save</span>
-                    Deploy Changes
-                </button>
-</div>
+<header class="fixed top-0 w-full z-50 bg-white/75 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_4px_20px_rgba(103,80,164,0.05)]">
+    <div class="flex justify-between items-center px-container-margin h-20 w-full">
+        <div class="flex items-center gap-gutter">
+            <h1 class="font-display-lg text-display-lg bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent hidden md:block" style="font-size: 28px; font-weight: 750; cursor: pointer;" onclick="window.location.href='index.html'">ChatbotPro</h1>
+            <h1 class="font-display-lg-mobile text-display-lg-mobile bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent md:hidden" style="font-size: 24px; font-weight: 750;" onclick="window.location.href='index.html'">ChatbotPro</h1>
+        </div>
+        <div class="flex items-center gap-stack-md">
+            <div class="relative hidden md:block">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+                <input class="bg-slate-50 border border-outline-variant/50 rounded-full py-2 pl-10 pr-4 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all w-64 font-mono-data text-mono-data" data-translate-placeholder="dash-search-placeholder" placeholder="Tìm kiếm khách hàng, kênh kết nối..." type="text"/>
+            </div>
+            <button class="p-2 rounded-full hover:bg-primary/5 transition-all duration-300 active:scale-95 text-on-surface-variant">
+                <span class="material-symbols-outlined">language</span>
+            </button>
+            <button class="p-2 rounded-full hover:bg-primary/5 transition-all duration-300 active:scale-95 text-on-surface-variant relative">
+                <span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full shadow-[0_0_5px_rgba(239,68,68,0.5)]"></span>
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <div class="w-10 h-10 rounded-full bg-slate-100 border border-outline-variant/50 overflow-hidden cursor-pointer hover:border-primary transition-colors">
+                <img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBIUDhUh4WJokbt6eaR39WWnllSy3R5Y2ubYoM-BXYHAwjzsVLJ7F-UFxq44aIjStlSz4yIerWvEkrAPrzw6z_cFBn7pvuFAveUQWde_R54XtdWFoAOtbfenopAKkMYinI9KbPkuMa-nlTrq9G2gzMewhy4la7j1XcgHYQtKBKga_mdkLyPzwBiZsVtofpmOMVKuyV9-Gz1kR-qSnedfV9f4m3BtsRFQitanKo4j4TlgSahv5oYZPfuAbw9umqPv5J90xX_nb7TEf4"/>
+            </div>
+        </div>
+    </div>
 </header>
+
+<div class="flex flex-1 pt-20 h-screen">
+    <!-- SideNavBar -->
+    <nav class="hidden md:flex flex-col py-stack-md px-4 fixed left-0 top-20 h-[calc(100vh-80px)] w-64 bg-white border-r border-outline-variant/30 shadow-sm z-40">
+        <div class="mb-stack-lg px-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined">terminal</span>
+            </div>
+            <div>
+                <div class="font-label-caps text-xs text-primary tracking-wider font-bold" data-translate="nav-admin-terminal">Admin Terminal</div>
+                <div class="font-mono-data text-mono-data text-on-surface-variant text-[10px] uppercase mt-1">ChatbotPro OS</div>
+            </div>
+        </div>
+        <ul class="flex flex-col gap-2 flex-1">
+            <li>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="index.html">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span data-translate="nav-home">Trang Chủ</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="features.html">
+                    <span class="material-symbols-outlined">smart_toy</span>
+                    <span data-translate="nav-features">Tính Năng</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="dashboard.html">
+                    <span class="material-symbols-outlined">hub</span>
+                    <span data-translate="nav-crm">CRM Khách Hàng</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary border-r-2 border-primary font-label-caps text-label-caps font-bold active" href="env-vars.html">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">database</span>
+                    <span data-translate="nav-api">Cấu Hình API</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="guides.html">
+                    <span class="material-symbols-outlined">menu_book</span>
+                    <span data-translate="nav-guides">Hướng Dẫn</span>
+                </a>
+            </li>
+        </ul>
+        <div class="mt-auto">
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:translate-x-1 transition-all duration-300 font-label-caps text-label-caps font-bold" href="env-vars.html">
+                <span class="material-symbols-outlined">settings</span>
+                <span data-translate="nav-settings">Cài Đặt</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 md:ml-64 p-4 md:p-container-margin overflow-y-auto" id="main-content">
+        <!-- Page Header -->
+        <header class="mb-stack-lg flex flex-col md:flex-row md:justify-between md:items-end gap-stack-md border-b border-outline-variant/30 pb-stack-md">
+            <div>
+                <h1 class="font-display-lg text-headline-md text-on-surface mb-unit font-bold" data-translate="env-title">Quản Lý Biến Môi Trường API</h1>
+                <p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl" data-translate="dash-env-sub">Cấu hình API Keys kết nối LLM, Zalo OA, Messenger và các webhook.</p>
+            </div>
+            <div class="flex gap-stack-sm mt-4 md:mt-0">
+                <button class="btn-luxury px-6 py-2.5 rounded-full font-label-caps text-label-caps flex items-center gap-2 font-bold" data-translate="env-btn-audit">
+                    <span class="material-symbols-outlined text-[18px]">history</span>
+                    Xem Nhật Ký
+                </button>
+                <button class="btn-primary px-6 py-2.5 rounded-full font-label-caps text-label-caps font-bold flex items-center gap-2" data-translate="env-btn-deploy">
+                    <span class="material-symbols-outlined text-[18px]">save</span>
+                    Áp Dụng Thay Đổi
+                </button>
+            </div>
+        </header>
 <!-- Bento Grid Layout -->
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
 <!-- Left Column: Variable Management (8 cols) -->
 <section class="lg:col-span-8 flex flex-col gap-gutter">
-<!-- Core Variables Card -->
-<div class="glass-panel rounded-xl p-stack-md glass-panel-hover transition-all duration-300">
-<div class="flex justify-between items-center mb-stack-md border-b border-outline-variant/30 pb-unit">
-<div class="flex items-center gap-stack-sm">
-<span class="material-symbols-outlined text-primary">key</span>
-<h3 class="font-headline-md text-headline-md text-on-surface">Core Infrastructure Keys</h3>
-</div>
-<button id="btn-add-var" class="text-primary hover:text-tertiary transition-colors flex items-center gap-1 font-label-caps text-label-caps">
-<span class="material-symbols-outlined text-[16px]">add</span> Add Variable
-                        </button>
-</div>
-<div id="vars-list" class="flex flex-col gap-unit">
-<!-- Key/Value Row 1 -->
-<div class="grid grid-cols-12 gap-unit items-center bg-surface/50 p-2 rounded-lg border border-outline-variant/20 group">
-<div class="col-span-4 flex items-center gap-2">
-<span class="material-symbols-outlined text-[#10b981] text-[16px]" title="Encrypted &amp; Safe">lock</span>
-<input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs text-outline" readonly="" type="text" value="OPENAI_API_KEY"/>
-</div>
-<div class="col-span-7 relative">
-<input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs obscured-value" readonly="" type="text" value="sk-proj-7x89qwe7r89qwe7r89qwe7r89qwe"/>
-</div>
-<div class="col-span-1 flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-<button class="p-1 hover:bg-white/10 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
-<button class="p-1 hover:bg-white/10 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
-</div>
-</div>
-<!-- Key/Value Row 2 -->
-<div class="grid grid-cols-12 gap-unit items-center bg-surface/50 p-2 rounded-lg border border-outline-variant/20 group">
-<div class="col-span-4 flex items-center gap-2">
-<span class="material-symbols-outlined text-[#10b981] text-[16px]">lock</span>
-<input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs text-outline" readonly="" type="text" value="DB_CONNECTION_STRING"/>
-</div>
-<div class="col-span-7">
-<input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs obscured-value" readonly="" type="text" value="postgresql://user:pass@cluster.aws.com/db"/>
-</div>
-<div class="col-span-1 flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-<button class="p-1 hover:bg-white/10 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
-<button class="p-1 hover:bg-white/10 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
-</div>
-</div>
-<!-- Add New Row Input -->
-<div class="grid grid-cols-12 gap-unit items-center mt-stack-sm">
-<div class="col-span-4">
-<input id="new-var-key" class="input-glass w-full rounded py-2 px-3 font-mono-data text-mono-data text-xs" placeholder="NEW_VARIABLE_KEY" type="text"/>
-</div>
-<div class="col-span-7">
-<input id="new-var-val" class="input-glass w-full rounded py-2 px-3 font-mono-data text-mono-data text-xs" placeholder="Value..." type="text"/>
-</div>
-<div class="col-span-1 flex justify-end">
-<button id="btn-save-new-var" class="p-2 bg-primary/10 hover:bg-primary/20 rounded text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">check</span></button>
-</div>
-</div>
-</div>
-</div>
-<!-- System Config Card -->
-<div class="glass-panel rounded-xl p-stack-md glass-panel-hover transition-all duration-300">
-<div class="flex justify-between items-center mb-stack-md border-b border-outline-variant/30 pb-unit">
-<div class="flex items-center gap-stack-sm">
-<span class="material-symbols-outlined text-tertiary">tune</span>
-<h3 class="font-headline-md text-headline-md text-on-surface">System Parameters</h3>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
-<!-- Param 1 -->
-<div>
-<label class="block font-label-caps text-label-caps text-on-surface-variant mb-2">Default Model</label>
-<select class="input-glass w-full rounded-lg py-2.5 px-4 font-mono-data text-mono-data text-sm appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23cfbcff%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[position:right_1rem_center]">
-<option value="gpt-4">GPT-4 Turbo</option>
-<option value="claude-3">Claude 3 Opus</option>
-<option value="llama-3">Llama 3 70B</option>
-</select>
-</div>
-<!-- Param 2 -->
-<div>
-<label class="block font-label-caps text-label-caps text-on-surface-variant mb-2">Max Tokens Per Request</label>
-<input class="input-glass w-full rounded-lg py-2.5 px-4 font-mono-data text-mono-data text-sm" type="number" value="4096"/>
-</div>
-<!-- Param 3 -->
-<div>
-<label class="block font-label-caps text-label-caps text-on-surface-variant mb-2">Temperature</label>
-<div class="flex items-center gap-4">
-<input class="w-full accent-primary" max="2" min="0" step="0.1" type="range" value="0.7"/>
-<span class="font-mono-data text-mono-data text-primary w-8 text-right">0.7</span>
-</div>
-</div>
-<!-- Param 4 -->
-<div class="flex items-center justify-between mt-auto">
-<label class="block font-label-caps text-label-caps text-on-surface-variant">Enable Vector Cache</label>
-<label class="relative inline-flex items-center cursor-pointer">
-<input checked="" class="sr-only peer" type="checkbox"/>
-<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-</label>
-</div>
-</div>
-</div>
-</section>
-<!-- Right Column: Integrations & Status (4 cols) -->
-<section class="lg:col-span-4 flex flex-col gap-gutter">
-<!-- Integration Status -->
-<div class="glass-panel rounded-xl p-stack-md relative overflow-hidden group">
-<div class="absolute -right-10 -top-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-500"></div>
-<h3 class="font-headline-md text-headline-md text-on-surface mb-stack-md relative z-10">Active Connections</h3>
-<!-- Gmail Connection -->
-<div class="bg-surface/40 border border-outline-variant/30 rounded-lg p-4 flex flex-col gap-4 relative z-10">
-<div class="flex justify-between items-start">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 bg-white rounded flex items-center justify-center shadow-lg">
-<svg class="w-6 h-6" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V8L12 13L20 8V18ZM12 11L4 6H20L12 11Z" fill="#EA4335"></path>
-</svg>
-</div>
-<div>
-<h4 class="font-body-sm text-body-sm font-bold text-on-surface">Gmail SMTP</h4>
-<p class="font-label-caps text-label-caps text-outline text-[10px] mt-1">system@chatbotpro.com</p>
-</div>
-</div>
-<span class="px-2 py-1 bg-[#10b981]/20 text-[#10b981] rounded text-xs font-label-caps flex items-center gap-1">
-<span class="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span> Connected
-                            </span>
-</div>
-<button class="w-full py-2 border border-outline-variant/50 rounded-lg text-on-surface-variant font-label-caps text-label-caps hover:bg-white/5 transition-colors text-xs">
-                            Manage Connection
-                        </button>
-</div>
-<!-- Slack Connection -->
-<div class="bg-surface/40 border border-outline-variant/30 rounded-lg p-4 flex flex-col gap-4 relative z-10 mt-unit">
-<div class="flex justify-between items-start">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 bg-white rounded flex items-center justify-center shadow-lg">
-<svg class="w-6 h-6" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.528 2.528 0 0 1 2.521-2.523 2.528 2.528 0 0 1 2.521 2.523v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 8.835a2.528 2.528 0 0 1 2.521-2.522 2.528 2.528 0 0 1 2.521 2.522 2.527 2.527 0 0 1-2.52 2.52H8.833v-2.52zM8.834 7.563A2.528 2.528 0 0 1 11.355 5.04a2.528 2.528 0 0 1 2.521 2.521V1.25A2.528 2.528 0 0 1 11.355-1.27a2.528 2.528 0 0 1-2.521 2.521v6.313zM18.956 8.835a2.528 2.528 0 0 1 2.522-2.522 2.528 2.528 0 0 1 2.522 2.522 2.527 2.527 0 0 1-2.522 2.52H18.956v-2.52zM17.685 8.835a2.528 2.528 0 0 1-2.522 2.522 2.528 2.528 0 0 1-2.522-2.522V2.522A2.528 2.528 0 0 1 15.163 0a2.528 2.528 0 0 1 2.522 2.522v6.313zM15.163 15.165a2.528 2.528 0 0 1-2.522 2.523 2.528 2.528 0 0 1-2.522-2.523 2.527 2.527 0 0 1 2.522-2.52H15.163v-2.52zM15.163 16.437a2.528 2.528 0 0 1-2.522 2.522 2.528 2.528 0 0 1-2.522-2.522v6.313a2.528 2.528 0 0 1 2.522 2.522 2.528 2.528 0 0 1 2.522-2.522v-6.313z" fill="#E01E5A"></path>
-</svg>
-</div>
-<div>
-<h4 class="font-body-sm text-body-sm font-bold text-on-surface">Slack Webhooks</h4>
-</div>
-</div>
-<span class="px-2 py-1 bg-surface-variant/50 text-outline rounded text-xs font-label-caps border border-outline-variant/30">
-                                Disconnected
-                            </span>
-</div>
-<button class="w-full py-2 bg-primary/10 text-primary rounded-lg font-label-caps text-label-caps hover:bg-primary/20 transition-colors text-xs flex items-center justify-center gap-1">
-<span class="material-symbols-outlined text-[16px]">add_link</span> Connect Slack
-                        </button>
-</div>
-</div>
-<!-- Environment Meta -->
-<div class="glass-panel rounded-xl p-stack-md">
-<h3 class="font-headline-md text-headline-md text-on-surface mb-stack-sm text-sm border-b border-outline-variant/30 pb-2">Environment Details</h3>
-<ul class="flex flex-col gap-2 font-mono-data text-mono-data text-xs text-on-surface-variant">
-<li class="flex justify-between"><span class="text-outline">Current Env:</span> <span class="text-tertiary">Production</span></li>
-<li class="flex justify-between"><span class="text-outline">Region:</span> <span class="text-on-surface">us-east-1</span></li>
-<li class="flex justify-between"><span class="text-outline">Last Updated:</span> <span class="text-on-surface">2 hours ago</span></li>
-<li class="flex justify-between"><span class="text-outline">Version Hash:</span> <span class="text-primary truncate ml-4">#a9f3b2c</span></li>
-</ul>
-</div>
-</section>
+        <!-- Core Variables Card -->
+        <div class="glass-panel rounded-xl p-stack-md glass-panel-hover transition-all duration-300 bg-white">
+            <div class="flex justify-between items-center mb-stack-md border-b border-outline-variant/30 pb-unit">
+                <div class="flex items-center gap-stack-sm">
+                    <span class="material-symbols-outlined text-primary">key</span>
+                    <h3 class="font-headline-md text-headline-md text-on-surface font-bold" data-translate="env-card-infra">Khóa Hạ Tầng Core</h3>
+                </div>
+                <button id="btn-add-var" class="text-primary hover:text-tertiary transition-colors flex items-center gap-1 font-label-caps text-label-caps font-bold">
+                    <span class="material-symbols-outlined text-[16px]">add</span> 
+                    <span data-translate="env-btn-add">Thêm Biến Môi Trường</span>
+                </button>
+            </div>
+            <div id="vars-list" class="flex flex-col gap-unit">
+                <!-- Key/Value Row 1 -->
+                <div class="grid grid-cols-12 gap-unit items-center bg-slate-50/50 p-2 rounded-lg border border-outline-variant/20 group">
+                    <div class="col-span-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[#10b981] text-[16px]" title="Encrypted &amp; Safe">lock</span>
+                        <input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs text-outline" readonly="" type="text" value="OPENAI_API_KEY"/>
+                    </div>
+                    <div class="col-span-7 relative">
+                        <input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs obscured-value" readonly="" type="text" value="sk-proj-7x89qwe7r89qwe7r89qwe7r89qwe"/>
+                    </div>
+                    <div class="col-span-1 flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button class="p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+                        <button class="p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+                    </div>
+                </div>
+                <!-- Key/Value Row 2 -->
+                <div class="grid grid-cols-12 gap-unit items-center bg-slate-50/50 p-2 rounded-lg border border-outline-variant/20 group">
+                    <div class="col-span-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[#10b981] text-[16px]">lock</span>
+                        <input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs text-outline" readonly="" type="text" value="DB_CONNECTION_STRING"/>
+                    </div>
+                    <div class="col-span-7">
+                        <input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs obscured-value" readonly="" type="text" value="postgresql://user:pass@cluster.aws.com/db"/>
+                    </div>
+                    <div class="col-span-1 flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button class="p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+                        <button class="p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+                    </div>
+                </div>
+                <!-- Add New Row Input -->
+                <div class="grid grid-cols-12 gap-unit items-center mt-stack-sm">
+                    <div class="col-span-4">
+                        <input id="new-var-key" class="input-glass w-full rounded py-2 px-3 font-mono-data text-mono-data text-xs" data-translate-placeholder="env-placeholder-key" placeholder="TÊN_BIẾN_MỚI" type="text"/>
+                    </div>
+                    <div class="col-span-7">
+                        <input id="new-var-val" class="input-glass w-full rounded py-2 px-3 font-mono-data text-mono-data text-xs" data-translate-placeholder="env-placeholder-value" placeholder="Giá trị..." type="text"/>
+                    </div>
+                    <div class="col-span-1 flex justify-end">
+                        <button id="btn-save-new-var" class="p-2 bg-primary/10 hover:bg-primary/20 rounded text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">check</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- System Config Card -->
+        <div class="glass-panel rounded-xl p-stack-md glass-panel-hover transition-all duration-300 bg-white">
+            <div class="flex justify-between items-center mb-stack-md border-b border-outline-variant/30 pb-unit">
+                <div class="flex items-center gap-stack-sm">
+                    <span class="material-symbols-outlined text-tertiary">tune</span>
+                    <h3 class="font-headline-md text-headline-md text-on-surface font-bold" data-translate="env-card-params">Tham Số Hệ Thống</h3>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+                <!-- Param 1 -->
+                <div>
+                    <label class="block font-label-caps text-label-caps text-on-surface-variant mb-2 font-bold" data-translate="env-label-model">Mô Hình Mặc Định</label>
+                    <select class="input-glass w-full rounded-lg py-2.5 px-4 font-mono-data text-mono-data text-sm appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%236750a4%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[position:right_1rem_center]">
+                        <option value="gpt-4">GPT-4 Turbo</option>
+                        <option value="claude-3">Claude 3 Opus</option>
+                        <option value="llama-3">Llama 3 70B</option>
+                    </select>
+                </div>
+                <!-- Param 2 -->
+                <div>
+                    <label class="block font-label-caps text-label-caps text-on-surface-variant mb-2 font-bold" data-translate="env-label-tokens">Số Token Tối Đa</label>
+                    <input class="input-glass w-full rounded-lg py-2.5 px-4 font-mono-data text-mono-data text-sm" type="number" value="4096"/>
+                </div>
+                <!-- Param 3 -->
+                <div>
+                    <label class="block font-label-caps text-label-caps text-on-surface-variant mb-2 font-bold" data-translate="env-label-temp">Độ Sáng Tạo (Temperature)</label>
+                    <div class="flex items-center gap-4">
+                        <input class="w-full accent-primary" max="2" min="0" step="0.1" type="range" value="0.7"/>
+                        <span class="font-mono-data text-mono-data text-primary w-8 text-right">0.7</span>
+                    </div>
+                </div>
+                <!-- Param 4 -->
+                <div class="flex items-center justify-between mt-auto">
+                    <label class="block font-label-caps text-label-caps text-on-surface-variant font-bold" data-translate="env-label-cache">Bật Bộ Nhớ Đệm Vector</label>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input checked="" class="sr-only peer" type="checkbox"/>
+                        <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Right Column: Integrations & Status (4 cols) -->
+    <section class="lg:col-span-4 flex flex-col gap-gutter">
+        <!-- Integration Status -->
+        <div class="glass-panel rounded-xl p-stack-md relative overflow-hidden group bg-white">
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-500"></div>
+            <h3 class="font-headline-md text-headline-md text-on-surface mb-stack-md relative z-10 font-bold" data-translate="env-card-connections">Kết Nối Hoạt Động</h3>
+            <!-- Gmail Connection -->
+            <div class="bg-slate-50/50 border border-outline-variant/30 rounded-lg p-4 flex flex-col gap-4 relative z-10">
+                <div class="flex justify-between items-start">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-white rounded flex items-center justify-center shadow-lg border border-slate-100">
+                            <svg class="w-6 h-6" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V8L12 13L20 8V18ZM12 11L4 6H20L12 11Z" fill="#EA4335"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-body-sm text-body-sm font-bold text-on-surface">Gmail SMTP</h4>
+                            <p class="font-label-caps text-label-caps text-outline text-[10px] mt-1">system@chatbotpro.com</p>
+                        </div>
+                    </div>
+                    <span class="px-2 py-1 bg-[#10b981]/20 text-[#10b981] rounded text-xs font-label-caps flex items-center gap-1 font-bold">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span> Connected
+                    </span>
+                </div>
+                <button class="w-full py-2 border border-outline-variant/50 rounded-lg text-on-surface-variant font-label-caps text-label-caps hover:bg-slate-100 transition-colors text-xs font-bold bg-white">
+                    Manage Connection
+                </button>
+            </div>
+            <!-- Slack Connection -->
+            <div class="bg-slate-50/50 border border-outline-variant/30 rounded-lg p-4 flex flex-col gap-4 relative z-10 mt-unit">
+                <div class="flex justify-between items-start">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-white rounded flex items-center justify-center shadow-lg border border-slate-100">
+                            <svg class="w-6 h-6" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.528 2.528 0 0 1 2.521-2.523 2.528 2.528 0 0 1 2.521 2.523v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 8.835a2.528 2.528 0 0 1 2.521-2.522 2.528 2.528 0 0 1 2.521 2.522 2.527 2.527 0 0 1-2.52 2.52H8.833v-2.52zM8.834 7.563A2.528 2.528 0 0 1 11.355 5.04a2.528 2.528 0 0 1 2.521 2.521V1.25A2.528 2.528 0 0 1 11.355-1.27a2.528 2.528 0 0 1-2.521 2.521v6.313zM18.956 8.835a2.528 2.528 0 0 1 2.522-2.522 2.528 2.528 0 0 1 2.522 2.522 2.527 2.527 0 0 1-2.522 2.52H18.956v-2.52zM17.685 8.835a2.528 2.528 0 0 1-2.522 2.522 2.528 2.528 0 0 1-2.522-2.522V2.522A2.528 2.528 0 0 1 15.163 0a2.528 2.528 0 0 1 2.522 2.522v6.313zM15.163 15.165a2.528 2.528 0 0 1-2.522 2.523 2.528 2.528 0 0 1-2.522-2.523 2.527 2.527 0 0 1 2.522-2.52H15.163v-2.52zM15.163 16.437a2.528 2.528 0 0 1-2.522 2.522 2.528 2.528 0 0 1-2.522-2.522v6.313a2.528 2.528 0 0 1 2.522 2.522 2.528 2.528 0 0 1 2.522-2.522v-6.313z" fill="#E01E5A"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-body-sm text-body-sm font-bold text-on-surface">Slack Webhooks</h4>
+                        </div>
+                    </div>
+                    <span class="px-2 py-1 bg-slate-100 text-outline rounded text-xs font-label-caps border border-outline-variant/30 font-bold">
+                        Disconnected
+                    </span>
+                </div>
+                <button class="w-full py-2 bg-primary/10 text-primary rounded-lg font-label-caps text-label-caps hover:bg-primary/20 transition-colors text-xs flex items-center justify-center gap-1 font-bold">
+                    <span class="material-symbols-outlined text-[16px]">add_link</span> Connect Slack
+                </button>
+            </div>
+        </div>
+        <!-- Environment Meta -->
+        <div class="glass-panel rounded-xl p-stack-md bg-white">
+            <h3 class="font-headline-md text-headline-md text-on-surface mb-stack-sm text-sm border-b border-outline-variant/30 pb-2 font-bold" data-translate="env-card-details">Environment Details</h3>
+            <ul class="flex flex-col gap-2 font-mono-data text-mono-data text-xs text-on-surface-variant">
+                <li class="flex justify-between"><span class="text-outline" data-translate="env-detail-env">Current Env:</span> <span class="text-tertiary font-bold">Production</span></li>
+                <li class="flex justify-between"><span class="text-outline" data-translate="env-detail-region">Region:</span> <span class="text-on-surface font-bold">us-east-1</span></li>
+                <li class="flex justify-between"><span class="text-outline" data-translate="env-detail-updated">Last Updated:</span> <span class="text-on-surface font-bold">2 hours ago</span></li>
+                <li class="flex justify-between"><span class="text-outline" data-translate="env-detail-hash">Version Hash:</span> <span class="text-primary truncate ml-4 font-bold">#a9f3b2c</span></li>
+            </ul>
+        </div>
+    </section>
 </div>
 </main>
 <!-- Footer -->
-<footer class="bg-surface-container-lowest border-t border-outline-variant/10 flex justify-between items-center px-container-margin py-stack-sm w-full mt-auto z-40 relative md:ml-64 w-[calc(100%-16rem)] max-md:w-full max-md:ml-0">
-<div class="font-label-caps text-label-caps text-on-surface">© 2024 ChatbotPro. Digital Luxury AI.</div>
-<div class="flex gap-stack-md">
-<a class="font-mono-data text-mono-data text-on-surface-variant hover:text-tertiary-fixed transition-colors opacity-80 hover:opacity-100 text-xs" href="#">System Status</a>
-<a class="font-mono-data text-mono-data text-on-surface-variant hover:text-tertiary-fixed transition-colors opacity-80 hover:opacity-100 text-xs" href="#">API Health</a>
-<a class="font-mono-data text-mono-data text-on-surface-variant hover:text-tertiary-fixed transition-colors opacity-80 hover:opacity-100 text-xs" href="#">Support</a>
-</div>
+<footer class="bg-white/80 backdrop-blur-md border-t border-outline-variant/30 flex justify-between items-center px-container-margin py-stack-sm w-full mt-auto z-40 relative md:ml-64 w-[calc(100%-16rem)] max-md:w-full max-md:ml-0">
+    <div class="font-label-caps text-label-caps text-on-surface font-bold" data-translate="copyright">© 2026 ChatbotPro. Trợ lý Trí Tuệ Nhân Tạo Doanh Nghiệp.</div>
+    <div class="flex gap-stack-md">
+        <a class="font-mono-data text-mono-data text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100 text-xs" href="#" data-translate="nav-status">System Status</a>
+        <a class="font-mono-data text-mono-data text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100 text-xs" href="#" data-translate="nav-health">API Health</a>
+        <a class="font-mono-data text-mono-data text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100 text-xs" href="#" data-translate="nav-support">Support</a>
+    </div>
 </footer>
 <script src="js/main.js"></script>
 <script>
@@ -488,9 +481,13 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const key = newVarKey.value.trim().toUpperCase();
         const val = newVarVal.value.trim();
+        const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
 
         if (!key || !val) {
-            window.showToast('Please provide both a key and a value.', 'error');
+            const msg = currentLang === 'VIE' 
+                ? 'Vui lòng cung cấp cả tên biến và giá trị.' 
+                : 'Please provide both a key and a value.';
+            window.showToast(msg, 'error');
             return;
         }
 
@@ -499,13 +496,16 @@ document.addEventListener('DOMContentLoaded', () => {
             .map(input => input.value);
             
         if (existingKeys.includes(key)) {
-            window.showToast(`Variable ${key} already exists.`, 'error');
+            const msg = currentLang === 'VIE'
+                ? `Biến ${key} đã tồn tại.`
+                : `Variable ${key} already exists.`;
+            window.showToast(msg, 'error');
             return;
         }
 
         // Create new variable row HTML element
         const row = document.createElement('div');
-        row.className = 'grid grid-cols-12 gap-unit items-center bg-surface/50 p-2 rounded-lg border border-outline-variant/20 group';
+        row.className = 'grid grid-cols-12 gap-unit items-center bg-slate-50/50 p-2 rounded-lg border border-outline-variant/20 group';
         row.innerHTML = `
             <div class="col-span-4 flex items-center gap-2">
                 <span class="material-symbols-outlined text-[#10b981] text-[16px]" title="Encrypted & Safe">lock</span>
@@ -515,8 +515,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <input class="input-glass w-full rounded py-1.5 px-3 font-mono-data text-mono-data text-xs obscured-value" readonly type="text" value="${val}"/>
             </div>
             <div class="col-span-1 flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                <button class="btn-edit-row p-1 hover:bg-white/10 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
-                <button class="btn-delete-row p-1 hover:bg-white/10 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+                <button class="btn-edit-row p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+                <button class="btn-delete-row p-1 hover:bg-slate-200/50 rounded text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
             </div>
         `;
 
@@ -531,7 +531,10 @@ document.addEventListener('DOMContentLoaded', () => {
         bindRowEvents(row);
         setupObscuredValues();
 
-        window.showToast(`Variable ${key} added successfully.`, 'success');
+        const msg = currentLang === 'VIE'
+            ? `Đã thêm thành công biến ${key}.`
+            : `Variable ${key} added successfully.`;
+        window.showToast(msg, 'success');
     });
 
     // 3. Bind events for rows
@@ -544,13 +547,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // Delete row
         btnDelete.addEventListener('click', () => {
             const key = keyInput.value;
+            const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
             row.remove();
-            window.showToast(`Variable ${key} deleted.`, 'info');
+            
+            const msg = currentLang === 'VIE'
+                ? `Đã xóa biến ${key}.`
+                : `Variable ${key} deleted.`;
+            window.showToast(msg, 'info');
         });
 
         // Edit row (toggle readonly and focused style)
         btnEdit.addEventListener('click', () => {
             const isEditing = valInput.getAttribute('readonly') === null;
+            const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
 
             if (isEditing) {
                 // Save state
@@ -558,7 +567,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 valInput.classList.add('obscured-value');
                 valInput.classList.remove('revealed');
                 btnEdit.innerHTML = '<span class="material-symbols-outlined text-[18px]">edit</span>';
-                window.showToast(`Variable ${keyInput.value} updated.`, 'success');
+                
+                const msg = currentLang === 'VIE'
+                    ? `Đã cập nhật biến ${keyInput.value}.`
+                    : `Variable ${keyInput.value} updated.`;
+                window.showToast(msg, 'success');
             } else {
                 // Edit state
                 valInput.removeAttribute('readonly');
@@ -572,7 +585,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Bind initial list rows
     varsList.querySelectorAll('.group').forEach(row => {
         // Skip add row inputs container
-        if (!row.querySelector('.btn-delete-row')) return;
+        if (!row.querySelector('.btn-delete-row')) {
+            // Bind edit/delete for the two hardcoded rows as well
+            const btnEdit = row.querySelector('button:first-of-type');
+            const btnDelete = row.querySelector('button:last-of-type');
+            
+            if (btnEdit && btnDelete) {
+                btnEdit.classList.add('btn-edit-row');
+                btnDelete.classList.add('btn-delete-row');
+                bindRowEvents(row);
+            }
+            return;
+        }
         bindRowEvents(row);
     });
 
@@ -584,18 +608,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 4. Deploy changes loader
-    const btnDeploy = Array.from(document.querySelectorAll('button')).find(el => el.textContent.trim().includes('Deploy Changes'));
+    const btnDeploy = Array.from(document.querySelectorAll('button')).find(el => el.getAttribute('data-translate') === 'env-btn-deploy' || el.textContent.trim().includes('Deploy Changes'));
     if (btnDeploy) {
         btnDeploy.addEventListener('click', (e) => {
             e.preventDefault();
             const originalText = btnDeploy.innerHTML;
+            const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
             btnDeploy.disabled = true;
-            btnDeploy.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">sync</span> Deploying...`;
+            btnDeploy.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">sync</span> ${currentLang === 'VIE' ? 'Đang áp dụng...' : 'Deploying...'}`;
 
             setTimeout(() => {
                 btnDeploy.disabled = false;
                 btnDeploy.innerHTML = originalText;
-                window.showToast('Environment variables deployed globally to edge nodes.', 'success');
+                
+                const msg = currentLang === 'VIE'
+                    ? 'Cấu hình biến môi trường đã được triển khai đến toàn bộ máy chủ Edge.'
+                    : 'Environment variables deployed globally to edge nodes.';
+                window.showToast(msg, 'success');
             }, 1800);
         });
     }
@@ -606,18 +635,27 @@ document.addEventListener('DOMContentLoaded', () => {
         btnSlack.addEventListener('click', (e) => {
             e.preventDefault();
             const badge = btnSlack.parentElement.querySelector('span');
-            const isConnected = badge.textContent.trim().toLowerCase() === 'connected';
+            const isConnected = badge.textContent.trim().toLowerCase() === 'connected' || badge.textContent.trim() === 'Connected';
+            const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
 
             if (isConnected) {
-                badge.className = 'px-2 py-1 bg-surface-variant/50 text-outline rounded text-xs font-label-caps border border-outline-variant/30';
+                badge.className = 'px-2 py-1 bg-slate-100 text-outline rounded text-xs font-label-caps border border-outline-variant/30 font-bold';
                 badge.textContent = 'Disconnected';
                 btnSlack.innerHTML = '<span class="material-symbols-outlined text-[16px]">add_link</span> Connect Slack';
-                window.showToast('Slack connection terminated.', 'info');
+                
+                const msg = currentLang === 'VIE'
+                    ? 'Đã ngắt kết nối Slack Workspace.'
+                    : 'Slack connection terminated.';
+                window.showToast(msg, 'info');
             } else {
-                badge.className = 'px-2 py-1 bg-[#10b981]/20 text-[#10b981] rounded text-xs font-label-caps flex items-center gap-1';
+                badge.className = 'px-2 py-1 bg-[#10b981]/20 text-[#10b981] rounded text-xs font-label-caps flex items-center gap-1 font-bold';
                 badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span> Connected';
-                btnSlack.innerHTML = '<span class="material-symbols-outlined text-[16px]">link_off</span> Disconnect Slack';
-                window.showToast('Slack Workspace linked successfully.', 'success');
+                btnSlack.innerHTML = `<span class="material-symbols-outlined text-[16px]">link_off</span> ${currentLang === 'VIE' ? 'Ngắt Kết Nối Slack' : 'Disconnect Slack'}`;
+                
+                const msg = currentLang === 'VIE'
+                    ? 'Đã liên kết thành công với Slack Workspace.'
+                    : 'Slack Workspace linked successfully.';
+                window.showToast(msg, 'success');
             }
         });
     }

@@ -1,74 +1,73 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ChatbotPro - Secure Checkout</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="light" lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ChatbotPro - Secure Checkout</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
-                    "colors": {
-                        "secondary": "#cdc0e9",
-                        "on-background": "#e6e0e9",
-                        "inverse-primary": "#6750a4",
-                        "secondary-fixed": "#e9ddff",
-                        "background": "#141218",
-                        "tertiary-fixed": "#ffdf93",
-                        "tertiary-container": "#c9a74d",
-                        "on-tertiary-container": "#503d00",
-                        "outline": "#948e9c",
-                        "on-error": "#690005",
-                        "surface-variant": "#36343a",
-                        "on-error-container": "#ffdad6",
-                        "surface-container": "#211f24",
-                        "on-primary": "#381e72",
-                        "surface-container-lowest": "#0f0d13",
-                        "inverse-surface": "#e6e0e9",
-                        "error-container": "#93000a",
-                        "on-tertiary-fixed-variant": "#594400",
-                        "on-surface-variant": "#cbc4d2",
-                        "tertiary-fixed-dim": "#e7c365",
-                        "surface-container-highest": "#36343a",
-                        "surface-container-high": "#2b292f",
-                        "inverse-on-surface": "#322f35",
-                        "secondary-container": "#4d4465",
-                        "surface-bright": "#3b383e",
-                        "primary-container": "#6750a4",
-                        "on-tertiary": "#3e2e00",
-                        "on-secondary-fixed-variant": "#4b4263",
-                        "tertiary": "#e7c365",
-                        "primary": "#cfbcff",
+                    colors: {
                         "primary-fixed-dim": "#cfbcff",
-                        "on-secondary": "#342b4b",
+                        "tertiary-container": "#fef3c7",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f8fafc",
+                        "outline-variant": "#e2e8f0",
+                        "on-tertiary-fixed-variant": "#78350f",
+                        "secondary-fixed": "#e9ddff",
+                        "surface-tint": "#6750a4",
+                        "on-background": "#0f172a",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "secondary": "#625b71",
+                        "error-container": "#fee2e2",
+                        "outline": "#94a3b8",
+                        "primary-container": "#e9ddff",
+                        "surface-container": "#f1f3f9",
+                        "surface-dim": "#f1f5f9",
                         "on-primary-fixed": "#22005d",
-                        "on-tertiary-fixed": "#241a00",
-                        "outline-variant": "#494551",
-                        "on-primary-fixed-variant": "#4f378a",
-                        "surface-tint": "#cfbcff",
-                        "on-surface": "#e6e0e9",
-                        "surface-dim": "#141218",
-                        "on-primary-container": "#e0d2ff",
-                        "error": "#ffb4ab",
+                        "secondary-container": "#e8def8",
+                        "on-error-container": "#7f1d1d",
+                        "inverse-primary": "#cfbcff",
+                        "on-tertiary-container": "#451a03",
+                        "on-surface-variant": "#475569",
+                        "primary": "#6750a4",
+                        "inverse-surface": "#0f172a",
+                        "surface-variant": "#e2e8f0",
+                        "secondary-fixed-dim": "#cdc0e9",
                         "primary-fixed": "#e9ddff",
-                        "on-secondary-fixed": "#1f1635",
-                        "on-secondary-container": "#bfb2da",
-                        "surface-container-low": "#1d1b20",
-                        "surface": "#141218",
-                        "secondary-fixed-dim": "#cdc0e9"
+                        "on-primary-container": "#22005d",
+                        "surface": "#ffffff",
+                        "surface-container-high": "#e2e8f0",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#1d192b",
+                        "inverse-on-surface": "#f8fafc",
+                        "tertiary-fixed": "#fde68a",
+                        "on-tertiary-fixed": "#451a03",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f8fafc",
+                        "tertiary": "#d97706",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f8fafc",
+                        "on-secondary-container": "#1d192b",
+                        "on-surface": "#0f172a",
+                        "error": "#ef4444",
+                        "tertiary-fixed-dim": "#f59e0b",
+                        "surface-container-highest": "#cbd5e1",
+                        "on-primary": "#ffffff"
                     },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
                     },
-                    "spacing": {
+                    spacing: {
                         "stack-sm": "12px",
                         "container-margin": "40px",
                         "stack-lg": "48px",
@@ -76,7 +75,7 @@
                         "stack-md": "24px",
                         "unit": "8px"
                     },
-                    "fontFamily": {
+                    fontFamily: {
                         "headline-md": ["Sora"],
                         "display-lg-mobile": ["Sora"],
                         "mono-data": ["JetBrains Mono"],
@@ -85,7 +84,7 @@
                         "display-lg": ["Sora"],
                         "body-lg": ["Sora"]
                     },
-                    "fontSize": {
+                    fontSize: {
                         "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
                         "display-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
                         "mono-data": ["13px", { "lineHeight": "1.5", "fontWeight": "400" }],
@@ -98,85 +97,75 @@
             }
         }
     </script>
-<style>
+    <style>
         body {
-            background-color: #050505;
-            color: #e6e0e9;
+            background-color: #f8fafc;
+            color: #0f172a;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
         }
-
         .glass-panel {
-            background: rgba(33, 31, 36, 0.6);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(148, 142, 156, 0.2);
-            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(103, 80, 164, 0.08);
+            box-shadow: 0 4px 30px rgba(103, 80, 164, 0.03);
             transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-
         .glass-panel:hover {
-            border-color: rgba(207, 188, 255, 0.3);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-            transform: scale(1.01);
+            border-color: rgba(103, 80, 164, 0.2);
+            box-shadow: 0 10px 30px rgba(103, 80, 164, 0.08);
+            transform: translateY(-2px);
         }
-
         .input-glass {
-            background: rgba(20, 18, 24, 0.8);
+            background: rgba(255, 255, 255, 0.8);
             border: 1px solid rgba(148, 142, 156, 0.3);
-            color: #e6e0e9;
+            color: #0f172a;
             transition: all 0.3s ease;
         }
-
         .input-glass:focus {
             outline: none;
-            border-color: #cfbcff;
-            box-shadow: 0 0 15px rgba(207, 188, 255, 0.2);
+            border-color: #6750a4;
+            box-shadow: 0 0 15px rgba(103, 80, 164, 0.1);
         }
-
         .btn-primary {
-            background: linear-gradient(135deg, #cfbcff 0%, #6750a4 100%);
-            color: #141218;
+            background: linear-gradient(135deg, #6750a4 0%, #625b71 100%);
+            color: #ffffff;
             transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-
         .btn-primary:hover {
-            filter: brightness(1.2);
-            box-shadow: 0 0 20px rgba(207, 188, 255, 0.4);
-            transform: scale(1.02);
+            filter: brightness(1.1);
+            box-shadow: 0 4px 15px rgba(103, 80, 164, 0.25);
+            transform: scale(1.01);
         }
-
         .btn-luxury {
-            border: 1px solid #c9a74d;
-            color: #c9a74d;
+            border: 1px solid #d97706;
+            color: #d97706;
             background: transparent;
             transition: all 0.3s ease;
         }
-
         .btn-luxury:hover {
-            background: rgba(201, 167, 77, 0.1);
-            box-shadow: 0 0 15px rgba(201, 167, 77, 0.3);
+            background: rgba(217, 119, 6, 0.05);
+            box-shadow: 0 0 15px rgba(217, 119, 6, 0.15);
         }
-        
         .ambient-glow {
             position: fixed;
             width: 60vw;
             height: 60vw;
-            background: radial-gradient(circle, rgba(103,80,164,0.15) 0%, rgba(5,5,5,0) 70%);
+            background: radial-gradient(circle, rgba(103,80,164,0.06) 0%, rgba(255,255,255,0) 70%);
             top: -20%;
             left: -10%;
             pointer-events: none;
             z-index: -1;
             border-radius: 50%;
         }
-
         .ambient-glow-2 {
             position: fixed;
             width: 50vw;
             height: 50vw;
-            background: radial-gradient(circle, rgba(201,167,77,0.1) 0%, rgba(5,5,5,0) 70%);
+            background: radial-gradient(circle, rgba(217,119,6,0.04) 0%, rgba(255,255,255,0) 70%);
             bottom: -20%;
             right: -10%;
             pointer-events: none;
@@ -185,167 +174,156 @@
         }
     </style>
 </head>
-<body class="font-body-sm text-body-sm selection:bg-primary/30 selection:text-primary">
+<body class="font-body-sm text-body-sm selection:bg-primary/20 selection:text-primary">
 <div class="ambient-glow"></div>
 <div class="ambient-glow-2"></div>
-<!-- TopNavBar (Minimal for Transactional Intent) -->
-<header class="fixed top-0 w-full z-50 bg-surface-container/60 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_0_15px_rgba(207,188,255,0.1)]">
-<div class="flex justify-between items-center px-container-margin h-20 w-full max-w-7xl mx-auto">
-<div class="font-display-lg text-display-lg bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent" style="font-size: 28px; letter-spacing: -0.05em;">
-                ChatbotPro
-            </div>
-<div class="flex items-center gap-4 text-on-surface-variant">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lock</span>
-<span class="font-label-caps text-label-caps tracking-widest text-primary">SECURE CHECKOUT</span>
-</div>
-</div>
+
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/75 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_4px_20px_rgba(103,80,164,0.05)]">
+    <div class="flex justify-between items-center px-container-margin h-20 w-full max-w-7xl mx-auto">
+        <div class="font-display-lg text-display-lg bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent cursor-pointer" onclick="window.location.href='index.html'" style="font-size: 28px; font-weight: 750;">
+            ChatbotPro
+        </div>
+        <div class="flex items-center gap-4 text-on-surface-variant">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">lock</span>
+            <span class="font-label-caps text-label-caps tracking-widest text-primary font-bold" data-translate="checkout-secure">THANH TOÁN BẢO MẬT</span>
+        </div>
+    </div>
 </header>
+
 <!-- Main Content -->
 <main class="flex-grow pt-32 pb-24 px-4 md:px-container-margin relative z-10 flex flex-col items-center justify-center">
-<div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
-<!-- Left Column: Payment Details -->
-<div class="lg:col-span-7 space-y-stack-md w-full">
-<div class="glass-panel rounded-xl p-8 flex flex-col gap-6">
-<div>
-<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Payment Method</h2>
-<p class="font-body-sm text-body-sm text-on-surface-variant">All transactions are secure and encrypted.</p>
-</div>
-<!-- Payment Options -->
-<div class="flex gap-4">
-<button class="flex-1 glass-panel rounded-lg py-4 flex items-center justify-center gap-2 border border-primary bg-primary/10 shadow-[0_0_15px_rgba(207,188,255,0.1)]">
-<span class="material-symbols-outlined text-primary">credit_card</span>
-<span class="font-label-caps text-label-caps text-primary">CREDIT CARD</span>
-</button>
-<button class="flex-1 glass-panel rounded-lg py-4 flex items-center justify-center gap-2 hover:border-outline">
-<span class="material-symbols-outlined text-on-surface-variant">account_balance_wallet</span>
-<span class="font-label-caps text-label-caps text-on-surface-variant">PAYPAL</span>
-</button>
-<button class="flex-1 glass-panel rounded-lg py-4 flex items-center justify-center gap-2 hover:border-outline hidden sm:flex">
-<span class="material-symbols-outlined text-on-surface-variant">apps</span>
-<span class="font-label-caps text-label-caps text-on-surface-variant">APPLE PAY</span>
-</button>
-</div>
-<!-- Credit Card Form -->
-<form class="space-y-4">
-<div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface-variant">CARD NUMBER</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">credit_card</span>
-<input class="input-glass w-full rounded-lg py-3 pl-10 pr-4 font-mono-data text-mono-data tracking-wider" placeholder="0000 0000 0000 0000" type="text"/>
-</div>
-</div>
-<div class="grid grid-cols-2 gap-4">
-<div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface-variant">EXPIRY DATE</label>
-<input class="input-glass w-full rounded-lg py-3 px-4 font-mono-data text-mono-data text-center" placeholder="MM/YY" type="text"/>
-</div>
-<div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface-variant flex justify-between">
-                                    CVC
-                                    <span class="material-symbols-outlined text-[14px] cursor-help" title="3 digits on back of card">help</span>
-</label>
-<input class="input-glass w-full rounded-lg py-3 px-4 font-mono-data text-mono-data text-center" placeholder="123" type="text"/>
-</div>
-</div>
-<div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface-variant">CARDHOLDER NAME</label>
-<input class="input-glass w-full rounded-lg py-3 px-4 font-body-sm text-body-sm" placeholder="John Doe" type="text"/>
-</div>
-</form>
-</div>
-<!-- Billing Address -->
-<div class="glass-panel rounded-xl p-8 flex flex-col gap-6">
-<h2 class="font-headline-md text-headline-md text-on-surface">Billing Address</h2>
-<form class="space-y-4">
-<div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface-variant">STREET ADDRESS</label>
-<input class="input-glass w-full rounded-lg py-3 px-4 font-body-sm text-body-sm" type="text"/>
-</div>
-<div class="grid grid-cols-2 gap-4">
-<div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface-variant">CITY</label>
-<input class="input-glass w-full rounded-lg py-3 px-4 font-body-sm text-body-sm" type="text"/>
-</div>
-<div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface-variant">ZIP / POSTAL</label>
-<input class="input-glass w-full rounded-lg py-3 px-4 font-mono-data text-mono-data" type="text"/>
-</div>
-</div>
-</form>
-</div>
-</div>
-<!-- Right Column: Order Summary -->
-<div class="lg:col-span-5 w-full">
-<div class="glass-panel rounded-xl p-8 sticky top-28 flex flex-col gap-6 border-t-2 border-t-tertiary">
-<div>
-<div class="flex justify-between items-start mb-2">
-<h3 class="font-headline-md text-headline-md text-on-surface" id="summary-title">Elite Enterprise</h3>
-<span class="bg-tertiary/20 text-tertiary px-3 py-1 rounded-full font-label-caps text-label-caps border border-tertiary/30" id="summary-badge">PRO</span>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Billed monthly. Cancel anytime.</p>
-</div>
-<div class="h-px w-full bg-outline-variant/30"></div>
-<!-- Benefits List -->
-<ul class="space-y-3" id="summary-benefits">
-<li class="flex items-center gap-3">
-<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="font-body-sm text-body-sm text-on-surface">Unlimited AI Workflows</span>
-</li>
-<li class="flex items-center gap-3">
-<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="font-body-sm text-body-sm text-on-surface">Priority 24/7 Support</span>
-</li>
-<li class="flex items-center gap-3">
-<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="font-body-sm text-body-sm text-on-surface">Custom Integrations API</span>
-</li>
-<li class="flex items-center gap-3">
-<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="font-body-sm text-body-sm text-on-surface">Dedicated Account Manager</span>
-</li>
-</ul>
-<div class="h-px w-full bg-outline-variant/30"></div>
-<!-- Totals -->
-<div class="space-y-2">
-<div class="flex justify-between text-on-surface-variant">
-<span class="font-body-sm text-body-sm">Subtotal</span>
-<span class="font-mono-data text-mono-data" id="summary-subtotal">$149.00</span>
-</div>
-<div class="flex justify-between text-on-surface-variant">
-<span class="font-body-sm text-body-sm">Tax (Estimated)</span>
-<span class="font-mono-data text-mono-data">$0.00</span>
-</div>
-<div class="flex justify-between mt-4 pt-4 border-t border-outline-variant/30">
-<span class="font-headline-md text-headline-md text-on-surface">Total</span>
-<div class="text-right">
-<span class="font-display-lg-mobile text-display-lg-mobile text-on-surface" id="summary-total">$149</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">/mo</span>
-</div>
-</div>
-</div>
-<button id="btn-pay" class="btn-primary w-full py-4 rounded-lg font-label-caps text-label-caps font-bold tracking-widest mt-4 flex justify-center items-center gap-2">
-<span class="material-symbols-outlined">lock</span>
-                        PAY $149.00 NOW
+    <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+        <!-- Left Column: Payment Details -->
+        <div class="lg:col-span-7 space-y-6 w-full">
+            <div class="glass-panel rounded-2xl p-8 flex flex-col gap-6 bg-white shadow-sm">
+                <div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-2 font-bold" data-translate="checkout-title">Phương Thức Thanh Toán</h2>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant" data-translate="checkout-desc">Mọi giao dịch đều được bảo mật và mã hóa.</p>
+                </div>
+                <!-- Payment Options -->
+                <div class="flex gap-4">
+                    <button class="flex-1 glass-panel rounded-xl py-4 flex items-center justify-center gap-2 border border-primary bg-primary/5 shadow-sm">
+                        <span class="material-symbols-outlined text-primary">credit_card</span>
+                        <span class="font-label-caps text-label-caps text-primary font-bold" data-translate="checkout-method-card">THẺ QUỐC TẾ</span>
                     </button>
-<p class="font-body-sm text-body-sm text-on-surface-variant text-center opacity-70 flex items-center justify-center gap-1">
-<span class="material-symbols-outlined text-[16px]">verified</span>
-                        256-bit SSL Secure Checkout
-                    </p>
-</div>
-</div>
-</div>
+                    <button class="flex-1 glass-panel rounded-xl py-4 flex items-center justify-center gap-2 hover:border-primary bg-white shadow-sm">
+                        <span class="material-symbols-outlined text-on-surface-variant">account_balance_wallet</span>
+                        <span class="font-label-caps text-label-caps text-on-surface-variant font-bold" data-translate="checkout-method-wallet">PAYPAL</span>
+                    </button>
+                    <button class="flex-1 glass-panel rounded-xl py-4 flex items-center justify-center gap-2 hover:border-primary bg-white shadow-sm hidden sm:flex">
+                        <span class="material-symbols-outlined text-on-surface-variant">apps</span>
+                        <span class="font-label-caps text-label-caps text-on-surface-variant font-bold" data-translate="checkout-method-apple">MOMO / ZALOPAY</span>
+                    </button>
+                </div>
+                <!-- Credit Card Form -->
+                <form class="space-y-4">
+                    <div class="space-y-2">
+                        <label class="font-label-caps text-label-caps text-on-surface-variant font-bold" data-translate="checkout-label-number">SỐ THẺ</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">credit_card</span>
+                            <input class="input-glass w-full rounded-lg py-3 pl-10 pr-4 font-mono-data text-mono-data tracking-wider" placeholder="0000 0000 0000 0000" type="text"/>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label class="font-label-caps text-label-caps text-on-surface-variant font-bold" data-translate="checkout-label-expiry">NGÀY HẾT HẠN</label>
+                            <input class="input-glass w-full rounded-lg py-3 px-4 font-mono-data text-mono-data text-center" placeholder="MM/YY" type="text"/>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="font-label-caps text-label-caps text-on-surface-variant flex justify-between font-bold">
+                                CVC
+                                <span class="material-symbols-outlined text-[14px] cursor-help" title="3 digits on back of card">help</span>
+                            </label>
+                            <input class="input-glass w-full rounded-lg py-3 px-4 font-mono-data text-mono-data text-center" placeholder="123" type="text"/>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="font-label-caps text-label-caps text-on-surface-variant font-bold" data-translate="checkout-label-name">TÊN TRÊN THẺ</label>
+                        <input class="input-glass w-full rounded-lg py-3 px-4 font-body-sm text-body-sm" placeholder="John Doe" type="text"/>
+                    </div>
+                </form>
+            </div>
+            <!-- Billing Address -->
+            <div class="glass-panel rounded-2xl p-8 flex flex-col gap-6 bg-white shadow-sm">
+                <h2 class="font-headline-md text-headline-md text-on-surface font-bold" data-translate="checkout-billing-title">Thông Tin Hóa Đơn</h2>
+                <form class="space-y-4">
+                    <div class="space-y-2">
+                        <label class="font-label-caps text-label-caps text-on-surface-variant font-bold" data-translate="checkout-label-address">ĐỊA CHỈ</label>
+                        <input class="input-glass w-full rounded-lg py-3 px-4 font-body-sm text-body-sm" type="text"/>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label class="font-label-caps text-label-caps text-on-surface-variant font-bold" data-translate="checkout-label-city">THÀNH PHỐ</label>
+                            <input class="input-glass w-full rounded-lg py-3 px-4 font-body-sm text-body-sm" type="text"/>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="font-label-caps text-label-caps text-on-surface-variant font-bold" data-translate="checkout-label-zip">MÃ BƯU CHÍNH</label>
+                            <input class="input-glass w-full rounded-lg py-3 px-4 font-mono-data text-mono-data" type="text"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Right Column: Order Summary -->
+        <div class="lg:col-span-5 w-full">
+            <div class="glass-panel rounded-2xl p-8 sticky top-28 flex flex-col gap-6 border-t-4 border-t-tertiary bg-white shadow-sm">
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-headline-md text-xl font-bold text-on-surface" id="summary-title">Gói Standard</h3>
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-caps text-label-caps border border-tertiary/20 font-bold" id="summary-badge">STANDARD</span>
+                    </div>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant" data-translate="pricing-sub">Thanh toán hàng năm. Hỗ trợ trọn đời.</p>
+                </div>
+                <div class="h-px w-full bg-outline-variant/30"></div>
+                <!-- Benefits List -->
+                <ul class="space-y-3" id="summary-benefits">
+                    <!-- Loaded dynamically in script -->
+                </ul>
+                <div class="h-px w-full bg-outline-variant/30"></div>
+                <!-- Totals -->
+                <div class="space-y-2">
+                    <div class="flex justify-between text-on-surface-variant">
+                        <span class="font-body-sm text-body-sm" data-translate="checkout-subtotal">Tạm tính</span>
+                        <span class="font-mono-data text-mono-data font-semibold" id="summary-subtotal">1.100.000 VND</span>
+                    </div>
+                    <div class="flex justify-between text-on-surface-variant">
+                        <span class="font-body-sm text-body-sm" data-translate="checkout-tax">VAT 10% (đã gồm)</span>
+                        <span class="font-mono-data text-mono-data font-semibold">0 VND</span>
+                    </div>
+                    <div class="flex justify-between mt-4 pt-4 border-t border-outline-variant/30">
+                        <span class="font-headline-md text-headline-md text-on-surface font-bold">Total</span>
+                        <div class="text-right">
+                            <span class="font-display-lg-mobile text-2xl font-bold text-primary" id="summary-total">1.100.000 VND</span>
+                            <span class="font-body-sm text-body-sm text-on-surface-variant">/tháng</span>
+                        </div>
+                    </div>
+                </div>
+                <button id="btn-pay" class="btn-primary w-full py-4 rounded-xl font-label-caps text-label-caps font-bold tracking-widest mt-4 flex justify-center items-center gap-2">
+                    <span class="material-symbols-outlined">lock</span>
+                    <span data-translate="checkout-btn-pay">THANH TOÁN NGAY</span>
+                </button>
+                <p class="font-body-sm text-body-sm text-on-surface-variant text-center opacity-80 flex items-center justify-center gap-1">
+                    <span class="material-symbols-outlined text-[16px] text-green-600">verified</span>
+                    <span data-translate="checkout-secure">Cổng thanh toán bảo mật 256-bit SSL</span>
+                </p>
+            </div>
+        </div>
+    </div>
 </main>
+
 <!-- Footer -->
-<footer class="w-full mt-auto bg-surface-container-lowest border-t border-outline-variant/10">
-<div class="flex flex-col md:flex-row justify-between items-center px-container-margin py-stack-sm w-full max-w-7xl mx-auto gap-4">
-<span class="font-label-caps text-label-caps text-on-surface opacity-60">© 2024 ChatbotPro. Digital Luxury AI.</span>
-<div class="flex gap-6">
-<a class="font-mono-data text-mono-data text-on-surface-variant hover:text-tertiary-fixed transition-colors opacity-80 hover:opacity-100" href="#">System Status</a>
-<a class="font-mono-data text-mono-data text-on-surface-variant hover:text-tertiary-fixed transition-colors opacity-80 hover:opacity-100" href="#">API Health</a>
-<a class="font-mono-data text-mono-data text-on-surface-variant hover:text-tertiary-fixed transition-colors opacity-80 hover:opacity-100" href="#">Support</a>
-</div>
-</div>
+<footer class="w-full mt-auto bg-white border-t border-outline-variant/30 py-6">
+    <div class="flex flex-col md:flex-row justify-between items-center px-container-margin w-full max-w-7xl mx-auto gap-4">
+        <span class="font-label-caps text-label-caps text-on-surface-variant" data-translate="copyright">© 2026 ChatbotPro. Trợ lý Trí Tuệ Nhân Tạo Doanh Nghiệp.</span>
+        <div class="flex gap-6">
+            <a class="font-mono-data text-mono-data text-on-surface-variant hover:text-primary transition-colors font-bold" href="#" data-translate="nav-status">Trạng Thế Hệ Thống</a>
+            <a class="font-mono-data text-mono-data text-on-surface-variant hover:text-primary transition-colors font-bold" href="#" data-translate="nav-health">API Health</a>
+            <a class="font-mono-data text-mono-data text-on-surface-variant hover:text-primary transition-colors font-bold" href="#" data-translate="nav-support">Hỗ Trợ</a>
+        </div>
+    </div>
 </footer>
+
 <script src="js/main.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -362,43 +340,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const tiers = {
         starter: {
-            title: 'Starter Subscription',
-            badge: 'STARTER',
-            subtotal: '$49.00',
-            total: '$49',
-            btnText: 'PAY $49.00 NOW',
-            benefits: [
-                '5 Specialized Channels',
-                'Standard API Access',
-                '5 Languages Included',
-                'Standard Email Support'
-            ]
+            title: 'Gói Basic AI',
+            badge: 'BASIC',
+            subtotal: '550.000 VND',
+            total: '550.000 VND',
+            btnText: 'THANH TOÁN 550.000 VND NOW',
+            benefits: {
+                VIE: [
+                    '5.000 tin nhắn / tháng',
+                    'Tối đa 1 trợ lý AI hoạt động',
+                    'Tri thức triết xuất tài liệu PDF/cơ bản',
+                    'Hỗ trợ kênh Website Chat Widget'
+                ],
+                ENG: [
+                    '5,000 response messages / month',
+                    'Max 1 active AI assistant',
+                    'Basic PDF/Doc knowledge extraction',
+                    'Website Chat Widget support'
+                ]
+            }
         },
         pro: {
-            title: 'Professional Plan',
-            badge: 'PRO',
-            subtotal: '$149.00',
-            total: '$149',
-            btnText: 'PAY $149.00 NOW',
-            benefits: [
-                'All 30 Specialized Channels',
-                'High-throughput Neural API',
-                '20+ Languages Included',
-                'Priority 24/7 Support'
-            ]
+            title: 'Gói Standard AI',
+            badge: 'STANDARD',
+            subtotal: '1.100.000 VND',
+            total: '1.100.000 VND',
+            btnText: 'THANH TOÁN 1.100.000 VND NOW',
+            benefits: {
+                VIE: [
+                    '10.000 tin nhắn / tháng',
+                    'Tối đa 2 trợ lý AI hoạt động',
+                    'Hỗ trợ Zalo OA, Fanpage, Website',
+                    'Cập nhật tri thức DOCX, XLSX, Website',
+                    'Tự động gửi báo đơn Telegram'
+                ],
+                ENG: [
+                    '10,000 response messages / month',
+                    'Max 2 active AI assistants',
+                    'Zalo OA, Facebook, Website channels',
+                    'Ingest DOCX, XLSX, Website links',
+                    'Auto Telegram order alerts'
+                ]
+            }
         },
         enterprise: {
-            title: 'Elite Enterprise',
-            badge: 'ELITE',
-            subtotal: 'Custom Pricing',
-            total: 'Custom',
-            btnText: 'CONTACT SALES NOW',
-            benefits: [
-                'Dedicated Neural Infrastructure',
-                'Custom Channel Training',
-                '24/7 White-glove Support',
-                'Custom SLA Guarantees'
-            ]
+            title: 'Gói Edition AI',
+            badge: 'EDITION',
+            subtotal: '2.750.000 VND',
+            total: '2.750.000 VND',
+            btnText: 'THANH TOÁN 2.750.000 VND NOW',
+            benefits: {
+                VIE: [
+                    '25.000 tin nhắn / tháng',
+                    'Tối đa 5 trợ lý AI hoạt động',
+                    'Trọn bộ 20+ ngôn ngữ tích hợp',
+                    'Tính năng Whitelabel (thương hiệu riêng)',
+                    'Kết nối Webhook & API hệ thống'
+                ],
+                ENG: [
+                    '25,000 response messages / month',
+                    'Max 5 active AI assistants',
+                    'All 20+ Languages supported',
+                    'Full Whitelabel customization',
+                    'Developer Webhook & API links'
+                ]
+            }
         }
     };
 
@@ -409,15 +415,26 @@ document.addEventListener('DOMContentLoaded', () => {
     summaryBadge.textContent = selectedTier.badge;
     summarySubtotal.textContent = selectedTier.subtotal;
     summaryTotal.textContent = selectedTier.total;
-    btnPay.innerHTML = `<span class="material-symbols-outlined">lock</span> ${selectedTier.btnText}`;
+    
+    function renderBenefits() {
+        const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+        const list = selectedTier.benefits[currentLang] || selectedTier.benefits.VIE;
+        
+        summaryBenefits.innerHTML = list.map(benefit => `
+            <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <span class="font-body-sm text-body-sm text-on-surface">${benefit}</span>
+            </li>
+        `).join('');
 
-    // Render benefits
-    summaryBenefits.innerHTML = selectedTier.benefits.map(benefit => `
-        <li class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-            <span class="font-body-sm text-body-sm text-on-surface">${benefit}</span>
-        </li>
-    `).join('');
+        const payBtnText = currentLang === 'VIE' ? 'THANH TOÁN NGAY' : 'PAY NOW';
+        btnPay.innerHTML = `<span class="material-symbols-outlined">lock</span> ${payBtnText} (${selectedTier.total})`;
+    }
+
+    renderBenefits();
+
+    // Listen to language changes
+    document.addEventListener('langChanged', renderBenefits);
 
     // Handle Payment form submission
     btnPay.addEventListener('click', (e) => {
@@ -427,28 +444,36 @@ document.addEventListener('DOMContentLoaded', () => {
         const inputs = document.querySelectorAll('main input');
         let isValid = true;
         inputs.forEach(input => {
-            // Skip Apple Pay / Paypal buttons or hidden elements if any
             if (input.type === 'button' || input.type === 'submit') return;
             
             if (!input.value.trim()) {
-                input.style.borderColor = 'rgba(255, 180, 171, 0.8)'; // error color
+                input.style.borderColor = '#ef4444'; // error border
                 isValid = false;
             } else {
                 input.style.borderColor = 'rgba(148, 142, 156, 0.3)';
             }
         });
 
+        const currentLang = localStorage.getItem('chatbotpro_lang') || 'VIE';
+
         if (!isValid) {
-            window.showToast('Please fill in all credit card and billing details.', 'error');
+            const errorMsg = currentLang === 'VIE'
+                ? 'Vui lòng nhập đầy đủ thông tin thẻ và hóa đơn.'
+                : 'Please fill in all credit card and billing details.';
+            window.showToast(errorMsg, 'error');
             return;
         }
 
         // Show loading state on button
         btnPay.disabled = true;
-        btnPay.innerHTML = `<span class="material-symbols-outlined animate-spin text-[18px]">sync</span> PROCESSING TRANSACTION...`;
+        const processingText = currentLang === 'VIE' ? 'ĐANG XỬ LÝ GIAO DỊCH...' : 'PROCESSING TRANSACTION...';
+        btnPay.innerHTML = `<span class="material-symbols-outlined animate-spin text-[18px]">sync</span> ${processingText}`;
 
         setTimeout(() => {
-            window.showToast('Transaction approved! Workspace provisioned.', 'success');
+            const successMsg = currentLang === 'VIE'
+                ? 'Giao dịch thành công! Đang chuyển hướng sang CRM...'
+                : 'Transaction approved! Redirecting to CRM...';
+            window.showToast(successMsg, 'success');
             
             setTimeout(() => {
                 window.location.href = 'dashboard.html';
@@ -457,4 +482,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
-</body></html>
+</body>
+</html>
